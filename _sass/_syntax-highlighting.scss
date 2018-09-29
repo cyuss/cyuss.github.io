@@ -7,9 +7,9 @@
     .k     {  color: $alt-color; font-weight: bold } // Keyword
     .o     {  font-weight: bold }  // Operator
     .cm    {  font-style: italic } // Comment.Multiline
-    .cp    {  font-weight: bold }  // Comment.Preproc
-    .c1    {  font-style: italic } // Comment.Single
-    .cs    {  font-weight: bold; font-style: italic } // Comment.Special
+    .cp    {  color: lighten($text-color, 35%); font-weight: bold }  // Comment.Preproc
+    .c1    {  color: lighten($text-color, 35%); font-style: italic } // Comment.Single
+    .cs    {  color: lighten($text-color, 35%); font-weight: bold; font-style: italic } // Comment.Special
     .gd    {  } // Generic.Deleted
     .gd .x {  } // Generic.Deleted.Specific
     .ge    {  font-style: italic } // Generic.Emph
