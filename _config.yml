@@ -5,7 +5,7 @@ description: "<b><i>OhMyKode</i></b> is an opportunity to share knowledge about 
 # Everyday, we wake up and try to learn something new. Each of us has his or her own way of doing it: going to work, going to school, reading books... Learning is the best thing a person can accomplish. Sharing and communicating our experiences help us structure our ideas and what we have already learned.
 
 keywords: "Software Engineering, Mathematics, Python, Programming, Machine Learning, Data Science, Artificial Intelligence, Statistics, Probability, Emacs, Org-mode"
-biography: "An ordinary developer looking to share and learn about Mathematics and Algorithmics. Working in Machine Learning and Natural Language Processing, his hobbies are sleeping and laughing. He has been working with Python and Emacs for a couple of years."
+biography: "An ordinary developer looking to share and learn about Mathematics and Algorithmics. Working in Machine Learning and Natural Language Processing. He has been working with Python and Emacs for a couple of years."
 colophon: "© MMXVIII by Maâmra Youcef.<br>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and created with <a href='http://jekyllrb.com/'>Jekyll</a>.<br> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a></br>"
 # <a class='fa fa-twitter' href='https://twitter.com/{{site.twitter_username}}' title='Twitter'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/{{site.linkedin_username}}' title='LinkedIn'></a>
 

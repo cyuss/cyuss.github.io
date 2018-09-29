@@ -48,6 +48,19 @@ There are a lot of useful packages that we can install and use, we can install t
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
+```
+
+Let's try installing and configuring `diminish` package. It allows us to hide minor-modes in the mode line displays.
+
+```cl
 (use-package diminish
-  :ensure t) ;; keyword that causes the package to be installed automatically
+  :ensure t ;; keyword that causes the package to be installed automatically
+  :diminish eldoc-mode)
+```
+
+## Customize
+
+```cl
+(setq custom-file "~/.emacs.d/custom-settings.el")
+(load custom-file t)
 ```
