@@ -4,7 +4,7 @@
 .highlight {
     .c     {  color: lighten($text-color, 35%); font-style: italic } // Comment
     .err   {  } // Error
-    .k     {  color: $alt-color; font-weight: bold } // Keyword
+    .k     {  color: $alt-color } // Keyword
     .o     {  font-weight: bold }  // Operator
     .cm    {  font-style: italic } // Comment.Multiline
     .cp    {  color: lighten($text-color, 35%); font-weight: bold }  // Comment.Preproc
