@@ -7,14 +7,14 @@ external-url:
 categories: Emacs
 ---
 
-> We all remember our first program, a simple 'Hello World' or just a calculator that made us all excited. We were all impressed how amazing it's to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or even an advanced ones like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.<br/>What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?
+> We all remember our first program, a simple 'Hello World' or just a calculator that made us all excited. We were all impressed how amazing it's to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or others like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.<br/>What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?
 
 ## Overview
-While coding, we generally have to do many parallel tasks and sometimes we just get deconcentrated because we have to deal with many tools at the same time. We all wish to have a simple tool that allows us to do all kind of tasks as quickly as possible.
+While coding, we generally have to do many parallel tasks and sometimes we just get deconcentrated because we have to deal with many tools at the same time. We all wish to have a simple tool that allows us to do all kinds of tasks as quickly as possible.
 
-<a href="https://www.gnu.org/software/emacs/"><em>Emacs</em></a> and <em>Vim</em> are one of those effective tools that allow you to get more organized and be more productive, not only in programming but also in everyday life. I personally use Emacs for a couple of years and I am just enjoying using it each time. It's known that learning Emacs could be a bit complicated at first but after using it for a while, you will define your own workflow.
+<a href="https://www.gnu.org/software/emacs/"><em>Emacs</em></a> and <em>Vim</em> are parts of those effective tools that allow you to be more organized and productive, not only in programming but also in everyday life. I personally use Emacs for a couple of years and I am just enjoying using it each time. It's known that learning Emacs could be a bit complicated at first but after using it for a while now, you will define your own workflow.
 
-This article is not a tutorial to learn Emacs but rather to share my own configuration that I got after using emacs for a while now. To learn the Emacs basics, you can follow to the <a href='https://www.gnu.org/software/emacs/tour/'>official tutorial</a>.
+This article is not a tutorial to learn Emacs but rather to share my own configuration that I got after using emacs for a while now. To learn the Emacs basics, you can follow the <a href='https://www.gnu.org/software/emacs/tour/'>official tutorial</a>.
 
 ## Download & installation
 Emacs is a multiplatform software, it runs on several operating systems. To download and install it, you can follow the instructions in the official home <a href="https://www.gnu.org/software/emacs/download.html">page</a>.
@@ -38,7 +38,7 @@ First of all, we need to initialize Emacs and connect it to the different reposi
 ```
 
 ## Installing packages
-There are a lot of useful packages that we can install and use, we can install them manually by running `M-x package-install` or by just using <a href="https://github.com/jwiegley/use-package">`use-package`</a>, which is a package that allows us to isolate package configuration in our `.emacs` file. So, at first we only need to install it.
+There are a lot of useful packages that we can install and use, we can install them manually by running `M-x package-install` or by just using <a href="https://github.com/jwiegley/use-package">`use-package`</a>, which is a package that allows us to isolate package configuration in our `.emacs` file. At first we only need to install it.
 
 ```cl
 (unless (package-installed-p 'use-package)
@@ -59,7 +59,7 @@ Let's try installing and configuring `diminish` package. It allows us to hide mi
 ```
 
 ## Customization variables
-Emacs has many settings which we can change. I prefer to isolate the design's customization, like theme, outside of the init file.
+Emacs has many settings which we can change. I prefer isolating the design's customization, like theme, outside of the init file.
 ```cl
 ;; save the customization and theme settings in other file
 (setq custom-file "~/.emacs.d/custom-settings.el")
@@ -73,7 +73,7 @@ Keeping backups might be useful generally. To keep them organized we need to set
 (setq delete-old-versions -1)
 ```
 
-When we have to write in other languages or use special characters, `utf-8` encoding is very useful. Choosing the right font helps us to be comfortable while writing or coding.
+When we have to write in other languages or use special characters, `utf-8` encoding is very useful. Choosing the right font makes us more comfortable while writing or coding.
 ```cl
 ;; encoding system
 (set-language-environment "UTF-8")
