@@ -25,3 +25,4 @@ permalink: /blog/:categories/:title/
 
 plugins:
   - jekyll-numbered-headings
+  - jekyll-time-to-read
