@@ -240,3 +240,28 @@ table {
     // border-bottom: 2px solid $alt-color;
   }
 }
+
+.theorem {
+display: block;
+font-style: italic;
+}
+
+.theorem:before {
+content: "Theorem. ";
+font-weight: bold;
+font-style: normal;
+}
+
+.theorem[text]:before {
+content: "Theorem (" attr(text) ") ";
+}
+
+.example {
+display: block;
+}
+
+.example:before {
+content: "Example. ";
+font-weight: bold;
+font-style: normal;
+}
