@@ -8,11 +8,11 @@ categories: Mathematics
 ---
 
 
-> One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br/>This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic. The graph coloring problem has huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a>$$\dots$$
+> One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br/>This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a>$$\dots$$
 
 <!-- ![useful image]({{ site.url }}/assets/world_map.png){:height="50%" width="50%"} -->
 ## Introduction
-Let $G$ be a graph and $\lambda \in \Bbb{N}^* $. <br/>We call a proper $\lambda$-coloring, a function $ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
+Let $G$ be a graph and $\lambda \in \Bbb{N}^* $. <br/>We call a proper $\lambda$-coloring, a function $$ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
 
 There are several ways to color $G$ in $\lambda$-coloring, the number of distinct ways is denoted by $P(G, \lambda)$ and called the **chromatic polynomial**. By interpreting $\lambda$ as the number of colors, we can never color a graph with zero colors which will give us $P(G, \lambda)$ is not $\lambda$-colorable. By definition, we say that $G$ is $\lambda$-colorable if and only if $P(G, \lambda) \geq 1$, since it exists at least one way of $\lambda$-coloring.
 
@@ -38,6 +38,11 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 	$$ \begin{equation} P(K_n, \lambda) = \lambda(\lambda - 1)\dots(\lambda - n +1) \end{equation} \label{eq:complete_graph} $$
 </div>
 
+<figure><center>
+	<img src="{{ site.url }}/assets/kn.png" width="40%" height="40%">
+	<figcaption><b>Figure 1 -</b> A complete graph of order 5.</figcaption>
+</center></figure>
+
 <div class="example">
 	Let $H$ be a graph containing a $K_r$ as subgraph, and let $G$ be the graph obtained from $H$ by adding a new vertex $w$ which is linked with each vertex in $K_r$, then
 	$$ \begin{equation} P(G, \lambda) = (\lambda - r)P(H, \lambda) \end{equation} $$
@@ -46,7 +51,13 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 <div class="example">
 	Let us compute $P(C_4, \lambda)$, where $C_4$ is a <a href="https://en.wikipedia.org/wiki/Cycle_graph">cycle graph</a> of order 4.<br/>
 </div>
-Let $ƒ$ be a $\lambda$-coloring of $C_4$. We enumerate two cases,
+
+<figure><center>
+	<img src="{{ site.url }}/assets/cycle.png" width="40%" height="40%">
+	<figcaption><b>Figure 2 -</b> A cycle graph of order 4.</figcaption>
+</center></figure>
+
+Let $ƒ$ be a $\lambda$-coloring of $C_4$ and $u, v$ two non adjacent vertices, we enumerate two cases,
 1. $ƒ(x) = f(y)$. There are $\lambda - 1$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1)^2$,
 2. $ƒ(x) \neq f(y)$. There are $\lambda - 2$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1) (\lambda - 2)^2$.
 
@@ -85,4 +96,4 @@ $$\begin{cases}
 $$
 
 ## Calculation of the chromatic polynomial
-The problem to find $\chi(G)$ (chromatic number) of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot important information about graphs, which it attracts more attention by researchers.
+The problem to find $\chi(G)$ (chromatic number) of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers.
