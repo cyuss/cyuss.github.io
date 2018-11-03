@@ -1,6 +1,6 @@
 ---
 layout: post
-title: My Emacs configuration
+title: Emacs, let's take the control back of our workflow
 date: 2018-09-20 15:46
 comments: true
 external-url:

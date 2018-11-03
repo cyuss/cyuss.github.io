@@ -70,7 +70,7 @@ P(C_4, \lambda) &= \lambda (\lambda - 1)^2 + \lambda (\lambda - 1) (\lambda - 2)
 \end{aligned}\end{equation}$$
 
 ### Stirling numbers of the first kind
-From equation \ref{eq:complete_graph}, we observe that,
+From equation (\ref{eq:complete_graph}), we observe that,
 
 $$\begin{equation*}\begin{aligned}
 P(K_1, \lambda) &= \lambda \\
@@ -96,4 +96,36 @@ $$\begin{cases}
 $$
 
 ## Calculation of the chromatic polynomial
-The problem to find $\chi(G)$ (chromatic number) of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers.
+The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs.
+
+First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.
+
+<div class="theorem">
+Let $x$ and $y$ be tow non-adjacent vertices in a graph $G$, then
+
+$$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G . xy, \lambda) \label{eq:calculus} \end{equation} $$
+
+<i>Proof.&nbsp;&nbsp;</i> Let $ƒ$ be a $\lambda$-coloration of the graph $G$. We have either <i><b>(i)</b></i> $ƒ(x) \ne ƒ(y)$ or <i><b>(ii)</b></i> $ƒ(x) = f(y)$. The number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(i)</b></i> holds equals $P(G + xy, \lambda)$, while the number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(ii)</b></i> holds equals $P(G . xy, \lambda)$.
+<p align="right">$\square$</p>
+</div>
+
+<div class="example">
+	Let $G$ be the following graph,
+
+<figure><center>
+	<img src="{{ site.url }}/assets/example_calculus.png" width="35%" height="35%">
+	<figcaption><b>Figure 3 -</b> A graph $G$ of order 5.</figcaption>
+</center></figure>
+</div>
+
+By applying (\ref{eq:calculus}), we get 2 graphs :
+- $G + ab$, the graph obtained by adding a new edge $ab$ to $G$, which is a complete graph of order 5,
+- $G . ab$, the graph obtained from $G$ by contracting $a$ and $b$ and removing any loop, which is a complete graph of order 4.
+
+Thus,
+
+$$\begin{equation*}\begin{aligned}
+P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
+              &= \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3) (\lambda - 4) + \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3)\\
+              &= \lambda^5 - 9 \lambda^4 + 29 \lambda^3 - 39 \lambda^2 + 18 \lambda
+\end{aligned}\end{equation*}$$
