@@ -39,7 +39,7 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <figure><center>
-	<img src="{{ site.url }}/assets/kn.png" width="40%" height="40%">
+	<img src="{{ site.url }}/assets/kn.png" width="30%" height="30%">
 	<figcaption><b>Figure 1 -</b> A complete graph of order 5.</figcaption>
 </center></figure>
 
@@ -53,7 +53,7 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <figure><center>
-	<img src="{{ site.url }}/assets/cycle.png" width="40%" height="40%">
+	<img src="{{ site.url }}/assets/cycle.png" width="28%" height="28%">
 	<figcaption><b>Figure 2 -</b> A cycle graph of order 4.</figcaption>
 </center></figure>
 
