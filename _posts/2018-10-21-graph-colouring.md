@@ -70,7 +70,7 @@ P(C_4, \lambda) &= \lambda (\lambda - 1)^2 + \lambda (\lambda - 1) (\lambda - 2)
 \end{aligned}\end{equation}$$
 
 ### Stirling numbers of the first kind
-From equation (\ref{eq:complete_graph}), we observe that,
+From equation \eqref{eq:complete_graph}, we observe that,
 
 $$\begin{equation*}\begin{aligned}
 P(K_1, \lambda) &= \lambda \\
@@ -118,7 +118,7 @@ $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G . xy, \lambda) \lab
 </center></figure>
 </div>
 
-By applying (\ref{eq:calculus}), we get 2 graphs :
+By applying \eqref{eq:calculus}, we get 2 graphs :
 - $G + ab$, the graph obtained by adding a new edge $ab$ to $G$, which is a complete graph of order 5,
 - $G . ab$, the graph obtained from $G$ by contracting $a$ and $b$ and removing any loop, which is a complete graph of order 4.
 
