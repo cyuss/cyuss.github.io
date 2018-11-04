@@ -71,6 +71,10 @@ body {
     font-weight: bold;
     letter-spacing: 0.15em;
   }
+
+  counter-reset: theorems;
+  counter-reset: definitions;
+  counter-reset: examples
 }
 
 article {
@@ -242,26 +246,29 @@ table {
 }
 
 .theorem {
-display: block;
-font-style: italic;
+  display: block;
+  font-style: italic;
 }
 
 .theorem:before {
-content: "Theorem. ";
-font-weight: bold;
-font-style: normal;
+  content: "Theorem " counter(theorems) ". ";
+  font-weight: bold;
+  font-style: normal;
+  counter-increment: theorems;
 }
 
 .theorem[text]:before {
-content: "Theorem (" attr(text) ") ";
+  content: "Theorem " counter(theorems) ". (" attr(text) ") ";
+  counter-increment: theorems;
 }
 
 .example {
-display: block;
+  display: block;
 }
 
 .example:before {
-content: "Example. ";
-font-weight: bold;
-font-style: normal;
+  content: "Example " counter(examples) ". ";
+  font-weight: bold;
+  font-style: normal;
+  counter-increment: examples;
 }
