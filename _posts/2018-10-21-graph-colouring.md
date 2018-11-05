@@ -11,7 +11,7 @@ categories: Mathematics
 > One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br/>This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a>$$\dots$$
 
 <!-- ![useful image]({{ site.url }}/assets/world_map.png){:height="50%" width="50%"} -->
-## Introduction
+##1. Introduction
 Let $G$ be a graph and $\lambda \in \Bbb{N}^* $. <br/>We call a proper $\lambda$-coloring, a function $$ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
 
 There are several ways to color $G$ in $\lambda$-coloring, the number of distinct ways is denoted by $P(G, \lambda)$ and called the **chromatic polynomial**. By interpreting $\lambda$ as the number of colors, we can never color a graph with zero colors which will give us $P(G, \lambda)$ is not $\lambda$-colorable. By definition, we say that $G$ is $\lambda$-colorable if and only if $P(G, \lambda) \geq 1$, since it exists at least one way of $\lambda$-coloring.
@@ -22,10 +22,10 @@ $$ \begin{equation} \chi(G) = \min\{\lambda \in \Bbb{N}^* : P(G, \lambda) \geq 1
 
 By definition, $P(G, \chi(G)) \geq 1$ ($G$ is $\chi(G)$-colorable). Given a set of $r$ colors ($r \in \Bbb{N}$), for $r < \chi(G)$, $P(G, r) = 0$.
 
-## Particular graphs
+##1. Particular graphs
 After having defined the graph coloring, we will try to enumerate $P(G, \lambda)$ for some special graphs.
 
-### Examples
+###1. Examples
 <div class="example">
 	For an <a href="https://en.wiktionary.org/wiki/empty_graph">empty graph</a> $O_n$ of order $n$, it is clear that,
 	$$ \begin{equation} P(O_n, \lambda) = \lambda^{n} \end{equation} $$
@@ -69,7 +69,7 @@ P(C_4, \lambda) &= \lambda (\lambda - 1)^2 + \lambda (\lambda - 1) (\lambda - 2)
   				&= (\lambda - 1)^4 + (\lambda - 1)
 \end{aligned}\end{equation}$$
 
-### Stirling numbers of the first kind
+###1. Stirling numbers of the first kind
 From equation \eqref{eq:complete_graph}, we observe that,
 
 $$\begin{equation*}\begin{aligned}
@@ -95,7 +95,7 @@ $$\begin{cases}
 \end{cases}
 $$
 
-## Calculation of the chromatic polynomial
+##1. Calculation of the chromatic polynomial
 The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs.
 
 First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.
