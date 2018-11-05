@@ -96,7 +96,7 @@ $$\begin{cases}
 $$
 
 ##1. Calculation of the chromatic polynomial
-The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs.
+The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs. {% cite Dong2005 %}
 
 First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.
 
@@ -129,6 +129,9 @@ P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
               &= \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3) (\lambda - 4) + \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3)\\
               &= \lambda^5 - 9 \lambda^4 + 29 \lambda^3 - 39 \lambda^2 + 18 \lambda
 \end{aligned}\end{equation*}$$
+
+##1. Behind the Sudoku
+*Sudoku* is a puzzle that has become very popular. The game consists of a grid of $9 \times 9$ where each box contains
 
 
 References
