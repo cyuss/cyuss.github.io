@@ -1,3 +1,9 @@
 _site/
 .sass-cache/
 .jekyll-metadata
+.DS_Store
+_includes/.DS_Store
+_includes/toc.html
+_posts/.DS_Store
+assets/.DS_Store
+assets/world_map.png

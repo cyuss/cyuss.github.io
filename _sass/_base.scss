@@ -79,6 +79,7 @@ body {
 }
 
 article {
+  counter-reset: level1;
   ul li {
     padding-left: 0em;
     margin-bottom: 0;
@@ -274,3 +275,17 @@ table {
   font-weight: bold;
   font-style: normal;
 }
+
+article h1:before {
+    content: counter(level1) " ";
+    counter-increment: level1;}
+article h1 {counter-reset: level2;}
+
+article h2:before {
+    content: counter(level1) "." counter(level2) " ";
+    counter-increment: level2;}
+article h2 {counter-reset: level3;}
+
+article h3:before {
+    content: counter(level1) "." counter(level2) "." counter(level3) " ";
+    counter-increment: level3;}
