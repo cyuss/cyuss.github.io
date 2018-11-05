@@ -14,7 +14,7 @@ categories: Mathematics
 ##1. Introduction
 Let $G$ be a graph and $\lambda \in \Bbb{N}^* $. <br/>We call a proper $\lambda$-coloring, a function $$ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
 
-There are several ways to color $G$ in $\lambda$-coloring, the number of distinct ways is denoted by $P(G, \lambda)$ and called the **chromatic polynomial**. By interpreting $\lambda$ as the number of colors, we can never color a graph with zero colors which will give us $P(G, \lambda)$ is not $\lambda$-colorable. By definition, we say that $G$ is $\lambda$-colorable if and only if $P(G, \lambda) \geq 1$, since it exists at least one way of $\lambda$-coloring.
+There are several ways to color $G$ in $\lambda$-coloring, the number of distinct ways is denoted by $P(G, \lambda)$ and called the **chromatic polynomial** {% cite birkhoff12 %}. By interpreting $\lambda$ as the number of colors, we can never color a graph with zero colors which will give us $P(G, \lambda)$ is not $\lambda$-colorable. By definition, we say that $G$ is $\lambda$-colorable if and only if $P(G, \lambda) \geq 1$, since it exists at least one way of $\lambda$-coloring.
 
 Among the most classic problems in graph theory is to find the minimum number of colors to color the graph $G$. This number is called the **chromatic number** and is denoted by $\chi(G)$.
 
@@ -101,7 +101,7 @@ The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.
 First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.
 
 <div class="theorem">
-Let $x$ and $y$ be tow non-adjacent vertices in a graph $G$, then
+Let $x$ and $y$ be two non-adjacent vertices in a graph $G$, then
 
 $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G . xy, \lambda) \label{eq:calculus} \end{equation} $$
 
@@ -129,3 +129,8 @@ P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
               &= \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3) (\lambda - 4) + \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3)\\
               &= \lambda^5 - 9 \lambda^4 + 29 \lambda^3 - 39 \lambda^2 + 18 \lambda
 \end{aligned}\end{equation*}$$
+
+
+References
+----------
+{% bibliography %}
