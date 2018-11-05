@@ -96,12 +96,12 @@ $$\begin{cases}
 $$
 
 ## Calculation of the chromatic polynomial
-The problem to find $\chi(G)$ [^1] of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a> [^2], and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs.
+The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness">*NP-Complete*</a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs.
 
 First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.
 
 <div class="theorem">
-Let $x$ and $y$ be two non-adjacent vertices in a graph $G$, then
+Let $x$ and $y$ be tow non-adjacent vertices in a graph $G$, then
 
 $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G . xy, \lambda) \label{eq:calculus} \end{equation} $$
 
@@ -129,7 +129,3 @@ P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
               &= \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3) (\lambda - 4) + \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3)\\
               &= \lambda^5 - 9 \lambda^4 + 29 \lambda^3 - 39 \lambda^2 + 18 \lambda
 \end{aligned}\end{equation*}$$
-
-
-[^1]: Chromatic number (cf. \ref{eq:chrom_num}).
-[^2]: Any of a class of computational problems for which no efficient solution algorithm has been found.

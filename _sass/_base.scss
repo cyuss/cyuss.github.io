@@ -65,17 +65,16 @@ body {
   }
 
   h3 {
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-variant: small-caps;
     text-transform: lowercase;
     font-weight: bold;
     letter-spacing: 0.15em;
   }
 
-  // define counters
   counter-reset: theorems;
   counter-reset: definitions;
-  counter-reset: examples;
+  counter-reset: examples
 }
 
 article {
@@ -190,7 +189,7 @@ footer {
   }
 
   h2 {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-variant: small-caps;
     text-transform: lowercase;
     font-weight: bold;
@@ -246,22 +245,21 @@ table {
   }
 }
 
-// added some blocks for theorems, examples...
 .theorem {
   display: block;
   font-style: italic;
 }
 
 .theorem:before {
-  counter-increment: theorems;
   content: "Theorem " counter(theorems) ". ";
   font-weight: bold;
   font-style: normal;
+  counter-increment: theorems;
 }
 
 .theorem[text]:before {
-  counter-increment: theorems;
   content: "Theorem " counter(theorems) ". (" attr(text) ") ";
+  counter-increment: theorems;
 }
 
 .example {
@@ -269,8 +267,8 @@ table {
 }
 
 .example:before {
-  counter-increment: examples;
   content: "Example " counter(examples) ". ";
   font-weight: bold;
   font-style: normal;
+  counter-increment: examples;
 }
