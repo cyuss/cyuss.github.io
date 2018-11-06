@@ -131,9 +131,23 @@ P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
 \end{aligned}\end{equation*}$$
 
 ##1. Behind the Sudoku
-*Sudoku* is a puzzle that has become very popular. The game consists of a grid of $9 \times 9$ where each box contains
+*Sudoku* is a puzzle that has become very popular. The game consists of a grid of 9 $\times$ 9 where each box contains a number from 1 to 9. One must fill the grid in a way where each row, each column and each sub grid contain numbers from 1 to 9 exactly once.
+
+A *Latin square* of order $n$ is a grid of size $n \times n$ where each row and each column contain all the numbers between 1 and $n$ repeating exactly once. Each *Sudoku* grid is a Latin square of order 9, but the converse is not true because of the condition of the sub grids.
+
+After understanding the principle of the game, we will approach to see a Sudoku grid using graphs {% cite Herzberg2007 %}. We can see the Sudoku grid as a coloring problem. In fact, by associating to each grid a graph of order 81 (9 $\times$ 9), where each vertex corresponds to a cell in the grid. Two distincts vertices are adjacent if and only if the two corresponding cells in the grid are either in the same row, same column or same sub grid.</br>
+Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i', j')$ are adjacents if :
+1. $i = i'$ or,
+2. $j = j'$ or,
+3. $\lceil i/n \rceil = \lceil i'/n \rceil$ and $\lceil j/n \rceil = \lceil j'/n \rceil$ 
+
+where $\lceil . \rceil$ denote the ceiling function.
+
+Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It's clear that $X_n$ is a *regular graph* [^1] such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ corresponds to a 9 $\times$ 9 grid and it is a 20-regular graph.
 
 
 References
 ----------
-{% bibliography %}
+{% bibliography --cited %}
+
+[^1]: A regular graph is a graph where each vertex has the same degree; *i.e.* has the same number of neighbors

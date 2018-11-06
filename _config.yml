@@ -26,6 +26,7 @@ permalink: /blog/:categories/:title/
 plugins:
   - jekyll-numbered-headings
   - jekyll-scholar
+  - jekyll-time-to-read
 
 scholar:
   style: apa
