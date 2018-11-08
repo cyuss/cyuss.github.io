@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Graph coloring & chromacity
+title: Introduction to Chromatic Polynomials
 date: 2018-10-21 12:00
 comments: true
 external-url:
@@ -8,11 +8,31 @@ categories: Mathematics
 ---
 
 
-> One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br/>This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a>$$\dots$$
+> One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br/>This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a>$$\dots$$
 
 <!-- ![useful image]({{ site.url }}/assets/world_map.png){:height="50%" width="50%"} -->
+## Notations
+
+$$\begin{array}{ r c l }
+\Bbb{N} & = & \{0, 1, 2, \dots\} \\
+\Bbb{N}^* & = & \{1, 2, 3, \dots\} \\
+\lceil x \rceil & : & \text{the smallest integer greater than or equal to } x \\
+\chi(G) & : & \text{the chromatic number of } G \\
+(\lambda)_{n} & = & \lambda (\lambda - 1) \dots (\lambda - n + 1) \\
+V(G) & : & \text{the vertex set of } G \\
+E(G) & : & \text{the edge set of } G \\
+G \cdot xy & : & \text{the graph obtained from } G \text{ by contracting } x \text{ and } y \text{ removing any loop} \\
+G + xy & : & \text{the graph obtained by adding a new edge } ab \text{ to } G \\
+G \cup H & : & \text{the disjoint union of } G \text{ and } H \\
+C_n & : & \text{the cycle of order } n \\
+K_n & : & \text{the complete graph of order } n \\
+O_n & : & \text{the empty graph of order } n \\
+\end{array}$$
+
 ##1. Introduction
-Let $G$ be a graph and $\lambda \in \Bbb{N}^* $. <br/>We call a proper $\lambda$-coloring, a function $$ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
+Let $G$ be a graph and $\lambda \in \Bbb{N}^* $.
+
+We call a proper $\lambda$-coloring, a function $$ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
 
 There are several ways to color $G$ in $\lambda$-coloring, the number of distinct ways is denoted by $P(G, \lambda)$ and called the **chromatic polynomial** {% cite birkhoff12 %}. By interpreting $\lambda$ as the number of colors, we can never color a graph with zero colors which will give us $P(G, \lambda)$ is not $\lambda$-colorable. By definition, we say that $G$ is $\lambda$-colorable if and only if $P(G, \lambda) \geq 1$, since it exists at least one way of $\lambda$-coloring.
 
@@ -20,7 +40,7 @@ Among the most classic problems in graph theory is to find the minimum number of
 
 $$ \begin{equation} \chi(G) = \min\{\lambda \in \Bbb{N}^* : P(G, \lambda) \geq 1 \label{eq:chrom_num}\} \end{equation} $$
 
-By definition, $P(G, \chi(G)) \geq 1$ ($G$ is $\chi(G)$-colorable). Given a set of $r$ colors ($r \in \Bbb{N}$), for $r < \chi(G)$, $P(G, r) = 0$.
+By definition, $P(G, \chi(G)) \geq 1$ [^1]. Given a set of $r$ colors ($r \in \Bbb{N}$), for $r < \chi(G)$, $P(G, r) = 0$.
 
 ##1. Particular graphs
 After having defined the graph coloring, we will try to enumerate $P(G, \lambda)$ for some special graphs.
@@ -58,8 +78,8 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </center></figure>
 
 Let $ƒ$ be a $\lambda$-coloring of $C_4$ and $u, v$ two non adjacent vertices, we enumerate two cases,
-1. $ƒ(x) = f(y)$. There are $\lambda - 1$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1)^2$,
-2. $ƒ(x) \neq f(y)$. There are $\lambda - 2$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1) (\lambda - 2)^2$.
+1. $ƒ(u) = f(v)$. There are $\lambda - 1$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1)^2$,
+2. $ƒ(u) \neq f(v)$. There are $\lambda - 2$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1) (\lambda - 2)^2$.
 
 We conclude that,
 
@@ -103,7 +123,7 @@ First, we will use an extension of the idea used for the computation of $P(C_4, 
 <div class="theorem">
 Let $x$ and $y$ be two non-adjacent vertices in a graph $G$, then
 
-$$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G . xy, \lambda) \label{eq:calculus} \end{equation} $$
+$$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G \cdot xy, \lambda) \label{eq:calculus} \end{equation} $$
 
 <i>Proof.&nbsp;&nbsp;</i> Let $ƒ$ be a $\lambda$-coloration of the graph $G$. We have either <i><b>(i)</b></i> $ƒ(x) \ne ƒ(y)$ or <i><b>(ii)</b></i> $ƒ(x) = f(y)$. The number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(i)</b></i> holds equals $P(G + xy, \lambda)$, while the number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(ii)</b></i> holds equals $P(G . xy, \lambda)$.
 <p align="right">$\square$</p>
@@ -120,7 +140,7 @@ $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G . xy, \lambda) \lab
 
 By applying \eqref{eq:calculus}, we get 2 graphs :
 - $G + ab$, the graph obtained by adding a new edge $ab$ to $G$, which is a complete graph of order 5,
-- $G . ab$, the graph obtained from $G$ by contracting $a$ and $b$ and removing any loop, which is a complete graph of order 4.
+- $G \cdot ab$, the graph obtained from $G$ by contracting $a$ and $b$ and removing any loop, which is a complete graph of order 4.
 
 Thus,
 
@@ -135,19 +155,15 @@ P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
 
 A *Latin square* of order $n$ is a grid of size $n \times n$ where each row and each column contain all the numbers between 1 and $n$ repeating exactly once. Each *Sudoku* grid is a Latin square of order 9, but the converse is not true because of the condition of the sub grids.
 
-After understanding the principle of the game, we will approach to see a Sudoku grid using graphs {% cite Herzberg2007 %}. We can see the Sudoku grid as a coloring problem. In fact, by associating to each grid a graph of order 81 (9 $\times$ 9), where each vertex corresponds to a cell in the grid. Two distincts vertices are adjacent if and only if the two corresponding cells in the grid are either in the same row, same column or same sub grid.</br>
-Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i', j')$ are adjacents if :
-1. $i = i'$ or,
-2. $j = j'$ or,
-3. $\lceil i/n \rceil = \lceil i'/n \rceil$ and $\lceil j/n \rceil = \lceil j'/n \rceil$ 
+After understanding the principle of the game, we will approach to see a Sudoku grid using graphs {% cite Herzberg2007 %}. We can see the Sudoku grid as a coloring problem. In fact, by associating to each grid a graph of order 81 (9 $\times$ 9), where each vertex corresponds to a cell in the grid. Two distincts vertices are adjacent if and only if the two corresponding cells in the grid are either in the same row, same column or same sub grid.<br/>
+Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i', j')$ are adjacents if $i = i'$ or $j = j'$ or $\lceil i/n \rceil = \lceil i'/n \rceil$ and $\lceil j/n \rceil = \lceil j'/n \rceil$ where $\lceil \,. \rceil$ denote the ceiling function.
 
-where $\lceil . \rceil$ denote the ceiling function.
-
-Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It's clear that $X_n$ is a *regular graph* [^1] such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ corresponds to a 9 $\times$ 9 grid and it is a 20-regular graph.
+Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It's clear that $X_n$ is a *regular graph* [^2] such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ graph corresponds to a 9 $\times$ 9 grid that is a 20-regular graph.
 
 
 References
 ----------
 {% bibliography --cited %}
 
-[^1]: A regular graph is a graph where each vertex has the same degree; *i.e.* has the same number of neighbors
+[^1]: $G$ is $\chi(G)$-colorable.
+[^2]: A regular graph is a graph where each vertex has the same degree; *i.e.* has the same number of neighbors.
