@@ -5,6 +5,7 @@ date: 2018-10-21 12:00
 comments: true
 external-url:
 categories: Mathematics
+tags: [graph-coloring, chromacity]
 ---
 
 
@@ -14,19 +15,20 @@ categories: Mathematics
 ## Notations
 
 $$\begin{array}{ r c l }
-\Bbb{N} & = & \{0, 1, 2, \dots\} \\
-\Bbb{N}^* & = & \{1, 2, 3, \dots\} \\
+\Bbb{N} & : & \{0, 1, 2, \dots\} \\
+\Bbb{N}^* & : & \{1, 2, 3, \dots\} \\
 \lceil x \rceil & : & \text{the smallest integer greater than or equal to } x \\
+(\lambda)_{n} & : & \lambda (\lambda - 1) \dots (\lambda - n + 1) \\
+\mathcal{s}(r, n) & : & \text{(signed) Stirling number of first kind} \\
 \chi(G) & : & \text{the chromatic number of } G \\
-(\lambda)_{n} & = & \lambda (\lambda - 1) \dots (\lambda - n + 1) \\
 V(G) & : & \text{the vertex set of } G \\
 E(G) & : & \text{the edge set of } G \\
 G \cdot xy & : & \text{the graph obtained from } G \text{ by contracting } x \text{ and } y \text{ removing any loop} \\
 G + xy & : & \text{the graph obtained by adding a new edge } ab \text{ to } G \\
 G \cup H & : & \text{the disjoint union of } G \text{ and } H \\
-C_n & : & \text{the cycle of order } n \\
-K_n & : & \text{the complete graph of order } n \\
 O_n & : & \text{the empty graph of order } n \\
+K_n & : & \text{the complete graph of order } n \\
+C_n & : & \text{the cycle of order } n \\
 \end{array}$$
 
 ##1. Introduction
@@ -54,12 +56,12 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <div class="example">
-	For a <a href="https://en.wikipedia.org/wiki/Complete_graph">complete graph</a> $K_n$ of order $n$ ($\forall u, v \in V(G)$, they are adjacents), we have
+	For a <a href="https://en.wikipedia.org/wiki/Complete_graph">complete graph</a> $K_n$ of order $n$, we have
 	$$ \begin{equation} P(K_n, \lambda) = \lambda(\lambda - 1)\dots(\lambda - n +1) \end{equation} \label{eq:complete_graph} $$
 </div>
 
 <figure><center>
-	<img src="{{ site.url }}/assets/kn.png" width="30%" height="30%">
+	<img src="{{ site.url }}/assets/images/kn.png" width="30%" height="30%">
 	<figcaption><b>Figure 1 -</b> A complete graph of order 5.</figcaption>
 </center></figure>
 
@@ -73,7 +75,7 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <figure><center>
-	<img src="{{ site.url }}/assets/cycle.png" width="28%" height="28%">
+	<img src="{{ site.url }}/assets/images/cycle.png" width="28%" height="28%">
 	<figcaption><b>Figure 2 -</b> A cycle graph of order 4.</figcaption>
 </center></figure>
 
@@ -133,7 +135,7 @@ $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G \cdot xy, \lambda) 
 	Let $G$ be the following graph,
 
 <figure><center>
-	<img src="{{ site.url }}/assets/example_calculus.png" width="35%" height="35%">
+	<img src="{{ site.url }}/assets/images/example_calculus.png" width="35%" height="35%">
 	<figcaption><b>Figure 3 -</b> A graph $G$ of order 5.</figcaption>
 </center></figure>
 </div>
@@ -150,10 +152,12 @@ P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
               &= \lambda^5 - 9 \lambda^4 + 29 \lambda^3 - 39 \lambda^2 + 18 \lambda
 \end{aligned}\end{equation*}$$
 
+Chromatic polynomials are a very useful tools for graphs, they are applied in many fields. As a simple example, we will try to apply it to a very famous game, *Sudoku*.
+
 ##1. Behind the Sudoku
 *Sudoku* is a puzzle that has become very popular. The game consists of a grid of 9 $\times$ 9 where each box contains a number from 1 to 9. One must fill the grid in a way where each row, each column and each sub grid contain numbers from 1 to 9 exactly once.
 
-A *Latin square* of order $n$ is a grid of size $n \times n$ where each row and each column contain all the numbers between 1 and $n$ repeating exactly once. Each *Sudoku* grid is a Latin square of order 9, but the converse is not true because of the condition of the sub grids.
+A *Latin square* of order $n$ is a grid of size $n \times n$ where each row and each column contain all the numbers between 1 and $n$ repeating exactly once. Each Sudoku grid is a Latin square of order 9, but the converse is not true because of the condition of the sub grids.
 
 After understanding the principle of the game, we will approach to see a Sudoku grid using graphs {% cite Herzberg2007 %}. We can see the Sudoku grid as a coloring problem. In fact, by associating to each grid a graph of order 81 (9 $\times$ 9), where each vertex corresponds to a cell in the grid. Two distincts vertices are adjacent if and only if the two corresponding cells in the grid are either in the same row, same column or same sub grid.<br/>
 Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i', j')$ are adjacents if $i = i'$ or $j = j'$ or $\lceil i/n \rceil = \lceil i'/n \rceil$ and $\lceil j/n \rceil = \lceil j'/n \rceil$ where $\lceil \,. \rceil$ denote the ceiling function.
