@@ -272,3 +272,14 @@ table {
   font-style: normal;
   counter-increment: examples;
 }
+
+.definition {
+  display: block;
+}
+
+.definition:before {
+  content: "Definition " counter(definitions) ". ";
+  font-weight: bold;
+  font-style: normal;
+  counter-increment: definitions;
+}
