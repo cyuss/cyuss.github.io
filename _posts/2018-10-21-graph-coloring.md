@@ -6,6 +6,7 @@ comments: true
 external-url:
 categories: Mathematics
 tags: [graph-coloring, chromacity]
+permalink: /blog/:categories/introduction-chromatic-polynomials
 ---
 
 
@@ -16,7 +17,7 @@ tags: [graph-coloring, chromacity]
 
 $$\begin{array}{ r c l }
 \Bbb{N} & : & \{0, 1, 2, \dots\} \\
-\Bbb{N}^* & : & \{1, 2, 3, \dots\} \\
+\Bbb{N}^{\ast} & : & \{1, 2, 3, \dots\} \\
 \lceil x \rceil & : & \text{the smallest integer greater than or equal to } x \\
 (\lambda)_{n} & : & \lambda (\lambda - 1) \dots (\lambda - n + 1) \\
 \mathcal{s}(r, n) & : & \text{(signed) Stirling number of first kind} \\
@@ -80,8 +81,8 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </center></figure>
 
 Let $ƒ$ be a $\lambda$-coloring of $C_4$ and $u, v$ two non adjacent vertices, we enumerate two cases,
-1. $ƒ(u) = f(v)$. There are $\lambda - 1$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1)^2$,
-2. $ƒ(u) \neq f(v)$. There are $\lambda - 2$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1) (\lambda - 2)^2$.
+1. $ƒ(x) = f(y)$. There are $\lambda - 1$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1)^2$,
+2. $ƒ(x) \neq f(y)$. There are $\lambda - 2$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1) (\lambda - 2)^2$.
 
 We conclude that,
 

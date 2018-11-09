@@ -13,7 +13,7 @@ colophon: "© MMXVIII by Maâmra Youcef - معامره يوسف <br/>Content ava
 # <a class='fa fa-twitter' href='https://twitter.com/{{site.twitter_username}}' title='Twitter'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/{{site.linkedin_username}}' title='LinkedIn'></a>
 
 baseurl: ""
-url: ""
+url: "www.ohmykode.com"
 
 github_username: Cyuss
 linkedin_username: youcefmaamra
@@ -25,10 +25,18 @@ highlighter: rouge
 #permalink: /blog/:year/:month/:day/:title/
 permalink: /blog/:categories/:title/
 
+social:
+  name: Maamra Youcef
+  links:
+    - https://github.com/Cyuss
+    - https://id.linkedin.com/in/youcefmaamra
+
 plugins:
   - jekyll-numbered-headings
   - jekyll-scholar
   - jekyll-time-to-read
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 scholar:
   style: apa
