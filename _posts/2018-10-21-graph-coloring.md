@@ -62,7 +62,7 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <figure><center>
-	<img src="{{ site.url }}/assets/images/kn.png" width="30%" height="30%">
+	<img src="{{ site.baseurl }}/assets/images/kn.png" width="30%" height="30%">
 	<figcaption><b>Figure 1 -</b> A complete graph of order 5.</figcaption>
 </center></figure>
 
@@ -76,7 +76,7 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <figure><center>
-	<img src="{{ site.url }}/assets/images/cycle.png" width="28%" height="28%">
+	<img src="{{ site.baseurl }}/assets/images/cycle.png" width="28%" height="28%">
 	<figcaption><b>Figure 2 -</b> A cycle graph of order 4.</figcaption>
 </center></figure>
 
@@ -136,7 +136,7 @@ $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G \cdot xy, \lambda) 
 	Let $G$ be the following graph,
 
 <figure><center>
-	<img src="{{ site.url }}/assets/images/example_calculus.png" width="35%" height="35%">
+	<img src="{{ site.baseurl }}/assets/images/example_calculus.png" width="35%" height="35%">
 	<figcaption><b>Figure 3 -</b> A graph $G$ of order 5.</figcaption>
 </center></figure>
 </div>
