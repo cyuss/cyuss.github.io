@@ -5,7 +5,7 @@ date: 2018-10-21 12:00
 comments: true
 external-url:
 categories: Mathematics
-tags: [graph-coloring, chromacity]
+tags: [graph-theory, graph-coloring, chromacity]
 permalink: /blog/:categories/introduction-chromatic-polynomials
 ---
 
@@ -13,7 +13,7 @@ permalink: /blog/:categories/introduction-chromatic-polynomials
 > One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br/>This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a>$$\dots$$
 
 <!-- ![useful image]({{ site.url }}/assets/world_map.png){:height="50%" width="50%"} -->
-## Notations
+<!--## Notations
 
 $$\begin{array}{ r c l }
 \Bbb{N} & : & \{0, 1, 2, \dots\} \\
@@ -22,18 +22,18 @@ $$\begin{array}{ r c l }
 (\lambda)_{n} & : & \lambda (\lambda - 1) \dots (\lambda - n + 1) \\
 \mathcal{s}(r, n) & : & \text{(signed) Stirling number of first kind} \\
 \chi(G) & : & \text{the chromatic number of } G \\
-V(G) & : & \text{the vertex set of } G \\
-E(G) & : & \text{the edge set of } G \\
+% V(G) & : & \text{the vertex set of } G \\
+% E(G) & : & \text{the edge set of } G \\
 G \cdot xy & : & \text{the graph obtained from } G \text{ by contracting } x \text{ and } y \text{ removing any loop} \\
 G + xy & : & \text{the graph obtained by adding a new edge } ab \text{ to } G \\
 G \cup H & : & \text{the disjoint union of } G \text{ and } H \\
-O_n & : & \text{the empty graph of order } n \\
-K_n & : & \text{the complete graph of order } n \\
-C_n & : & \text{the cycle of order } n \\
-\end{array}$$
+% O_n & : & \text{the empty graph of order } n \\
+% K_n & : & \text{the complete graph of order } n \\
+% C_n & : & \text{the cycle of order } n \\
+\end{array}$$-->
 
 ##1. Introduction
-Let $G$ be a graph and $\lambda \in \Bbb{N}^* $.
+Let $G(V(G), E(G))$ be a graph and $\lambda \in \Bbb{N}^* $, where $V(G)$ and $E(G)$ are respectively the vertex set and the edge set of $G$.
 
 We call a proper $\lambda$-coloring, a function $$ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}$$, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and $$v$$ are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.
 
@@ -57,7 +57,7 @@ After having defined the graph coloring, we will try to enumerate $P(G, \lambda)
 </div>
 
 <div class="example">
-	For a <a href="https://en.wikipedia.org/wiki/Complete_graph">complete graph</a> $K_n$ of order $n$, we have
+	For a <a href="https://en.wikipedia.org/wiki/Complete_graph">complete graph</a> $K_n$ of order $n$ where $\forall u, v \in V(G)$ they are adjacents (by definition $ƒ(u) \neq ƒ(v)$), we have
 	$$ \begin{equation} P(K_n, \lambda) = \lambda(\lambda - 1)\dots(\lambda - n +1) \end{equation} \label{eq:complete_graph} $$
 </div>
 
@@ -161,7 +161,7 @@ Chromatic polynomials are a very useful tools for graphs, they are applied in ma
 A *Latin square* of order $n$ is a grid of size $n \times n$ where each row and each column contain all the numbers between 1 and $n$ repeating exactly once. Each Sudoku grid is a Latin square of order 9, but the converse is not true because of the condition of the sub grids.
 
 After understanding the principle of the game, we will approach to see a Sudoku grid using graphs {% cite Herzberg2007 %}. We can see the Sudoku grid as a coloring problem. In fact, by associating to each grid a graph of order 81 (9 $\times$ 9), where each vertex corresponds to a cell in the grid. Two distincts vertices are adjacent if and only if the two corresponding cells in the grid are either in the same row, same column or same sub grid.<br/>
-Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i', j')$ are adjacents if $i = i'$ or $j = j'$ or $\lceil i/n \rceil = \lceil i'/n \rceil$ and $\lceil j/n \rceil = \lceil j'/n \rceil$ where $\lceil \,. \rceil$ denote the ceiling function.
+Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i', j')$ are adjacents if $i = i'$ or $j = j'$ or $\lceil i/n \rceil = \lceil i'/n \rceil$ and $\lceil j/n \rceil = \lceil j'/n \rceil$ where $\lceil \,. \rceil$ denote the ceiling function (the smallest integer greater than or equal to $x$).
 
 Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It's clear that $X_n$ is a *regular graph* [^2] such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ graph corresponds to a 9 $\times$ 9 grid that is a 20-regular graph.
 
