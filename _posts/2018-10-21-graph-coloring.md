@@ -123,11 +123,9 @@ The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.
 
 First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.
 
-<div class="theorem">
+> <div class="theorem">
 Let $x$ and $y$ be two non-adjacent vertices in a graph $G$, then
-
 $$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G \cdot xy, \lambda) \label{eq:calculus} \end{equation} $$
-
 <i>Proof.&nbsp;&nbsp;</i> Let $ƒ$ be a $\lambda$-coloration of the graph $G$. We have either <i><b>(i)</b></i> $ƒ(x) \ne ƒ(y)$ or <i><b>(ii)</b></i> $ƒ(x) = f(y)$. The number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(i)</b></i> holds equals $P(G + xy, \lambda)$, while the number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(ii)</b></i> holds equals $P(G . xy, \lambda)$.
 <p align="right">$\square$</p>
 </div>

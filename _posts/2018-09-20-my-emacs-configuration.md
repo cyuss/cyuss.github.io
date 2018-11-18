@@ -5,6 +5,7 @@ date: 2018-09-20 15:46
 comments: true
 external-url:
 categories: Emacs
+permalink: /blog/:categories/emacs-configuration
 ---
 
 > We all remember our first program, a simple 'Hello World' or just a calculator that made us all excited. We were all impressed how amazing it's to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or others like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.<br/>What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?
