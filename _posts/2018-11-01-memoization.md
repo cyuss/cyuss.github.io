@@ -5,7 +5,7 @@ date: 2018-11-01 12:00
 comments: true
 external-url:
 categories: Python
-tags: [python, memoization, optimization, algorithmic]
+tags: [python, memoization, algorithmic]
 permalink: /blog/:categories/memoization
 ---
 
@@ -14,7 +14,7 @@ permalink: /blog/:categories/memoization
 
 
 ##1. Overview
-Let $ƒ$ be a function. Memoizing $ƒ$ is switching between the invocations of $ƒ$ and checking whether the value of an input $x$ can already be found in the memory whenever $ƒ(x)$ is to be computed. If $x$ is not already present in the memory, we compute $f(x)$ using its recursive definition and store the resulting value in it.
+Let $f$ be a function. Memoizing $f$ is switching between the invocations of $f$ and checking whether the value of an input $x$ can already be found in the memory whenever $f(x)$ is to be computed. If $x$ is not already present in the memory, we compute $f(x)$ using its recursive definition and store the resulting value in it.
 
 Memoization is similar to a very familiar technique we already know in computer science, **caching** ! The aim goal of caching techniques is **avoid doing the same thing repeatedly to avoid spending unnecessary running time or resources**.
 
@@ -34,14 +34,14 @@ F(1) = 1.
 \end{cases}
 $$
 
-To calculate the Fibonacci sequence defined in \eqref{eq:fibo}, we can use an iterative or a recursive function. Beside the disadvantages of recursion (slow), its main advantage is making the algorithm a little easier and more readable.
+To calculate the Fibonacci sequence defined in \eqref{eq:fibo}, we can use an iterative or a recursive version. Beside the disadvantages of recursion (slow), its main advantage is making the algorithm a little easier and more readable.
 
 ```python
 # -*- coding: utf-8 -*-
 
 def fibo_iterative(n):
 	"""
-		Iterative version of Fibonacci sequence
+	Iterative version of Fibonacci sequence
 	"""
 	assert n >= 0, "shouldn't be a negative number."
 	n2, n1 = 0, 1 # seed values are 0 and 1
@@ -51,7 +51,7 @@ def fibo_iterative(n):
 
 def fibo_recursive(n):
 	"""
-		Recursive version of Fibonacci sequence
+	Recursive version of Fibonacci sequence
 	"""
 	assert n >= 0, "shouldn't be a negative number."
 	if n < 2: # seed values, if n equals 0 or 1
@@ -60,13 +60,18 @@ def fibo_recursive(n):
 		return fibo_recursive(n-1) + fibo_recursive(n-2)
 ```
 
-Let's try to run these two functions and compute the running time,
+Let's try to run these two functions and compute the running time of $F(50)$,
 
 ```python
 if __name__ == '__main__':
-	n = 40
+	n = 50
 	print("(recursive version) F({}) = {}".format(n, fibo_recursive(n)))
 	print("(iterative version) F({}) = {}".format(n, fibo_iterative(n)))
+```
+
+```text
+(recursive version) F(50) = 102334155 (time : )
+(iterative version) F(50) = 102334155 (time : )
 ```
 
 <figure><center>
