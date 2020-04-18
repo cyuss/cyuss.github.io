@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>My Emacs configuration</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            My Emacs configuration
+             20 Sep 2018 
+             13 minutes read
+            
+        
+  ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/emacs/emacs-configuration">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My Emacs configuration | Oh My Kode</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="My Emacs configuration" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="We all remember our first program, a simple ‘Hello World’ or just a calculator that made us all excited. We were all impressed how amazing it’s to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or others like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?" />
+<meta property="og:description" content="We all remember our first program, a simple ‘Hello World’ or just a calculator that made us all excited. We were all impressed how amazing it’s to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or others like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?" />
+<link rel="canonical" href="www.ohmykode.com/blog/emacs/emacs-configuration" />
+<meta property="og:url" content="www.ohmykode.com/blog/emacs/emacs-configuration" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-20T15:46:00+02:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"url":"www.ohmykode.com/blog/emacs/emacs-configuration","headline":"My Emacs configuration","dateModified":"2018-09-20T15:46:00+02:00","datePublished":"2018-09-20T15:46:00+02:00","description":"We all remember our first program, a simple ‘Hello World’ or just a calculator that made us all excited. We were all impressed how amazing it’s to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or others like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/emacs/emacs-configuration"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>My Emacs configuration</h1></span></center>
+            <center><p> 20 Sep 2018 </p></center>
+            <center><p class="fa fa-clock-o"> 13 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            17 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>We all remember our first program, a simple ‘Hello World’ or just a calculator that made us all excited. We were all impressed how amazing it’s to open a terminal and run or compile it. For that, we used a simple text editor like Notepad++ or others like Eclipse or PyCharm. At that moment, we focused only on the result without worrying about which text editor or IDE to choose.<br />What if this choice has a big impact on our workflow and determines the quality of the rendering ? If so, what makes a text editor a good one ?</p>
+</blockquote>
+
+<h2 id="overview">Overview</h2>
+<p>While coding, we generally have to do many parallel tasks and sometimes we just get deconcentrated because we have to deal with many tools at the same time. We all wish to have a simple tool that allows us to do all kinds of tasks as quickly as possible.</p>
+
+<p><a href="https://www.gnu.org/software/emacs/"><em>Emacs</em></a> and <em>Vim</em> are parts of those effective tools that allow you to be more organized and productive, not only in programming but also in everyday life. I personally use Emacs for a couple of years and I am just enjoying using it each time. It’s known that learning Emacs could be a bit complicated at first but after using it for a while now, you will define your own workflow.</p>
+
+<p>This article is not a tutorial to learn Emacs but rather to share my own configuration that I got after using emacs for a while now. To learn the Emacs basics, you can follow the <a href="https://www.gnu.org/software/emacs/tour/">official tutorial</a>.</p>
+
+<h2 id="download--installation">Download &amp; installation</h2>
+<p>Emacs is a multiplatform software, it runs on several operating systems. To download and install it, you can follow the instructions in the official home <a href="https://www.gnu.org/software/emacs/download.html">page</a>.</p>
+
+<p>After the installation, we will start the configuration. For that, Emacs has a configuration file which is <code class="highlighter-rouge">~/.emacs</code> that we can find or create in the home directory.</p>
+
+<h2 id="initialization">Initialization</h2>
+<p>First of all, we need to initialize Emacs and connect it to the different repositories that will allow us to download any package later.</p>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">load</span> <span class="s">"package"</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">"cl"</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">assoc-default</span> <span class="s">"marmalade"</span> <span class="nv">package-archives</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"marmalade"</span> <span class="o">.</span> <span class="s">"https://marmalade-repo.org/packages/"</span><span class="p">)</span> <span class="no">t</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">assoc-default</span> <span class="s">"melpa"</span> <span class="nv">package-archives</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"melpa"</span> <span class="o">.</span> <span class="s">"http://melpa.org/packages/"</span><span class="p">)</span> <span class="no">t</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">assoc-default</span> <span class="s">"org"</span> <span class="nv">package-archives</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"org"</span> <span class="o">.</span> <span class="s">"http://orgmode.org/elpa/"</span><span class="p">)</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="installing-packages">Installing packages</h2>
+<p>There are a lot of useful packages that we can install and use, we can install them manually by running <code class="highlighter-rouge">M-x package-install</code> or by just using <a href="https://github.com/jwiegley/use-package"><code class="highlighter-rouge">use-package</code></a>, which is a package that allows us to isolate package configuration in our <code class="highlighter-rouge">.emacs</code> file. At first we only need to install it.</p>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">'use-package</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">'use-package</span><span class="p">))</span>
+<span class="c1">;; enable use-package</span>
+<span class="p">(</span><span class="nv">eval-when-compile</span>
+	<span class="p">(</span><span class="nb">require</span> <span class="ss">'use-package</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">bind-key</span>
+	<span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; if we want to use :bind</span>
+</code></pre></div></div>
+
+<p>Let’s try installing and configuring <code class="highlighter-rouge">diminish</code> package. It allows us to hide minor-modes in the mode line displays.</p>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">diminish</span>
+  <span class="ss">:ensure</span> <span class="no">t</span> <span class="c1">;; keyword that causes the package to be installed automatically</span>
+  <span class="ss">:diminish</span> <span class="nv">helm-mode</span>
+  <span class="ss">:diminish</span> <span class="nv">eldoc-mode</span>
+  <span class="ss">:diminish</span> <span class="nv">flymake-mode</span>
+  <span class="ss">:diminish</span> <span class="nv">elpy-mode</span>
+  <span class="ss">:diminish</span> <span class="nv">sphinx-doc-mode</span>
+  <span class="ss">:diminish</span> <span class="nv">org-indent-mode</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="customization-variables">Customization variables</h2>
+<p>Emacs has many settings which we can change. I prefer isolating the design’s customization, like theme, outside of the init file.</p>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; save the customization and theme settings in other file</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">custom-file</span> <span class="s">"~/.emacs.d/custom-settings.el"</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="nv">custom-file</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Keeping backups might be useful generally. To keep them organized we need to set the backup directory.</p>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">setq</span> <span class="nv">backup-directory-alist</span> <span class="o">'</span><span class="p">((</span><span class="s">"."</span> <span class="o">.</span> <span class="s">"~/.emacs.d/backups"</span><span class="p">)))</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">version-control</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">delete-old-versions</span> <span class="mi">-1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To use the different environment variables inside Emacs, we need to set it in Os X.</p>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; fix the $PATH environment variable</span>
+<span class="c1">;; inherit from the shel environment</span>
+<span class="c1">;; using it in Os X</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">exec-path-from-shell</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:init</span>
+  <span class="p">(</span><span class="nv">exec-path-from-shell-initialize</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>When we have to write in other languages or use special characters, <code class="highlighter-rouge">utf-8</code> encoding is very useful. Choosing the right font makes us more comfortable while writing or coding.</p>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; encoding system</span>
+<span class="p">(</span><span class="nv">set-language-environment</span> <span class="s">"UTF-8"</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-keyboard-coding-system</span> <span class="ss">'utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">prefer-coding-system</span> <span class="ss">'utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-terminal-coding-system</span> <span class="ss">'utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-default-coding-systems</span> <span class="ss">'utf-8</span><span class="p">)</span>
+
+<span class="c1">;; change the yes or no answer to y or n</span>
+<span class="p">(</span><span class="nv">defalias</span> <span class="ss">'yes-or-no-p</span> <span class="ss">'y-or-n-p</span><span class="p">)</span>
+
+<span class="c1">;; set font</span>
+<span class="p">(</span><span class="nv">set-default-font</span> <span class="s">"Monaco-14"</span><span class="p">)</span>
+
+<span class="c1">;; change the line spacing for better visualization</span>
+<span class="p">(</span><span class="nv">setq-default</span> <span class="nv">line-spacing</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">;; prettify symbols</span>
+<span class="p">(</span><span class="nv">global-prettify-symbols-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>After using Emacs for a long time, I found that I rarely use <code class="highlighter-rouge">Caps</code> key, so I remapped it to <code class="highlighter-rouge">Ctrl</code> which is very convenient and comfortable.</p>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; set the keys - invert between the command and option keys for meta</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mac-command-modifier</span> <span class="ss">'meta</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mac-option-modifier</span> <span class="no">nil</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="buffers">Buffers</h2>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; start up buffers</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-splash-screen</span> <span class="no">t</span>
+      <span class="nv">initial-scratch-message</span> <span class="no">nil</span>
+      <span class="nv">initial-major-mode</span> <span class="ss">'org-mode</span><span class="p">)</span>
+
+<span class="c1">;; frames configuration</span>
+<span class="p">(</span><span class="nv">tool-bar-mode</span> <span class="mi">-1</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">display-time-mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">menu-bar-mode</span> <span class="mi">-99</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">scroll-bar-mode</span> <span class="mi">-1</span><span class="p">)</span>
+
+<span class="c1">;; marking text</span>
+<span class="p">(</span><span class="nv">delete-selection-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">transient-mark-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">x-select-enable-clipboard</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; show ~ at the end of the file for empty lines</span>
+<span class="p">(</span><span class="nv">setq-default</span> <span class="nv">indicate-empty-lines</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not</span> <span class="nv">indicate-empty-lines</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">toggle-indicate-empty-lines</span><span class="p">))</span>
+<span class="p">(</span><span class="k">progn</span>
+  <span class="p">(</span><span class="nv">define-fringe-bitmap</span> <span class="ss">'tilde</span> <span class="nv">[0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">113</span> <span class="mi">219</span> <span class="mi">142</span> <span class="mi">0</span> <span class="nv">0]</span> <span class="no">nil</span> <span class="no">nil</span> <span class="ss">'center</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">setcdr</span> <span class="p">(</span><span class="nv">assq</span> <span class="ss">'empty-line</span> <span class="nv">fringe-indicator-alist</span><span class="p">)</span> <span class="ss">'tilde</span><span class="p">))</span>
+  
+<span class="c1">;; if you close a buffer, it remembers where you were in the file</span>
+<span class="p">(</span><span class="nv">setq-default</span> <span class="nv">save-place</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">save-place-file</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">".places"</span> <span class="nv">user-emacs-directory</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">save-place-mode</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="eldoc">Eldoc</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">eldoc</span>
+  <span class="ss">:ensure</span> <span class="no">nil</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="p">(</span><span class="nv">eldoc-mode</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="parentheses">Parentheses</h2>
+<h3 id="highlight-parentheses">Highlight parentheses</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">highlight-parentheses</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="nv">highlight-parentheses-mode</span>
+  <span class="ss">:commands</span> <span class="nv">highlight-parentheses-mode</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="electric-pair">Electric pair</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">electric-pair</span> <span class="p">()</span>
+  <span class="s">"If at end of line, insert character pair without surrounding spaces. Otherwise, just insert the typed character."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">eolp</span><span class="p">)</span> <span class="p">(</span><span class="k">let</span> <span class="p">(</span><span class="nv">parens-require-spaces</span><span class="p">)</span> <span class="p">(</span><span class="nv">insert-pair</span><span class="p">))</span> <span class="p">(</span><span class="nv">self-insert-command</span> <span class="mi">1</span><span class="p">))</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="autopair">Autopair</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">autopair</span>
+  <span class="c1">;; diminish autopair mode to make a spacy mode line</span>
+  <span class="ss">:diminish</span> <span class="nv">autopair-mode</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">autopair-global-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="matching-parentheses">Matching parentheses</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">show-paren-mode</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="indentation">Indentation</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; electric indentation</span>
+<span class="p">(</span><span class="nv">electric-indent-mode</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="autocomplete">Autocomplete</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; autocomplete</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">auto-complete</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="nv">auto-complete-mode</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">'auto-complete-config</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ac-config-default</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="highlighting">Highlighting</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">hl-line</span>
+  <span class="c1">;; visible current line</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="nv">global-hl-line-mode</span>
+  <span class="ss">:config</span> <span class="p">(</span><span class="nv">global-hl-line-mode</span><span class="p">)</span>
+  <span class="p">)</span>
+  
+<span class="c1">;; show column number</span>
+<span class="p">(</span><span class="nv">setq-default</span> <span class="nv">column-number-mode</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; highlight multiple occurences</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">highlight-symbol</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"M-p"</span> <span class="o">.</span> <span class="nv">highlight-symbol-prev</span><span class="p">)</span>
+         <span class="p">(</span><span class="s">"M-n"</span> <span class="o">.</span> <span class="nv">highlight-symbol-next</span><span class="p">)</span>
+         <span class="p">(</span><span class="s">"M-'"</span> <span class="o">.</span> <span class="nv">highlight-symbol-query-replace</span><span class="p">))</span>
+  <span class="ss">:init</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">highlight-symbol-first</span> <span class="p">()</span>
+    <span class="s">"Jump to the first location of symbol at point."</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">push-mark</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">eval</span>
+     <span class="o">`</span><span class="p">(</span><span class="k">progn</span>
+        <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">search-forward-regexp</span>
+         <span class="p">(</span><span class="nv">rx</span> <span class="nv">symbol-start</span> <span class="o">,</span><span class="p">(</span><span class="nv">thing-at-point</span> <span class="ss">'symbol</span><span class="p">)</span> <span class="nv">symbol-end</span><span class="p">)</span>
+         <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">beginning-of-thing</span> <span class="ss">'symbol</span><span class="p">))))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">highlight-symbol-last</span> <span class="p">()</span>
+    <span class="s">"Jump to the last location of symbol at point."</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">push-mark</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">eval</span>
+     <span class="o">`</span><span class="p">(</span><span class="k">progn</span>
+        <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">search-backward-regexp</span>
+         <span class="p">(</span><span class="nv">rx</span> <span class="nv">symbol-start</span> <span class="o">,</span><span class="p">(</span><span class="nv">thing-at-point</span> <span class="ss">'symbol</span><span class="p">)</span> <span class="nv">symbol-end</span><span class="p">)</span>
+         <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
+
+  <span class="p">(</span><span class="nv">bind-keys</span> <span class="p">(</span><span class="s">"M-P"</span> <span class="o">.</span> <span class="nv">highlight-symbol-first</span><span class="p">)</span>
+             <span class="p">(</span><span class="s">"M-N"</span> <span class="o">.</span> <span class="nv">highlight-symbol-last</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">rainbow-identifiers</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'prog-mode-hook</span> <span class="ss">'rainbow-identifiers-mode</span><span class="p">)</span>
+  <span class="c1">;; configuration</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">rainbow-identifiers-choose-face-function</span> <span class="ss">'rainbow-identifiers-cie-l*a*b*-choose-face</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="neotree">Neotree</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; install the fonts from https://github.com/domtronn/all-the-icons.el/tree/master/fonts</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">neotree</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">neo-theme</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">display-graphic-p</span><span class="p">)</span> <span class="ss">'icons</span> <span class="ss">'arrow</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">neo-smart-open</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="markdown">Markdown</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; markdown configuration</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">markdown-mode</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:mode</span> <span class="p">((</span><span class="s">"README\\.md\\'"</span> <span class="o">.</span> <span class="nv">gfm-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="s">"\\.md\\'"</span> <span class="o">.</span> <span class="nv">markdown-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="s">"\\.markdown\\'"</span> <span class="o">.</span> <span class="nv">markdown-mode</span><span class="p">))</span>
+  <span class="ss">:init</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">markdown-command</span> <span class="s">"multimarkdown"</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="iedit">Iedit</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">iedit</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="nv">iedit-mode</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"C-'"</span> <span class="o">.</span> <span class="nv">iedit-mode</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="discover-my-major">Discover my major</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">discover-my-major</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"C-h C-m"</span> <span class="o">.</span> <span class="nv">discover-my-major</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="anzu">Anzu</h2>
+<p>Shows the current match and total matches information in the mode-line</p>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">anzu</span>
+  <span class="ss">:init</span> <span class="p">(</span><span class="nv">global-anzu-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="ss">:diminish</span> <span class="nv">anzu-mode</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="mode-line">Mode line</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">spaceline-all-the-icons</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">spaceline-all-the-icons--setup-anzu</span><span class="p">)</span>            <span class="c1">;; Enable anzu searching</span>
+  <span class="p">(</span><span class="nv">spaceline-all-the-icons--setup-package-updates</span><span class="p">)</span> <span class="c1">;; Enable package update indicator</span>
+  <span class="p">(</span><span class="nv">spaceline-all-the-icons--setup-git-ahead</span><span class="p">)</span>       <span class="c1">;; Enable # of commits ahead of upstream in git</span>
+  <span class="p">(</span><span class="nv">spaceline-all-the-icons--setup-paradox</span><span class="p">)</span>         <span class="c1">;; Enable Paradox mode line</span>
+  <span class="p">(</span><span class="nv">spaceline-all-the-icons--setup-neotree</span><span class="p">)</span>         <span class="c1">;; Enable Neotree mode line</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; spaceline configuration</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">spaceline</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">mode-line-format</span> <span class="o">'</span><span class="p">(</span><span class="s">"%e"</span> <span class="p">(</span><span class="ss">:eval</span> <span class="p">(</span><span class="nv">spaceline-ml-main</span><span class="p">))))</span>
+  <span class="p">)</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">spaceline-config</span>
+  <span class="ss">:ensure</span> <span class="nv">spaceline</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">spaceline-helm-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">spaceline-emacs-theme</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="multiple-cursors">Multiple cursors</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">multiple-cursors</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"C-S-c C-S-c"</span> <span class="o">.</span> <span class="nv">mc/edit-lines</span><span class="p">)</span>
+	 <span class="p">(</span><span class="s">"C-&gt;"</span> <span class="o">.</span> <span class="nv">mc/mark-next-like-this</span><span class="p">)</span>
+	 <span class="p">(</span><span class="s">"C-&lt;"</span> <span class="o">.</span> <span class="nv">mc/mark-previous-like-this</span><span class="p">)</span>
+	 <span class="c1">;; ("C-c C-&lt;" . mc/mark-all-like-this)</span>
+	 <span class="p">(</span><span class="s">"C-c o"</span> <span class="o">.</span> <span class="nv">mc/mark-all-like-this</span><span class="p">)</span>
+	 <span class="p">)</span>
+ <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ace-mc</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"C-)"</span> <span class="o">.</span> <span class="nv">ace-mc-add-multiple-cursors</span><span class="p">)</span>
+	 <span class="p">(</span><span class="s">"C-M-)"</span> <span class="o">.</span> <span class="nv">ace-mc-add-single-cursor</span><span class="p">))</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="navigation">Navigation</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ace-jump-mode</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"C-c SPC"</span> <span class="o">.</span> <span class="nv">ace-jump-mode</span><span class="p">))</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="which-key">Which key</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; it shows which combos are setup while we are typing</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">which-key</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="nv">which-key-mode</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">which-key-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="documentation">Documentation</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">devdocs</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="docker">Docker</h2>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Dockerfile &amp; Docker-compose modes</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">dockerfile-mode</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">docker-compose-mode</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="languages">Languages</h2>
+<h3 id="go">Go</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">go-mode</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">"\\.go$"</span> <span class="o">.</span> <span class="nv">go-mode</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="javascript">JavaScript</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">js2-mode</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">use-package</span> <span class="nv">ac-js2</span>
+    <span class="ss">:ensure</span> <span class="no">t</span>
+    <span class="ss">:defer</span> <span class="no">t</span>
+    <span class="ss">:config</span>
+    <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'js2-mode-hook</span> <span class="ss">'ac-js2-mode</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h3 id="yasnippet">Yasnippet</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">yasnippet</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:diminish</span> <span class="nv">yas-minor-mode</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">yas-minor-mode</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="git">Git</h3>
+<div class="language-cl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">magit</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"C-x g"</span> <span class="o">.</span> <span class="nv">magit-status</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
