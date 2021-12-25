@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Introduction to Chromatic Polynomials</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Introduction to Chromatic Polynomials
+             21 Oct 2018 
+             11 minutes read
+         ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="http://localhost:4000/blog/mathematics/introduction-chromatic-polynomials">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="http://localhost:4000/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to Chromatic Polynomials | Oh My Kode</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Introduction to Chromatic Polynomials" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, register allocation, mobile radio frequency assignement" />
+<meta property="og:description" content="One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, register allocation, mobile radio frequency assignement" />
+<link rel="canonical" href="http://localhost:4000/blog/mathematics/introduction-chromatic-polynomials" />
+<meta property="og:url" content="http://localhost:4000/blog/mathematics/introduction-chromatic-polynomials" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-21T12:00:00+02:00" />
+<script type="application/ld+json">
+{"dateModified":"2018-10-21T12:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/mathematics/introduction-chromatic-polynomials"},"url":"http://localhost:4000/blog/mathematics/introduction-chromatic-polynomials","author":{"@type":"Person","name":"Maâmra Youcef"},"description":"One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, register allocation, mobile radio frequency assignement","headline":"Introduction to Chromatic Polynomials","@type":"BlogPosting","datePublished":"2018-10-21T12:00:00+02:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Introduction to Chromatic Polynomials</h1></span></center>
+            <center><p> 21 Oct 2018 </p></center>
+            <center><p class="fa fa-clock-o"> 11 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            15 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. <br />This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, <a href="https://en.wikipedia.org/wiki/Register_allocation">register allocation</a>, <a href="https://www.zib.de/groetschel/teaching/SS2012/GraphCol%20and%20FrequAssignment.pdf">mobile radio frequency assignement</a><script type="math/tex">\dots</script></p>
+</blockquote>
+
+<!-- ![useful image](http://localhost:4000/assets/world_map.png){:height="50%" width="50%"} -->
+<!--## Notations
+
+$$\begin{array}{ r c l }
+\Bbb{N} & : & \{0, 1, 2, \dots\} \\
+\Bbb{N}^{\ast} & : & \{1, 2, 3, \dots\} \\
+\lceil x \rceil & : & \text{the smallest integer greater than or equal to } x \\
+(\lambda)_{n} & : & \lambda (\lambda - 1) \dots (\lambda - n + 1) \\
+\mathcal{s}(r, n) & : & \text{(signed) Stirling number of first kind} \\
+\chi(G) & : & \text{the chromatic number of } G \\
+% V(G) & : & \text{the vertex set of } G \\
+% E(G) & : & \text{the edge set of } G \\
+G \cdot xy & : & \text{the graph obtained from } G \text{ by contracting } x \text{ and } y \text{ removing any loop} \\
+G + xy & : & \text{the graph obtained by adding a new edge } ab \text{ to } G \\
+G \cup H & : & \text{the disjoint union of } G \text{ and } H \\
+% O_n & : & \text{the empty graph of order } n \\
+% K_n & : & \text{the complete graph of order } n \\
+% C_n & : & \text{the cycle of order } n \\
+\end{array}$$-->
+
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Let $G(V(G), E(G))$ be a graph and $\lambda \in \Bbb{N}^* $, where $V(G)$ and $E(G)$ are respectively the vertex set and the edge set of $G$.</p>
+
+<p>We call a proper $\lambda$-coloring, a function <script type="math/tex">ƒ : V(G) \rightarrow \{1, 2, \dots, \lambda\}</script>, where for each $u, v \in V(G)$ we have $ƒ(u) \neq ƒ(v)$ whenever $u$ and <script type="math/tex">v</script> are two adjacent vertices in $G$. We say that two $\lambda$-colorings $ƒ$ and $g$ are distincts, if for some vertex $x$ of $G$, $ƒ(x) \neq g(x)$. Which means that given $\lambda$ colors, we need to find a way of coloring the vertices of $G$ such that no two adjacent vertices are colored using the same color.</p>
+
+<p>There are several ways to color $G$ in $\lambda$-coloring, the number of distinct ways is denoted by $P(G, \lambda)$ and called the <strong>chromatic polynomial</strong> <a class="citation" href="#birkhoff12">(Birkhoff, 1912)</a>. By interpreting $\lambda$ as the number of colors, we can never color a graph with zero colors which will give us $P(G, \lambda)$ is not $\lambda$-colorable. By definition, we say that $G$ is $\lambda$-colorable if and only if $P(G, \lambda) \geq 1$, since it exists at least one way of $\lambda$-coloring.</p>
+
+<p>Among the most classic problems in graph theory is to find the minimum number of colors to color the graph $G$. This number is called the <strong>chromatic number</strong> and is denoted by $\chi(G)$.</p>
+
+<script type="math/tex; mode=display">\begin{equation} \chi(G) = \min\{\lambda \in \Bbb{N}^* : P(G, \lambda) \geq 1 \label{eq:chrom_num}\} \end{equation}</script>
+
+<p>By definition, $P(G, \chi(G)) \geq 1$ <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. Given a set of $r$ colors ($r \in \Bbb{N}$), for $r &lt; \chi(G)$, $P(G, r) = 0$.</p>
+
+<h2 id="2-particular-graphs">2. Particular graphs</h2>
+<p>After having defined the graph coloring, we will try to enumerate $P(G, \lambda)$ for some special graphs.</p>
+
+<h3 id="21-examples">2.1. Examples</h3>
+<div class="example">
+	For an <a href="https://en.wiktionary.org/wiki/empty_graph">empty graph</a> $O_n$ of order $n$, it is clear that,
+	$$ \begin{equation} P(O_n, \lambda) = \lambda^{n} \end{equation} $$
+	More generally, when $G$ contains $k$ <a href="https://en.wikipedia.org/wiki/Connected_component_(graph_theory)">connected components</a>, we have $G = \bigcup_{i=1}^{k} G_i$, then
+	$$ \begin{equation} P(G, \lambda) = \prod_{i=1}^{k} P(G_i, \lambda) \end{equation}$$
+</div>
+
+<div class="example">
+	For a <a href="https://en.wikipedia.org/wiki/Complete_graph">complete graph</a> $K_n$ of order $n$ where $\forall u, v \in V(G)$ they are adjacents (by definition $ƒ(u) \neq ƒ(v)$), we have
+	$$ \begin{equation} P(K_n, \lambda) = \lambda(\lambda - 1)\dots(\lambda - n +1) \end{equation} \label{eq:complete_graph} $$
+</div>
+
+<figure><center>
+	<img src="/assets/images/kn.png" width="30%" height="30%" />
+	<figcaption><b>Figure 1 -</b> A complete graph of order 5.</figcaption>
+</center></figure>
+
+<div class="example">
+	Let $H$ be a graph containing a $K_r$ as subgraph, and let $G$ be the graph obtained from $H$ by adding a new vertex $w$ which is linked with each vertex in $K_r$, then
+	$$ \begin{equation} P(G, \lambda) = (\lambda - r)P(H, \lambda) \end{equation} $$
+</div>
+
+<div class="example">
+	Let us compute $P(C_4, \lambda)$, where $C_4$ is a <a href="https://en.wikipedia.org/wiki/Cycle_graph">cycle graph</a> of order 4.<br />
+</div>
+
+<figure><center>
+	<img src="/assets/images/cycle.png" width="28%" height="28%" />
+	<figcaption><b>Figure 2 -</b> A cycle graph of order 4.</figcaption>
+</center></figure>
+
+<p>Let $ƒ$ be a $\lambda$-coloring of $C_4$ and $u, v$ two non adjacent vertices, we enumerate two cases,</p>
+<ol>
+  <li>$ƒ(x) = f(y)$. There are $\lambda - 1$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1)^2$,</li>
+  <li>$ƒ(x) \neq f(y)$. There are $\lambda - 2$ ways to color the vertices $u$ and $v$ independently, so the number of $\lambda$-colorations is $\lambda (\lambda - 1) (\lambda - 2)^2$.</li>
+</ol>
+
+<p>We conclude that,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation}\begin{aligned}
+P(C_4, \lambda) &= \lambda (\lambda - 1)^2 + \lambda (\lambda - 1) (\lambda - 2)^2 \\
+  				&= \lambda^4 - 4 \lambda^3 + 6 \lambda^2 - 3 \lambda \\
+  				&= (\lambda - 1)^4 + (\lambda - 1)
+\end{aligned}\end{equation} %]]></script>
+
+<h3 id="22-stirling-numbers-of-the-first-kind">2.2. Stirling numbers of the first kind</h3>
+<p>From equation \eqref{eq:complete_graph}, we observe that,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation*}\begin{aligned}
+P(K_1, \lambda) &= \lambda \\
+P(K_2, \lambda) &= \lambda (\lambda - 1) = \lambda^2 - \lambda \\
+P(K_3, \lambda) &= \lambda (\lambda - 1) (\lambda - 2) = \lambda^3 - 3 \lambda^2 + 2 \lambda \\
+				& \vdots
+\end{aligned}\end{equation*} %]]></script>
+
+<p>Generally, when $P(K_n, \lambda)$ is expressed in terms of powers of $\lambda$, we have</p>
+
+<script type="math/tex; mode=display">\begin{equation} P(K_n, \lambda) = \lambda (\lambda - 1) \dots (\lambda - n + 1) = \sum_{k=1}^n \mathcal{s}(n, k) \lambda^k \end{equation}</script>
+
+<p>Where $\mathcal{s}(n, k)$ are the <em>Stirling numbers of the first kind</em>, which are defined as</p>
+
+<script type="math/tex; mode=display">\begin{equation} \mathcal{s}(n, k) = \mathcal{s}(n - 1, k - 1) - (n - 1) \mathcal{s}(n - 1, k) \end{equation}</script>
+
+<p>where,</p>
+
+<script type="math/tex; mode=display">\begin{cases}
+\mathcal{s}(r, 0) = 0, \;\; \forall r \in \Bbb{N^* }, \\
+\mathcal{s}(r, r) = 1, \;\; \forall r \in \Bbb{N}
+\end{cases}</script>
+
+<h2 id="3-calculation-of-the-chromatic-polynomial">3. Calculation of the chromatic polynomial</h2>
+<p>The problem to find $\chi(G)$ of a given graph is <a href="https://en.wikipedia.org/wiki/NP-completeness"><em>NP-Complete</em></a>, and the problem to evaluate $P(G, \lambda)$ is as hard as finding the $\chi(G)$. Despite this, the calculation of $P(G, \lambda)$ gives us a lot of important information about graphs, which it attracts more attention by researchers. We will introduce some important results about $P(G, \lambda)$ computation for some classes of graphs. <a class="citation" href="#Dong2005">(Dong, Koh, &amp; Teo, 2005)</a></p>
+
+<p>First, we will use an extension of the idea used for the computation of $P(C_4, \lambda)$ that we will use for $P(G, \lambda)$ computation.</p>
+
+<div class="theorem">
+Let $x$ and $y$ be two non-adjacent vertices in a graph $G$, then
+$$ \begin{equation} P(G, \lambda) = P(G + xy, \lambda) + P(G \cdot xy, \lambda) \label{eq:calculus} \end{equation} $$
+<i>Proof.&nbsp;&nbsp;</i> Let $ƒ$ be a $\lambda$-coloration of the graph $G$. We have either <i><b>(i)</b></i> $ƒ(x) \ne ƒ(y)$ or <i><b>(ii)</b></i> $ƒ(x) = f(y)$. The number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(i)</b></i> holds equals $P(G + xy, \lambda)$, while the number of $\lambda$-colorings $ƒ$ of $G$ for which <i><b>(ii)</b></i> holds equals $P(G . xy, \lambda)$.
+<p align="right">$\square$</p>
+</div>
+
+<div class="example">
+	Let $G$ be the following graph,
+
+<figure><center>
+	<img src="/assets/images/example_calculus.png" width="35%" height="35%" />
+	<figcaption><b>Figure 3 -</b> A graph $G$ of order 5.</figcaption>
+</center></figure>
+</div>
+
+<p>By applying \eqref{eq:calculus}, we get 2 graphs :</p>
+<ul>
+  <li>$G + ab$, the graph obtained by adding a new edge $ab$ to $G$, which is a complete graph of order 5,</li>
+  <li>$G \cdot ab$, the graph obtained from $G$ by contracting $a$ and $b$ and removing any loop, which is a complete graph of order 4.</li>
+</ul>
+
+<p>Thus,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation*}\begin{aligned}
+P(G, \lambda) &= P(K_5, \lambda) + P(K_4, \lambda) \\
+              &= \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3) (\lambda - 4) + \lambda (\lambda - 1) (\lambda - 2) (\lambda - 3)\\
+              &= \lambda^5 - 9 \lambda^4 + 29 \lambda^3 - 39 \lambda^2 + 18 \lambda
+\end{aligned}\end{equation*} %]]></script>
+
+<p>Chromatic polynomials are a very useful tools for graphs, they are applied in many fields. As a simple example, we will try to apply it to a very famous game, <em>Sudoku</em>.</p>
+
+<h2 id="4-behind-the-sudoku">4. Behind the Sudoku</h2>
+<p><em>Sudoku</em> is a puzzle that has become very popular. The game consists of a grid of 9 $\times$ 9 where each box contains a number from 1 to 9. One must fill the grid in a way where each row, each column and each sub grid contain numbers from 1 to 9 exactly once.</p>
+
+<p>A <em>Latin square</em> of order $n$ is a grid of size $n \times n$ where each row and each column contain all the numbers between 1 and $n$ repeating exactly once. Each Sudoku grid is a Latin square of order 9, but the converse is not true because of the condition of the sub grids.</p>
+
+<p>After understanding the principle of the game, we will approach to see a Sudoku grid using graphs <a class="citation" href="#Herzberg2007">(Herzberg &amp; Murty, 2007)</a>. We can see the Sudoku grid as a coloring problem. In fact, by associating to each grid a graph of order 81 (9 $\times$ 9), where each vertex corresponds to a cell in the grid. Two distincts vertices are adjacent if and only if the two corresponding cells in the grid are either in the same row, same column or same sub grid.<br />
+Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i’, j’)$ are adjacents if $i = i’$ or $j = j’$ or $\lceil i/n \rceil = \lceil i’/n \rceil$ and $\lceil j/n \rceil = \lceil j’/n \rceil$ where $\lceil \,. \rceil$ denotes the ceiling function.
+<!--(the smallest integer greater than or equal to $x$).--></p>
+
+<p>Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It’s clear that $X_n$ is a <em>regular graph</em> <sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ graph corresponds to a 9 $\times$ 9 grid that is a 20-regular graph.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="birkhoff12">Birkhoff, G. D. (1912). A Determinant Formula for the Number of Ways of Coloring a Map. <i>Annals of Mathematics</i>, <i>14</i>(1/4), pp. 42–46.</span>
+
+<div id="birkhoff12-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="birkhoff12-bibtex" class="pre pre-scrollable collapse">@article{birkhoff12,
+  added-at = {2015-05-10T13:10:32.000+0200},
+  author = {Birkhoff, George D.},
+  issn = {0003486X},
+  journal = {Annals of Mathematics},
+  keywords = {},
+  language = {English},
+  number = {1/4},
+  pages = {pp. 42-46},
+  privnote = {Birkhoff's original definition of chromatic polynomials},
+  publisher = {Annals of Mathematics},
+  series = {Second Series},
+  title = {A Determinant Formula for the Number of Ways of Coloring a Map},
+  volume = {14},
+  year = {1912}
+}
+</pre>
+
+</div></li>
+<li><span id="Dong2005">Dong, F. M., Koh, K. M., &amp; Teo, K. L. (2005). <i>Chromatic Polynomials and Chromaticity of Graphs</i>.</span>
+
+<div id="Dong2005-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Dong2005-bibtex" class="pre pre-scrollable collapse">@book{Dong2005,
+  author = {Dong, F. M. and Koh, K. M. and Teo, K. L.},
+  title = {{Chromatic Polynomials and Chromaticity of Graphs}},
+  year = {2005}
+}
+</pre>
+
+</div></li>
+<li><span id="Herzberg2007">Herzberg, A. M., &amp; Murty, M. R. (2007). Sudoku Squares and Chromatic Polynomials. <i>Notices of the AMS</i>, <i>54</i>(6), 708–717.</span>
+
+<div id="Herzberg2007-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Herzberg2007-bibtex" class="pre pre-scrollable collapse">@article{Herzberg2007,
+  author = {Herzberg, Agnes M and Murty, M Ram},
+  journal = {Notices of the AMS},
+  number = {6},
+  pages = {708--717},
+  title = {{Sudoku Squares and Chromatic Polynomials}},
+  volume = {54},
+  year = {2007}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>$G$ is $\chi(G)$-colorable. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>A regular graph is a graph where each vertex has the same degree; <em>i.e.</em> has the same number of neighbors. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
