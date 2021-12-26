@@ -21,8 +21,8 @@
   
   <meta name="keywords" content="" />
 
-  <link rel="canonical" href="http://localhost:4000/blog/python/memoization">
-  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="http://localhost:4000/feed.xml" />
+  <link rel="canonical" href="www.ohmykode.com/blog/python/memoization">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
   <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
 
       <link href="/favicon.png" rel="icon">
@@ -64,21 +64,23 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
 </head>
 
-    <!-- Begin Jekyll SEO tag v2.6.1 -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Memoization - Remember what we already found | Oh My Kode</title>
-<meta name="generator" content="Jekyll v4.0.0" />
+<meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Memoization - Remember what we already found" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?" />
 <meta property="og:description" content="Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?" />
-<link rel="canonical" href="http://localhost:4000/blog/python/memoization" />
-<meta property="og:url" content="http://localhost:4000/blog/python/memoization" />
+<link rel="canonical" href="www.ohmykode.com/blog/python/memoization" />
+<meta property="og:url" content="www.ohmykode.com/blog/python/memoization" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-11-01T12:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Memoization - Remember what we already found" />
 <script type="application/ld+json">
-{"dateModified":"2018-11-01T12:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/python/memoization"},"url":"http://localhost:4000/blog/python/memoization","author":{"@type":"Person","name":"Maâmra Youcef"},"description":"Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?","headline":"Memoization - Remember what we already found","@type":"BlogPosting","datePublished":"2018-11-01T12:00:00+01:00","@context":"https://schema.org"}</script>
+{"headline":"Memoization - Remember what we already found","dateModified":"2018-11-01T12:00:00+01:00","datePublished":"2018-11-01T12:00:00+01:00","url":"www.ohmykode.com/blog/python/memoization","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/python/memoization"},"author":{"@type":"Person","name":"Maâmra Youcef"},"@type":"BlogPosting","description":"Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -121,18 +123,18 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 <!-- ###1. The Fibonacci sequence -->
 <p>Let’s take the Fibonacci sequence, which defines every number after the first two as the sum of the two preceding ones. Its recurrence relation is defined as :</p>
 
-<script type="math/tex; mode=display">\begin{equation} F(n) = F(n-1) + F(n-2) \end{equation} \label{eq:fibo}</script>
+\[\begin{equation} F(n) = F(n-1) + F(n-2) \end{equation} \label{eq:fibo}\]
 
 <p>where seed values are,</p>
 
-<script type="math/tex; mode=display">\begin{cases}
+\[\begin{cases}
 F(0) = 0, \\
 F(1) = 1.
-\end{cases}</script>
+\end{cases}\]
 
 <p>To calculate the Fibonacci sequence defined in \eqref{eq:fibo}, we can use an iterative or a recursive version. Beside the disadvantages of recursion (slow), its main advantage is making the algorithm a little easier and more readable.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fibo_iterative</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fibo_iterative</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 	<span class="s">"""
 	Iterative version of Fibonacci sequence
 	"""</span>
@@ -143,7 +145,7 @@ F(1) = 1.
 	<span class="k">return</span> <span class="n">n2</span>
 
 
-<span class="k">def</span> <span class="nf">fibo_recursive</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">fibo_recursive</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 	<span class="s">"""
 	Recursive version of Fibonacci sequence
 	"""</span>
@@ -154,7 +156,7 @@ F(1) = 1.
 		<span class="k">return</span> <span class="n">fibo_recursive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo_recursive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>After running these two functions on few examples, we will notice that the recursive version takes more time than the iterative form which instant when $n$ grows up.</p>
+<p>After running these two functions on few examples, we will notice that the recursive version takes more time than the iterative form which is instant when $n$ grows up.</p>
 
 <blockquote>
   <p><strong>Why the recursive form takes much more time ?</strong> To answer that, we need to understand how it’s calculated.</p>
@@ -177,16 +179,19 @@ We notice that the calculation of $F(n-2)$ is done twice (or more), as well as $
 
 <h2 id="3-speed-isnt-everything">3. Speed isn’t everything</h2>
 <p>Memoization technique is very powerful, it allows us to keep the code readability and being fast at the same time. But this fast execution time costs us another resource, <strong>memory</strong>.<br />
-The data structure choice for saving the intermediate results is important. For example, choosing a dictionary structure is very fast <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> while it consumes a lot of memory.</p>
+The data structure choice for saving the intermediate results is important. For example, choosing a dictionary structure is very fast <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> while it consumes a lot of memory.</p>
 
 <div class="note">
 	In Python, we have a built-in function for memoization that we can find in <a href="https://github.com/python/cpython/blob/3.8/Lib/functools.py">functools</a> module with the name <a href="https://docs.python.org/3/library/functools.html">lru_cache()</a>. This function is a high-order function that can be used as a decorator.
 </div>
 
-<div class="footnotes">
+<h2 id="4-conclusion">4. Conclusion</h2>
+<p>Memoization is a very powerful technique to optimize our execution time, but still we need to be careful while using it. We can limit the memory cost for an acceptable running time. This technique opens the topic to many other fields, for example <strong>Dynamic Programming</strong> which is an algorithmic technique for solving an optimization problem.</p>
+
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>In base cases when the hash function is perfect, the time complexity is equal to $\mathcal{O}(1)$. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>In base cases when the hash function is perfect, the time complexity is equal to $\mathcal{O}(1)$. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
