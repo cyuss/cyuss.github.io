@@ -14,7 +14,7 @@
         
               
             The Universal Approximation Theorem
-             16 Apr 2021 
+             20 Jan 2020 
              12 minutes read
            ..." />
 
@@ -76,12 +76,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="og:url" content="www.ohmykode.com/blog/mathematics/universal-approximation-theorem" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-04-16T12:00:00+02:00" />
-<meta property="article:modified_time" content="2021-04-16T12:00:00+02:00" />
+<meta property="article:published_time" content="2020-01-20T12:00:00+01:00" />
+<meta property="article:modified_time" content="2020-01-20T12:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="The Universal Approximation Theorem" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2021-04-16T12:00:00+02:00","datePublished":"2021-04-16T12:00:00+02:00","description":"Why do neural networks work at all ? Before worrying about how to train a network, it is worth asking whether a network is even capable of representing the function we are looking for. The Universal Approximation Theorem answers exactly this question : a feedforward network with a single hidden layer can approximate, as closely as we want, any continuous function on a compact domain. It is one of the most cited and, ironically, one of the most misunderstood results in machine learning. In this post we state it carefully, sketch why it is true, and, just as importantly, discuss…","headline":"The Universal Approximation Theorem","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"},"url":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2020-01-20T12:00:00+01:00","datePublished":"2020-01-20T12:00:00+01:00","description":"Why do neural networks work at all ? Before worrying about how to train a network, it is worth asking whether a network is even capable of representing the function we are looking for. The Universal Approximation Theorem answers exactly this question : a feedforward network with a single hidden layer can approximate, as closely as we want, any continuous function on a compact domain. It is one of the most cited and, ironically, one of the most misunderstood results in machine learning. In this post we state it carefully, sketch why it is true, and, just as importantly, discuss…","headline":"The Universal Approximation Theorem","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"},"url":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -91,12 +91,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         <header>
             <center>  <a class="fa fa-home home_button" href="/"></a></center>
             <center><span itemprop="name"><h1>The Universal Approximation Theorem</h1></span></center>
-            <center><p> 16 Apr 2021 </p></center>
+            <center><p> 20 Jan 2020 </p></center>
             <center><p class="fa fa-clock-o"> 12 minutes read</p></center>
             <!--<center><p class="fa fa-clock-o"> 
                         
                           
-                            16 minutes read
+                            17 minutes read
                         </p></center>-->
         <center><span class="small-ornament"><svg viewBox="0 0 290 320">
           <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
@@ -130,6 +130,8 @@ M(I_n) & : & \text{the space of finite signed regular Borel measures on } I_n \\
 <p>where $\alpha_{j}, b_{j} \in \Bbb{R}$ and $w_{j} \in \Bbb{R}^{n}$. The set of all functions of the form $\eqref{eq:network}$, for every possible width $N$ and every choice of parameters, is exactly the class of functions that a shallow network can <em>represent</em>.</p>
 
 <p>The question is then very natural. Given a target function $ƒ$ that we would like the network to compute, and a tolerance $\varepsilon &gt; 0$, does there always exist a choice of parameters such that $G$ is $\varepsilon$-close to $ƒ$ everywhere ? The Universal Approximation Theorem says <strong>yes</strong>, provided $ƒ$ is continuous, the domain is compact, and $\sigma$ is chosen sensibly. What is striking is that a <em>single</em> hidden layer already suffices ; depth is not required for representability.</p>
+
+<p><em>In plain words : think of each neuron as a little adjustable “bump” or “step”. Give yourself enough bumps of the right height, width and position, and you can trace the outline of any smooth curve, the way a row of dimmer switches can approximate any lighting pattern. The theorem promises that this always works ; it does not promise the bumps are easy to find.</em></p>
 
 <div class="definition">
 	A function $\sigma : \Bbb{R} \rightarrow \Bbb{R}$ is said to be <b>sigmoidal</b> if it is bounded and satisfies
@@ -221,7 +223,7 @@ M(I_n) & : & \text{the space of finite signed regular Borel measures on } I_n \\
   </li>
 </ul>
 
-<p>This is precisely the tension that motivates <a href="https://en.wikipedia.org/wiki/Deep_learning">deep</a> networks. Depth does not extend <em>what</em> can be represented, that battle was already won by a single layer, but it can drastically reduce <em>how many</em> neurons are needed. Certain functions expressible by a deep network of modest size provably require an exponentially wider shallow network to match. Universality tells us the destination exists ; depth is about getting there efficiently.</p>
+<p>This is precisely the tension that motivates <a href="https://en.wikipedia.org/wiki/Deep_learning">deep</a> networks. Depth does not extend <em>what</em> can be represented, that battle was already won by a single layer, but it can drastically reduce <em>how many</em> neurons are needed. Certain functions expressible by a deep network of modest size provably require an exponentially wider shallow network to match. Universality tells us the destination exists ; depth is about getting there efficiently. The modern <a href="/blog/mathematics/transformers">Transformer</a> is the spectacular payoff of this idea : a very deep stack whose feed-forward layers are exactly these universal approximators, wired together with <a href="/blog/mathematics/attention-mechanism">attention</a>.</p>
 
 <h2 id="7-a-historical-cousin">7. A historical cousin</h2>
 <p>It would be unfair to close without mentioning that the idea predates neural networks. In 1957, answering a version of Hilbert’s thirteenth problem, Kolmogorov <a class="citation" href="#Kolmogorov1957">(Kolmogorov, 1957)</a> proved that <em>every</em> continuous function of several variables can be written as a superposition of continuous functions of a <strong>single</strong> variable and addition,</p>

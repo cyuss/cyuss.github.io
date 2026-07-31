@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>The Attention Mechanism, Explained</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            The Attention Mechanism, Explained
+             12 Jul 2024 
+             13 minutes read
+            ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/attention-mechanism">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>The Attention Mechanism, Explained | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="The Attention Mechanism, Explained" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\operatorname{softmax}!\big(QK^{\top}/\sqrt{d_k}\big)V$,…" />
+<meta name="twitter:description" property="og:description" content="Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\operatorname{softmax}!\big(QK^{\top}/\sqrt{d_k}\big)V$,…" />
+<link rel="canonical" href="www.ohmykode.com/blog/mathematics/attention-mechanism" />
+<meta property="og:url" content="www.ohmykode.com/blog/mathematics/attention-mechanism" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-07-12T12:00:00+02:00" />
+<meta property="article:modified_time" content="2024-07-12T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="The Attention Mechanism, Explained" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2024-07-12T12:00:00+02:00","datePublished":"2024-07-12T12:00:00+02:00","description":"Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\\operatorname{softmax}!\\big(QK^{\\top}/\\sqrt{d_k}\\big)V$,…","headline":"The Attention Mechanism, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/attention-mechanism"},"url":"www.ohmykode.com/blog/mathematics/attention-mechanism"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>The Attention Mechanism, Explained</h1></span></center>
+            <center><p> 12 Jul 2024 </p></center>
+            <center><p class="fa fa-clock-o"> 13 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            18 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>Read this sentence : <em>“The cat sat on the mat because <strong>it</strong> was tired.”</em> Who was tired ? You knew instantly it was the cat, not the mat, because your brain <strong>paid attention</strong> to the right earlier word. The <strong>attention mechanism</strong>, introduced for translation by Bahdanau <a class="citation" href="#Bahdanau2014">(Bahdanau et al., 2015)</a> and then crowned as the single idea behind the Transformer <a class="citation" href="#Vaswani2017">(Vaswani et al., 2017)</a>, gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\operatorname{softmax}!\big(QK^{\top}/\sqrt{d_k}\big)V$, one small step at a time.</p>
+</blockquote>
+
+<h2 id="1-the-problem--words-need-context">1. The problem : words need context</h2>
+<p>A word on its own is ambiguous. <em>“Bank”</em> is a riverside or a place for money ; <em>“it”</em> points to something mentioned earlier ; <em>“apple”</em> could be a fruit or a company. To understand a word, a model must <strong>mix in information from the other words around it</strong>.</p>
+
+<p>Older models (recurrent networks) read a sentence one word at a time, squeezing everything seen so far into a single memory vector. Like whispering a long story down a line of people, the beginning gets forgotten by the end. Attention throws that bottleneck away : it lets every word look <strong>directly</strong> at every other word, no matter how far apart, all at once.</p>
+
+<div class="definition">
+	<b>Attention</b> is a mechanism that computes, for each element of a sequence, a new representation as a <b>weighted average of the other elements</b>, where the weights (how much to "attend") are learned from how <i>relevant</i> each element is to it.
+</div>
+
+<h2 id="2-the-big-idea--looking-things-up">2. The big idea : looking things up</h2>
+<p>Here is the ELI5 picture. Imagine a tiny library search.</p>
+
+<ul>
+  <li>You walk in with a <strong>question</strong> — <em>“something about a tired animal”</em>. That is your <strong>query</strong>.</li>
+  <li>Every book on the shelf has a <strong>label</strong> describing what it is about — <em>“cats”, “mats”, “weather”</em>. Those are the <strong>keys</strong>.</li>
+  <li>Every book also has actual <strong>contents</strong> inside. Those are the <strong>values</strong>.</li>
+</ul>
+
+<p>To answer your question you compare it against each label, decide how well each matches, and then read <em>mostly</em> the best-matching books, skimming the rest. Attention is precisely this : compare a <strong>query</strong> against all <strong>keys</strong>, turn the match scores into percentages, and blend the <strong>values</strong> accordingly.</p>
+
+<div class="definition">
+	Each element is turned into three vectors : a <b>query</b> $q$ ("what am I looking for ?"), a <b>key</b> $k$ ("what do I offer ?"), and a <b>value</b> $v$ ("what information do I carry ?"). These are produced by multiplying the element's embedding $x$ by three learned matrices, $q = W_{Q}\,x$, $k = W_{K}\,x$, $v = W_{V}\,x$.
+</div>
+
+<h2 id="3-attention-for-a-single-word-step-by-step">3. Attention for a single word, step by step</h2>
+<p>Let us attend from one query $q$ to a set of keys $k_{1}, \dots, k_{n}$ and values $v_{1}, \dots, v_{n}$. Four small steps.</p>
+
+<p><strong>Step 1 — Score.</strong> How relevant is each word to my query ? Measure it with a <strong>dot product</strong> <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, which is large when two vectors point the same way :</p>
+
+\[\begin{equation} s_{j} = q \cdot k_{j} = \sum_{d} q_{d}\, k_{j,d}. \label{eq:score} \end{equation}\]
+
+<p><em>In plain words : a high score $s_j$ means “this word is a good match for what I’m looking for”.</em></p>
+
+<p><strong>Step 2 — Scale.</strong> Divide by $\sqrt{d_k}$ (with $d_k$ the vector length). We will justify this shortly ; for now, it just keeps the numbers from getting too big.</p>
+
+<p><strong>Step 3 — Softmax.</strong> Turn the scores into positive weights that add up to $1$ (percentages of attention) :</p>
+
+\[\begin{equation} \alpha_{j} = \frac{\exp(s_{j}/\sqrt{d_k})}{\sum_{\ell=1}^{n}\exp(s_{\ell}/\sqrt{d_k})}, \qquad \sum_{j}\alpha_{j}=1. \label{eq:softmax} \end{equation}\]
+
+<p><strong>Step 4 — Blend.</strong> Read the values in those proportions :</p>
+
+\[\begin{equation} \text{output} = \sum_{j=1}^{n}\alpha_{j}\, v_{j}. \label{eq:blend} \end{equation}\]
+
+<p><em>In plain words : the answer is a mix of all the words’ contents, but dominated by the ones that matched.</em> The animation below shows the query <em>“it”</em> scanning the sentence : the bars are the attention weights $\alpha_j$, and <em>“cat”</em> wins.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 300" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .word { font-size:15px; fill:#2b2b2b; } .q { font-style:italic; fill:#b5651d; }
+    .bar  { fill:#4a6da7; transform-box:fill-box; transform-origin:bottom;
+            animation:grow 4s ease-in-out infinite; }
+    @keyframes grow { 0%{transform:scaleY(0)} 25%{transform:scaleY(1)} 85%{transform:scaleY(1)} 100%{transform:scaleY(0)} }
+    .cap { font-size:12px; fill:#7a7a7a; }
+    .spot{ fill:#b5651d; opacity:.12; animation:sweep 4s ease-in-out infinite; }
+    @keyframes sweep { 0%{opacity:0} 30%{opacity:.16} 100%{opacity:.16} }
+    .pct { font-size:10.5px; fill:#4a6da7; }
+  </style>
+  <text class="word q" x="320" y="30" text-anchor="middle">query : "it"  →  who / what ?</text>
+  <!-- 7 words, bars proportional to attention weight -->
+  <!-- x positions -->
+  <!-- The:0.03 cat:0.55 sat:0.10 because:0.05 it:0.02 was:0.05 tired:0.20 -->
+  <!-- baseline y=230; max bar height 150 -->
+  <!-- cat spotlight -->
+  <rect class="spot" x="112" y="70" width="70" height="200" rx="6" />
+  <g text-anchor="middle">
+    <rect class="bar" x="36" y="225" width="30" height="5" style="animation-delay:.0s" /><text class="word" x="51" y="252">The</text>   <text class="pct" x="51" y="266">3%</text>
+    <rect class="bar" x="118" y="80" width="58" height="150" style="animation-delay:.1s" /><text class="word" x="147" y="252">cat</text>   <text class="pct" x="147" y="266">55%</text>
+    <rect class="bar" x="196" y="200" width="30" height="30" style="animation-delay:.2s" /><text class="word" x="211" y="252">sat</text>   <text class="pct" x="211" y="266">10%</text>
+    <rect class="bar" x="262" y="215" width="46" height="15" style="animation-delay:.3s" /><text class="word" x="285" y="252">because</text><text class="pct" x="285" y="266">5%</text>
+    <rect class="bar" x="336" y="222" width="24" height="8" style="animation-delay:.4s" /><text class="word q" x="348" y="252">it</text>    <text class="pct" x="348" y="266">2%</text>
+    <rect class="bar" x="382" y="215" width="34" height="15" style="animation-delay:.5s" /><text class="word" x="399" y="252">was</text>   <text class="pct" x="399" y="266">5%</text>
+    <rect class="bar" x="438" y="170" width="46" height="60" style="animation-delay:.6s" /><text class="word" x="461" y="252">tired</text> <text class="pct" x="461" y="266">20%</text>
+  </g>
+  <line x1="24" y1="230" x2="500" y2="230" stroke="#ccc" stroke-width="1" />
+  <text class="cap" x="320" y="290" text-anchor="middle">attention weights αⱼ (they sum to 100%) — "it" attends mostly to "cat"</text>
+</svg>
+<figcaption><b>Figure 1 -</b> Attention from the word <i>"it"</i>. Each bar is the learned weight $\alpha_j$ from $\eqref{eq:softmax}$. The output for <i>"it"</i> becomes mostly the <i>value</i> of <i>"cat"</i>, so the model now "knows" what <i>it</i> refers to.</figcaption>
+</center></figure>
+
+<h2 id="4-all-queries-at-once--the-matrix-formula">4. All queries at once : the matrix formula</h2>
+<p>A sentence has many words, and each is a query. Instead of looping, we stack the query, key and value vectors as rows of matrices $Q$, $K$, $V$ and do it all with two matrix multiplications. This is the celebrated <strong>scaled dot-product attention</strong> <a class="citation" href="#Vaswani2017">(Vaswani et al., 2017)</a> :</p>
+
+<div class="theorem" text="Scaled dot-product attention">
+	$$ \operatorname{Attention}(Q, K, V) = \operatorname{softmax}\!\left( \frac{Q K^{\top}}{\sqrt{d_k}} \right) V. $$
+</div>
+
+<p>Let us read it left to right, because every piece is one of the four steps above.</p>
+
+<ul>
+  <li>$Q K^{\top}$ is the table of <strong>all</strong> scores at once : entry $(i,j)$ is query $i$ dotted with key $j$, exactly $\eqref{eq:score}$.</li>
+  <li>Dividing by $\sqrt{d_k}$ is the <strong>scaling</strong> of Step 2.</li>
+  <li>$\operatorname{softmax}$ (applied row by row) turns each row into attention weights that sum to $1$, exactly $\eqref{eq:softmax}$.</li>
+  <li>Multiplying by $V$ <strong>blends the values</strong>, exactly $\eqref{eq:blend}$, but for every word simultaneously.</li>
+</ul>
+
+<figure><center>
+<svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .box { rx:8; stroke-width:1.6; } 
+    .bq{ fill:#f6f7fb; stroke:#4a6da7; } .bk{ fill:#f6f7fb; stroke:#4a6da7; }
+    .bv{ fill:#f3faf4; stroke:#5aa06a; } .bs{ fill:#faf6f2; stroke:#b5651d; }
+    .bo{ fill:#fff; stroke:#2b2b2b; }
+    .t { font-size:14px; fill:#2b2b2b; text-anchor:middle; } .op{ font-size:20px; fill:#7a7a7a; text-anchor:middle; }
+    .sm{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .arrow{ stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:5 6; animation:aflow 1.8s linear infinite; }
+    @keyframes aflow { to { stroke-dashoffset:-44; } }
+  </style>
+  <!-- Q x K^T -->
+  <rect class="box bq" x="20" y="60" width="60" height="60" /><text class="t" x="50" y="96">Q</text>
+  <text class="op" x="95" y="96">×</text>
+  <rect class="box bk" x="110" y="60" width="60" height="60" /><text class="t" x="140" y="96">Kᵀ</text>
+  <path class="arrow" d="M175,90 L215,90" />
+  <!-- scores -->
+  <rect class="box bs" x="220" y="55" width="70" height="70" /><text class="t" x="255" y="88">QKᵀ</text><text class="sm" x="255" y="104">/ √dₖ</text>
+  <path class="arrow" d="M295,90 L335,90" />
+  <!-- softmax -->
+  <rect class="box bs" x="340" y="55" width="90" height="70" /><text class="t" x="385" y="95">softmax</text>
+  <text class="sm" x="385" y="145">attention weights A</text>
+  <path class="arrow" d="M435,90 L475,90" />
+  <text class="op" x="497" y="96">×</text>
+  <!-- V -->
+  <rect class="box bv" x="515" y="60" width="55" height="60" /><text class="t" x="542" y="96">V</text>
+  <!-- output -->
+  <path class="arrow" d="M542,125 L542,165" />
+  <rect class="box bo" x="500" y="170" width="85" height="55" /><text class="t" x="542" y="203">output</text>
+  <text class="sm" x="300" y="185">scores → weights (each row sums to 1)</text>
+</svg>
+<figcaption><b>Figure 2 -</b> The pipeline of scaled dot-product attention. Scores are computed ($QK^{\top}$), scaled, softmaxed into a weight table $A$, and used to average the values $V$.</figcaption>
+</center></figure>
+
+<div class="example">
+	Why divide by $\sqrt{d_k}$ ? If queries and keys have independent, unit-variance entries, their dot product $\eqref{eq:score}$ is a sum of $d_k$ random terms, so its variance grows like $d_k$. For large $d_k$ the scores become huge, the softmax saturates (one weight $\approx 1$, the rest $\approx 0$), and gradients vanish. Dividing by $\sqrt{d_k}$ rescales the variance back to $\approx 1$, keeping the softmax in its sensitive, learnable range.
+</div>
+
+<h2 id="5-self-attention--a-sentence-looking-at-itself">5. Self-attention : a sentence looking at itself</h2>
+<p>When the queries, keys and values all come from the <strong>same</strong> sentence ($Q$, $K$, $V$ are three projections of the same words), we call it <strong>self-attention</strong>. Every word refreshes itself by mixing in the words most relevant to it. The full weight table $A = \operatorname{softmax}(QK^{\top}/\sqrt{d_k})$ is an $n \times n$ heatmap : row $i$ says where word $i$ looks.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 300" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .hl { font-size:12.5px; fill:#2b2b2b; }
+    .cellh { stroke:#fff; stroke-width:2; }
+    .rowscan { fill:#b5651d; opacity:0; animation:rowsweep 5s steps(1) infinite; }
+    @keyframes rowsweep { 0%,100%{opacity:0} }
+    .lab{ font-size:11px; fill:#7a7a7a; }
+  </style>
+  <!-- 5 words -->
+  <!-- labels top (keys) and left (queries) -->
+  <text class="lab" x="330" y="24" text-anchor="middle">keys  (looked at)  →</text>
+  <text class="lab" x="20" y="160" text-anchor="middle" transform="rotate(-90 20 160)">queries  (doing the looking)  →</text>
+  <g class="hl" text-anchor="middle">
+    <text x="120" y="52">The</text><text x="190" y="52">cat</text><text x="260" y="52">sat</text><text x="330" y="52">on</text><text x="400" y="52">mat</text>
+  </g>
+  <g class="hl" text-anchor="end">
+    <text x="86" y="90">The</text><text x="86" y="140">cat</text><text x="86" y="190">sat</text><text x="86" y="240">on</text><text x="86" y="290">mat</text>
+  </g>
+  <!-- heat cells: opacity encodes weight. rows sum ~1 -->
+  <g transform="translate(95,64)">
+    <!-- row The -->
+    <rect class="cellh" x="0" y="0" width="50" height="40" fill="#4a6da7" opacity="0.75" />
+    <rect class="cellh" x="70" y="0" width="50" height="40" fill="#4a6da7" opacity="0.10" />
+    <rect class="cellh" x="140" y="0" width="50" height="40" fill="#4a6da7" opacity="0.06" />
+    <rect class="cellh" x="210" y="0" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="cellh" x="280" y="0" width="50" height="40" fill="#4a6da7" opacity="0.04" />
+    <!-- row cat -->
+    <rect class="cellh" x="0" y="50" width="50" height="40" fill="#4a6da7" opacity="0.08" />
+    <rect class="cellh" x="70" y="50" width="50" height="40" fill="#4a6da7" opacity="0.62" />
+    <rect class="cellh" x="140" y="50" width="50" height="40" fill="#4a6da7" opacity="0.20" />
+    <rect class="cellh" x="210" y="50" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="cellh" x="280" y="50" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <!-- row sat -->
+    <rect class="cellh" x="0" y="100" width="50" height="40" fill="#4a6da7" opacity="0.06" />
+    <rect class="cellh" x="70" y="100" width="50" height="40" fill="#4a6da7" opacity="0.30" />
+    <rect class="cellh" x="140" y="100" width="50" height="40" fill="#4a6da7" opacity="0.44" />
+    <rect class="cellh" x="210" y="100" width="50" height="40" fill="#4a6da7" opacity="0.12" />
+    <rect class="cellh" x="280" y="100" width="50" height="40" fill="#4a6da7" opacity="0.08" />
+    <!-- row on -->
+    <rect class="cellh" x="0" y="150" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="cellh" x="70" y="150" width="50" height="40" fill="#4a6da7" opacity="0.08" />
+    <rect class="cellh" x="140" y="150" width="50" height="40" fill="#4a6da7" opacity="0.22" />
+    <rect class="cellh" x="210" y="150" width="50" height="40" fill="#4a6da7" opacity="0.45" />
+    <rect class="cellh" x="280" y="150" width="50" height="40" fill="#4a6da7" opacity="0.20" />
+    <!-- row mat -->
+    <rect class="cellh" x="0" y="200" width="50" height="40" fill="#4a6da7" opacity="0.04" />
+    <rect class="cellh" x="70" y="200" width="50" height="40" fill="#4a6da7" opacity="0.18" />
+    <rect class="cellh" x="140" y="200" width="50" height="40" fill="#4a6da7" opacity="0.10" />
+    <rect class="cellh" x="210" y="200" width="50" height="40" fill="#4a6da7" opacity="0.20" />
+    <rect class="cellh" x="280" y="200" width="50" height="40" fill="#4a6da7" opacity="0.48" />
+    <!-- animated highlight sweeping down the rows -->
+    <rect x="-4" y="-4" width="338" height="48" fill="none" stroke="#b5651d" stroke-width="2.4" rx="3">
+      <animate attributeName="y" values="-4;46;96;146;196;-4" dur="5s" repeatCount="indefinite" />
+    </rect>
+  </g>
+  <text class="lab" x="330" y="288" text-anchor="middle">darker = more attention · the moving box scans one query (row) at a time</text>
+</svg>
+<figcaption><b>Figure 3 -</b> A self-attention heatmap for <i>"The cat sat on mat"</i>. Each row is one word's attention distribution over all words. Notice the diagonal (words attend to themselves) plus meaningful off-diagonal links like <i>sat</i>→<i>cat</i>.</figcaption>
+</center></figure>
+
+<h2 id="6-many-spotlights--multi-head-attention">6. Many spotlights : multi-head attention</h2>
+<p>One attention pattern can only capture one kind of relationship. Real language has several at once : <em>who did what</em> (subject–verb), <em>what modifies what</em> (adjective–noun), <em>what refers to what</em> (pronoun–antecedent). So Transformers run several attentions in parallel, called <strong>heads</strong>, each with its own $W_Q, W_K, W_V$, and then concatenate the results :</p>
+
+\[\begin{equation} \operatorname{MultiHead}(Q,K,V) = \operatorname{Concat}(\text{head}_1, \dots, \text{head}_h)\, W_{O}, \quad \text{head}_i = \operatorname{Attention}(QW_Q^i, KW_K^i, VW_V^i). \label{eq:multihead} \end{equation}\]
+
+<p><em>In plain words : each head is a different pair of “reading glasses”. One head might track grammar, another long-range references ; stacking their views gives a richer representation.</em></p>
+
+<h2 id="7-why-attention-changed-everything">7. Why attention changed everything</h2>
+<p>Two properties made attention the backbone of modern AI.</p>
+
+<ul>
+  <li><strong>Parallelism.</strong> Every word is processed at the same time, not one after another, so training uses modern hardware fully. This is the practical reason it dethroned recurrent networks.</li>
+  <li><strong>Direct long-range links.</strong> Any two words are one step apart, so a pronoun can look back at a noun fifty words earlier with no signal decay.</li>
+</ul>
+
+<p>Attention is the <em>engine</em>. To build a full model, we stack it into a repeating block, add a way to encode word order, and sprinkle in some plumbing. That assembled machine is the <strong>Transformer</strong>, the subject of a <a href="/blog/mathematics/transformers">companion post</a>. And why can a stack of these blocks represent essentially any function we need ? That question is answered by the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a>.</p>
+
+<h2 id="8-conclusion">8. Conclusion</h2>
+<p>Attention is, at heart, a <em>soft, differentiable lookup table</em> : compare a query to keys, softmax the matches into weights, and average the values. Everything else, the scaling by $\sqrt{d_k}$, self-attention, multiple heads, is refinement on that one idea. It replaced the fragile “remember everything in one vector” strategy with a simple instruction that a network can learn : <em>for each word, look at the words that matter.</em> From that sentence-sized intuition grew the models that now write, translate and reason.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Bahdanau2014">Bahdanau, D., Cho, K., &amp; Bengio, Y. (2015). Neural Machine Translation by Jointly Learning to Align and Translate. <i>International Conference on Learning Representations (ICLR)</i>.</span>
+
+<div id="Bahdanau2014-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Bahdanau2014-bibtex" class="pre pre-scrollable collapse">@inproceedings{Bahdanau2014,
+  author = {Bahdanau, Dzmitry and Cho, Kyunghyun and Bengio, Yoshua},
+  title = {Neural Machine Translation by Jointly Learning to Align and Translate},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year = {2015}
+}
+</pre>
+
+</div></li>
+<li><span id="Vaswani2017">Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017). Attention Is All You Need. <i>Advances in Neural Information Processing Systems (NeurIPS)</i>, <i>30</i>, 5998–6008.</span>
+
+<div id="Vaswani2017-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Vaswani2017-bibtex" class="pre pre-scrollable collapse">@inproceedings{Vaswani2017,
+  author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  title = {Attention Is All You Need},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume = {30},
+  pages = {5998--6008},
+  year = {2017}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The dot-product form used here is sometimes called <em>multiplicative</em> attention. Bahdanau’s original 2014 formulation used an <em>additive</em> variant with a small feed-forward network to score query–key pairs ; the two perform comparably, but the multiplicative form is far faster as a matrix product. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
