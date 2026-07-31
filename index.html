@@ -145,10 +145,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     #f-algo:checked ~ .toolbar label[for="f-algo"],
     #f-py:checked   ~ .toolbar label[for="f-py"] { background:var(--accent); color:#fff; border-color:var(--accent); }
 
-    .view-switch { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
-    .view-switch label { padding:.4em .8em; cursor:pointer; color:var(--muted);
+    /* align-items:stretch + margin:0 so each segment fills the pill exactly
+       (the theme gives every <label> an 8px bottom margin, which left a dead strip) */
+    .view-switch { display:inline-flex; align-items:stretch; border:1px solid var(--line);
+                   border-radius:8px; overflow:hidden; background:var(--card-bg); line-height:1; }
+    .view-switch label { margin:0; padding:.62em .95em; cursor:pointer; color:var(--muted);
                          font-size:.7em; letter-spacing:.08em; text-transform:uppercase; font-weight:bold;
-                         display:inline-flex; align-items:center; gap:.4em; transition:background .15s, color .15s; }
+                         line-height:1; display:inline-flex; align-items:center; gap:.45em;
+                         transition:background .15s, color .15s; }
+    .view-switch label:hover { color:var(--accent); }
     .view-switch label + label { border-left:1px solid var(--line); }
     #v-grid:checked ~ .toolbar label[for="v-grid"],
     #v-list:checked ~ .toolbar label[for="v-list"] { background:var(--accent); color:#fff; }
@@ -244,8 +249,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
       <input class="st" type="radio" name="catfilter" id="f-math">
       <input class="st" type="radio" name="catfilter" id="f-algo">
       <input class="st" type="radio" name="catfilter" id="f-py">
-      <input class="st" type="radio" name="viewmode" id="v-grid" checked>
-      <input class="st" type="radio" name="viewmode" id="v-list">
+      <input class="st" type="radio" name="viewmode" id="v-grid">
+      <input class="st" type="radio" name="viewmode" id="v-list" checked>
 
       <div class="toolbar">
         <div class="filters">
