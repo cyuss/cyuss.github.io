@@ -22,7 +22,7 @@
   
   <meta name="keywords" content="" />
 
-  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/transformers">
+  <link rel="canonical" href="www.ohmykode.com/blog/machine-learning/transformers">
   <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
   <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
 
@@ -73,8 +73,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="If attention is an engine, the Transformer is the whole car built around it. Introduced in the 2017 paper whose title says it all, “Attention Is All You Need” (Vaswani et al., 2017), it threw away the sequential recurrence that machine translation had relied on and replaced it with stacks of attention, processed all at once. That single architectural bet powers essentially every large language model you have heard of, from BERT to the GPT family. This post assembles the Transformer piece by piece, keeping each part ELI5-simple while writing down the mathematics that makes it tick. If you have…" />
 <meta name="twitter:description" property="og:description" content="If attention is an engine, the Transformer is the whole car built around it. Introduced in the 2017 paper whose title says it all, “Attention Is All You Need” (Vaswani et al., 2017), it threw away the sequential recurrence that machine translation had relied on and replaced it with stacks of attention, processed all at once. That single architectural bet powers essentially every large language model you have heard of, from BERT to the GPT family. This post assembles the Transformer piece by piece, keeping each part ELI5-simple while writing down the mathematics that makes it tick. If you have…" />
-<link rel="canonical" href="www.ohmykode.com/blog/mathematics/transformers" />
-<meta property="og:url" content="www.ohmykode.com/blog/mathematics/transformers" />
+<link rel="canonical" href="www.ohmykode.com/blog/machine-learning/transformers" />
+<meta property="og:url" content="www.ohmykode.com/blog/machine-learning/transformers" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-01-15T12:00:00+01:00" />
@@ -82,7 +82,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="The Transformer, Explained" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2026-01-15T12:00:00+01:00","datePublished":"2026-01-15T12:00:00+01:00","description":"If attention is an engine, the Transformer is the whole car built around it. Introduced in the 2017 paper whose title says it all, “Attention Is All You Need” (Vaswani et al., 2017), it threw away the sequential recurrence that machine translation had relied on and replaced it with stacks of attention, processed all at once. That single architectural bet powers essentially every large language model you have heard of, from BERT to the GPT family. This post assembles the Transformer piece by piece, keeping each part ELI5-simple while writing down the mathematics that makes it tick. If you have…","headline":"The Transformer, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/transformers"},"url":"www.ohmykode.com/blog/mathematics/transformers"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2026-01-15T12:00:00+01:00","datePublished":"2026-01-15T12:00:00+01:00","description":"If attention is an engine, the Transformer is the whole car built around it. Introduced in the 2017 paper whose title says it all, “Attention Is All You Need” (Vaswani et al., 2017), it threw away the sequential recurrence that machine translation had relied on and replaced it with stacks of attention, processed all at once. That single architectural bet powers essentially every large language model you have heard of, from BERT to the GPT family. This post assembles the Transformer piece by piece, keeping each part ELI5-simple while writing down the mathematics that makes it tick. If you have…","headline":"The Transformer, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/transformers"},"url":"www.ohmykode.com/blog/machine-learning/transformers"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -110,7 +110,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         <article lang="en">
           
           <blockquote>
-  <p>If <a href="/blog/mathematics/attention-mechanism">attention</a> is an <em>engine</em>, the <strong>Transformer</strong> is the whole <em>car</em> built around it. Introduced in the 2017 paper whose title says it all, <em>“Attention Is All You Need”</em> <a class="citation" href="#Vaswani2017">(Vaswani et al., 2017)</a>, it threw away the sequential recurrence that machine translation had relied on and replaced it with stacks of attention, processed all at once. That single architectural bet powers essentially every large language model you have heard of, from BERT to the GPT family. This post assembles the Transformer piece by piece, keeping each part ELI5-simple while writing down the mathematics that makes it tick. If you have not met attention yet, read the <a href="/blog/mathematics/attention-mechanism">companion post</a> first, everything here is built on it.</p>
+  <p>If <a href="/blog/machine-learning/attention-mechanism">attention</a> is an <em>engine</em>, the <strong>Transformer</strong> is the whole <em>car</em> built around it. Introduced in the 2017 paper whose title says it all, <em>“Attention Is All You Need”</em> <a class="citation" href="#Vaswani2017">(Vaswani et al., 2017)</a>, it threw away the sequential recurrence that machine translation had relied on and replaced it with stacks of attention, processed all at once. That single architectural bet powers essentially every large language model you have heard of, from BERT to the GPT family. This post assembles the Transformer piece by piece, keeping each part ELI5-simple while writing down the mathematics that makes it tick. If you have not met attention yet, read the <a href="/blog/machine-learning/attention-mechanism">companion post</a> first, everything here is built on it.</p>
 </blockquote>
 
 <h2 id="1-the-one-sentence-idea">1. The one-sentence idea</h2>
@@ -289,7 +289,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <p>Why should stacking these blocks be able to represent the staggering variety of functions language requires ? The reassuring theoretical backdrop is the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a> : the feed-forward sub-layers alone are universal approximators, and attention adds the ability to route information between positions. Representational power was never the worry ; as that post stresses, the real magic is that these models can be <em>trained</em> at all.</p>
 
 <h2 id="7-conclusion">7. Conclusion</h2>
-<p>Strip away the vocabulary and the Transformer is short to describe : embed the tokens, add a positional fingerprint, then repeat <em>“let every word look at the others, then let every word think”</em> a handful of times, with residual skips and normalisation to keep the deep stack healthy. Two towers, an encoder that reads and a decoder that writes, cooperate through cross-attention, and a masked softmax lets the whole thing generate text one word at a time. No recurrence, no convolution, <a href="/blog/mathematics/attention-mechanism">attention</a> really was, more or less, all we needed.</p>
+<p>Strip away the vocabulary and the Transformer is short to describe : embed the tokens, add a positional fingerprint, then repeat <em>“let every word look at the others, then let every word think”</em> a handful of times, with residual skips and normalisation to keep the deep stack healthy. Two towers, an encoder that reads and a decoder that writes, cooperate through cross-attention, and a masked softmax lets the whole thing generate text one word at a time. No recurrence, no convolution, <a href="/blog/machine-learning/attention-mechanism">attention</a> really was, more or less, all we needed.</p>
 
 <h2 id="references">References</h2>
 <ol class="bibliography"><li><span id="Bahdanau2014">Bahdanau, D., Cho, K., &amp; Bengio, Y. (2015). Neural Machine Translation by Jointly Learning to Align and Translate. <i>International Conference on Learning Representations (ICLR)</i>.</span>

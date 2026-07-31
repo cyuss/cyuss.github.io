@@ -17,7 +17,7 @@
 <lastmod>2020-01-20T12:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>www.ohmykode.com/blog/mathematics/gradient-descent</loc>
+<loc>www.ohmykode.com/blog/machine-learning/gradient-descent</loc>
 <lastmod>2020-09-10T12:00:00+02:00</lastmod>
 </url>
 <url>
@@ -25,7 +25,7 @@
 <lastmod>2021-06-15T12:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>www.ohmykode.com/blog/mathematics/backpropagation</loc>
+<loc>www.ohmykode.com/blog/machine-learning/backpropagation</loc>
 <lastmod>2022-04-20T12:00:00+02:00</lastmod>
 </url>
 <url>
@@ -33,7 +33,11 @@
 <lastmod>2023-01-18T12:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>www.ohmykode.com/blog/mathematics/attention-mechanism</loc>
+<loc>www.ohmykode.com/blog/machine-learning/xgboost</loc>
+<lastmod>2023-09-10T12:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>www.ohmykode.com/blog/machine-learning/attention-mechanism</loc>
 <lastmod>2024-07-12T12:00:00+02:00</lastmod>
 </url>
 <url>
@@ -41,7 +45,7 @@
 <lastmod>2025-03-15T15:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>www.ohmykode.com/blog/mathematics/transformers</loc>
+<loc>www.ohmykode.com/blog/machine-learning/transformers</loc>
 <lastmod>2026-01-15T12:00:00+01:00</lastmod>
 </url>
 <url>

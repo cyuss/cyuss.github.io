@@ -21,7 +21,7 @@
   
   <meta name="keywords" content="" />
 
-  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/backpropagation">
+  <link rel="canonical" href="www.ohmykode.com/blog/machine-learning/backpropagation">
   <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
   <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
 
@@ -70,10 +70,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="og:title" content="Backpropagation, How Neural Nets Actually Learn" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations with transposes and little $\delta$ symbols. Let us throw that away and do something better : take one tiny network, put actual numbers through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the chain rule walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be able…" />
-<meta name="twitter:description" property="og:description" content="Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations with transposes and little $\delta$ symbols. Let us throw that away and do something better : take one tiny network, put actual numbers through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the chain rule walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be able…" />
-<link rel="canonical" href="www.ohmykode.com/blog/mathematics/backpropagation" />
-<meta property="og:url" content="www.ohmykode.com/blog/mathematics/backpropagation" />
+<meta name="description" content="Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations bristling with transposes and tiny delta symbols. Let us throw that away and do something better : take one tiny network, put actual numbers through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the chain rule walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be…" />
+<meta name="twitter:description" property="og:description" content="Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations bristling with transposes and tiny delta symbols. Let us throw that away and do something better : take one tiny network, put actual numbers through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the chain rule walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be…" />
+<link rel="canonical" href="www.ohmykode.com/blog/machine-learning/backpropagation" />
+<meta property="og:url" content="www.ohmykode.com/blog/machine-learning/backpropagation" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-04-20T12:00:00+02:00" />
@@ -81,7 +81,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Backpropagation, How Neural Nets Actually Learn" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2022-04-20T12:00:00+02:00","datePublished":"2022-04-20T12:00:00+02:00","description":"Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations with transposes and little $\\delta$ symbols. Let us throw that away and do something better : take one tiny network, put actual numbers through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the chain rule walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be able…","headline":"Backpropagation, How Neural Nets Actually Learn","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/backpropagation"},"url":"www.ohmykode.com/blog/mathematics/backpropagation"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2022-04-20T12:00:00+02:00","datePublished":"2022-04-20T12:00:00+02:00","description":"Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations bristling with transposes and tiny delta symbols. Let us throw that away and do something better : take one tiny network, put actual numbers through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the chain rule walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be…","headline":"Backpropagation, How Neural Nets Actually Learn","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/backpropagation"},"url":"www.ohmykode.com/blog/machine-learning/backpropagation"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -109,7 +109,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         <article lang="en">
           
           <blockquote>
-  <p>Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations with transposes and little $\delta$ symbols. Let us throw that away and do something better : take one tiny network, put <strong>actual numbers</strong> through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the <strong>chain rule</strong> walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be able to backpropagate on paper.</p>
+  <p>Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations bristling with transposes and tiny delta symbols. Let us throw that away and do something better : take one tiny network, put <strong>actual numbers</strong> through it, and watch the gradients being computed by hand. You will see that backpropagation is not an algorithm you need to memorise, it is just the <strong>chain rule</strong> walking backwards through a diagram, where each little box does one embarrassingly simple local calculation and whispers the result to its neighbour. By the end you will be able to backpropagate on paper.</p>
 </blockquote>
 
 <h2 id="1-a-network-is-a-graph-of-tiny-operations">1. A network is a graph of tiny operations</h2>
@@ -119,7 +119,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 
 \[\begin{equation} x \xrightarrow{\;\times w\;} \; \xrightarrow{\;+\,b\;} z \xrightarrow{\;\sigma\;} a \xrightarrow{\;(a-y)^2\;} L. \label{eq:graph} \end{equation}\]
 
-<p>That is the whole model. Learning means answering one question : if I nudge $w$ a little, how does the loss $L$ change ? That number, $\frac{\partial L}{\partial w}$, is the gradient, and <a href="/blog/mathematics/gradient-descent">gradient descent</a> will use it to improve $w$.</p>
+<p>That is the whole model. Learning means answering one question : if I nudge $w$ a little, how does the loss $L$ change ? That number, $\frac{\partial L}{\partial w}$, is the gradient, and <a href="/blog/machine-learning/gradient-descent">gradient descent</a> will use it to improve $w$.</p>
 
 <h2 id="2-the-forward-pass--just-compute">2. The forward pass : just compute</h2>
 <p>First we run the graph left to right with concrete numbers. Let us pick $x = 1$, $w = 0.5$, $b = 0$, and target $y = 1$. Nothing clever here, we simply evaluate each box and remember its output (we will need those outputs in a minute).</p>
@@ -234,10 +234,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <h2 id="6-one-honest-warning--vanishing-gradients">6. One honest warning : vanishing gradients</h2>
 <p>Look again at the backward pass : the gradient is a <strong>product</strong> of local derivatives, one per box on the path. The sigmoid’s local derivative $a(1-a)$ is at most $0.25$. Chain a dozen sigmoids and the gradient reaching the earliest layers is multiplied by $0.25$ a dozen times, roughly $0.25^{12} \approx 6\times10^{-8}$, effectively zero. Those early layers barely learn : the notorious <strong>vanishing gradient</strong> problem.</p>
 
-<p>This single observation, that a long product of small numbers collapses, explains a surprising amount of modern design : the ReLU activation (local derivative exactly $1$ on the positive side, so the product does not shrink), careful weight initialisation, and the <em>residual connections</em> of the <a href="/blog/mathematics/transformers">Transformer</a>, which hand the gradient a clean shortcut straight back to the early layers.</p>
+<p>This single observation, that a long product of small numbers collapses, explains a surprising amount of modern design : the ReLU activation (local derivative exactly $1$ on the positive side, so the product does not shrink), careful weight initialisation, and the <em>residual connections</em> of the <a href="/blog/machine-learning/transformers">Transformer</a>, which hand the gradient a clean shortcut straight back to the early layers.</p>
 
 <h2 id="7-conclusion">7. Conclusion</h2>
-<p>Backpropagation deserves to feel easy, because it is : draw the computation as a graph, run it forwards once and remember the intermediate values, then sweep backwards multiplying by one local derivative at each box. The chain rule does all the work ; backprop is merely the bookkeeping that reuses shared results so the whole gradient falls out in a single pass. Feed those gradients to <a href="/blog/mathematics/gradient-descent">gradient descent</a> and repeat a few million times, and the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a>’s promise, that a good network <em>exists</em>, is turned into a network you actually <em>have</em>.</p>
+<p>Backpropagation deserves to feel easy, because it is : draw the computation as a graph, run it forwards once and remember the intermediate values, then sweep backwards multiplying by one local derivative at each box. The chain rule does all the work ; backprop is merely the bookkeeping that reuses shared results so the whole gradient falls out in a single pass. Feed those gradients to <a href="/blog/machine-learning/gradient-descent">gradient descent</a> and repeat a few million times, and the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a>’s promise, that a good network <em>exists</em>, is turned into a network you actually <em>have</em>.</p>
 
 <h2 id="references">References</h2>
 <ol class="bibliography"></ol>

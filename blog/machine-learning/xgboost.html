@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>XGBoost, A Team of Trees That Fix Each Other's Mistakes</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            XGBoost, A Team of Trees That Fix Each Other's Mistakes
+             10 Sep 2023 
+             10 minu..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/machine-learning/xgboost">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>XGBoost, A Team of Trees That Fix Each Other’s Mistakes | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="XGBoost, A Team of Trees That Fix Each Other’s Mistakes" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : XGBoost (Chen &amp; Guestrin, 2016). Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a team of very simple ones, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the…" />
+<meta name="twitter:description" property="og:description" content="If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : XGBoost (Chen &amp; Guestrin, 2016). Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a team of very simple ones, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the…" />
+<link rel="canonical" href="www.ohmykode.com/blog/machine-learning/xgboost" />
+<meta property="og:url" content="www.ohmykode.com/blog/machine-learning/xgboost" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-10T12:00:00+02:00" />
+<meta property="article:modified_time" content="2023-09-10T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="XGBoost, A Team of Trees That Fix Each Other’s Mistakes" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2023-09-10T12:00:00+02:00","datePublished":"2023-09-10T12:00:00+02:00","description":"If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : XGBoost (Chen &amp; Guestrin, 2016). Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a team of very simple ones, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the…","headline":"XGBoost, A Team of Trees That Fix Each Other’s Mistakes","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/xgboost"},"url":"www.ohmykode.com/blog/machine-learning/xgboost"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>XGBoost, A Team of Trees That Fix Each Other's Mistakes</h1></span></center>
+            <center><p> 10 Sep 2023 </p></center>
+            <center><p class="fa fa-clock-o"> 10 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            13 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>If <a href="/blog/mathematics/universal-approximation-theorem">neural networks</a> rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : <strong>XGBoost</strong> <a class="citation" href="#Chen2016">(Chen &amp; Guestrin, 2016)</a>. Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a <strong>team of very simple ones</strong>, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the mathematics that makes XGBoost special, and answers the practical questions : why is it so good, and when should you reach for it ?</p>
+</blockquote>
+
+<h2 id="1-where-xgboost-shines">1. Where XGBoost shines</h2>
+<p>Most real-world data is <strong>tabular</strong> : rows of examples, columns of mixed features (age, price, a category, a count). For this kind of data, a well-tuned XGBoost is very often the single best model you can train, beating deep networks while being faster and needing far less tuning. Its home turf is exactly where <a href="/blog/machine-learning/transformers">deep learning</a> is weakest, and vice versa, a division of labour we will make precise at the end.</p>
+
+<h2 id="2-the-big-idea--boosting-is-teamwork-by-correction">2. The big idea : boosting is teamwork by correction</h2>
+<p>Imagine guessing a house’s price. Your first guess is crude, say the average price, $300{,}000. Someone points at the leftover error (this house is bigger than average) and adds a correction : $+50{,}000. Someone else notices the corrected guess is still off (bad neighbourhood) and adds $-20{,}000. Each helper looks only at what the team got <strong>wrong so far</strong> and nudges the answer. That is <strong>boosting</strong>.</p>
+
+<div class="definition">
+	<b>Boosting</b> builds a strong predictor as a sum of many <b>weak</b> ones, added <b>one at a time</b>. Each new weak learner is trained to correct the <b>residual errors</b> left by the sum of all the previous ones.
+</div>
+
+<p>The weak learners in XGBoost are shallow <strong>decision trees</strong> : little flowcharts that split the data on one feature at a time and output a number at each leaf. On their own they are mediocre. Summed by the hundreds, each fixing its predecessors’ mistakes, they become excellent. The animation shows the ensemble’s prediction (blue) sharpening towards the truth (grey) as trees are added.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .tgt{ fill:none; stroke:#c9cdd6; stroke-width:2.4; stroke-dasharray:5 5; }
+    .pred{ fill:none; stroke:#7a5c9e; stroke-width:2.8; stroke-linejoin:round; }
+    .ax{ stroke:#e2e2e2; stroke-width:1; }
+    .cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <line class="ax" x1="60" y1="215" x2="600" y2="215" />
+  <path class="tgt" d="M60,116 L95,93 L130,103 L165,108 L200,96 L235,99 L270,147 L305,194 L327,202 L351,187 L384,153 L419,134 L451,134 L478,127 L510,97 L540,71 L556,69 L589,99 L600,115" />
+  <path class="pred" d="M60.0,98.9 L127.5,98.9 L127.5,105.8 L195.0,105.8 L195.0,104.8 L262.5,104.8 L262.5,178.6 L330.0,178.6 L330.0,173.6 L397.5,173.6 L397.5,135.0 L465.0,135.0 L465.0,107.6 L532.5,107.6 L532.5,81.5 L600.0,81.5">
+    <animate attributeName="d" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="M60.0,123.1 L60.0,123.1 L600.0,123.1;M60.0,123.2 L60.0,123.2 L330.0,123.2 L330.0,125.5 L600.0,125.5;M60.0,102.4 L60.0,102.4 L195.0,102.4 L195.0,142.0 L330.0,142.0 L330.0,154.7 L465.0,154.7 L465.0,95.4 L600.0,95.4;M60.0,98.9 L60.0,98.9 L127.5,98.9 L127.5,105.8 L195.0,105.8 L195.0,104.8 L262.5,104.8 L262.5,178.6 L330.0,178.6 L330.0,173.6 L397.5,173.6 L397.5,135.0 L465.0,135.0 L465.0,107.6 L532.5,107.6 L532.5,81.5 L600.0,81.5" />
+  </path>
+  <text class="cap" x="330" y="238">grey = truth · purple = ensemble prediction as trees are added (1 → 2 → 4 → 8)</text>
+</svg>
+<figcaption><b>Figure 1 -</b> Boosting in action. With one tree the prediction is a crude flat guess ; each added tree carves the input into finer regions to fix the remaining error, and the staircase closes in on the target function.</figcaption>
+</center></figure>
+
+<h2 id="3-gradient-boosting-the-maths">3. Gradient boosting, the maths</h2>
+<p>Let the model after $t$ rounds be a sum of trees $f_k$ :</p>
+
+\[\begin{equation} \hat{y}_i^{(t)} = \sum_{k=1}^{t} f_k(x_i) = \hat{y}_i^{(t-1)} + f_t(x_i). \label{eq:additive} \end{equation}\]
+
+<p>We want to choose the new tree $f_t$ to reduce the total loss $\sum_i l(y_i, \hat{y}_i)$. Friedman’s insight <a class="citation" href="#Friedman2001">(Friedman, 2001)</a> was that the best direction to move the predictions is the <strong>negative gradient</strong> of the loss, so each new tree should be fitted to point that way. In other words, <em>boosting is <a href="/blog/machine-learning/gradient-descent">gradient descent</a>, but taking steps in the space of functions rather than the space of weights</em> : each tree is one downhill step.</p>
+
+<div class="example">
+	For the squared error $l = \tfrac12(y-\hat{y})^2$, the negative gradient is simply the <b>residual</b> $y_i - \hat{y}_i$. So "fit the next tree to the negative gradient" becomes the intuitive "fit the next tree to what is still left over", exactly the correction story from the house-price example.
+</div>
+
+<h2 id="4-what-makes-xgboost-special">4. What makes XGBoost special</h2>
+<p>Plain gradient boosting fits each tree to the residual. XGBoost <a class="citation" href="#Chen2016">(Chen &amp; Guestrin, 2016)</a> sharpens this in two ways that together explain its accuracy and speed.</p>
+
+<p><strong>A second-order step.</strong> Instead of using only the gradient $g_i = \partial_{\hat{y}} l$, XGBoost also uses the curvature $h_i = \partial^2_{\hat{y}} l$ (a Taylor expansion to second order). The objective for the new tree becomes</p>
+
+\[\begin{equation} \tilde{\mathcal{L}}^{(t)} = \sum_{i}\Big[ g_i\, f_t(x_i) + \tfrac{1}{2} h_i\, f_t(x_i)^2 \Big] + \Omega(f_t), \qquad \Omega(f) = \gamma T + \tfrac{1}{2}\lambda \sum_{j=1}^{T} w_j^2. \label{eq:obj} \end{equation}\]
+
+<p><strong>Built-in regularisation.</strong> The penalty $\Omega$ charges $\gamma$ per leaf (discouraging big bushy trees, $T$ = number of leaves) and $\lambda$ for large leaf values $w_j$ (keeping corrections modest). This is what stops the ensemble from memorising the training data.</p>
+
+<p>Because a tree just assigns every example to one leaf, $\eqref{eq:obj}$ can be solved in closed form. If $G_j = \sum_{i \in \text{leaf } j} g_i$ and $H_j = \sum_{i \in \text{leaf } j} h_i$, the optimal value to put in leaf $j$, and the resulting objective, are</p>
+
+\[\begin{equation} w_j^{\ast} = -\frac{G_j}{H_j + \lambda}, \qquad \tilde{\mathcal{L}}^{\ast} = -\frac{1}{2}\sum_{j=1}^{T}\frac{G_j^2}{H_j + \lambda} + \gamma T. \label{eq:leaf} \end{equation}\]
+
+<p>This last expression is a <strong>quality score</strong> for a tree’s shape. To decide whether to split a leaf into two, XGBoost simply checks whether the split improves that score, giving the famous <strong>gain</strong> formula :</p>
+
+\[\begin{equation} \text{Gain} = \frac{1}{2}\left[ \frac{G_L^2}{H_L+\lambda} + \frac{G_R^2}{H_R+\lambda} - \frac{(G_L+G_R)^2}{H_L+H_R+\lambda} \right] - \gamma. \label{eq:gain} \end{equation}\]
+
+<p><em>In plain words : $\eqref{eq:gain}$ measures how much cleaner the two children are than the parent, minus a fixed cost $\gamma$ for adding a leaf. If no split beats that cost, the branch stops growing, this is how XGBoost prunes itself.</em></p>
+
+<figure><center>
+<svg viewBox="0 0 640 250" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .nd{ fill:#f1ecf7; stroke:#7a5c9e; stroke-width:1.6; }
+    .leaf{ fill:#eef7ef; stroke:#5aa06a; stroke-width:1.6; }
+    .br{ stroke:#b9a7d4; stroke-width:2; fill:none; }
+    .q{ font-size:13px; fill:#2b2b2b; text-anchor:middle; } .e{ font-size:11px; fill:#7a7a7a; }
+    .w{ font-size:12px; fill:#4e8f5e; text-anchor:middle; font-weight:bold; }
+    .pulse{ animation:pl 2.5s ease-in-out infinite; } @keyframes pl { 0%,100%{opacity:.85} 50%{opacity:1} }
+  </style>
+  <path class="br" d="M320,60 L180,120" /><path class="br" d="M320,60 L460,120" />
+  <path class="br" d="M180,145 L110,195" /><path class="br" d="M180,145 L250,195" />
+  <text class="e" x="238" y="88">yes</text><text class="e" x="405" y="88">no</text>
+  <text class="e" x="128" y="178">yes</text><text class="e" x="223" y="178">no</text>
+  <rect class="nd pulse" x="252" y="32" width="136" height="42" rx="8" /><text class="q" x="320" y="58">age &lt; 30 ?</text>
+  <rect class="nd" x="120" y="120" width="120" height="40" rx="8" /><text class="q" x="180" y="145" font-size="12">income &lt; 40k ?</text>
+  <rect class="leaf" x="410" y="122" width="100" height="40" rx="8" /><text class="q" x="460" y="141" font-size="12">leaf</text><text class="w" x="460" y="155">w = +0.7</text>
+  <rect class="leaf" x="60" y="196" width="100" height="40" rx="8" /><text class="w" x="110" y="221">w = −0.4</text>
+  <rect class="leaf" x="200" y="196" width="100" height="40" rx="8" /><text class="w" x="250" y="221">w = +0.2</text>
+  <text class="e" x="540" y="205" text-anchor="end">each leaf outputs a small</text>
+  <text class="e" x="540" y="221" text-anchor="end">correction wⱼ from eq. (3)</text>
+</svg>
+<figcaption><b>Figure 2 -</b> One weak learner : a shallow tree. It routes an example through yes/no questions to a leaf, whose value $w_j$ (chosen by $\eqref{eq:leaf}$) is the correction this tree contributes. XGBoost adds hundreds of such trees, each scaled by a small <b>learning rate</b> $\eta$ (shrinkage) so no single tree dominates.</figcaption>
+</center></figure>
+
+<h2 id="5-why-it-works-so-well">5. Why it works so well</h2>
+<p>Several ingredients combine to make XGBoost a default winner on tabular data.</p>
+
+<ul>
+  <li><strong>It captures interactions automatically.</strong> A tree that splits on <em>age</em> and then on <em>income</em> has expressed “the effect of income depends on age” without you specifying it, structured data is full of such interactions.</li>
+  <li><strong>Regularisation is built in.</strong> The $\gamma$ and $\lambda$ penalties $\eqref{eq:obj}$, plus <strong>shrinkage</strong> (scaling each tree by a learning rate $\eta$) and <strong>column/row subsampling</strong>, keep the ensemble from overfitting.</li>
+  <li><strong>It is fast and scalable.</strong> XGBoost sorts features once, grows trees using the closed-form gain $\eqref{eq:gain}$, and parallelises split-finding across features with a cache-aware, out-of-core implementation, the engineering that gave it its name (e<b>X</b>treme <b>G</b>radient <b>Boost</b>ing).</li>
+  <li><strong>It handles messy reality.</strong> Missing values are routed to a learned default direction at each split (sparsity-aware), and the model yields interpretable <strong>feature-importance</strong> scores for free.</li>
+</ul>
+
+<h2 id="6-when-to-use-it-and-when-not">6. When to use it (and when not)</h2>
+<p>The honest guidance is a clean split by data type.</p>
+
+<div class="theorem" text="rule of thumb">
+	For <b>tabular / structured</b> data (finite columns of numbers and categories), reach for XGBoost first. For <b>unstructured</b> data, images, audio, raw text, where the meaning lives in spatial or sequential patterns, reach for a neural network.
+</div>
+
+<p>Why the divide ? Trees split on individual features, so they excel when features are individually meaningful (income, age, blood pressure) but are poor at raw pixels, where meaning emerges from patterns across thousands of coordinates, exactly what convolutions and <a href="/blog/machine-learning/attention-mechanism">attention</a> are built to capture. XGBoost is also a superb choice when you need results <strong>fast</strong>, with <strong>little tuning</strong>, on <strong>modest data</strong>, or when <strong>interpretability</strong> matters. Its limitations are the mirror image : it does not natively handle images or long text, and it does not learn transferable representations the way large pre-trained networks do.</p>
+
+<h2 id="7-conclusion">7. Conclusion</h2>
+<p>XGBoost turns a very human strategy, <em>let each helper fix what the group got wrong</em>, into rigorous mathematics : an additive ensemble of shallow trees, each one a second-order <a href="/blog/machine-learning/gradient-descent">gradient-descent</a> step in function space, regularised so the team generalises rather than memorises, and engineered to run fast on real data. It will not caption your photos or write your emails, that is the neural network’s job, but when your problem lives in a table, a stack of humble, self-correcting trees remains remarkably hard to beat. <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Chen2016">Chen, T., &amp; Guestrin, C. (2016). XGBoost: A Scalable Tree Boosting System. <i>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</i>, 785–794.</span>
+
+<div id="Chen2016-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Chen2016-bibtex" class="pre pre-scrollable collapse">@inproceedings{Chen2016,
+  author = {Chen, Tianqi and Guestrin, Carlos},
+  title = {XGBoost: A Scalable Tree Boosting System},
+  booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+  pages = {785--794},
+  year = {2016},
+  publisher = {ACM}
+}
+</pre>
+
+</div></li>
+<li><span id="Friedman2001">Friedman, J. H. (2001). Greedy Function Approximation: A Gradient Boosting Machine. <i>The Annals of Statistics</i>, <i>29</i>(5), 1189–1232.</span>
+
+<div id="Friedman2001-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Friedman2001-bibtex" class="pre pre-scrollable collapse">@article{Friedman2001,
+  author = {Friedman, Jerome H.},
+  title = {Greedy Function Approximation: A Gradient Boosting Machine},
+  journal = {The Annals of Statistics},
+  volume = {29},
+  number = {5},
+  pages = {1189--1232},
+  year = {2001}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>XGBoost belongs to the <em>gradient boosting machine</em> family introduced by Friedman <a class="citation" href="#Friedman2001">(Friedman, 2001)</a> ; its close cousins LightGBM and CatBoost share the same mathematics with different engineering trade-offs (histogram splits, ordered boosting). All remain the tools of choice for tabular prediction. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>

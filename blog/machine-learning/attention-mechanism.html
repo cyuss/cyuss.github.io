@@ -21,7 +21,7 @@
   
   <meta name="keywords" content="" />
 
-  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/attention-mechanism">
+  <link rel="canonical" href="www.ohmykode.com/blog/machine-learning/attention-mechanism">
   <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
   <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
 
@@ -72,8 +72,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\operatorname{softmax}!\big(QK^{\top}/\sqrt{d_k}\big)V$,…" />
 <meta name="twitter:description" property="og:description" content="Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\operatorname{softmax}!\big(QK^{\top}/\sqrt{d_k}\big)V$,…" />
-<link rel="canonical" href="www.ohmykode.com/blog/mathematics/attention-mechanism" />
-<meta property="og:url" content="www.ohmykode.com/blog/mathematics/attention-mechanism" />
+<link rel="canonical" href="www.ohmykode.com/blog/machine-learning/attention-mechanism" />
+<meta property="og:url" content="www.ohmykode.com/blog/machine-learning/attention-mechanism" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2024-07-12T12:00:00+02:00" />
@@ -81,7 +81,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="The Attention Mechanism, Explained" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2024-07-12T12:00:00+02:00","datePublished":"2024-07-12T12:00:00+02:00","description":"Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\\operatorname{softmax}!\\big(QK^{\\top}/\\sqrt{d_k}\\big)V$,…","headline":"The Attention Mechanism, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/attention-mechanism"},"url":"www.ohmykode.com/blog/mathematics/attention-mechanism"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2024-07-12T12:00:00+02:00","datePublished":"2024-07-12T12:00:00+02:00","description":"Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the cat, not the mat, because your brain paid attention to the right earlier word. The attention mechanism, introduced for translation by Bahdanau (Bahdanau et al., 2015) and then crowned as the single idea behind the Transformer (Vaswani et al., 2017), gives a neural network exactly this superpower : for every word, it decides which other words to look at, and how hard. This post builds attention from an everyday intuition up to the famous formula $\\operatorname{softmax}!\\big(QK^{\\top}/\\sqrt{d_k}\\big)V$,…","headline":"The Attention Mechanism, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/attention-mechanism"},"url":"www.ohmykode.com/blog/machine-learning/attention-mechanism"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -325,7 +325,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
   <li><strong>Direct long-range links.</strong> Any two words are one step apart, so a pronoun can look back at a noun fifty words earlier with no signal decay.</li>
 </ul>
 
-<p>Attention is the <em>engine</em>. To build a full model, we stack it into a repeating block, add a way to encode word order, and sprinkle in some plumbing. That assembled machine is the <strong>Transformer</strong>, the subject of a <a href="/blog/mathematics/transformers">companion post</a>. And why can a stack of these blocks represent essentially any function we need ? That question is answered by the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a>.</p>
+<p>Attention is the <em>engine</em>. To build a full model, we stack it into a repeating block, add a way to encode word order, and sprinkle in some plumbing. That assembled machine is the <strong>Transformer</strong>, the subject of a <a href="/blog/machine-learning/transformers">companion post</a>. And why can a stack of these blocks represent essentially any function we need ? That question is answered by the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a>.</p>
 
 <h2 id="8-conclusion">8. Conclusion</h2>
 <p>Attention is, at heart, a <em>soft, differentiable lookup table</em> : compare a query to keys, softmax the matches into weights, and average the values. Everything else, the scaling by $\sqrt{d_k}$, self-attention, multiple heads, is refinement on that one idea. It replaced the fragile “remember everything in one vector” strategy with a simple instruction that a network can learn : <em>for each word, look at the words that matter.</em> From that sentence-sized intuition grew the models that now write, translate and reason.</p>
