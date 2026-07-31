@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Backpropagation, How Neural Nets Actually Learn</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Backpropagation, How Neural Nets Actually Learn
+             20 Apr 2022 
+             7 minutes read
+..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/backpropagation">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Backpropagation, How Neural Nets Actually Learn | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Backpropagation, How Neural Nets Actually Learn" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A neural network makes a prediction, it is wrong, and a single number, the loss, says how wrong. But the network has millions of weights. Which ones are to blame, and by how much should each change ? Answering that for every weight, quickly, is the problem backpropagation solves. The idea is to assign blame backwards : the output layer knows its error directly, and it passes a share of the blame back to the layer before it, which passes it back again, all the way to the first weight. Mathematically this “blame-passing” is nothing but the chain rule of…" />
+<meta name="twitter:description" property="og:description" content="A neural network makes a prediction, it is wrong, and a single number, the loss, says how wrong. But the network has millions of weights. Which ones are to blame, and by how much should each change ? Answering that for every weight, quickly, is the problem backpropagation solves. The idea is to assign blame backwards : the output layer knows its error directly, and it passes a share of the blame back to the layer before it, which passes it back again, all the way to the first weight. Mathematically this “blame-passing” is nothing but the chain rule of…" />
+<link rel="canonical" href="www.ohmykode.com/blog/mathematics/backpropagation" />
+<meta property="og:url" content="www.ohmykode.com/blog/mathematics/backpropagation" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-20T12:00:00+02:00" />
+<meta property="article:modified_time" content="2022-04-20T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Backpropagation, How Neural Nets Actually Learn" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2022-04-20T12:00:00+02:00","datePublished":"2022-04-20T12:00:00+02:00","description":"A neural network makes a prediction, it is wrong, and a single number, the loss, says how wrong. But the network has millions of weights. Which ones are to blame, and by how much should each change ? Answering that for every weight, quickly, is the problem backpropagation solves. The idea is to assign blame backwards : the output layer knows its error directly, and it passes a share of the blame back to the layer before it, which passes it back again, all the way to the first weight. Mathematically this “blame-passing” is nothing but the chain rule of…","headline":"Backpropagation, How Neural Nets Actually Learn","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/backpropagation"},"url":"www.ohmykode.com/blog/mathematics/backpropagation"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Backpropagation, How Neural Nets Actually Learn</h1></span></center>
+            <center><p> 20 Apr 2022 </p></center>
+            <center><p class="fa fa-clock-o"> 7 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            9 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>A neural network makes a prediction, it is wrong, and a single number, the loss, says <em>how</em> wrong. But the network has millions of weights. Which ones are to blame, and by how much should each change ? Answering that for every weight, quickly, is the problem <strong>backpropagation</strong> solves. The idea is to assign <em>blame</em> backwards : the output layer knows its error directly, and it passes a share of the blame back to the layer before it, which passes it back again, all the way to the first weight. Mathematically this “blame-passing” is nothing but the <strong>chain rule</strong> of calculus, applied with ruthless efficiency. Together with <a href="/blog/mathematics/gradient-descent">gradient descent</a>, which <em>uses</em> the blame to update the weights, backpropagation is the reason deep learning is possible at all.</p>
+</blockquote>
+
+<h2 id="1-the-setup--a-network-is-a-chain-of-functions">1. The setup : a network is a chain of functions</h2>
+<p>A feedforward network is just a stack of layers, each taking the previous layer’s output, mixing it with weights, and bending it through a non-linearity $\sigma$. For layer $l$ :</p>
+
+\[\begin{equation} z^{l} = W^{l} a^{l-1} + b^{l}, \qquad a^{l} = \sigma(z^{l}), \label{eq:forward} \end{equation}\]
+
+<p>where $a^{l-1}$ is the input from below, $z^{l}$ is the <strong>pre-activation</strong>, and $a^{l}$ is the layer’s output. Running these equations from the input $a^0 = x$ up to the final layer is the <strong>forward pass</strong> : it produces the prediction and, compared against the target, the loss $L$.</p>
+
+<p><em>In plain words : the forward pass is the network “thinking” , data flows in at the bottom and a prediction comes out the top. Backpropagation is the network “reflecting” on what went wrong, flowing backwards from top to bottom.</em></p>
+
+<h2 id="2-what-we-actually-want">2. What we actually want</h2>
+<p><a href="/blog/mathematics/gradient-descent">Gradient descent</a> needs one thing : the gradient of the loss with respect to <em>every</em> weight, $\dfrac{\partial L}{\partial W^{l}}$ and $\dfrac{\partial L}{\partial b^{l}}$, for all layers $l$. With millions of weights, computing each derivative separately would be hopeless. Backpropagation gets <strong>all</strong> of them in a single backward sweep, at roughly the cost of one forward pass.</p>
+
+<h2 id="3-the-chain-rule-eli5">3. The chain rule, ELI5</h2>
+<p>The chain rule tells you how a small nudge ripples through a composition of functions. If $L$ depends on $a$, which depends on $z$, which depends on $w$, then</p>
+
+\[\begin{equation} \frac{\partial L}{\partial w} = \frac{\partial L}{\partial a}\cdot\frac{\partial a}{\partial z}\cdot\frac{\partial z}{\partial w}. \label{eq:chain} \end{equation}\]
+
+<p><em>In plain words : to know how much a weight deep in the network affects the final loss, you multiply together the little “how much does each step affect the next” factors along the path from that weight to the output.</em> Blame is a product of local sensitivities, and backprop computes that product from the output end, reusing work as it goes.</p>
+
+<h2 id="4-the-error-signal-and-its-backward-flow">4. The error signal and its backward flow</h2>
+<p>The clever bookkeeping trick is to define, for each layer, an <strong>error signal</strong></p>
+
+\[\begin{equation} \delta^{l} = \frac{\partial L}{\partial z^{l}}, \label{eq:delta} \end{equation}\]
+
+<p>how sensitive the loss is to that layer’s pre-activation. Two facts make everything fall into place. At the <strong>output</strong> layer, $\delta$ is immediate (the difference between prediction and target, shaped by the loss). And each layer’s error can be computed from the one <strong>above</strong> it :</p>
+
+\[\begin{equation} \delta^{l} = \big( (W^{l+1})^{\top}\, \delta^{l+1} \big) \odot \sigma'(z^{l}), \label{eq:backprop} \end{equation}\]
+
+<p>where $\odot$ is element-wise multiplication and $\sigma’$ the derivative of the activation. This is the <em>“pass the blame back one layer”</em> step : multiply by the transposed weights to route the error backwards, then scale by how active each neuron was. Once you have the $\delta$’s, the gradients you actually wanted are simply</p>
+
+\[\begin{equation} \frac{\partial L}{\partial W^{l}} = \delta^{l} (a^{l-1})^{\top}, \qquad \frac{\partial L}{\partial b^{l}} = \delta^{l}. \label{eq:grads} \end{equation}\]
+
+<figure><center>
+<svg viewBox="0 0 640 320" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .lay{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .node{ fill:#fff; stroke:#8a97b5; stroke-width:1.3; }
+    .fwd{ stroke:#4a6da7; stroke-width:2; fill:none; opacity:.5; }
+    .fdot{ fill:#4a6da7; } .bdot{ fill:#b5651d; }
+    .t{ font-size:12px; fill:#2b2b2b; text-anchor:middle; } .cap{ font-size:12px; text-anchor:middle; }
+  </style>
+  <!-- 4 layers of nodes -->
+  <!-- x positions: 90, 250, 410, 560 ; y: 120,180,240 -->
+  <g>
+    <!-- edges layer1->2 -->
+    <g class="fwd">
+      <path d="M110,120 L230,120" /><path d="M110,120 L230,180" /><path d="M110,120 L230,240" />
+      <path d="M110,180 L230,120" /><path d="M110,180 L230,180" /><path d="M110,180 L230,240" />
+      <path d="M110,240 L230,120" /><path d="M110,240 L230,180" /><path d="M110,240 L230,240" />
+      <path d="M270,120 L390,120" /><path d="M270,120 L390,180" /><path d="M270,120 L390,240" />
+      <path d="M270,180 L390,120" /><path d="M270,180 L390,180" /><path d="M270,180 L390,240" />
+      <path d="M270,240 L390,120" /><path d="M270,240 L390,180" /><path d="M270,240 L390,240" />
+      <path d="M430,120 L540,180" /><path d="M430,180 L540,180" /><path d="M430,240 L540,180" />
+    </g>
+    <!-- nodes -->
+    <g>
+      <circle class="node" cx="90" cy="120" r="16" /><circle class="node" cx="90" cy="180" r="16" /><circle class="node" cx="90" cy="240" r="16" />
+      <circle class="node" cx="250" cy="120" r="16" /><circle class="node" cx="250" cy="180" r="16" /><circle class="node" cx="250" cy="240" r="16" />
+      <circle class="node" cx="410" cy="120" r="16" /><circle class="node" cx="410" cy="180" r="16" /><circle class="node" cx="410" cy="240" r="16" />
+      <circle class="node" cx="560" cy="180" r="16" />
+    </g>
+  </g>
+  <text class="cap" x="90" y="290" fill="#7a7a7a">input x</text>
+  <text class="cap" x="330" y="290" fill="#7a7a7a">hidden layers</text>
+  <text class="cap" x="560" y="290" fill="#7a7a7a">output / loss</text>
+  <!-- forward dot (blue) left to right -->
+  <circle class="fdot" r="6"><animateMotion dur="3s" repeatCount="indefinite" keyTimes="0;0.5;0.5;1" keyPoints="0;1;1;1" calcMode="linear" path="M90,180 L560,180" /></circle>
+  <!-- backward dot (orange) right to left, second half -->
+  <circle class="bdot" r="6" opacity="0"><animateMotion dur="3s" repeatCount="indefinite" keyTimes="0;0.5;1" keyPoints="0;0;1" calcMode="linear" path="M560,180 L90,180" /><animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.5;0.55;0.95;1" /></circle>
+  <text class="t" x="330" y="40" fill="#4a6da7">forward pass  →  prediction</text>
+  <text class="t" x="330" y="62" fill="#b5651d">←  backward pass  :  error δ flows back</text>
+</svg>
+<figcaption><b>Figure 1 -</b> The two sweeps. Blue : the forward pass $\eqref{eq:forward}$ carries activations from input to output. Orange : the backward pass $\eqref{eq:backprop}$ carries the error signal $\delta$ from the loss back through every layer, handing each weight its share of the blame.</figcaption>
+</center></figure>
+
+<h2 id="5-why-it-is-so-efficient">5. Why it is so efficient</h2>
+<p>The magic is <strong>reuse</strong>. A naive approach would recompute the long product $\eqref{eq:chain}$ from scratch for every weight. Backpropagation instead computes each $\delta^{l}$ <strong>once</strong> and reuses it for all the weights feeding that layer, exactly the “compute a subproblem once, store it, reuse it” spirit of <a href="/blog/python/memoization">memoization</a> and dynamic programming. The result : the entire gradient over millions of weights costs about the same as a single forward pass. Without this, training large networks would be computationally impossible.</p>
+
+<div class="example">
+	For a chain of layers, the blame reaching an early layer is a <b>product</b> of many factors $\eqref{eq:backprop}$. If those factors are consistently smaller than $1$, the product shrinks towards zero, the notorious <b>vanishing gradient</b>, and early layers barely learn. If they are larger than $1$, it explodes. This single observation explains a lot of modern design : the ReLU activation (whose derivative is exactly $1$ on the positive side), careful initialisation, and the <i>residual connections</i> of the <a href="/blog/mathematics/transformers">Transformer</a>, which give the gradient a clean shortcut straight back.
+</div>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>Backpropagation is often made to sound arcane, but it is just the chain rule with good bookkeeping : do a forward pass to see what the network predicted, then sweep backwards, handing each layer its error signal $\delta$ and reading off every gradient along the way. Feed those gradients to <a href="/blog/mathematics/gradient-descent">gradient descent</a> and the weights inch towards something better ; repeat a few million times and a pile of random numbers becomes a model that can translate languages or recognise faces. The <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a> promised a good network exists ; backpropagation and gradient descent are how we actually reach it. <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The algorithm was popularised for neural networks by Rumelhart, Hinton and Williams in 1986, though equivalent ideas appear earlier, notably in the 1974 thesis of Paul Werbos. Today it is a special case of <em>automatic differentiation</em>, built into every deep-learning framework. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>

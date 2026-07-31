@@ -120,44 +120,131 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
       </center>
     </header>
   </div>
+  <style>
+    .home-intro { text-align:center; color:#8a8a8a; font-style:italic; font-size:1.02em;
+                  max-width:640px; margin:0 auto 2.4em; line-height:1.55; }
+    .cat-block { margin: 2.2em 0; }
+    .cat-title { font-size:.82em; letter-spacing:.14em; text-transform:uppercase;
+                 color:#8a6d1f; border-bottom:2px solid #e7dcc0; padding-bottom:.35em;
+                 margin-bottom:.4em; font-weight:bold; }
+    .post-list { list-style:none; padding:0; margin:0; }
+    .post-item { border-bottom:1px solid #efe9db; }
+    .post-item:last-child { border-bottom:none; }
+    .post-link { display:flex; justify-content:space-between; align-items:baseline;
+                 gap:1em; padding:.7em .35em; text-decoration:none; color:inherit;
+                 transition:background .15s ease, padding-left .15s ease; }
+    .post-link:hover { background:#faf7ee; padding-left:.7em; }
+    .post-title { font-size:1.1em; color:#333; line-height:1.35; }
+    .post-link:hover .post-title { color:#8a6d1f; }
+    .post-date { font-size:.8em; color:#b0a393; white-space:nowrap; letter-spacing:.03em; }
+    @media (max-width:480px) {
+      .post-link { flex-direction:column; gap:.15em; }
+      .post-date { align-self:flex-start; }
+    }
+  </style>
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-10 offset-md-1">
+      <p class="home-intro">OhMyKode is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
       
       
-        <h3> On Algorithmic</h3>
-        <p>
+      <section class="cat-block">
+        <h3 class="cat-title">Algorithmic</h3>
+        <ul class="post-list">
         
-        <a></a> 
-        1. <a href="/blog/algorithmic/bloom-filters">Introduction to Bloom Filters</a>   
-           </p>
-            
-        <h3> On Mathematics</h3>
-        <p>
+          <li class="post-item">
+            <a class="post-link" href="/blog/algorithmic/hyperloglog">
+              <span class="post-title">HyperLogLog, Counting Millions with Kilobytes</span>
+              <span class="post-date">Mar 2025</span>
+            </a>
+          </li>
         
-        <a></a> 
-        1. <a href="/blog/mathematics/transformers">The Transformer, Explained</a>  &nbsp;&nbsp;  
+          <li class="post-item">
+            <a class="post-link" href="/blog/algorithmic/bloom-filters">
+              <span class="post-title">Introduction to Bloom Filters</span>
+              <span class="post-date">Jan 2023</span>
+            </a>
+          </li>
         
-        <a></a> 
-        2. <a href="/blog/mathematics/attention-mechanism">The Attention Mechanism, Explained</a>  &nbsp;&nbsp;  
+        </ul>
+      </section>
+      
+      <section class="cat-block">
+        <h3 class="cat-title">Mathematics</h3>
+        <ul class="post-list">
         
-        <a></a> 
-        3. <a href="/blog/mathematics/kolmogorov-superposition">Kolmogorov's Superposition Theorem</a>  &nbsp;&nbsp;  
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/transformers">
+              <span class="post-title">The Transformer, Explained</span>
+              <span class="post-date">Jan 2026</span>
+            </a>
+          </li>
         
-        <a></a> 
-        4. <a href="/blog/mathematics/universal-approximation-theorem">The Universal Approximation Theorem</a>  &nbsp;&nbsp;  
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/attention-mechanism">
+              <span class="post-title">The Attention Mechanism, Explained</span>
+              <span class="post-date">Jul 2024</span>
+            </a>
+          </li>
         
-        <a></a> 
-        5. <a href="/blog/mathematics/introduction-chromatic-polynomials">Introduction to Chromatic Polynomials</a>   
-           </p>
-            
-        <h3> On Python</h3>
-        <p>
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/backpropagation">
+              <span class="post-title">Backpropagation, How Neural Nets Actually Learn</span>
+              <span class="post-date">Apr 2022</span>
+            </a>
+          </li>
         
-        <a></a> 
-        1. <a href="/blog/python/memoization">Memoization - Remember what we already found</a>   
-           </p>
-             
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/kolmogorov-superposition">
+              <span class="post-title">Kolmogorov's Superposition Theorem</span>
+              <span class="post-date">Jun 2021</span>
+            </a>
+          </li>
+        
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/gradient-descent">
+              <span class="post-title">Gradient Descent and Optimisation</span>
+              <span class="post-date">Sep 2020</span>
+            </a>
+          </li>
+        
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/universal-approximation-theorem">
+              <span class="post-title">The Universal Approximation Theorem</span>
+              <span class="post-date">Jan 2020</span>
+            </a>
+          </li>
+        
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/fourier-transform">
+              <span class="post-title">The Fourier Transform, Why Sinusoids?</span>
+              <span class="post-date">May 2019</span>
+            </a>
+          </li>
+        
+          <li class="post-item">
+            <a class="post-link" href="/blog/mathematics/introduction-chromatic-polynomials">
+              <span class="post-title">Introduction to Chromatic Polynomials</span>
+              <span class="post-date">Oct 2018</span>
+            </a>
+          </li>
+        
+        </ul>
+      </section>
+      
+      <section class="cat-block">
+        <h3 class="cat-title">Python</h3>
+        <ul class="post-list">
+        
+          <li class="post-item">
+            <a class="post-link" href="/blog/python/memoization">
+              <span class="post-title">Memoization - Remember what we already found</span>
+              <span class="post-date">Nov 2018</span>
+            </a>
+          </li>
+        
+        </ul>
+      </section>
+      
     </div>
   </div>
 </div>

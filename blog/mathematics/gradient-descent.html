@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Gradient Descent and Optimisation</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Gradient Descent and Optimisation
+             10 Sep 2020 
+             8 minutes read
+            
+ ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/gradient-descent">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Gradient Descent and Optimisation | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Gradient Descent and Optimisation" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Imagine you are lost on a foggy mountain and want to reach the valley. You cannot see far, but you can feel the slope under your feet. A sensible plan : take a small step in the steepest downhill direction, then feel around again, and repeat. Do this patiently and you will end up at the bottom. That simple idea, follow the slope downhill, is gradient descent, the optimisation workhorse behind almost all of machine learning. It is how a neural network turns “here is how wrong you are” into “here is how to be a little less wrong”. This…" />
+<meta name="twitter:description" property="og:description" content="Imagine you are lost on a foggy mountain and want to reach the valley. You cannot see far, but you can feel the slope under your feet. A sensible plan : take a small step in the steepest downhill direction, then feel around again, and repeat. Do this patiently and you will end up at the bottom. That simple idea, follow the slope downhill, is gradient descent, the optimisation workhorse behind almost all of machine learning. It is how a neural network turns “here is how wrong you are” into “here is how to be a little less wrong”. This…" />
+<link rel="canonical" href="www.ohmykode.com/blog/mathematics/gradient-descent" />
+<meta property="og:url" content="www.ohmykode.com/blog/mathematics/gradient-descent" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-10T12:00:00+02:00" />
+<meta property="article:modified_time" content="2020-09-10T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Gradient Descent and Optimisation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2020-09-10T12:00:00+02:00","datePublished":"2020-09-10T12:00:00+02:00","description":"Imagine you are lost on a foggy mountain and want to reach the valley. You cannot see far, but you can feel the slope under your feet. A sensible plan : take a small step in the steepest downhill direction, then feel around again, and repeat. Do this patiently and you will end up at the bottom. That simple idea, follow the slope downhill, is gradient descent, the optimisation workhorse behind almost all of machine learning. It is how a neural network turns “here is how wrong you are” into “here is how to be a little less wrong”. This…","headline":"Gradient Descent and Optimisation","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/gradient-descent"},"url":"www.ohmykode.com/blog/mathematics/gradient-descent"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Gradient Descent and Optimisation</h1></span></center>
+            <center><p> 10 Sep 2020 </p></center>
+            <center><p class="fa fa-clock-o"> 8 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            11 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>Imagine you are lost on a foggy mountain and want to reach the valley. You cannot see far, but you can feel the slope under your feet. A sensible plan : take a small step in the steepest downhill direction, then feel around again, and repeat. Do this patiently and you will end up at the bottom. That simple idea, <em>follow the slope downhill</em>, is <strong>gradient descent</strong>, the optimisation workhorse behind almost all of machine learning. It is how a neural network turns “here is how wrong you are” into “here is how to be a little less wrong”. This post builds it from the hiker’s intuition up to the update rule $\theta \leftarrow \theta - \eta\, \nabla L(\theta)$, and explains the one knob, the learning rate, that makes or breaks it.</p>
+</blockquote>
+
+<h2 id="1-the-problem--minimise-a-loss">1. The problem : minimise a loss</h2>
+<p>Training a model means choosing its parameters $\theta$ (all the weights) so that its predictions are good. We measure “badness” with a <strong>loss function</strong> $L(\theta)$, a single number that is large when the model is wrong and small when it is right. Learning is then just <strong>minimisation</strong> :</p>
+
+\[\begin{equation} \theta^{\ast} = \arg\min_{\theta}\; L(\theta). \label{eq:argmin} \end{equation}\]
+
+<p>For anything but the simplest models we cannot solve this with a formula. There are millions of parameters and $L$ is a wildly complicated landscape. So instead of jumping to the answer, we <strong>walk</strong> to it.</p>
+
+<h2 id="2-the-gradient--which-way-is-downhill-">2. The gradient : which way is downhill ?</h2>
+<p>The tool that tells us the slope is the <strong>gradient</strong> $\nabla L(\theta)$, the vector of partial derivatives</p>
+
+\[\begin{equation} \nabla L(\theta) = \left( \frac{\partial L}{\partial \theta_1}, \frac{\partial L}{\partial \theta_2}, \dots, \frac{\partial L}{\partial \theta_n} \right). \label{eq:grad} \end{equation}\]
+
+<div class="definition">
+	The <b>gradient</b> $\nabla L(\theta)$ points in the direction of <b>steepest ascent</b> of $L$, and its length is how steep that climb is. Therefore $-\nabla L(\theta)$ points in the direction of steepest <b>descent</b>.
+</div>
+
+<p><em>In plain words : the gradient is the compass that always points straight uphill. To go down, we simply walk the opposite way.</em> That is the whole trick.</p>
+
+<h2 id="3-the-update-rule">3. The update rule</h2>
+<p>Gradient descent turns “walk downhill” into one line of maths <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. Starting from a guess $\theta_0$, repeat :</p>
+
+\[\begin{equation} \theta_{t+1} = \theta_{t} - \eta\, \nabla L(\theta_{t}). \label{eq:gd} \end{equation}\]
+
+<p>Each term has a plain meaning : $\nabla L$ is <em>which way is uphill</em>, the minus sign says <em>go the other way</em>, and $\eta &gt; 0$ (the <strong>learning rate</strong>) is <em>how big a step to take</em>. The animation below drops a ball on a loss curve ; at every step it reads the local slope and moves against it, settling into the valley.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 300" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .curve{ fill:none; stroke:#4a6da7; stroke-width:2.6; }
+    .axis{ stroke:#bbb; stroke-width:1; }
+    .ball{ fill:#b5651d; }
+    .step{ fill:#b5651d; opacity:.35; }
+    .lab{ font-size:12px; fill:#7a7a7a; } .lz{ font-size:13px; fill:#2b2b2b; }
+  </style>
+  <line class="axis" x1="40" y1="250" x2="600" y2="250" />
+  <line class="axis" x1="60" y1="30" x2="60" y2="255" />
+  <text class="lab" x="30" y="140" text-anchor="middle" transform="rotate(-90 30 140)">loss L(θ)</text>
+  <text class="lab" x="330" y="278" text-anchor="middle">parameter θ  →</text>
+  <!-- bowl-shaped loss curve: a parabola from (80,60) down to (330,235) up to (600,80) -->
+  <path class="curve" d="M80,60 Q330,360 600,80" />
+  <!-- static faded step markers along the descent (right side coming down) -->
+  <circle class="step" cx="560" cy="105" r="6" />
+  <circle class="step" cx="500" cy="150" r="6" />
+  <circle class="step" cx="450" cy="185" r="6" />
+  <circle class="step" cx="410" cy="208" r="6" />
+  <circle class="step" cx="380" cy="221" r="6" />
+  <circle class="step" cx="358" cy="229" r="6" />
+  <!-- animated ball following the curve down to the minimum -->
+  <circle class="ball" r="8">
+    <animateMotion dur="4s" repeatCount="indefinite" keyPoints="0;0.28;0.42;0.52;0.60;0.66;0.70;0.70;0" keyTimes="0;0.12;0.24;0.36;0.5;0.64;0.8;0.92;1" calcMode="linear" path="M80,60 Q330,360 600,80" />
+  </circle>
+  <text class="lz" x="330" y="250" text-anchor="middle">minimum</text>
+</svg>
+<figcaption><b>Figure 1 -</b> Gradient descent on a 1-D loss. The ball repeatedly moves against the slope $\eqref{eq:gd}$, taking large steps where the curve is steep and small steps as it flattens near the minimum.</figcaption>
+</center></figure>
+
+<h2 id="4-the-learning-rate--the-one-knob-that-matters">4. The learning rate : the one knob that matters</h2>
+<p>The step size $\eta$ is deceptively important. Get it wrong and the whole thing fails in one of two opposite ways.</p>
+
+<ul>
+  <li><strong>Too small.</strong> Progress is safe but painfully slow ; you inch down the mountain and training takes forever.</li>
+  <li><strong>Too large.</strong> You leap past the valley to the far slope, then leap back even further, <strong>overshooting</strong> and possibly <strong>diverging</strong> to infinity.</li>
+  <li><strong>Just right.</strong> A handful of well-sized steps land you near the bottom.</li>
+</ul>
+
+<figure><center>
+<svg viewBox="0 0 640 260" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .cv{ fill:none; stroke:#c9cdd6; stroke-width:2.2; }
+    .p1{ fill:none; stroke:#5aa06a; stroke-width:2; marker-end:url(#g); }
+    .p2{ fill:none; stroke:#4a6da7; stroke-width:2; marker-end:url(#b); }
+    .p3{ fill:none; stroke:#b5651d; stroke-width:2; marker-end:url(#o); }
+    .tt{ font-size:12px; } .cap{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="g" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#5aa06a" /></marker>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#4a6da7" /></marker>
+    <marker id="o" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#b5651d" /></marker>
+  </defs>
+  <!-- three small bowls -->
+  <g>
+    <path class="cv" d="M20,40 Q100,230 180,40" />
+    <text class="tt" x="100" y="24" text-anchor="middle" fill="#5aa06a">η too small</text>
+    <!-- many tiny steps -->
+    <path class="p1" d="M170,55 L162,72 L155,88 L149,103 L144,116 L140,127 L137,136" />
+    <text class="cap" x="100" y="250">slow crawl</text>
+  </g>
+  <g>
+    <path class="cv" d="M230,40 Q310,230 390,40" />
+    <text class="tt" x="310" y="24" text-anchor="middle" fill="#4a6da7">η just right</text>
+    <path class="p2" d="M378,58 L330,150 L305,175 L312,168" />
+    <text class="cap" x="310" y="250">few good steps</text>
+  </g>
+  <g>
+    <path class="cv" d="M440,40 Q520,230 600,40" />
+    <text class="tt" x="520" y="24" text-anchor="middle" fill="#b5651d">η too large</text>
+    <!-- overshoot zigzag growing -->
+    <path class="p3" d="M585,60 L505,150 L455,95 L560,175 L440,70" />
+    <text class="cap" x="520" y="250">overshoots / diverges</text>
+  </g>
+</svg>
+<figcaption><b>Figure 2 -</b> The effect of the learning rate $\eta$. Too small crawls, too large overshoots and can diverge, and a good value converges in a few steps. Tuning $\eta$ is the central practical skill of training.</figcaption>
+</center></figure>
+
+<h2 id="5-stochastic-gradient-descent">5. Stochastic gradient descent</h2>
+<p>There is a catch hiding in $\eqref{eq:gd}$ : computing $\nabla L$ exactly means averaging the error over the <strong>entire</strong> dataset, which can be millions of examples, for <em>every single step</em>. That is far too slow.</p>
+
+<p>The fix is beautifully lazy : estimate the gradient from a small random <strong>mini-batch</strong> of examples instead. This is <strong>stochastic gradient descent</strong> (SGD) <a class="citation" href="#Robbins1951">(Robbins &amp; Monro, 1951)</a>. The estimate is noisy, so the path down the mountain wobbles rather than flows, but each step is thousands of times cheaper, and the noise even helps to escape shallow traps.</p>
+
+<div class="example">
+	With $1{,}000{,}000$ training examples, one exact gradient step reads all million. SGD with a mini-batch of $256$ takes a slightly wobbly step after reading just $256$, so in the time of one exact step it can take roughly $4{,}000$ stochastic ones. Noisier, but overwhelmingly faster in practice.
+</div>
+
+<p>Modern optimisers refine this further. <strong>Momentum</strong> remembers past steps and keeps rolling, damping the wobble like a heavy ball. <strong>Adam</strong> <a class="citation" href="#Kingma2015">(Kingma &amp; Ba, 2015)</a> adapts a separate step size for each parameter from the recent history of gradients. They are all, at heart, still $\eqref{eq:gd}$ with a smarter step.</p>
+
+<h2 id="6-the-bumpy-reality--non-convex-landscapes">6. The bumpy reality : non-convex landscapes</h2>
+<p>The bowl in Figure 1 is a <strong>convex</strong> loss : one valley, and downhill always leads to it. Neural-network losses are <strong>non-convex</strong>, a mountain range of many valleys, ridges and saddle points, so gradient descent only guarantees a <em>local</em> minimum, not the global best.</p>
+
+<p>Remarkably, this matters far less than one would fear. In the huge parameter spaces of deep learning, most local minima turn out to be nearly as good as the global one, and the truly bad configurations are rare saddle points that noise helps to slip past. This empirical grace is a big part of <em>why</em> deep learning works, and it complements the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a> : that theorem promises a good set of weights <em>exists</em>, and gradient descent is the procedure that actually goes and <em>finds</em> one.</p>
+
+<h2 id="7-conclusion">7. Conclusion</h2>
+<p>Gradient descent is the hiker’s rule written in calculus : read the slope with the gradient, step against it, and control your stride with the learning rate. Everything else, mini-batches, momentum, Adam, non-convex landscapes, is a refinement of that one move, $\theta \leftarrow \theta - \eta \nabla L$. But there is a missing piece : for a deep network, how do we even <em>compute</em> the gradient $\nabla L$ over millions of tangled weights ? That is the job of a wonderfully efficient algorithm called <a href="/blog/mathematics/backpropagation">backpropagation</a>, the subject of the next post.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Kingma2015">Kingma, D. P., &amp; Ba, J. (2015). Adam: A Method for Stochastic Optimization. <i>International Conference on Learning Representations (ICLR)</i>.</span>
+
+<div id="Kingma2015-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Kingma2015-bibtex" class="pre pre-scrollable collapse">@inproceedings{Kingma2015,
+  author = {Kingma, Diederik P. and Ba, Jimmy},
+  title = {Adam: A Method for Stochastic Optimization},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year = {2015}
+}
+</pre>
+
+</div></li>
+<li><span id="Robbins1951">Robbins, H., &amp; Monro, S. (1951). A Stochastic Approximation Method. <i>The Annals of Mathematical Statistics</i>, <i>22</i>(3), 400–407.</span>
+
+<div id="Robbins1951-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Robbins1951-bibtex" class="pre pre-scrollable collapse">@article{Robbins1951,
+  author = {Robbins, Herbert and Monro, Sutton},
+  title = {A Stochastic Approximation Method},
+  journal = {The Annals of Mathematical Statistics},
+  volume = {22},
+  number = {3},
+  pages = {400--407},
+  year = {1951}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Gradient descent dates back to Cauchy in 1847. What is new in the deep-learning era is not the method but the scale, billions of parameters, and the automatic computation of the gradient by backpropagation. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
