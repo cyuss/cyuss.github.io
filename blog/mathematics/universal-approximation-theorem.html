@@ -15,8 +15,8 @@
               
             The Universal Approximation Theorem
              16 Apr 2021 
-             Less than 1 minute read
-   ..." />
+             12 minutes read
+           ..." />
 
   
   <meta name="keywords" content="" />
@@ -51,7 +51,7 @@
        };
       </script>
   <script type="text/javascript" async
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -64,23 +64,24 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
 </head>
 
-    <!-- Begin Jekyll SEO tag v2.7.1 -->
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
 <title>The Universal Approximation Theorem | Oh My Kode</title>
-<meta name="generator" content="Jekyll v4.2.1" />
+<meta name="generator" content="Jekyll v3.10.0" />
 <meta property="og:title" content="The Universal Approximation Theorem" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="OhMyKode is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why." />
-<meta property="og:description" content="OhMyKode is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why." />
+<meta name="description" content="Why do neural networks work at all ? Before worrying about how to train a network, it is worth asking whether a network is even capable of representing the function we are looking for. The Universal Approximation Theorem answers exactly this question : a feedforward network with a single hidden layer can approximate, as closely as we want, any continuous function on a compact domain. It is one of the most cited and, ironically, one of the most misunderstood results in machine learning. In this post we state it carefully, sketch why it is true, and, just as importantly, discuss…" />
+<meta name="twitter:description" property="og:description" content="Why do neural networks work at all ? Before worrying about how to train a network, it is worth asking whether a network is even capable of representing the function we are looking for. The Universal Approximation Theorem answers exactly this question : a feedforward network with a single hidden layer can approximate, as closely as we want, any continuous function on a compact domain. It is one of the most cited and, ironically, one of the most misunderstood results in machine learning. In this post we state it carefully, sketch why it is true, and, just as importantly, discuss…" />
 <link rel="canonical" href="www.ohmykode.com/blog/mathematics/universal-approximation-theorem" />
 <meta property="og:url" content="www.ohmykode.com/blog/mathematics/universal-approximation-theorem" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-04-16T12:00:00+02:00" />
+<meta property="article:modified_time" content="2021-04-16T12:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="The Universal Approximation Theorem" />
+<meta name="twitter:title" content="The Universal Approximation Theorem" />
 <script type="application/ld+json">
-{"headline":"The Universal Approximation Theorem","dateModified":"2021-04-16T12:00:00+02:00","datePublished":"2021-04-16T12:00:00+02:00","url":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"},"author":{"@type":"Person","name":"Maâmra Youcef"},"@type":"BlogPosting","description":"OhMyKode is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2021-04-16T12:00:00+02:00","datePublished":"2021-04-16T12:00:00+02:00","description":"Why do neural networks work at all ? Before worrying about how to train a network, it is worth asking whether a network is even capable of representing the function we are looking for. The Universal Approximation Theorem answers exactly this question : a feedforward network with a single hidden layer can approximate, as closely as we want, any continuous function on a compact domain. It is one of the most cited and, ironically, one of the most misunderstood results in machine learning. In this post we state it carefully, sketch why it is true, and, just as importantly, discuss…","headline":"The Universal Approximation Theorem","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"},"url":"www.ohmykode.com/blog/mathematics/universal-approximation-theorem"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -91,12 +92,12 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
             <center>  <a class="fa fa-home home_button" href="/"></a></center>
             <center><span itemprop="name"><h1>The Universal Approximation Theorem</h1></span></center>
             <center><p> 16 Apr 2021 </p></center>
-            <center><p class="fa fa-clock-o"> Less than 1 minute read</p></center>
+            <center><p class="fa fa-clock-o"> 12 minutes read</p></center>
             <!--<center><p class="fa fa-clock-o"> 
                         
                           
-                            1 minute read
-                          </p></center>-->
+                            16 minutes read
+                        </p></center>-->
         <center><span class="small-ornament"><svg viewBox="0 0 290 320">
           <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
         </svg></span></center>
@@ -107,7 +108,234 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
       <div class="col-md-8 offset-md-1">
         <article lang="en">
           
-          
+          <blockquote>
+  <p>Why do neural networks work at all ? Before worrying about <em>how</em> to train a network, it is worth asking whether a network is even <em>capable</em> of representing the function we are looking for. The <strong>Universal Approximation Theorem</strong> answers exactly this question : a feedforward network with a single hidden layer can approximate, as closely as we want, any continuous function on a compact domain. It is one of the most cited and, ironically, one of the most misunderstood results in machine learning. In this post we state it carefully, sketch why it is true, and, just as importantly, discuss what it does <strong>not</strong> say.</p>
+</blockquote>
+
+<!--## Notations
+
+$$\begin{array}{ r c l }
+\Bbb{R}^{n} & : & \text{the } n \text{-dimensional Euclidean space} \\
+I_n & : & [0, 1]^n \text{, the unit hypercube} \\
+C(I_n) & : & \text{the space of continuous functions on } I_n \\
+\|\,.\,\|_{\infty} & : & \text{the supremum (uniform) norm} \\
+M(I_n) & : & \text{the space of finite signed regular Borel measures on } I_n \\
+\end{array}$$-->
+
+<h2 id="1-introduction">1. Introduction</h2>
+<p>A single artificial neuron computes a very simple thing : it takes an input vector $x \in \Bbb{R}^{n}$, forms a weighted sum $w^{T} x + b$ with weights $w \in \Bbb{R}^{n}$ and a bias $b \in \Bbb{R}$, and passes the result through a non-linear <strong>activation function</strong> $\sigma : \Bbb{R} \rightarrow \Bbb{R}$. A network with one hidden layer of $N$ such neurons and a linear output is therefore a function of the form</p>
+
+\[\begin{equation} G(x) = \sum_{j=1}^{N} \alpha_{j} \, \sigma(w_{j}^{T} x + b_{j}) \label{eq:network} \end{equation}\]
+
+<p>where $\alpha_{j}, b_{j} \in \Bbb{R}$ and $w_{j} \in \Bbb{R}^{n}$. The set of all functions of the form $\eqref{eq:network}$, for every possible width $N$ and every choice of parameters, is exactly the class of functions that a shallow network can <em>represent</em>.</p>
+
+<p>The question is then very natural. Given a target function $ƒ$ that we would like the network to compute, and a tolerance $\varepsilon &gt; 0$, does there always exist a choice of parameters such that $G$ is $\varepsilon$-close to $ƒ$ everywhere ? The Universal Approximation Theorem says <strong>yes</strong>, provided $ƒ$ is continuous, the domain is compact, and $\sigma$ is chosen sensibly. What is striking is that a <em>single</em> hidden layer already suffices ; depth is not required for representability.</p>
+
+<div class="definition">
+	A function $\sigma : \Bbb{R} \rightarrow \Bbb{R}$ is said to be <b>sigmoidal</b> if it is bounded and satisfies
+	$$ \sigma(t) \rightarrow 1 \; \text{ as } \; t \rightarrow +\infty \qquad \text{and} \qquad \sigma(t) \rightarrow 0 \; \text{ as } \; t \rightarrow -\infty. $$
+	The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> $\sigma(t) = \frac{1}{1 + e^{-t}}$ is the canonical example.
+</div>
+
+<h2 id="2-measuring-the-approximation">2. Measuring the approximation</h2>
+<p>To say that $G$ is <em>close</em> to $ƒ$ we need a notion of distance between functions. We work on the unit hypercube $I_{n} = [0, 1]^{n}$, which is compact <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, and on the space $C(I_{n})$ of continuous real functions on $I_{n}$, equipped with the <strong>supremum norm</strong></p>
+
+\[\begin{equation} \|ƒ - G\|_{\infty} = \sup_{x \in I_{n}} |ƒ(x) - G(x)|. \label{eq:supnorm} \end{equation}\]
+
+<p>Saying that networks are <em>universal approximators</em> is the topological statement that the family $\eqref{eq:network}$ is <strong>dense</strong> in $C(I_{n})$ : every continuous $ƒ$ is a limit, in the norm $\eqref{eq:supnorm}$, of functions computable by a one hidden layer network. Concretely, for every $\varepsilon &gt; 0$ there is a network $G$ such that $|ƒ - G|_{\infty} &lt; \varepsilon$.</p>
+
+<h2 id="3-the-theorem">3. The theorem</h2>
+<p>The cleanest and most famous formulation is due to Cybenko <a class="citation" href="#Cybenko1989">(Cybenko, 1989)</a>, who proved it for continuous sigmoidal activations. The key technical notion is that of a <em>discriminatory</em> function.</p>
+
+<div class="definition">
+	Let $M(I_{n})$ be the space of finite signed regular Borel measures on $I_{n}$. A function $\sigma$ is called <b>discriminatory</b> if the only measure $\mu \in M(I_{n})$ satisfying
+	$$ \int_{I_{n}} \sigma(w^{T} x + b) \, d\mu(x) = 0 \qquad \text{for all } w \in \Bbb{R}^{n}, \, b \in \Bbb{R} $$
+	is the zero measure $\mu = 0$.
+</div>
+
+<p>Intuitively, a function is discriminatory if the ridge functions $x \mapsto \sigma(w^{T}x + b)$ are <em>rich enough</em> that no non-trivial measure can be orthogonal to all of them at once. With this vocabulary the theorem is remarkably compact.</p>
+
+<div class="theorem" text="Cybenko, 1989">
+	Let $\sigma$ be any continuous discriminatory function. Then finite sums of the form
+	$$ G(x) = \sum_{j=1}^{N} \alpha_{j} \, \sigma(w_{j}^{T} x + b_{j}) $$
+	are <b>dense</b> in $C(I_{n})$. That is, for every $ƒ \in C(I_{n})$ and every $\varepsilon &gt; 0$, there exists such a $G$ with $\;\|ƒ - G\|_{\infty} &lt; \varepsilon$.
+</div>
+
+<p>On its own this would be an abstract statement about a mysterious class of functions, were it not for the following companion lemma, which is what makes the theorem usable in practice.</p>
+
+<div class="theorem" text="Cybenko, 1989">
+	Every bounded, measurable sigmoidal function is discriminatory. In particular, every <b>continuous</b> sigmoidal function is discriminatory.
+</div>
+
+<p>Combining the two, any continuous sigmoidal activation, the logistic function, $\tanh$, the arctangent, yields a universal approximator. This is the result usually quoted simply as <em>the</em> Universal Approximation Theorem.</p>
+
+<h2 id="4-why-is-it-true-">4. Why is it true ?</h2>
+<p>The proof is short but leans on two pillars of functional analysis, and understanding the <em>shape</em> of the argument is more illuminating than the technical details.</p>
+
+<p>Let $S \subset C(I_{n})$ be the linear subspace of all functions of the form $\eqref{eq:network}$. We want to show that its closure $\overline{S}$ is all of $C(I_{n})$. Suppose, for contradiction, that it is not : $\overline{S}$ is then a <em>proper</em> closed subspace.</p>
+
+<ul>
+  <li>By the <a href="https://en.wikipedia.org/wiki/Hahn%E2%80%93Banach_theorem">Hahn–Banach theorem</a>, there exists a non-zero bounded linear functional $L$ on $C(I_{n})$ that vanishes on the whole of $\overline{S}$, hence on $S$.</li>
+  <li>By the <a href="https://en.wikipedia.org/wiki/Riesz%E2%80%93Markov%E2%80%93Kakutani_representation_theorem">Riesz representation theorem</a>, every such functional is an integration against some measure $\mu \in M(I_{n})$, so that $L(h) = \int_{I_{n}} h \, d\mu$ for all $h$.</li>
+</ul>
+
+<p>Since $L$ vanishes on $S$, and each ridge function $x \mapsto \sigma(w^{T}x + b)$ belongs to $S$, we get</p>
+
+\[\int_{I_{n}} \sigma(w^{T} x + b) \, d\mu(x) = 0 \qquad \text{for all } w, b.\]
+
+<p>But $\sigma$ is <em>discriminatory</em>, so this forces $\mu = 0$, and therefore $L = 0$, contradicting the fact that $L$ was chosen non-zero. Hence no proper closed subspace can contain $S$, which means $\overline{S} = C(I_{n})$. $\;\;\blacksquare$</p>
+
+<p>The whole argument is a duality trick : <em>density</em> of a subspace is equivalent to the <em>absence</em> of a non-zero functional annihilating it, and the discriminatory property is precisely what rules out such an annihilator.</p>
+
+<h2 id="5-beyond-sigmoids">5. Beyond sigmoids</h2>
+<p>Cybenko’s proof is tailored to sigmoidal activations, but the phenomenon is far more general. Hornik <a class="citation" href="#Hornik1991">(Hornik, 1991)</a> showed that the sigmoidal shape is not what matters : what matters is mere non-linearity and boundedness.</p>
+
+<div class="theorem" text="Hornik, 1991">
+	Multilayer feedforward networks with a single hidden layer and any continuous, bounded and non-constant activation function are universal approximators on compact sets.
+</div>
+
+<p>The final word belongs to Leshno <em>et al.</em> <a class="citation" href="#Leshno1993">(Leshno et al., 1993)</a>, who pinned down the exact frontier. Their condition is beautifully simple and, retrospectively, explains why practitioners had so much freedom in their choice of activation.</p>
+
+<div class="theorem" text="Leshno et al., 1993">
+	A feedforward network with a single hidden layer and a continuous activation function $\sigma$ is a universal approximator (dense in $C(I_{n})$) <b>if and only if</b> $\sigma$ is <b>not a polynomial</b>.
+</div>
+
+<p>This is the reason the ubiquitous <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a> $\sigma(t) = \max(0, t)$, which is neither bounded nor sigmoidal, is nonetheless a perfectly valid universal approximator : it simply is not a polynomial. A network built out of polynomial activations, on the other hand, can only ever produce polynomials of bounded degree, and thus can never approximate, say, $\sin$ uniformly. Leshno’s condition turns a folklore intuition into a theorem.</p>
+
+<div class="example">
+	It is worth pausing on the polynomial exclusion. If $\sigma$ is a polynomial of degree $d$, then every $\sigma(w^{T}x + b)$ is a polynomial of degree at most $d$ in $x$, and so is any finite linear combination $\eqref{eq:network}$. The class $S$ then lives inside a finite dimensional subspace of $C(I_{n})$, which cannot be dense. Non-polynomiality is exactly what breaks this ceiling.
+</div>
+
+<h2 id="6-what-the-theorem-does-not-say">6. What the theorem does not say</h2>
+<p>The Universal Approximation Theorem is often invoked as a slogan (<em>“neural networks can learn anything”</em>), and this is where the misunderstandings begin. Three caveats deserve to be spelled out.</p>
+
+<ul>
+  <li>
+    <p><strong>It is an existence result, not a construction.</strong> The theorem guarantees that <em>some</em> network of the form $\eqref{eq:network}$ approximates $ƒ$, but it says nothing about how to <em>find</em> the weights. Nothing here mentions <a href="https://en.wikipedia.org/wiki/Gradient_descent">gradient descent</a>, backpropagation, or whether the optimisation landscape is friendly. Representability and <em>learnability</em> are different problems.</p>
+  </li>
+  <li>
+    <p><strong>It says nothing about size.</strong> The width $N$ needed to reach accuracy $\varepsilon$ can be astronomically large, and in the worst case it grows exponentially with the input dimension $n$, the so called <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a>. A theorem that allows a billion neurons is a weak practical guarantee.</p>
+  </li>
+  <li>
+    <p><strong>It says nothing about generalisation.</strong> Approximating $ƒ$ well on the training domain is not the same as behaving well on unseen data. The theorem lives in the world of <em>approximation</em>, not <em>statistical estimation</em>.</p>
+  </li>
+</ul>
+
+<p>This is precisely the tension that motivates <a href="https://en.wikipedia.org/wiki/Deep_learning">deep</a> networks. Depth does not extend <em>what</em> can be represented, that battle was already won by a single layer, but it can drastically reduce <em>how many</em> neurons are needed. Certain functions expressible by a deep network of modest size provably require an exponentially wider shallow network to match. Universality tells us the destination exists ; depth is about getting there efficiently.</p>
+
+<h2 id="7-a-historical-cousin">7. A historical cousin</h2>
+<p>It would be unfair to close without mentioning that the idea predates neural networks. In 1957, answering a version of Hilbert’s thirteenth problem, Kolmogorov <a class="citation" href="#Kolmogorov1957">(Kolmogorov, 1957)</a> proved that <em>every</em> continuous function of several variables can be written as a superposition of continuous functions of a <strong>single</strong> variable and addition,</p>
+
+\[ƒ(x_{1}, \dots, x_{n}) = \sum_{q=0}^{2n} \Phi_{q}\!\left( \sum_{p=1}^{n} \phi_{q, p}(x_{p}) \right).\]
+
+<p>The resemblance to a two layer network is uncanny : an inner layer of univariate maps $\phi_{q,p}$ feeding an outer layer of univariate maps $\Phi_{q}$. The catch is that the functions produced by Kolmogorov’s theorem are highly irregular and depend on $ƒ$ in a non-constructive way, so it is an <em>exact representation</em> result rather than an <em>approximation</em> one. Still, it is a striking reminder that the expressive power of layered univariate non-linearities was understood, in a different language, decades before it was rediscovered by the connectionists. I will devote a separate post to the <a href="/blog/mathematics/kolmogorov-superposition">Kolmogorov superposition theorem</a>, as it deserves a treatment of its own.</p>
+
+<h2 id="8-conclusion">8. Conclusion</h2>
+<p>The Universal Approximation Theorem is a reassuring foundation : it certifies that shallow feedforward networks are, in principle, as expressive as we could hope, capable of matching any continuous function on a compact set to arbitrary precision. Its proof is a clean piece of functional analysis resting on Hahn–Banach and Riesz duality, and its scope was later sharpened to the elegant <em>“anything but a polynomial”</em> criterion. But the theorem is a statement about <em>possibility</em>, not <em>practicality</em>. It says nothing about the number of neurons, the difficulty of training, or generalisation to new data, precisely the questions that occupy modern deep learning. Knowing that the target is reachable is comforting ; the rest of the field is about learning to reach it.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Cybenko1989">Cybenko, G. (1989). Approximation by Superpositions of a Sigmoidal Function. <i>Mathematics of Control, Signals and Systems</i>, <i>2</i>(4), 303–314.</span>
+
+<div id="Cybenko1989-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Cybenko1989-bibtex" class="pre pre-scrollable collapse">@article{Cybenko1989,
+  author = {Cybenko, George},
+  title = {Approximation by Superpositions of a Sigmoidal Function},
+  journal = {Mathematics of Control, Signals and Systems},
+  volume = {2},
+  number = {4},
+  pages = {303--314},
+  year = {1989},
+  publisher = {Springer}
+}
+</pre>
+
+</div></li>
+<li><span id="Hornik1991">Hornik, K. (1991). Approximation Capabilities of Multilayer Feedforward Networks. <i>Neural Networks</i>, <i>4</i>(2), 251–257.</span>
+
+<div id="Hornik1991-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Hornik1991-bibtex" class="pre pre-scrollable collapse">@article{Hornik1991,
+  author = {Hornik, Kurt},
+  title = {Approximation Capabilities of Multilayer Feedforward Networks},
+  journal = {Neural Networks},
+  volume = {4},
+  number = {2},
+  pages = {251--257},
+  year = {1991},
+  publisher = {Elsevier}
+}
+</pre>
+
+</div></li>
+<li><span id="Kolmogorov1957">Kolmogorov, A. N. (1957). On the Representation of Continuous Functions of Many Variables by Superposition of Continuous Functions of One Variable and Addition. <i>Doklady Akademii Nauk SSSR</i>, <i>114</i>, 953–956.</span>
+
+<div id="Kolmogorov1957-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Kolmogorov1957-bibtex" class="pre pre-scrollable collapse">@article{Kolmogorov1957,
+  author = {Kolmogorov, Andrey N.},
+  title = {On the Representation of Continuous Functions of Many Variables by Superposition of Continuous Functions of One Variable and Addition},
+  journal = {Doklady Akademii Nauk SSSR},
+  volume = {114},
+  pages = {953--956},
+  year = {1957}
+}
+</pre>
+
+</div></li>
+<li><span id="Leshno1993">Leshno, M., Lin, V. Y., Pinkus, A., &amp; Schocken, S. (1993). Multilayer Feedforward Networks with a Nonpolynomial Activation Function Can Approximate Any Function. <i>Neural Networks</i>, <i>6</i>(6), 861–867.</span>
+
+<div id="Leshno1993-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Leshno1993-bibtex" class="pre pre-scrollable collapse">@article{Leshno1993,
+  author = {Leshno, Moshe and Lin, Vladimir Ya. and Pinkus, Allan and Schocken, Shimon},
+  title = {Multilayer Feedforward Networks with a Nonpolynomial Activation Function Can Approximate Any Function},
+  journal = {Neural Networks},
+  volume = {6},
+  number = {6},
+  pages = {861--867},
+  year = {1993},
+  publisher = {Elsevier}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The theorem is usually stated on the unit cube $I_n = [0,1]^n$, but compactness is the only property that matters : the same result holds on any compact subset of $\Bbb{R}^n$. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
         </article>
 	     </div>

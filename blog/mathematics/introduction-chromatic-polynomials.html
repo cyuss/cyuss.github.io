@@ -51,7 +51,7 @@
        };
       </script>
   <script type="text/javascript" async
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -64,23 +64,24 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
 </head>
 
-    <!-- Begin Jekyll SEO tag v2.7.1 -->
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
 <title>Introduction to Chromatic Polynomials | Oh My Kode</title>
-<meta name="generator" content="Jekyll v4.2.1" />
+<meta name="generator" content="Jekyll v3.10.0" />
 <meta property="og:title" content="Introduction to Chromatic Polynomials" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, register allocation, mobile radio frequency assignement\(\dots\)" />
-<meta property="og:description" content="One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, register allocation, mobile radio frequency assignement\(\dots\)" />
+<meta name="description" content="One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule…" />
+<meta name="twitter:description" property="og:description" content="One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule…" />
 <link rel="canonical" href="www.ohmykode.com/blog/mathematics/introduction-chromatic-polynomials" />
 <meta property="og:url" content="www.ohmykode.com/blog/mathematics/introduction-chromatic-polynomials" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-10-21T12:00:00+02:00" />
+<meta property="article:modified_time" content="2018-10-21T12:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Introduction to Chromatic Polynomials" />
+<meta name="twitter:title" content="Introduction to Chromatic Polynomials" />
 <script type="application/ld+json">
-{"headline":"Introduction to Chromatic Polynomials","dateModified":"2018-10-21T12:00:00+02:00","datePublished":"2018-10-21T12:00:00+02:00","url":"www.ohmykode.com/blog/mathematics/introduction-chromatic-polynomials","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/introduction-chromatic-polynomials"},"author":{"@type":"Person","name":"Maâmra Youcef"},"@type":"BlogPosting","description":"One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule or time table, register allocation, mobile radio frequency assignement\\(\\dots\\)","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2018-10-21T12:00:00+02:00","datePublished":"2018-10-21T12:00:00+02:00","description":"One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that problem is, given a geographical map, how many colors are required to color it so that no two adjacent regions have the same color ? The answer is four, but it took a long time to prove this theorem after many false proofs and counterexamples. This problem led to the development of useful tools for graphs coloring as Chromatic polynomials and Chromatic number. The graph coloring problem has a huge number of applications : making schedule…","headline":"Introduction to Chromatic Polynomials","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/introduction-chromatic-polynomials"},"url":"www.ohmykode.com/blog/mathematics/introduction-chromatic-polynomials"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -142,7 +143,7 @@ G \cup H & : & \text{the disjoint union of } G \text{ and } H \\
 
 \[\begin{equation} \chi(G) = \min\{\lambda \in \Bbb{N}^* : P(G, \lambda) \geq 1 \label{eq:chrom_num}\} \end{equation}\]
 
-<p>By definition, $P(G, \chi(G)) \geq 1$ <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. Given a set of $r$ colors ($r \in \Bbb{N}$), for $r &lt; \chi(G)$, $P(G, r) = 0$.</p>
+<p>By definition, $P(G, \chi(G)) \geq 1$ <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. Given a set of $r$ colors ($r \in \Bbb{N}$), for $r &lt; \chi(G)$, $P(G, r) = 0$.</p>
 
 <h2 id="2-particular-graphs">2. Particular graphs</h2>
 <p>After having defined the graph coloring, we will try to enumerate $P(G, \lambda)$ for some special graphs.</p>
@@ -264,7 +265,7 @@ P(G, \lambda) &amp;= P(K_5, \lambda) + P(K_4, \lambda) \\
 Each Sudoku solution corresponds to coloring the associated graph. We can generalize this by considering a grid of size $n^2 \times n^2$. For each cell of the grid we associate a vertex denoted by $(i, j)$, with $1 \leq i, j \leq n^2$. We say that $(i, j)$ and $(i’, j’)$ are adjacents if $i = i’$ or $j = j’$ or $\lceil i/n \rceil = \lceil i’/n \rceil$ and $\lceil j/n \rceil = \lceil j’/n \rceil$ where $\lceil \,. \rceil$ denotes the ceiling function.
 <!--(the smallest integer greater than or equal to $x$).--></p>
 
-<p>Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It’s clear that $X_n$ is a <em>regular graph</em> <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ graph corresponds to a 9 $\times$ 9 grid that is a 20-regular graph.</p>
+<p>Let $X_n$ be a graph that we call a Sudoku graph of order $n$. It’s clear that $X_n$ is a <em>regular graph</em> <sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> such that each vertex is of degree $3n^2 - 2n - 1 = (3n + 1)(n - 1)$. In particular, $X_3$ graph corresponds to a 9 $\times$ 9 grid that is a 20-regular graph.</p>
 
 <h2 id="references">References</h2>
 <ol class="bibliography"><li><span id="birkhoff12">Birkhoff, G. D. (1912). A Determinant Formula for the Number of Ways of Coloring a Map. <i>Annals of Mathematics</i>, <i>14</i>(1/4), pp. 42–46.</span>
@@ -342,10 +343,10 @@ Each Sudoku solution corresponds to coloring the associated graph. We can genera
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1" role="doc-endnote">
+    <li id="fn:1">
       <p>$G$ is $\chi(G)$-colorable. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:2" role="doc-endnote">
+    <li id="fn:2">
       <p>A regular graph is a graph where each vertex has the same degree; <em>i.e.</em> has the same number of neighbors. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

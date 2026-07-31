@@ -51,7 +51,7 @@
        };
       </script>
   <script type="text/javascript" async
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -64,23 +64,24 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
 </head>
 
-    <!-- Begin Jekyll SEO tag v2.7.1 -->
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
 <title>Memoization - Remember what we already found | Oh My Kode</title>
-<meta name="generator" content="Jekyll v4.2.1" />
+<meta name="generator" content="Jekyll v3.10.0" />
 <meta property="og:title" content="Memoization - Remember what we already found" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?" />
-<meta property="og:description" content="Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?" />
+<meta name="twitter:description" property="og:description" content="Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?" />
 <link rel="canonical" href="www.ohmykode.com/blog/python/memoization" />
 <meta property="og:url" content="www.ohmykode.com/blog/python/memoization" />
 <meta property="og:site_name" content="Oh My Kode" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-11-01T12:00:00+01:00" />
+<meta property="article:modified_time" content="2018-11-01T12:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Memoization - Remember what we already found" />
+<meta name="twitter:title" content="Memoization - Remember what we already found" />
 <script type="application/ld+json">
-{"headline":"Memoization - Remember what we already found","dateModified":"2018-11-01T12:00:00+01:00","datePublished":"2018-11-01T12:00:00+01:00","url":"www.ohmykode.com/blog/python/memoization","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/python/memoization"},"author":{"@type":"Person","name":"Maâmra Youcef"},"@type":"BlogPosting","description":"Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2018-11-01T12:00:00+01:00","datePublished":"2018-11-01T12:00:00+01:00","description":"Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow. Memoization is a very effective technique that accelerates recursion. So what is memoization ? And how does it work ?","headline":"Memoization - Remember what we already found","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/python/memoization"},"url":"www.ohmykode.com/blog/python/memoization"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -179,7 +180,7 @@ We notice that the calculation of $F(n-2)$ is done twice (or more), as well as $
 
 <h2 id="3-speed-isnt-everything">3. Speed isn’t everything</h2>
 <p>Memoization technique is very powerful, it allows us to keep the code readability and being fast at the same time. But this fast execution time costs us another resource, <strong>memory</strong>.<br />
-The data structure choice for saving the intermediate results is important. For example, choosing a dictionary structure is very fast <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> while it consumes a lot of memory.</p>
+The data structure choice for saving the intermediate results is important. For example, choosing a dictionary structure is very fast <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> while it consumes a lot of memory.</p>
 
 <div class="note">
 	In Python, we have a built-in function for memoization that we can find in <a href="https://github.com/python/cpython/blob/3.8/Lib/functools.py">functools</a> module with the name <a href="https://docs.python.org/3/library/functools.html">lru_cache()</a>. This function is a high-order function that can be used as a decorator.
@@ -190,7 +191,7 @@ The data structure choice for saving the intermediate results is important. For 
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1" role="doc-endnote">
+    <li id="fn:1">
       <p>In base cases when the hash function is perfect, the time complexity is equal to $\mathcal{O}(1)$. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
