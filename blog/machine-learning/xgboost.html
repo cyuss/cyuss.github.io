@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="theme-color" content="hsl(35, 36%, 95%)">
-  <title>XGBoost, A Team of Trees That Fix Each Other's Mistakes</title>
+  <title>XGBoost, Explained</title>
 
   
   <meta name="description" content="
@@ -13,9 +13,12 @@
     
         
               
-            XGBoost, A Team of Trees That Fix Each Other's Mistakes
+            XGBoost, Explained
              10 Sep 2023 
-             10 minu..." />
+             10 minutes read
+            
+        
+      ..." />
 
   
   <meta name="keywords" content="" />
@@ -64,9 +67,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 </head>
 
     <!-- Begin Jekyll SEO tag v2.9.0 -->
-<title>XGBoost, A Team of Trees That Fix Each Other’s Mistakes | Oh My Kode</title>
+<title>XGBoost, Explained | Oh My Kode</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="XGBoost, A Team of Trees That Fix Each Other’s Mistakes" />
+<meta property="og:title" content="XGBoost, Explained" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : XGBoost (Chen &amp; Guestrin, 2016). Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a team of very simple ones, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the…" />
@@ -78,9 +81,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="article:published_time" content="2023-09-10T12:00:00+02:00" />
 <meta property="article:modified_time" content="2023-09-10T12:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="XGBoost, A Team of Trees That Fix Each Other’s Mistakes" />
+<meta name="twitter:title" content="XGBoost, Explained" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2023-09-10T12:00:00+02:00","datePublished":"2023-09-10T12:00:00+02:00","description":"If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : XGBoost (Chen &amp; Guestrin, 2016). Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a team of very simple ones, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the…","headline":"XGBoost, A Team of Trees That Fix Each Other’s Mistakes","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/xgboost"},"url":"www.ohmykode.com/blog/machine-learning/xgboost"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2023-09-10T12:00:00+02:00","datePublished":"2023-09-10T12:00:00+02:00","description":"If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns of numbers that run banks, hospitals and Kaggle leaderboards : XGBoost (Chen &amp; Guestrin, 2016). Its idea is charmingly human. Instead of building one enormous, clever model, it assembles a team of very simple ones, where each new member studies the mistakes the team has made so far and does its best to correct them. Add enough of these humble correctors and the team becomes formidably accurate. This post explains that idea from scratch, keeps the…","headline":"XGBoost, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/xgboost"},"url":"www.ohmykode.com/blog/machine-learning/xgboost"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -89,7 +92,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     <div class="row">
         <header>
             <center>  <a class="fa fa-home home_button" href="/"></a></center>
-            <center><span itemprop="name"><h1>XGBoost, A Team of Trees That Fix Each Other's Mistakes</h1></span></center>
+            <center><span itemprop="name"><h1>XGBoost, Explained</h1></span></center>
             <center><p> 10 Sep 2023 </p></center>
             <center><p class="fa fa-clock-o"> 10 minutes read</p></center>
             <!--<center><p class="fa fa-clock-o"> 

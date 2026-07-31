@@ -157,14 +157,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     .cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1.1em; }
     @media (max-width:640px){ .cards { grid-template-columns:1fr; } }
     .card { position:relative; display:block; text-decoration:none; color:inherit; background:var(--card-bg);
+            margin:0; /* theme adds a stray bottom margin to links */
             border:1px solid var(--line); border-radius:12px; padding:1.4em 1.5em 1.2em;
             box-shadow:0 1px 2px rgba(80,60,30,.04); animation:fadeUp .5s ease both;
-            transition:transform .2s cubic-bezier(.2,.7,.3,1), box-shadow .2s, border-color .2s; }
-    .card::before { content:""; position:absolute; left:0; top:0; height:3px; width:100%;
-                    background:var(--accent); border-radius:12px 12px 0 0;
-                    transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
-    .card:hover { transform:translateY(-4px); box-shadow:0 16px 34px rgba(90,60,25,.13); border-color:rgba(199,35,35,.28); }
-    .card:hover::before { transform:scaleX(1); }
+            transition:transform .28s cubic-bezier(.2,.7,.3,1), box-shadow .28s ease, border-color .28s ease; }
+    /* refined hover: soft lift + arrow sliding in, no colour bar */
+    .card::after { content:"→"; position:absolute; right:1.4em; bottom:1.05em; color:var(--accent);
+                   font-size:1em; line-height:1; opacity:0; transform:translateX(-8px);
+                   transition:opacity .28s ease, transform .28s cubic-bezier(.2,.7,.3,1); }
+    .card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(90,60,25,.10);
+                  border-color:rgba(199,35,35,.30); }
+    .card:hover::after { opacity:1; transform:translateX(0); }
     .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.10s}
     .card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.20s}
     .card:nth-child(5){animation-delay:.25s}.card:nth-child(6){animation-delay:.30s}
@@ -179,21 +182,35 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     .c-exc { font-size:.87em; color:#7d7568; line-height:1.55; margin:0 0 .9em; }
     .c-date { font-size:.72em; color:#aa9f8b; letter-spacing:.05em; text-transform:uppercase; }
 
-    /* ---- LIST view (compact) ---- */
-    #v-list:checked ~ .cards { display:block; border:1px solid var(--line); border-radius:12px;
+    /* ---- LIST view (compact, column-aligned) ---- */
+    /* flex column: whitespace text nodes never become boxes (no phantom gaps when filtering) */
+    #v-list:checked ~ .cards { display:flex; flex-direction:column; gap:0;
+                               border:1px solid var(--line); border-bottom:none; border-radius:12px;
                                overflow:hidden; background:var(--card-bg); box-shadow:0 1px 2px rgba(80,60,30,.04); }
-    #v-list:checked ~ .cards .card { display:flex; align-items:baseline; flex-wrap:wrap; gap:.35em 1em;
+    /* one row = a 3-column grid so titles, categories and dates line up across rows */
+    #v-list:checked ~ .cards .card { display:grid; grid-template-columns:1fr 11em 8em;
+                                     align-items:center; column-gap:1.2em;
                                      border:none; border-bottom:1px solid var(--line); border-radius:0;
-                                     box-shadow:none; background:transparent; padding:.85em 1.2em;
-                                     transform:none; animation:none; }
-    #v-list:checked ~ .cards .card::before { display:none; }
-    #v-list:checked ~ .cards .card:last-child { border-bottom:none; }
+                                     box-shadow:none; background:transparent; padding:.8em 1.3em;
+                                     transform:none; animation:none;
+                                     transition:background .16s ease; }
+    #v-list:checked ~ .cards .card::after { display:none; }
+    /* every row keeps its bottom border, so whichever row is last VISIBLE (after filtering)
+       forms the container's bottom edge : no stray line, no missing line */
     #v-list:checked ~ .cards .card:hover { background:var(--hover-bg); }
-    #v-list:checked ~ .cards .c-title { order:1; flex:1 1 60%; margin:0; font-size:1.02em; font-weight:600; }
+    #v-list:checked ~ .cards .c-title { grid-column:1; grid-row:1; margin:0;
+                                        font-size:1em; font-weight:600; line-height:1.4; }
     #v-list:checked ~ .cards .card:hover .c-title { color:var(--accent); }
-    #v-list:checked ~ .cards .badge { order:2; margin:0 0 0 auto; }
-    #v-list:checked ~ .cards .c-date { order:3; margin:0; }
+    #v-list:checked ~ .cards .badge { grid-column:2; grid-row:1; margin:0; justify-self:start; }
+    #v-list:checked ~ .cards .c-date { grid-column:3; grid-row:1; margin:0; text-align:right;
+                                       white-space:nowrap; }
     #v-list:checked ~ .cards .c-exc { display:none; }
+    @media (max-width:640px){
+      #v-list:checked ~ .cards .card { grid-template-columns:1fr auto; row-gap:.4em; }
+      #v-list:checked ~ .cards .c-title { grid-column:1 / -1; grid-row:1; }
+      #v-list:checked ~ .cards .badge   { grid-column:1; grid-row:2; }
+      #v-list:checked ~ .cards .c-date  { grid-column:2; grid-row:2; }
+    }
 
     /* filtering: hide cards not matching the checked category (both views) */
     #f-ml:checked   ~ .cards .card:not(.cat-machine-learning),
@@ -273,7 +290,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         
         <a class="card cat-machine-learning" href="/blog/machine-learning/xgboost">
           <span class="badge">Machine Learning</span>
-          <h3 class="c-title">XGBoost, A Team of Trees That Fix Each Other's Mistakes</h3>
+          <h3 class="c-title">XGBoost, Explained</h3>
           <p class="c-exc">If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns...</p>
           <span class="c-date">September 2023</span>
         </a>
