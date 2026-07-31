@@ -121,57 +121,81 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     </header>
   </div>
   <style>
+    :root { --accent:#c72323; --ink:#33302c; --muted:#8f8676; --line:rgba(120,92,50,.16);
+            --card-bg:#fffefb; --hover-bg:#faf6ee; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes introFade { from { opacity:0; } to { opacity:1; } }
 
-    .home-intro { text-align:center; color:#8a8a8a; font-style:italic; font-size:1.03em;
-                  max-width:640px; margin:0 auto 1.1em; line-height:1.55; animation:introFade 1.1s ease both; }
-    .home-count { text-align:center; color:#b8ab97; font-size:.78em; letter-spacing:.16em;
-                  text-transform:uppercase; margin:0 0 1.8em; animation:introFade 1.3s ease both; }
+    .home-count { text-align:center; color:#b3a894; font-size:.72em; letter-spacing:.22em;
+                  text-transform:uppercase; margin:.2em 0 2em; }
 
-    /* CSS-only category filter */
-    .filt-input { position:absolute; opacity:0; width:0; height:0; pointer-events:none; }
-    .filters { text-align:center; margin:0 auto 2em; }
-    .filters label { display:inline-block; margin:.22em .2em; padding:.34em .95em; cursor:pointer;
-                     border:1px solid #e3d9c0; border-radius:22px; color:#9a835a;
-                     font-size:.76em; letter-spacing:.1em; text-transform:uppercase; font-weight:bold;
-                     transition:background .15s ease, color .15s ease, border-color .15s ease; }
-    .filters label:hover { background:#faf7ee; }
-    #f-all:checked  ~ .filters label[for="f-all"],
-    #f-ml:checked   ~ .filters label[for="f-ml"],
-    #f-math:checked ~ .filters label[for="f-math"],
-    #f-algo:checked ~ .filters label[for="f-algo"],
-    #f-py:checked   ~ .filters label[for="f-py"] { background:#8a6d1f; color:#fff; border-color:#8a6d1f; }
+    /* hidden state radios (category filter + view mode) */
+    .st { position:absolute; opacity:0; width:0; height:0; pointer-events:none; }
 
-    .cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1.15em; }
+    /* toolbar : filters (left) + view switch (right) */
+    .toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+               gap:.8em 1em; margin-bottom:1.6em; }
+    .filters label { display:inline-block; margin:.15em .12em; padding:.32em .85em; cursor:pointer;
+                     border:1px solid var(--line); border-radius:20px; color:var(--muted);
+                     font-size:.72em; letter-spacing:.08em; text-transform:uppercase; font-weight:bold;
+                     transition:background .15s, color .15s, border-color .15s; }
+    .filters label:hover { border-color:var(--accent); color:var(--accent); }
+    #f-all:checked  ~ .toolbar label[for="f-all"],
+    #f-ml:checked   ~ .toolbar label[for="f-ml"],
+    #f-math:checked ~ .toolbar label[for="f-math"],
+    #f-algo:checked ~ .toolbar label[for="f-algo"],
+    #f-py:checked   ~ .toolbar label[for="f-py"] { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+    .view-switch { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+    .view-switch label { padding:.4em .8em; cursor:pointer; color:var(--muted);
+                         font-size:.7em; letter-spacing:.08em; text-transform:uppercase; font-weight:bold;
+                         display:inline-flex; align-items:center; gap:.4em; transition:background .15s, color .15s; }
+    .view-switch label + label { border-left:1px solid var(--line); }
+    #v-grid:checked ~ .toolbar label[for="v-grid"],
+    #v-list:checked ~ .toolbar label[for="v-list"] { background:var(--accent); color:#fff; }
+
+    /* ---- GRID (card) view ---- */
+    .cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1.1em; }
     @media (max-width:640px){ .cards { grid-template-columns:1fr; } }
-    .card { display:block; text-decoration:none; color:inherit; background:#fffdf8;
-            border:1px solid #ece3cf; border-left:4px solid #ccc; border-radius:9px;
-            padding:1.15em 1.25em 1.05em; animation:fadeUp .55s ease both;
-            transition:transform .18s ease, box-shadow .18s ease, border-left-color .18s ease; }
-    .card:hover { transform:translateY(-4px); box-shadow:0 10px 26px rgba(120,100,50,.13); }
-    .card.cat-machine-learning { border-left-color:#7a5c9e; }
-    .card.cat-mathematics { border-left-color:#4a6da7; }
-    .card.cat-algorithmic { border-left-color:#5aa06a; }
-    .card.cat-python      { border-left-color:#b5651d; }
-    .card:nth-child(1){animation-delay:.06s}.card:nth-child(2){animation-delay:.12s}
-    .card:nth-child(3){animation-delay:.18s}.card:nth-child(4){animation-delay:.24s}
-    .card:nth-child(5){animation-delay:.30s}.card:nth-child(6){animation-delay:.36s}
-    .card:nth-child(7){animation-delay:.42s}.card:nth-child(8){animation-delay:.48s}
-    .card:nth-child(9){animation-delay:.54s}.card:nth-child(10){animation-delay:.60s}
-    .card:nth-child(11){animation-delay:.66s}.card:nth-child(12){animation-delay:.72s}
-    .badge { display:inline-block; font-size:.66em; letter-spacing:.13em; text-transform:uppercase;
-             font-weight:bold; padding:.24em .62em; border-radius:4px; margin-bottom:.55em; }
-    .cat-machine-learning .badge { background:#f1ecf7; color:#6b4e97; }
-    .cat-mathematics .badge { background:#eef2fa; color:#3f5f96; }
-    .cat-algorithmic .badge { background:#eef7ef; color:#4e8f5e; }
-    .cat-python      .badge { background:#faf1e8; color:#b5651d; }
-    .c-title { font-size:1.17em; line-height:1.3; margin:.1em 0 .4em; color:#2b2b2b; }
-    .card:hover .c-title { color:#8a6d1f; }
-    .c-exc { font-size:.89em; color:#7c7468; line-height:1.5; margin:0 0 .8em; }
-    .c-date { font-size:.74em; color:#b0a393; letter-spacing:.05em; text-transform:uppercase; }
+    .card { position:relative; display:block; text-decoration:none; color:inherit; background:var(--card-bg);
+            border:1px solid var(--line); border-radius:12px; padding:1.4em 1.5em 1.2em;
+            box-shadow:0 1px 2px rgba(80,60,30,.04); animation:fadeUp .5s ease both;
+            transition:transform .2s cubic-bezier(.2,.7,.3,1), box-shadow .2s, border-color .2s; }
+    .card::before { content:""; position:absolute; left:0; top:0; height:3px; width:100%;
+                    background:var(--accent); border-radius:12px 12px 0 0;
+                    transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .card:hover { transform:translateY(-4px); box-shadow:0 16px 34px rgba(90,60,25,.13); border-color:rgba(199,35,35,.28); }
+    .card:hover::before { transform:scaleX(1); }
+    .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.10s}
+    .card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.20s}
+    .card:nth-child(5){animation-delay:.25s}.card:nth-child(6){animation-delay:.30s}
+    .card:nth-child(7){animation-delay:.35s}.card:nth-child(8){animation-delay:.40s}
+    .card:nth-child(9){animation-delay:.45s}.card:nth-child(10){animation-delay:.50s}
+    .card:nth-child(11){animation-delay:.55s}.card:nth-child(12){animation-delay:.60s}
+    .badge { display:inline-block; font-size:.63em; letter-spacing:.15em; text-transform:uppercase;
+             font-weight:bold; color:var(--accent); background:rgba(199,35,35,.07);
+             padding:.28em .7em; border-radius:100px; margin-bottom:.7em; }
+    .c-title { font-size:1.16em; line-height:1.32; margin:.1em 0 .45em; color:var(--ink); font-weight:bold; }
+    .card:hover .c-title { color:var(--accent); }
+    .c-exc { font-size:.87em; color:#7d7568; line-height:1.55; margin:0 0 .9em; }
+    .c-date { font-size:.72em; color:#aa9f8b; letter-spacing:.05em; text-transform:uppercase; }
 
-    /* filtering: hide cards not matching the checked category */
+    /* ---- LIST view (compact) ---- */
+    #v-list:checked ~ .cards { display:block; border:1px solid var(--line); border-radius:12px;
+                               overflow:hidden; background:var(--card-bg); box-shadow:0 1px 2px rgba(80,60,30,.04); }
+    #v-list:checked ~ .cards .card { display:flex; align-items:baseline; flex-wrap:wrap; gap:.35em 1em;
+                                     border:none; border-bottom:1px solid var(--line); border-radius:0;
+                                     box-shadow:none; background:transparent; padding:.85em 1.2em;
+                                     transform:none; animation:none; }
+    #v-list:checked ~ .cards .card::before { display:none; }
+    #v-list:checked ~ .cards .card:last-child { border-bottom:none; }
+    #v-list:checked ~ .cards .card:hover { background:var(--hover-bg); }
+    #v-list:checked ~ .cards .c-title { order:1; flex:1 1 60%; margin:0; font-size:1.02em; font-weight:600; }
+    #v-list:checked ~ .cards .card:hover .c-title { color:var(--accent); }
+    #v-list:checked ~ .cards .badge { order:2; margin:0 0 0 auto; }
+    #v-list:checked ~ .cards .c-date { order:3; margin:0; }
+    #v-list:checked ~ .cards .c-exc { display:none; }
+
+    /* filtering: hide cards not matching the checked category (both views) */
     #f-ml:checked   ~ .cards .card:not(.cat-machine-learning),
     #f-math:checked ~ .cards .card:not(.cat-mathematics),
     #f-algo:checked ~ .cards .card:not(.cat-algorithmic),
@@ -181,7 +205,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     .big-ornament { display:inline-block; animation:orn-float 6s ease-in-out 1.6s infinite; }
     .big-ornament svg { overflow:visible; }
     .big-ornament svg path {
-      fill-opacity:0; stroke:#8a6d1f; stroke-width:2; stroke-opacity:.55;
+      fill-opacity:0; stroke:var(--accent); stroke-width:2; stroke-opacity:.5;
       stroke-dasharray:2600; stroke-dashoffset:2600;
       animation:orn-draw 2.6s ease forwards, orn-fill 1.4s ease 1.7s forwards; }
     @keyframes orn-draw { to { stroke-dashoffset:0; } }
@@ -189,34 +213,42 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     @keyframes orn-float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
 
     @media (prefers-reduced-motion: reduce) {
-      .home-intro, .home-count, .card, .big-ornament { animation:none; }
+      .card, .big-ornament { animation:none; }
       .big-ornament svg path { fill-opacity:1; stroke-opacity:0; stroke-dashoffset:0; animation:none; }
       .card:hover { transform:none; }
     }
   </style>
   <div class="row">
     <div class="col-md-10 offset-md-1">
-      <p class="home-intro">OhMyKode is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
-      <p class="home-count">12 articles &middot; mathematics, computer science &amp; machine learning</p>
+      <p class="home-count">12 articles</p>
 
-      <input class="filt-input" type="radio" name="catfilter" id="f-all" checked>
-      <input class="filt-input" type="radio" name="catfilter" id="f-ml">
-      <input class="filt-input" type="radio" name="catfilter" id="f-math">
-      <input class="filt-input" type="radio" name="catfilter" id="f-algo">
-      <input class="filt-input" type="radio" name="catfilter" id="f-py">
-      <div class="filters">
-        <label for="f-all">All</label>
-        <label for="f-ml">Machine Learning</label>
-        <label for="f-math">Mathematics</label>
-        <label for="f-algo">Algorithmic</label>
-        <label for="f-py">Python</label>
+      <input class="st" type="radio" name="catfilter" id="f-all" checked>
+      <input class="st" type="radio" name="catfilter" id="f-ml">
+      <input class="st" type="radio" name="catfilter" id="f-math">
+      <input class="st" type="radio" name="catfilter" id="f-algo">
+      <input class="st" type="radio" name="catfilter" id="f-py">
+      <input class="st" type="radio" name="viewmode" id="v-grid" checked>
+      <input class="st" type="radio" name="viewmode" id="v-list">
+
+      <div class="toolbar">
+        <div class="filters">
+          <label for="f-all">All</label>
+          <label for="f-ml">Machine Learning</label>
+          <label for="f-math">Mathematics</label>
+          <label for="f-algo">Algorithmic</label>
+          <label for="f-py">Python</label>
+        </div>
+        <div class="view-switch">
+          <label for="v-grid">▦ Cards</label>
+          <label for="v-list">☰ List</label>
+        </div>
       </div>
 
       <div class="cards">
         
         
-        <a class="card cat-machine" href="/blog/machine-learning/transformers">
-          <span class="badge">Machine</span>
+        <a class="card cat-machine-learning" href="/blog/machine-learning/transformers">
+          <span class="badge">Machine Learning</span>
           <h3 class="c-title">The Transformer, Explained</h3>
           <p class="c-exc">If attention is an engine, the Transformer is the whole car built around it. Introduced in the 2017 paper whose title says it all,...</p>
           <span class="c-date">January 2026</span>
@@ -231,16 +263,16 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         </a>
         
         
-        <a class="card cat-machine" href="/blog/machine-learning/attention-mechanism">
-          <span class="badge">Machine</span>
+        <a class="card cat-machine-learning" href="/blog/machine-learning/attention-mechanism">
+          <span class="badge">Machine Learning</span>
           <h3 class="c-title">The Attention Mechanism, Explained</h3>
           <p class="c-exc">Read this sentence : “The cat sat on the mat because it was tired.” Who was tired ? You knew instantly it was the...</p>
           <span class="c-date">July 2024</span>
         </a>
         
         
-        <a class="card cat-machine" href="/blog/machine-learning/xgboost">
-          <span class="badge">Machine</span>
+        <a class="card cat-machine-learning" href="/blog/machine-learning/xgboost">
+          <span class="badge">Machine Learning</span>
           <h3 class="c-title">XGBoost, A Team of Trees That Fix Each Other's Mistakes</h3>
           <p class="c-exc">If neural networks rule images, audio and text, there is another model that quietly wins almost everything else, the spreadsheets, the tables, the columns...</p>
           <span class="c-date">September 2023</span>
@@ -255,8 +287,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         </a>
         
         
-        <a class="card cat-machine" href="/blog/machine-learning/backpropagation">
-          <span class="badge">Machine</span>
+        <a class="card cat-machine-learning" href="/blog/machine-learning/backpropagation">
+          <span class="badge">Machine Learning</span>
           <h3 class="c-title">Backpropagation, How Neural Nets Actually Learn</h3>
           <p class="c-exc">Everyone is told that neural networks learn by “backpropagation”, and everyone is then shown a wall of matrix equations bristling with transposes and tiny...</p>
           <span class="c-date">April 2022</span>
@@ -271,8 +303,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         </a>
         
         
-        <a class="card cat-machine" href="/blog/machine-learning/gradient-descent">
-          <span class="badge">Machine</span>
+        <a class="card cat-machine-learning" href="/blog/machine-learning/gradient-descent">
+          <span class="badge">Machine Learning</span>
           <h3 class="c-title">Gradient Descent and Optimisation</h3>
           <p class="c-exc">Imagine you are lost on a foggy mountain and want to reach the valley. You cannot see far, but you can feel the slope...</p>
           <span class="c-date">September 2020</span>
