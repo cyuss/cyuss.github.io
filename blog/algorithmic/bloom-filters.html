@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Introduction to Bloom Filters - Can We Check Things Without Remembering Them?</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Introduction to Bloom Filters - Can We Check Things Without Remembering Them?
+             6 May 2025 ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/algorithmic/bloom-filters">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Introduction to Bloom Filters - Can We Check Things Without Remembering Them? | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Introduction to Bloom Filters - Can We Check Things Without Remembering Them?" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Suppose you are building a web crawler and, for every URL you meet, you must answer one question : “have I seen this before ?”. Storing every URL in a hash set works, until the set grows to billions of entries and no longer fits in memory. What if you could answer that question using a few bits per item, accepting that you will occasionally be told “yes” when the true answer is “no”, but never the reverse ? This is exactly the bargain struck by the Bloom filter, a beautifully simple probabilistic data structure invented by Burton Bloom in…" />
+<meta name="twitter:description" property="og:description" content="Suppose you are building a web crawler and, for every URL you meet, you must answer one question : “have I seen this before ?”. Storing every URL in a hash set works, until the set grows to billions of entries and no longer fits in memory. What if you could answer that question using a few bits per item, accepting that you will occasionally be told “yes” when the true answer is “no”, but never the reverse ? This is exactly the bargain struck by the Bloom filter, a beautifully simple probabilistic data structure invented by Burton Bloom in…" />
+<link rel="canonical" href="www.ohmykode.com/blog/algorithmic/bloom-filters" />
+<meta property="og:url" content="www.ohmykode.com/blog/algorithmic/bloom-filters" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-06T15:46:00+02:00" />
+<meta property="article:modified_time" content="2025-05-06T15:46:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Introduction to Bloom Filters - Can We Check Things Without Remembering Them?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2025-05-06T15:46:00+02:00","datePublished":"2025-05-06T15:46:00+02:00","description":"Suppose you are building a web crawler and, for every URL you meet, you must answer one question : “have I seen this before ?”. Storing every URL in a hash set works, until the set grows to billions of entries and no longer fits in memory. What if you could answer that question using a few bits per item, accepting that you will occasionally be told “yes” when the true answer is “no”, but never the reverse ? This is exactly the bargain struck by the Bloom filter, a beautifully simple probabilistic data structure invented by Burton Bloom in…","headline":"Introduction to Bloom Filters - Can We Check Things Without Remembering Them?","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/algorithmic/bloom-filters"},"url":"www.ohmykode.com/blog/algorithmic/bloom-filters"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Introduction to Bloom Filters - Can We Check Things Without Remembering Them?</h1></span></center>
+            <center><p> 6 May 2025 </p></center>
+            <center><p class="fa fa-clock-o"> 15 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            20 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>Suppose you are building a web crawler and, for every URL you meet, you must answer one question : <em>“have I seen this before ?”</em>. Storing every URL in a hash set works, until the set grows to billions of entries and no longer fits in memory. What if you could answer that question using a few bits per item, accepting that you will occasionally be told <em>“yes”</em> when the true answer is <em>“no”</em>, but <strong>never</strong> the reverse ? This is exactly the bargain struck by the <strong>Bloom filter</strong>, a beautifully simple probabilistic data structure invented by Burton Bloom in 1970 <a class="citation" href="#Bloom1970">(Bloom, 1970)</a>. In this post we build it from scratch, implement it in Python, and derive the mathematics that tells us how to size it.</p>
+</blockquote>
+
+<h2 id="1-what-is-a-bloom-filter-">1. What is a Bloom filter ?</h2>
+<p>A Bloom filter is a probabilistic data structure for <strong>approximate set membership</strong>. It supports two operations, <code class="language-plaintext highlighter-rouge">insert(x)</code> and <code class="language-plaintext highlighter-rouge">contains(x)</code>, and it answers the second one with a deliberate asymmetry :</p>
+
+<div class="definition">
+	A <b>Bloom filter</b> answers a membership query with either <i>"possibly in the set"</i> or <i>"definitely not in the set"</i>. It admits <b>false positives</b> (claiming an absent element is present) but never <b>false negatives</b> : if it says an element is absent, that is certain.
+</div>
+
+<p>That one-sided error is what buys the enormous space savings. A Bloom filter stores no keys at all, only a compact array of bits, and yet it can vouch, with a tunable and quantifiable error rate, that an element has never been inserted. When a definitive answer is occasionally required, the filter is used as a cheap first line of defence : only the queries it lets through need to touch the slow, exact store on disk.</p>
+
+<h2 id="2-how-it-works">2. How it works</h2>
+<p>The machinery has three ingredients : a bit array $B$ of $m$ bits (all initially $0$), and $k$ independent hash functions $h_{1}, \dots, h_{k}$, each mapping an element to one of the $m$ positions.</p>
+
+<p><strong>Insertion.</strong> To insert an element $x$, compute the $k$ positions $h_{1}(x), \dots, h_{k}(x)$ and set each of those bits to $1$. Bits are only ever turned on, never off.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 240" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .cellb { fill:#fff; stroke:#c9cdd6; stroke-width:1.4; }
+    .idx   { font-size:10.5px; fill:#9a9a9a; }
+    .hpath { stroke:#b5651d; stroke-width:1.8; fill:none; opacity:.8;
+             stroke-dasharray:4 6; animation:bflow 1.6s linear infinite; }
+    @keyframes bflow { to { stroke-dashoffset:-40; } }
+    .setb  { fill:#4a6da7; opacity:0; }
+    .s0 { animation:lite 6s ease-in-out infinite; animation-delay:.3s; }
+    .s1 { animation:lite 6s ease-in-out infinite; animation-delay:1.3s; }
+    .s2 { animation:lite 6s ease-in-out infinite; animation-delay:2.3s; }
+    @keyframes lite { 0%{opacity:0} 8%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
+    .elem { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .lbl  { font-size:15px; fill:#2b2b2b; } .it{ font-style:italic; }
+    .htag { font-size:12px; fill:#b5651d; }
+  </style>
+  <!-- element -->
+  <rect class="elem" x="250" y="16" rx="16" ry="16" width="140" height="38" />
+  <text class="lbl it" x="320" y="41" text-anchor="middle">insert("apple")</text>
+  <!-- hash tags -->
+  <text class="htag" x="150" y="96" text-anchor="middle">h₁</text>
+  <text class="htag" x="320" y="150" text-anchor="middle">h₂</text>
+  <text class="htag" x="470" y="96" text-anchor="middle">h₃</text>
+  <!-- hash paths to cells 3, 8, 12 -->
+  <path class="hpath" d="M300,54 C230,90 175,110 140,150" />
+  <path class="hpath" d="M320,54 C320,120 320,120 320,150" />
+  <path class="hpath" d="M340,54 C420,90 470,110 500,150" />
+  <!-- bit array of 16 cells, width 32, start x=32, y=150 -->
+  <g>
+    <!-- generate cells -->
+    <g>
+      <rect class="cellb" x="32" y="150" width="32" height="34" /><text class="idx" x="48" y="200" text-anchor="middle">0</text>
+      <rect class="cellb" x="64" y="150" width="32" height="34" /><text class="idx" x="80" y="200" text-anchor="middle">1</text>
+      <rect class="cellb" x="96" y="150" width="32" height="34" /><text class="idx" x="112" y="200" text-anchor="middle">2</text>
+      <rect class="cellb" x="128" y="150" width="32" height="34" /><rect class="setb s0" x="128" y="150" width="32" height="34" /><text class="idx" x="144" y="200" text-anchor="middle">3</text>
+      <rect class="cellb" x="160" y="150" width="32" height="34" /><text class="idx" x="176" y="200" text-anchor="middle">4</text>
+      <rect class="cellb" x="192" y="150" width="32" height="34" /><text class="idx" x="208" y="200" text-anchor="middle">5</text>
+      <rect class="cellb" x="224" y="150" width="32" height="34" /><text class="idx" x="240" y="200" text-anchor="middle">6</text>
+      <rect class="cellb" x="256" y="150" width="32" height="34" /><text class="idx" x="272" y="200" text-anchor="middle">7</text>
+      <rect class="cellb" x="288" y="150" width="32" height="34" /><rect class="setb s1" x="288" y="150" width="32" height="34" /><text class="idx" x="304" y="200" text-anchor="middle">8</text>
+      <rect class="cellb" x="320" y="150" width="32" height="34" /><text class="idx" x="336" y="200" text-anchor="middle">9</text>
+      <rect class="cellb" x="352" y="150" width="32" height="34" /><text class="idx" x="368" y="200" text-anchor="middle">10</text>
+      <rect class="cellb" x="384" y="150" width="32" height="34" /><text class="idx" x="400" y="200" text-anchor="middle">11</text>
+      <rect class="cellb" x="416" y="150" width="32" height="34" /><rect class="setb s2" x="416" y="150" width="32" height="34" /><text class="idx" x="432" y="200" text-anchor="middle">12</text>
+      <rect class="cellb" x="448" y="150" width="32" height="34" /><text class="idx" x="464" y="200" text-anchor="middle">13</text>
+      <rect class="cellb" x="480" y="150" width="32" height="34" /><text class="idx" x="496" y="200" text-anchor="middle">14</text>
+      <rect class="cellb" x="512" y="150" width="32" height="34" /><text class="idx" x="528" y="200" text-anchor="middle">15</text>
+    </g>
+  </g>
+  <text class="lbl" x="288" y="228" text-anchor="middle" font-size="13" fill="#7a7a7a">the bit array B  (m = 16 bits, k = 3 hashes)</text>
+</svg>
+<figcaption><b>Figure 1 -</b> Inserting <i>"apple"</i>. The three hash functions select positions $3, 8, 12$, and those bits are switched on (blue). Different elements light up different, possibly overlapping, positions.</figcaption>
+</center></figure>
+
+<p><strong>Membership query.</strong> To test whether $x$ is present, compute the same $k$ positions and inspect the bits. If <strong>any</strong> of them is $0$, then $x$ was certainly never inserted, because insertion would have set all of them, this is the guaranteed <em>no false negatives</em> property. If <strong>all</strong> $k$ bits are $1$, the filter reports <em>“possibly present”</em> : the element may have been inserted, or those bits may simply have been set by a combination of other elements, a <strong>false positive</strong>.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .c0 { fill:#fff; stroke:#c9cdd6; stroke-width:1.3; }
+    .c1 { fill:#4a6da7; stroke:#3c5a8a; stroke-width:1.3; }
+    .bit{ font-size:13px; fill:#fff; font-weight:bold; }
+    .bit0{ font-size:13px; fill:#b9bdc6; }
+    .qlbl{ font-size:14px; fill:#2b2b2b; font-style:italic; }
+    .yes { font-size:14px; fill:#5aa06a; font-weight:bold; }
+    .no  { font-size:14px; fill:#b5651d; font-weight:bold; }
+    .mk  { font-size:11px; fill:#7a7a7a; }
+  </style>
+  <!-- row A: member -->
+  <text class="qlbl" x="14" y="55">contains("apple")</text>
+  <g transform="translate(190,32)">
+    <rect class="c1" x="0" y="0" width="34" height="34" /><text class="bit" x="17" y="22" text-anchor="middle">1</text>
+    <rect class="c1" x="40" y="0" width="34" height="34" /><text class="bit" x="57" y="22" text-anchor="middle">1</text>
+    <rect class="c1" x="80" y="0" width="34" height="34" /><text class="bit" x="97" y="22" text-anchor="middle">1</text>
+    <text class="mk" x="17" y="52" text-anchor="middle">pos 3</text>
+    <text class="mk" x="57" y="52" text-anchor="middle">pos 8</text>
+    <text class="mk" x="97" y="52" text-anchor="middle">pos 12</text>
+  </g>
+  <text class="yes" x="360" y="55">all 1  →  possibly in set ✓</text>
+  <!-- divider -->
+  <line x1="14" y1="120" x2="626" y2="120" stroke="#eee" stroke-width="1" />
+  <!-- row B: non-member -->
+  <text class="qlbl" x="14" y="175">contains("cow")</text>
+  <g transform="translate(190,152)">
+    <rect class="c1" x="0" y="0" width="34" height="34" /><text class="bit" x="17" y="22" text-anchor="middle">1</text>
+    <rect class="c0" x="40" y="0" width="34" height="34" /><text class="bit0" x="57" y="22" text-anchor="middle">0</text>
+    <rect class="c1" x="80" y="0" width="34" height="34" /><text class="bit" x="97" y="22" text-anchor="middle">1</text>
+    <text class="mk" x="17" y="52" text-anchor="middle">pos 5</text>
+    <text class="mk" x="57" y="52" text-anchor="middle">pos 9</text>
+    <text class="mk" x="97" y="52" text-anchor="middle">pos 12</text>
+  </g>
+  <text class="no" x="360" y="175">a 0  →  definitely not in set ✗</text>
+</svg>
+<figcaption><b>Figure 2 -</b> The asymmetric query logic. A single zero bit is an irrefutable proof of absence ; all-ones is only circumstantial evidence of presence.</figcaption>
+</center></figure>
+
+<h2 id="3-a-python-implementation">3. A Python implementation</h2>
+<p>Real Bloom filters do not need $k$ genuinely independent hash functions. A classic result by Kirsch and Mitzenmacher <a class="citation" href="#Kirsch2006">(Kirsch &amp; Mitzenmacher, 2008)</a> shows that two hash functions are enough : the family $h_{i}(x) = h_{1}(x) + i \cdot h_{2}(x) \pmod{m}$ behaves, for our purposes, just like $k$ independent ones. We use Python’s <code class="language-plaintext highlighter-rouge">hashlib</code> to derive $h_{1}$ and $h_{2}$ from a single digest.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
+
+<span class="k">class</span> <span class="nc">BloomFilter</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>                     <span class="c1"># number of bits
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>                     <span class="c1"># number of hash functions
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">bits</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">((</span><span class="n">m</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_positions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">digest</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">encode</span><span class="p">()).</span><span class="n">digest</span><span class="p">()</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span>  <span class="s">"big"</span><span class="p">)</span>
+        <span class="n">h2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="s">"big"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">h2</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">m</span>          <span class="c1"># Kirsch-Mitzenmacher
+</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_positions</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">bits</span><span class="p">[</span><span class="n">pos</span> <span class="o">//</span> <span class="mi">8</span><span class="p">]</span> <span class="o">|=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">pos</span> <span class="o">%</span> <span class="mi">8</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">bits</span><span class="p">[</span><span class="n">pos</span> <span class="o">//</span> <span class="mi">8</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">pos</span> <span class="o">%</span> <span class="mi">8</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_positions</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<p>The usage mirrors the guarantee exactly, a negative answer is always trustworthy :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bf</span> <span class="o">=</span> <span class="n">BloomFilter</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">,</span> <span class="s">"cherry"</span><span class="p">]:</span>
+    <span class="n">bf</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"apple"</span>  <span class="ow">in</span> <span class="n">bf</span><span class="p">)</span>   <span class="c1"># True  (really inserted)
+</span><span class="k">print</span><span class="p">(</span><span class="s">"cow"</span>    <span class="ow">in</span> <span class="n">bf</span><span class="p">)</span>   <span class="c1"># False (guaranteed correct)
+</span><span class="k">print</span><span class="p">(</span><span class="s">"grape"</span>  <span class="ow">in</span> <span class="n">bf</span><span class="p">)</span>   <span class="c1"># False, or rarely True (a false positive)
+</span></code></pre></div></div>
+
+<h2 id="4-the-mathematics-of-false-positives">4. The mathematics of false positives</h2>
+<p>The whole design hinges on one number : the probability that a query for an element we never inserted comes back positive. Let us derive it.</p>
+
+<p>Assume the hash functions distribute elements uniformly and independently over the $m$ bits. When we insert a single element we set $k$ bits ; the probability that one <em>specific</em> bit is left untouched by one hash is $1 - \tfrac{1}{m}$. After inserting $n$ elements, each contributing $k$ hashes, the probability that a given bit is still $0$ is</p>
+
+\[\begin{equation} P(\text{bit} = 0) = \left(1 - \frac{1}{m}\right)^{kn} \approx e^{-kn/m}, \label{eq:bitzero} \end{equation}\]
+
+<p>using the standard limit $\left(1 - \tfrac{1}{m}\right)^{m} \to e^{-1}$. Consequently the probability that a given bit is $1$ is $\;1 - e^{-kn/m}$.</p>
+
+<p>A false positive occurs when a <em>non-inserted</em> element hashes to $k$ positions that all happen to be $1$. Treating those $k$ bits as independent <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, the false-positive probability is</p>
+
+\[\begin{equation} \varepsilon \;\approx\; \left( 1 - e^{-kn/m} \right)^{k}. \label{eq:fp} \end{equation}\]
+
+<p>This compact formula is the design equation of every Bloom filter.</p>
+
+<h2 id="5-choosing-the-parameters">5. Choosing the parameters</h2>
+<p>Formula $\eqref{eq:fp}$ exposes a genuine trade-off in $k$. Too few hash functions and each query inspects too little evidence ; too many and the array saturates with $1$s, so almost everything looks present. There is a sweet spot, found by minimising $\varepsilon$ over $k$ for fixed $m$ and $n$ :</p>
+
+\[\begin{equation} k^{\ast} = \frac{m}{n}\,\ln 2 \;\approx\; 0.693\,\frac{m}{n}. \label{eq:koptimal} \end{equation}\]
+
+<figure><center>
+<svg viewBox="0 0 640 350" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .axis{ stroke:#8a8a8a; stroke-width:1.3; }
+    .grid{ stroke:#eee; stroke-width:1; }
+    .curve{ stroke:#4a6da7; stroke-width:2.4; fill:none; }
+    .tick{ font-size:11px; fill:#7a7a7a; }
+    .axl { font-size:13px; fill:#2b2b2b; }
+    .opt { stroke:#b5651d; stroke-width:1.4; stroke-dasharray:4 4; }
+    .optd{ fill:#b5651d; }
+    .optt{ font-size:12px; fill:#b5651d; }
+  </style>
+  <!-- gridlines -->
+  <line class="grid" x1="70" y1="60" x2="600" y2="60" />
+  <line class="grid" x1="70" y1="180" x2="600" y2="180" />
+  <!-- axes -->
+  <line class="axis" x1="70" y1="60" x2="70" y2="300" />
+  <line class="axis" x1="70" y1="300" x2="600" y2="300" />
+  <!-- y ticks -->
+  <text class="tick" x="62" y="304" text-anchor="end">0</text>
+  <text class="tick" x="62" y="184" text-anchor="end">0.05</text>
+  <text class="tick" x="62" y="64" text-anchor="end">0.10</text>
+  <text class="axl" x="24" y="185" text-anchor="middle" transform="rotate(-90 24 185)">false-positive rate ε</text>
+  <!-- x ticks (k = 1..14), x = 90 + (k-1)*38.46 -->
+  <text class="tick" x="90" y="318" text-anchor="middle">1</text>
+  <text class="tick" x="205" y="318" text-anchor="middle">4</text>
+  <text class="tick" x="321" y="318" text-anchor="middle">7</text>
+  <text class="tick" x="436" y="318" text-anchor="middle">10</text>
+  <text class="tick" x="590" y="318" text-anchor="middle">14</text>
+  <text class="axl" x="335" y="340" text-anchor="middle">number of hash functions k   (with m/n = 10)</text>
+  <!-- curve through computed points of (1 - e^{-k/10})^k -->
+  <path class="curve" d="M90,71 L128,221 L167,258 L205,272 L244,277 L282,280 L321,280 L359,280 L398,278 L436,275 L475,270 L513,261 L551,247 L590,228" />
+  <!-- optimum marker at k*=6.93 -> x ~ 318 -->
+  <line class="opt" x1="318" y1="280" x2="318" y2="60" />
+  <circle class="optd" cx="321" cy="280" r="4" />
+  <text class="optt" x="326" y="52">k* = (m/n) ln 2 ≈ 6.9</text>
+</svg>
+<figcaption><b>Figure 3 -</b> False-positive rate $\varepsilon$ from $\eqref{eq:fp}$ as a function of $k$, for a filter with ten bits per element ($m/n = 10$). The curve bottoms out near $k^{\ast} \approx 6.9$, matching $\eqref{eq:koptimal}$ ; beyond it, extra hashes only saturate the array and hurt.</figcaption>
+</center></figure>
+
+<p>Substituting $k^{\ast}$ back into $\eqref{eq:fp}$ and rearranging gives the number of bits required to hit a target error rate $\varepsilon$ :</p>
+
+\[\begin{equation} m = -\,\frac{n \ln \varepsilon}{(\ln 2)^{2}}. \label{eq:msize} \end{equation}\]
+
+<div class="example">
+	Say we expect $n = 1{,}000{,}000$ elements and want a false-positive rate of $\varepsilon = 1\%$. Then $\eqref{eq:msize}$ gives $m \approx 9.585\,n \approx 9.59$ million bits, about $1.2$ MB, and $\eqref{eq:koptimal}$ suggests $k^{\ast} \approx 7$ hash functions. Roughly <b>ten bits per element</b> buys a $1\%$ error rate ; note this is entirely independent of how <i>large</i> the elements themselves are, be they short words or kilobyte-long URLs.
+</div>
+
+<h2 id="6-variants-and-where-they-are-used">6. Variants and where they are used</h2>
+<p>The plain Bloom filter cannot delete elements (turning a bit off might erase evidence of some <em>other</em> element). This limitation spawned a family of refinements :</p>
+
+<ul>
+  <li><strong>Counting Bloom filters</strong> replace each bit by a small counter, so insertions increment and deletions decrement, restoring removal at the cost of more space <a class="citation" href="#Fan2000">(Fan et al., 2000)</a>.</li>
+  <li><strong>Scalable</strong> and <strong>partitioned</strong> Bloom filters grow gracefully when $n$ is not known in advance.</li>
+  <li><strong>Cuckoo filters</strong> achieve similar space efficiency while supporting deletion and often lower false-positive rates.</li>
+</ul>
+
+<p>Bloom filters are quietly everywhere. Databases such as Cassandra, HBase and Google’s Bigtable use them to avoid disk reads for keys that are absent ; the same trick guards the LSM-tree lookups in RocksDB. Web browsers have used them for safe-browsing URL blacklists, content-delivery networks use them for cache filtering, and Bitcoin’s lightweight clients once used them to request relevant transactions without revealing exactly which addresses they cared about. Whenever <em>“probably yes / definitely no”</em> is good enough, a Bloom filter turns a memory problem into a handful of bits.</p>
+
+<h2 id="7-conclusion">7. Conclusion</h2>
+<p>The Bloom filter is a small masterpiece of engineering trade-offs : by giving up the ability to store keys, and by tolerating a controlled, quantifiable rate of false positives, it answers set-membership queries in constant time and a fistful of bits per element. Its one-sided error, <em>never</em> a false negative, is what makes it trustworthy where it matters, and its design equations $\eqref{eq:fp}$–$\eqref{eq:msize}$ let us dial the error rate to whatever a system can afford. More than fifty years after Burton Bloom described it, it remains a first reflex for anyone who needs to check things without the luxury of remembering them.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Bloom1970">Bloom, B. H. (1970). Space/Time Trade-offs in Hash Coding with Allowable Errors. <i>Communications of the ACM</i>, <i>13</i>(7), 422–426.</span>
+
+<div id="Bloom1970-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Bloom1970-bibtex" class="pre pre-scrollable collapse">@article{Bloom1970,
+  author = {Bloom, Burton H.},
+  title = {Space/Time Trade-offs in Hash Coding with Allowable Errors},
+  journal = {Communications of the ACM},
+  volume = {13},
+  number = {7},
+  pages = {422--426},
+  year = {1970},
+  publisher = {ACM}
+}
+</pre>
+
+</div></li>
+<li><span id="Fan2000">Fan, L., Cao, P., Almeida, J., &amp; Broder, A. Z. (2000). Summary Cache: A Scalable Wide-Area Web Cache Sharing Protocol. <i>IEEE/ACM Transactions on Networking</i>, <i>8</i>(3), 281–293.</span>
+
+<div id="Fan2000-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Fan2000-bibtex" class="pre pre-scrollable collapse">@article{Fan2000,
+  author = {Fan, Li and Cao, Pei and Almeida, Jussara and Broder, Andrei Z.},
+  title = {Summary Cache: A Scalable Wide-Area Web Cache Sharing Protocol},
+  journal = {IEEE/ACM Transactions on Networking},
+  volume = {8},
+  number = {3},
+  pages = {281--293},
+  year = {2000},
+  publisher = {IEEE}
+}
+</pre>
+
+</div></li>
+<li><span id="Kirsch2006">Kirsch, A., &amp; Mitzenmacher, M. (2008). Less Hashing, Same Performance: Building a Better Bloom Filter. <i>Random Structures &amp; Algorithms</i>, <i>33</i>(2), 187–218.</span>
+
+<div id="Kirsch2006-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Kirsch2006-bibtex" class="pre pre-scrollable collapse">@article{Kirsch2006,
+  author = {Kirsch, Adam and Mitzenmacher, Michael},
+  title = {Less Hashing, Same Performance: Building a Better Bloom Filter},
+  journal = {Random Structures \&amp; Algorithms},
+  volume = {33},
+  number = {2},
+  pages = {187--218},
+  year = {2008},
+  publisher = {Wiley}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>This independence assumption is a slight simplification, the events “bit $i$ is set” are weakly correlated, so $\eqref{eq:fp}$ is a very good approximation rather than an exact identity. Bose <em>et al.</em> derived the exact expression, which differs only negligibly for the array sizes used in practice. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>

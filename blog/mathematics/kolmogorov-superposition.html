@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Kolmogorov's Superposition Theorem</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Kolmogorov's Superposition Theorem
+             1 May 2021 
+             12 minutes read
+            
+..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/kolmogorov-superposition">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Kolmogorov’s Superposition Theorem | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Kolmogorov’s Superposition Theorem" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="At the 1900 International Congress of Mathematicians, David Hilbert presented a list of 23 problems that would shape the century to come. His thirteenth asked, in essence, a deceptively simple question : are there functions of several variables that cannot be built from functions of fewer variables ? Half a century later, in a two-page note, Andrey Kolmogorov gave a breathtaking answer : every continuous function of many variables is a superposition of continuous functions of a single variable and addition. Nothing more than univariate functions and $+$ is ever needed. This post tells that story, unpacks the structure of…" />
+<meta name="twitter:description" property="og:description" content="At the 1900 International Congress of Mathematicians, David Hilbert presented a list of 23 problems that would shape the century to come. His thirteenth asked, in essence, a deceptively simple question : are there functions of several variables that cannot be built from functions of fewer variables ? Half a century later, in a two-page note, Andrey Kolmogorov gave a breathtaking answer : every continuous function of many variables is a superposition of continuous functions of a single variable and addition. Nothing more than univariate functions and $+$ is ever needed. This post tells that story, unpacks the structure of…" />
+<link rel="canonical" href="www.ohmykode.com/blog/mathematics/kolmogorov-superposition" />
+<meta property="og:url" content="www.ohmykode.com/blog/mathematics/kolmogorov-superposition" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-01T12:00:00+02:00" />
+<meta property="article:modified_time" content="2021-05-01T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Kolmogorov’s Superposition Theorem" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2021-05-01T12:00:00+02:00","datePublished":"2021-05-01T12:00:00+02:00","description":"At the 1900 International Congress of Mathematicians, David Hilbert presented a list of 23 problems that would shape the century to come. His thirteenth asked, in essence, a deceptively simple question : are there functions of several variables that cannot be built from functions of fewer variables ? Half a century later, in a two-page note, Andrey Kolmogorov gave a breathtaking answer : every continuous function of many variables is a superposition of continuous functions of a single variable and addition. Nothing more than univariate functions and $+$ is ever needed. This post tells that story, unpacks the structure of…","headline":"Kolmogorov’s Superposition Theorem","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/kolmogorov-superposition"},"url":"www.ohmykode.com/blog/mathematics/kolmogorov-superposition"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Kolmogorov's Superposition Theorem</h1></span></center>
+            <center><p> 1 May 2021 </p></center>
+            <center><p class="fa fa-clock-o"> 12 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            16 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>At the 1900 International Congress of Mathematicians, David Hilbert presented a list of 23 problems that would shape the century to come. His <strong>thirteenth</strong> asked, in essence, a deceptively simple question : are there functions of several variables that cannot be built from functions of fewer variables ? Half a century later, in a two-page note, Andrey Kolmogorov gave a breathtaking answer : <strong>every</strong> continuous function of many variables is a superposition of continuous functions of a <em>single</em> variable and addition. Nothing more than univariate functions and $+$ is ever needed. This post tells that story, unpacks the structure of the theorem, and follows the surprising thread that ties it to modern neural networks.</p>
+</blockquote>
+
+<h2 id="1-hilberts-thirteenth-problem">1. Hilbert’s thirteenth problem</h2>
+<p>Some functions of two variables are obviously reducible. The product $xy$, for instance, hides a univariate skeleton :</p>
+
+\[\begin{equation} xy = \exp\big( \ln x + \ln y \big), \qquad x, y &gt; 0, \label{eq:product} \end{equation}\]
+
+<p>so multiplication is really just addition of logarithms wrapped inside an exponential, <em>i.e.</em> a superposition of the univariate functions $\ln$ and $\exp$. Hilbert asked whether this kind of reduction is always possible. Concretely, he conjectured that the solution of the general seventh-degree equation, viewed as a function of three of its coefficients, could <strong>not</strong> be written using only continuous functions of two variables. He expected an <em>impossibility</em> result.</p>
+
+<p>Mathematics rarely obliges our intuitions. In 1957 Kolmogorov <a class="citation" href="#Kolmogorov1957">(Kolmogorov, 1957)</a>, building on and then dramatically simplifying work with his student Vladimir Arnold <a class="citation" href="#Arnold1957">(Arnold, 1957)</a> <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, proved the opposite of what Hilbert anticipated : not only are two variables enough, a <em>single</em> variable is enough, provided we are allowed to add.</p>
+
+<h2 id="2-the-theorem">2. The theorem</h2>
+<div class="theorem" text="Kolmogorov, 1957">
+	For every integer $n \geq 2$ there exist continuous functions $\phi_{q,p} : [0,1] \rightarrow \Bbb{R}$, for $q = 0, \dots, 2n$ and $p = 1, \dots, n$, such that every continuous function $ƒ : [0,1]^{n} \rightarrow \Bbb{R}$ can be represented in the form
+	$$ \begin{equation} ƒ(x_{1}, \dots, x_{n}) = \sum_{q=0}^{2n} \Phi_{q}\!\left( \sum_{p=1}^{n} \phi_{q,p}(x_{p}) \right), \label{eq:kolmogorov} \end{equation} $$
+	where the outer functions $\Phi_{q} : \Bbb{R} \rightarrow \Bbb{R}$ are continuous and depend on $ƒ$.
+</div>
+
+<p>Read this slowly, because every symbol is carrying weight. The <strong>inner functions</strong> $\phi_{q,p}$ act on a single coordinate $x_{p}$ at a time. Their outputs are summed, coordinate by coordinate, into $2n+1$ scalars $z_{q} = \sum_{p} \phi_{q,p}(x_{p})$. Each scalar is then reshaped by a single <strong>outer function</strong> $\Phi_{q}$, and the $2n+1$ results are added. The entire multivariate complexity of $ƒ$ has been squeezed into univariate maps and two rounds of addition.</p>
+
+<p>The structure is easiest to see as a graph. The following diagram traces the flow for $n = 2$ : two inputs, $2n + 1 = 5$ inner units, five outer units, one sum.</p>
+
+<figure><center>
+<svg viewBox="0 0 720 415" width="100%" style="max-width:640px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .edge { stroke:#9db2d8; stroke-width:1.4; fill:none; opacity:.55;
+            stroke-dasharray:5 9; animation:kflow 2.6s linear infinite; }
+    .edge2{ stroke:#d8b89d; stroke-width:1.6; fill:none; opacity:.75;
+            stroke-dasharray:5 9; animation:kflow 2.6s linear infinite; }
+    @keyframes kflow { to { stroke-dashoffset:-56; } }
+    .lbl { font-size:16px; fill:#2b2b2b; } .lblf{ font-style:italic; }
+    .sub { font-size:11px; }
+    .cap { font-size:12.5px; fill:#7a7a7a; }
+    .nin { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .ninr{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .nout{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
+  </style>
+  <!-- column captions -->
+  <text class="cap" x="70" y="26" text-anchor="middle">inputs</text>
+  <text class="cap" x="270" y="26" text-anchor="middle">inner (φ)</text>
+  <text class="cap" x="470" y="26" text-anchor="middle">outer (Φ)</text>
+  <text class="cap" x="650" y="26" text-anchor="middle">output</text>
+  <!-- edges inputs -> inner -->
+  <g>
+    <path class="edge" d="M92,150 L248,70" />  <path class="edge" d="M92,150 L248,145" />
+    <path class="edge" d="M92,150 L248,215" /> <path class="edge" d="M92,150 L248,285" />
+    <path class="edge" d="M92,150 L248,360" />
+    <path class="edge" d="M92,280 L248,70" />  <path class="edge" d="M92,280 L248,145" />
+    <path class="edge" d="M92,280 L248,215" /> <path class="edge" d="M92,280 L248,285" />
+    <path class="edge" d="M92,280 L248,360" />
+  </g>
+  <!-- edges inner -> outer (one-to-one) -->
+  <g>
+    <path class="edge2" d="M292,70  L448,70" />  <path class="edge2" d="M292,145 L448,145" />
+    <path class="edge2" d="M292,215 L448,215" /> <path class="edge2" d="M292,285 L448,285" />
+    <path class="edge2" d="M292,360 L448,360" />
+  </g>
+  <!-- edges outer -> sum -->
+  <g>
+    <path class="edge2" d="M492,70  L628,215" /> <path class="edge2" d="M492,145 L628,215" />
+    <path class="edge2" d="M492,215 L628,215" /> <path class="edge2" d="M492,285 L628,215" />
+    <path class="edge2" d="M492,360 L628,215" />
+  </g>
+  <!-- input nodes -->
+  <circle class="nin" cx="70" cy="150" r="22" /><text class="lbl lblf" x="70" y="156" text-anchor="middle">x<tspan class="sub" dy="4">1</tspan></text>
+  <circle class="nin" cx="70" cy="280" r="22" /><text class="lbl lblf" x="70" y="286" text-anchor="middle">x<tspan class="sub" dy="4">2</tspan></text>
+  <!-- inner nodes: z_q -->
+  <g class="lbl lblf" text-anchor="middle">
+    <circle class="ninr" cx="270" cy="70" r="20" /><text x="270" y="76">z<tspan class="sub" dy="4">0</tspan></text>
+    <circle class="ninr" cx="270" cy="145" r="20" /><text x="270" y="151">z<tspan class="sub" dy="4">1</tspan></text>
+    <circle class="ninr" cx="270" cy="215" r="20" /><text x="270" y="221">z<tspan class="sub" dy="4">2</tspan></text>
+    <circle class="ninr" cx="270" cy="285" r="20" /><text x="270" y="291">z<tspan class="sub" dy="4">3</tspan></text>
+    <circle class="ninr" cx="270" cy="360" r="20" /><text x="270" y="366">z<tspan class="sub" dy="4">4</tspan></text>
+  </g>
+  <!-- outer nodes: Phi_q -->
+  <g class="lbl" text-anchor="middle">
+    <circle class="nout" cx="470" cy="70" r="20" /><text x="470" y="76">Φ<tspan class="sub" dy="4">0</tspan></text>
+    <circle class="nout" cx="470" cy="145" r="20" /><text x="470" y="151">Φ<tspan class="sub" dy="4">1</tspan></text>
+    <circle class="nout" cx="470" cy="215" r="20" /><text x="470" y="221">Φ<tspan class="sub" dy="4">2</tspan></text>
+    <circle class="nout" cx="470" cy="285" r="20" /><text x="470" y="291">Φ<tspan class="sub" dy="4">3</tspan></text>
+    <circle class="nout" cx="470" cy="360" r="20" /><text x="470" y="366">Φ<tspan class="sub" dy="4">4</tspan></text>
+  </g>
+  <!-- sum node -->
+  <circle cx="650" cy="215" r="26" fill="#fff" stroke="#2b2b2b" stroke-width="1.8" />
+  <text class="lbl" x="650" y="224" text-anchor="middle" font-size="24">Σ</text>
+  <text class="lbl lblf" x="650" y="272" text-anchor="middle">ƒ(x<tspan class="sub" dy="4">1</tspan><tspan dy="-4">,x</tspan><tspan class="sub" dy="4">2</tspan><tspan dy="-4">)</tspan></text>
+</svg>
+<figcaption><b>Figure 1 -</b> Kolmogorov's representation for $n=2$. Each input passes through inner univariate maps $\phi_{q,p}$ (green), the coordinate contributions are summed into $z_q$, reshaped by outer maps $\Phi_q$ (orange), and finally added. The animated dashes suggest the direction of the computation.</figcaption>
+</center></figure>
+
+<p>If this picture reminds you of something, that is not an accident, and we will return to it in the last section.</p>
+
+<h2 id="3-what-makes-it-remarkable">3. What makes it remarkable</h2>
+<p>Three features of $\eqref{eq:kolmogorov}$ deserve to be highlighted, because each one defies a natural expectation.</p>
+
+<div class="definition">
+	We call the $\phi_{q,p}$ the <b>inner</b> (or <i>universal</i>) functions and the $\Phi_{q}$ the <b>outer</b> functions. A representation is said to be <i>universal</i> when the inner functions can be chosen <b>once and for all</b>, independently of the target $ƒ$, so that only the outer functions have to adapt.
+</div>
+
+<ul>
+  <li>
+    <p><strong>A fixed number of terms.</strong> The outer sum always has exactly $2n + 1$ terms, no matter how wild $ƒ$ is. The complexity of $ƒ$ is absorbed entirely by the <em>shape</em> of the univariate functions, never by their <em>number</em>.</p>
+  </li>
+  <li>
+    <p><strong>Universality of the inner functions.</strong> In the sharper forms due to Lorentz, Sprecher and others <a class="citation" href="#Sprecher1965">(Sprecher, 1965)</a>, the inner functions $\phi_{q,p}$ (and even a single monotone $\phi$ with rational shifts) can be fixed <em>before</em> $ƒ$ is known. They form a kind of universal coordinate system into which any continuous function can be poured ; only the $\Phi_{q}$ then encode $ƒ$.</p>
+  </li>
+  <li>
+    <p><strong>Continuity without smoothness.</strong> The functions produced by the theorem are continuous but, in general, extremely irregular : they are typically nowhere differentiable, fractal-like objects. Vitushkin later showed that if one insists on <em>smoothness</em> (continuous derivatives), the reduction genuinely fails, which is why Hilbert’s intuition was not entirely misplaced, it was merely aimed at the wrong regularity class.</p>
+  </li>
+</ul>
+
+<div class="example">
+	The exponential trick $\eqref{eq:product}$ is a baby version of the phenomenon : the two-variable function $xy$ is expressed through the univariate $\ln$ and $\exp$ and one addition. Kolmogorov's theorem asserts that a decomposition of this flavour, though far less explicit, exists for <i>every</i> continuous $ƒ$ on the cube, not just for the analytically lucky ones.
+</div>
+
+<h2 id="4-a-non-constructive-miracle">4. A non-constructive miracle</h2>
+<p>It is tempting to ask for the functions. Here the theorem turns coy : its original proof is an <em>existence</em> argument. It guarantees that suitable $\phi_{q,p}$ and $\Phi_{q}$ exist, but the classical constructions produce functions of formidable irregularity, defined as limits of carefully nested approximations. Explicit and numerically usable constructions of the inner functions were only obtained much later, notably by Sprecher and, more recently, through the algorithm of Braun and Griebel <a class="citation" href="#Braun2009">(Braun &amp; Griebel, 2009)</a>, which finally made the decomposition computable to a prescribed accuracy.</p>
+
+<p>So the theorem is best read as a statement about <em>what is possible in principle</em>. It tells us that the barrier Hilbert imagined, dimensionality as an irreducible source of complexity, simply is not there for continuous functions. Whether that possibility can be <em>exploited</em> is a separate, and much harder, story, a tension we already met with the <a href="/blog/mathematics/universal-approximation-theorem">Universal Approximation Theorem</a>.</p>
+
+<h2 id="5-the-neural-network-connection">5. The neural-network connection</h2>
+<p>Look again at Figure 1. Inputs feed a first layer of univariate transformations, the results are summed, a second layer of univariate transformations is applied, and everything is added. That is precisely the shape of a <strong>two-layer feedforward network</strong> : the inner functions play the role of the first hidden layer, the outer functions the role of the second.</p>
+
+<p>This resemblance was made explicit by Hecht-Nielsen <a class="citation" href="#HechtNielsen1987">(Hecht-Nielsen, 1987)</a>, who observed that Kolmogorov’s theorem can be phrased as the existence of an exact four-layer “Kolmogorov network” computing any continuous $ƒ$. For a while this was advertised as a theoretical foundation for neural networks : here, it seemed, was a proof that networks can represent <em>anything</em>, and with a fixed, tiny width of $2n+1$ units.</p>
+
+<p>The enthusiasm needed tempering. Girosi and Poggio <a class="citation" href="#Girosi1989">(Girosi &amp; Poggio, 1989)</a> pointed out the catch : the outer functions $\Phi_{q}$ depend on $ƒ$ in a wholly non-constructive and highly non-smooth way, so they are nothing like the fixed, simple activation functions (a sigmoid, a ReLU) used in real networks. Kolmogorov’s theorem hands you an <em>exact representation</em> but with pathological building blocks ; the Universal Approximation Theorem hands you an <em>approximation</em> with benign, tunable building blocks. They are complementary lenses on the same question, how much can univariate non-linearities and addition achieve, and neither one, on its own, explains why deep learning works in practice.</p>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>Kolmogorov’s superposition theorem is one of those results that quietly rearranges your sense of what is possible. A question that Hilbert framed as a search for irreducible multivariate complexity turned out to have the most economical answer imaginable : univariate functions and addition suffice, always, for continuous functions on a cube. The price is regularity, the ingredients are fractal, non-constructive, and unfriendly to computation, which is exactly why the theorem informs, but does not by itself explain, the practical success of the layered architectures it so eerily prefigures. It is a bridge between a 1900 problem list and a 21st-century machine, built entirely out of one-dimensional pieces.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Arnold1957">Arnold, V. I. (1957). On Functions of Three Variables. <i>Doklady Akademii Nauk SSSR</i>, <i>114</i>, 679–681.</span>
+
+<div id="Arnold1957-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Arnold1957-bibtex" class="pre pre-scrollable collapse">@article{Arnold1957,
+  author = {Arnold, Vladimir I.},
+  title = {On Functions of Three Variables},
+  journal = {Doklady Akademii Nauk SSSR},
+  volume = {114},
+  pages = {679--681},
+  year = {1957}
+}
+</pre>
+
+</div></li>
+<li><span id="Braun2009">Braun, J., &amp; Griebel, M. (2009). On a Constructive Proof of Kolmogorov’s Superposition Theorem. <i>Constructive Approximation</i>, <i>30</i>(3), 653–675.</span>
+
+<div id="Braun2009-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Braun2009-bibtex" class="pre pre-scrollable collapse">@article{Braun2009,
+  author = {Braun, J{\"u}rgen and Griebel, Michael},
+  title = {On a Constructive Proof of Kolmogorov's Superposition Theorem},
+  journal = {Constructive Approximation},
+  volume = {30},
+  number = {3},
+  pages = {653--675},
+  year = {2009},
+  publisher = {Springer}
+}
+</pre>
+
+</div></li>
+<li><span id="Girosi1989">Girosi, F., &amp; Poggio, T. (1989). Representation Properties of Networks: Kolmogorov’s Theorem Is Irrelevant. <i>Neural Computation</i>, <i>1</i>(4), 465–469.</span>
+
+<div id="Girosi1989-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Girosi1989-bibtex" class="pre pre-scrollable collapse">@article{Girosi1989,
+  author = {Girosi, Federico and Poggio, Tomaso},
+  title = {Representation Properties of Networks: Kolmogorov's Theorem Is Irrelevant},
+  journal = {Neural Computation},
+  volume = {1},
+  number = {4},
+  pages = {465--469},
+  year = {1989},
+  publisher = {MIT Press}
+}
+</pre>
+
+</div></li>
+<li><span id="HechtNielsen1987">Hecht-Nielsen, R. (1987). Kolmogorov’s Mapping Neural Network Existence Theorem. <i>Proceedings of the IEEE International Conference on Neural Networks</i>, <i>3</i>, 11–14.</span>
+
+<div id="HechtNielsen1987-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="HechtNielsen1987-bibtex" class="pre pre-scrollable collapse">@inproceedings{HechtNielsen1987,
+  author = {Hecht-Nielsen, Robert},
+  title = {Kolmogorov's Mapping Neural Network Existence Theorem},
+  booktitle = {Proceedings of the IEEE International Conference on Neural Networks},
+  volume = {3},
+  pages = {11--14},
+  year = {1987}
+}
+</pre>
+
+</div></li>
+<li><span id="Kolmogorov1957">Kolmogorov, A. N. (1957). On the Representation of Continuous Functions of Many Variables by Superposition of Continuous Functions of One Variable and Addition. <i>Doklady Akademii Nauk SSSR</i>, <i>114</i>, 953–956.</span>
+
+<div id="Kolmogorov1957-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Kolmogorov1957-bibtex" class="pre pre-scrollable collapse">@article{Kolmogorov1957,
+  author = {Kolmogorov, Andrey N.},
+  title = {On the Representation of Continuous Functions of Many Variables by Superposition of Continuous Functions of One Variable and Addition},
+  journal = {Doklady Akademii Nauk SSSR},
+  volume = {114},
+  pages = {953--956},
+  year = {1957}
+}
+</pre>
+
+</div></li>
+<li><span id="Sprecher1965">Sprecher, D. A. (1965). On the Structure of Continuous Functions of Several Variables. <i>Transactions of the American Mathematical Society</i>, <i>115</i>, 340–355.</span>
+
+<div id="Sprecher1965-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Sprecher1965-bibtex" class="pre pre-scrollable collapse">@article{Sprecher1965,
+  author = {Sprecher, David A.},
+  title = {On the Structure of Continuous Functions of Several Variables},
+  journal = {Transactions of the American Mathematical Society},
+  volume = {115},
+  pages = {340--355},
+  year = {1965},
+  publisher = {American Mathematical Society}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Arnold first settled the three-variable case of Hilbert’s problem in 1957 ; Kolmogorov’s general superposition theorem, of which this post treats, appeared the same year and subsumed it. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXX by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
