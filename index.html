@@ -187,41 +187,26 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     .c-exc { font-size:.87em; color:#7d7568; line-height:1.55; margin:0 0 .9em; }
     .c-date { font-size:.72em; color:#aa9f8b; letter-spacing:.05em; text-transform:uppercase; }
 
-    /* ---- LIST view (compact, column-aligned) ---- */
-    /* flex column: whitespace text nodes never become boxes (no phantom gaps when filtering) */
-    #v-list:checked ~ .cards { display:flex; flex-direction:column; gap:0;
-                               border:1px solid var(--line); border-bottom:none; border-radius:12px;
-                               overflow:hidden; background:var(--card-bg); box-shadow:0 1px 2px rgba(80,60,30,.04); }
-    /* one row = a 3-column grid so titles, categories and dates line up across rows */
-    #v-list:checked ~ .cards .card { display:grid; grid-template-columns:1fr 11em 8em;
-                                     align-items:center; column-gap:1.2em;
-                                     border:none; border-bottom:1px solid var(--line); border-radius:0;
-                                     box-shadow:none; background:transparent; padding:.8em 1.3em;
-                                     transform:none; animation:none;
-                                     transition:background .16s ease; }
-    #v-list:checked ~ .cards .card::after { display:none; }
-    /* every row keeps its bottom border, so whichever row is last VISIBLE (after filtering)
-       forms the container's bottom edge : no stray line, no missing line */
-    #v-list:checked ~ .cards .card:hover { background:var(--hover-bg); }
-    #v-list:checked ~ .cards .c-title { grid-column:1; grid-row:1; margin:0;
-                                        font-size:1em; font-weight:600; line-height:1.4; }
-    #v-list:checked ~ .cards .card:hover .c-title { color:var(--accent); }
-    #v-list:checked ~ .cards .badge { grid-column:2; grid-row:1; margin:0; justify-self:start; }
-    #v-list:checked ~ .cards .c-date { grid-column:3; grid-row:1; margin:0; text-align:right;
-                                       white-space:nowrap; }
-    #v-list:checked ~ .cards .c-exc { display:none; }
-    @media (max-width:640px){
-      #v-list:checked ~ .cards .card { grid-template-columns:1fr auto; row-gap:.4em; }
-      #v-list:checked ~ .cards .c-title { grid-column:1 / -1; grid-row:1; }
-      #v-list:checked ~ .cards .badge   { grid-column:1; grid-row:2; }
-      #v-list:checked ~ .cards .c-date  { grid-column:2; grid-row:2; }
-    }
+    /* ---- LIST view : faithful to the original Papyrus theme ----
+       (hugoferreira/papyrus-theme) : one section per category, a small-caps
+       "On <category>" heading, then the posts as numbered inline links. */
+    .orig-list { display:none; }
+    #v-list:checked ~ .orig-list { display:block; }
+    #v-list:checked ~ .cards { display:none; }
+    .olist-sec { margin:0 0 1.5em; }
+    .olist-sec h3 { margin:0 0 .25em; }   /* the theme already renders h3 in small-caps */
+    .olist-sec p  { margin:0; line-height:1.95; }
+    .olist-num { color:var(--muted); }
 
-    /* filtering: hide cards not matching the checked category (both views) */
+    /* filtering: hide what does not match the checked category (both views) */
     #f-ml:checked   ~ .cards .card:not(.cat-machine-learning),
     #f-math:checked ~ .cards .card:not(.cat-mathematics),
     #f-algo:checked ~ .cards .card:not(.cat-algorithmic),
-    #f-py:checked   ~ .cards .card:not(.cat-python) { display:none; }
+    #f-py:checked   ~ .cards .card:not(.cat-python),
+    #f-ml:checked   ~ .orig-list .olist-sec:not(.cat-machine-learning),
+    #f-math:checked ~ .orig-list .olist-sec:not(.cat-mathematics),
+    #f-algo:checked ~ .orig-list .olist-sec:not(.cat-algorithmic),
+    #f-py:checked   ~ .orig-list .olist-sec:not(.cat-python) { display:none; }
 
     /* animated header ornament */
     .big-ornament { display:inline-block; animation:orn-float 6s ease-in-out 1.6s infinite; }
@@ -363,6 +348,32 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
           <p class="c-exc">One of the most well known problems in graph theory is the four color theorem for map coloring. A simple example to understand that...</p>
           <span class="c-date">October 2018</span>
         </a>
+        
+      </div>
+
+      
+      <div class="orig-list">
+        
+        
+        <section class="olist-sec cat-algorithmic">
+          <h3>On Algorithmic</h3>
+          <p><span class="olist-num">1.</span> <a href="/blog/algorithmic/hyperloglog">HyperLogLog, Counting Millions with Kilobytes</a>&nbsp;&nbsp;<span class="olist-num">2.</span> <a href="/blog/algorithmic/bloom-filters">Introduction to Bloom Filters</a></p>
+        </section>
+        
+        <section class="olist-sec cat-machine-learning">
+          <h3>On Machine Learning</h3>
+          <p><span class="olist-num">1.</span> <a href="/blog/machine-learning/transformers">The Transformer, Explained</a>&nbsp;&nbsp;<span class="olist-num">2.</span> <a href="/blog/machine-learning/attention-mechanism">The Attention Mechanism, Explained</a>&nbsp;&nbsp;<span class="olist-num">3.</span> <a href="/blog/machine-learning/xgboost">XGBoost, Explained</a>&nbsp;&nbsp;<span class="olist-num">4.</span> <a href="/blog/machine-learning/backpropagation">Backpropagation, How Neural Nets Actually Learn</a>&nbsp;&nbsp;<span class="olist-num">5.</span> <a href="/blog/machine-learning/gradient-descent">Gradient Descent and Optimisation</a></p>
+        </section>
+        
+        <section class="olist-sec cat-mathematics">
+          <h3>On Mathematics</h3>
+          <p><span class="olist-num">1.</span> <a href="/blog/mathematics/kolmogorov-superposition">Kolmogorov's Superposition Theorem</a>&nbsp;&nbsp;<span class="olist-num">2.</span> <a href="/blog/mathematics/universal-approximation-theorem">The Universal Approximation Theorem</a>&nbsp;&nbsp;<span class="olist-num">3.</span> <a href="/blog/mathematics/fourier-transform">The Fourier Transform, Why Sinusoids?</a>&nbsp;&nbsp;<span class="olist-num">4.</span> <a href="/blog/mathematics/introduction-chromatic-polynomials">Introduction to Chromatic Polynomials</a></p>
+        </section>
+        
+        <section class="olist-sec cat-python">
+          <h3>On Python</h3>
+          <p><span class="olist-num">1.</span> <a href="/blog/python/memoization">Memoization - Remember what we already found</a></p>
+        </section>
         
       </div>
     </div>
