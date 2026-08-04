@@ -78,7 +78,33 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     <div class="container main">
   <div class="row">
     <header>
-      <div><center><h1>Oh My Kode</h1></center></div>
+      <div><center>
+        <h1 class="wordmark">
+          <span class="wm-sr">Oh My Kode</span>
+          <svg class="wm-svg" viewBox="0 0 800 150" role="presentation" aria-hidden="true" focusable="false">
+            <defs>
+              <!-- left-to-right wipe : the letterforms write themselves -->
+              <mask id="wm-wipe">
+                <rect x="0" y="0" width="0" height="150" fill="#fff">
+                  <animate attributeName="width" from="0" to="820" dur="1.9s" begin="0.25s"
+                           calcMode="spline" keySplines=".3 .1 .25 1" fill="freeze"/>
+                </rect>
+              </mask>
+              <!-- the foil highlight that sweeps across once, after the ink has set -->
+              <linearGradient id="wm-foil" x1="-0.45" x2="-0.15" y1="0" y2="0">
+                <stop offset="0"   stop-color="#e8c07a" stop-opacity="0"/>
+                <stop offset="0.5" stop-color="#e8c07a" stop-opacity=".95"/>
+                <stop offset="1"   stop-color="#e8c07a" stop-opacity="0"/>
+                <animate attributeName="x1" from="-0.45" to="1.05" dur="1.5s" begin="2.5s" fill="freeze"/>
+                <animate attributeName="x2" from="-0.15" to="1.35" dur="1.5s" begin="2.5s" fill="freeze"/>
+              </linearGradient>
+            </defs>
+            <text class="wm-stroke" x="400" y="108" text-anchor="middle" mask="url(#wm-wipe)">Oh My Kode</text>
+            <text class="wm-fill"   x="400" y="108" text-anchor="middle">Oh My Kode</text>
+            <text class="wm-foil"   x="400" y="108" text-anchor="middle">Oh My Kode</text>
+          </svg>
+        </h1>
+      </center></div>
       <center>
         <span class="big-ornament">
           <svg viewBox="310 350 400 350">
@@ -208,6 +234,31 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     #f-algo:checked ~ .orig-list .olist-sec:not(.cat-algorithmic),
     #f-py:checked   ~ .orig-list .olist-sec:not(.cat-python) { display:none; }
 
+    /* ---- animated wordmark : calligraphy ----
+       1. the letterforms draw themselves as strokes (SVG mask wipe)
+       2. the ink fills them in
+       3. a foil highlight sweeps across once
+       4. a hairline rule draws outward from the centre, into the ornament */
+    .wordmark { position:relative; display:block; margin:0; line-height:1; }
+    /* the real title stays in the DOM for screen readers, copy-paste and SEO;
+       the SVG above it is purely decorative (aria-hidden) */
+    .wm-sr { position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+             overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
+    .wm-svg { display:block; margin:0 auto; width:min(560px, 88vw); height:auto; overflow:visible; }
+    .wm-svg text { font-family:'Merriweather','PT Serif',Georgia,'Times New Roman',serif;
+                   font-size:96px; font-weight:700; letter-spacing:.004em; }
+    .wm-stroke { fill:none; stroke:var(--ink); stroke-width:1.15;
+                 stroke-linejoin:round; paint-order:stroke; }
+    .wm-fill { fill:var(--ink); opacity:0;
+               animation:wm-inkfill 1.1s ease 1.55s forwards; }
+    @keyframes wm-inkfill { to { opacity:1; } }
+    .wm-foil { fill:url(#wm-foil); }
+    .wordmark::after { content:""; position:absolute; left:50%; bottom:.02em;
+                       height:1px; width:0; transform:translateX(-50%);
+                       background:linear-gradient(90deg,transparent,var(--accent),transparent);
+                       animation:wm-rule 1.2s cubic-bezier(.2,.7,.3,1) 2.1s forwards; }
+    @keyframes wm-rule { to { width:46%; } }
+
     /* animated header ornament */
     .big-ornament { display:inline-block; animation:orn-float 6s ease-in-out 1.6s infinite; }
     .big-ornament svg { overflow:visible; }
@@ -221,6 +272,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 
     @media (prefers-reduced-motion: reduce) {
       .card, .big-ornament { animation:none; }
+      /* show the finished wordmark straight away, hide the animated layers */
+      .wm-fill { animation:none; opacity:1; }
+      .wm-stroke, .wm-foil { display:none; }
+      .wordmark::after { animation:none; width:46%; }
       .big-ornament svg path { fill-opacity:1; stroke-opacity:0; stroke-dashoffset:0; animation:none; }
       .card:hover { transform:none; }
     }
