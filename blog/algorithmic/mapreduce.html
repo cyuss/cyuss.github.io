@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>MapReduce, Explained</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            MapReduce, Explained
+             20 Nov 2021 
+             19 minutes read
+            
+        
+    ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/algorithmic/mapreduce">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon" type="image/png" sizes="64x64">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>MapReduce, Explained | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="MapReduce, Explained" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Suppose you must count how many times each word appears across a library of a billion books. One librarian would take a lifetime. But hand each of a thousand librarians a shelf, ask each to tally the words on their shelf, then have a second team add up the tallies word by word, and the job finishes in an afternoon. That, in one sentence, is MapReduce : split the work, do the same simple thing to every piece in parallel, then combine the pieces back together. Introduced by Dean and Ghemawat at Google in 2004 (Dean &amp; Ghemawat, 2004), it…" />
+<meta name="twitter:description" property="og:description" content="Suppose you must count how many times each word appears across a library of a billion books. One librarian would take a lifetime. But hand each of a thousand librarians a shelf, ask each to tally the words on their shelf, then have a second team add up the tallies word by word, and the job finishes in an afternoon. That, in one sentence, is MapReduce : split the work, do the same simple thing to every piece in parallel, then combine the pieces back together. Introduced by Dean and Ghemawat at Google in 2004 (Dean &amp; Ghemawat, 2004), it…" />
+<link rel="canonical" href="www.ohmykode.com/blog/algorithmic/mapreduce" />
+<meta property="og:url" content="www.ohmykode.com/blog/algorithmic/mapreduce" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-20T12:00:00+01:00" />
+<meta property="article:modified_time" content="2021-11-20T12:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="MapReduce, Explained" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2021-11-20T12:00:00+01:00","datePublished":"2021-11-20T12:00:00+01:00","description":"Suppose you must count how many times each word appears across a library of a billion books. One librarian would take a lifetime. But hand each of a thousand librarians a shelf, ask each to tally the words on their shelf, then have a second team add up the tallies word by word, and the job finishes in an afternoon. That, in one sentence, is MapReduce : split the work, do the same simple thing to every piece in parallel, then combine the pieces back together. Introduced by Dean and Ghemawat at Google in 2004 (Dean &amp; Ghemawat, 2004), it…","headline":"MapReduce, Explained","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/algorithmic/mapreduce"},"url":"www.ohmykode.com/blog/algorithmic/mapreduce"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>MapReduce, Explained</h1></span></center>
+            <center><p> 20 Nov 2021 </p></center>
+            <center><p class="fa fa-clock-o"> 19 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            25 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>Suppose you must count how many times each word appears across a library of a billion books. One librarian would take a lifetime. But hand each of a thousand librarians a shelf, ask each to tally the words on their shelf, then have a second team add up the tallies word by word, and the job finishes in an afternoon. That, in one sentence, is <strong>MapReduce</strong> : <em>split the work, do the same simple thing to every piece in parallel, then combine the pieces back together.</em> Introduced by Dean and Ghemawat at Google in 2004 <a class="citation" href="#Dean2004">(Dean &amp; Ghemawat, 2004)</a>, it became the paradigm that made “big data” tractable on clusters of ordinary machines. This post builds it from that librarian intuition all the way to its algebraic foundations (why it works comes down to a structure called a <strong>monoid</strong>) and its cost model (why the middle step, the <em>shuffle</em>, is the part that really hurts). We keep it readable for newcomers and rigorous for the initiated.</p>
+</blockquote>
+
+<h2 id="1-the-problem--one-machine-is-not-enough">1. The problem : one machine is not enough</h2>
+<p>Some datasets are simply too large to fit on, or be processed by, a single computer in reasonable time. The instinctive fix is to use many machines, but distributed programming is notoriously hard : you must partition the data, ship it around, coordinate the workers, handle machines that crash mid-job, and reassemble the answer. MapReduce’s contribution was not a new algorithm ; it was a <strong>restriction</strong>. It asks you to express your computation using just two pure functions, <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">reduce</code>, and in exchange the framework handles <em>all</em> the distributed plumbing, partitioning, scheduling, data movement, fault tolerance, for free.</p>
+
+<div class="definition">
+	A <b>MapReduce program</b> is defined by two user functions. The <b>map</b> function is applied independently to every input record and emits intermediate key-value pairs. The <b>reduce</b> function is applied to each intermediate key together with the <i>list of all values</i> that were emitted for it, and produces the final output. Everything in between is the framework's job.
+</div>
+
+<h2 id="2-the-two-functions-and-the-hidden-third-one">2. The two functions, and the hidden third one</h2>
+<p>Formally, if we write $[X]$ for “a list of $X$”, the two functions have these types :</p>
+
+\[\begin{equation} \texttt{map} : (K_1 \times V_1) \longrightarrow [\,K_2 \times V_2\,], \qquad \texttt{reduce} : (K_2 \times [\,V_2\,]) \longrightarrow [\,K_3 \times V_3\,]. \label{eq:types} \end{equation}\]
+
+<p>Read them slowly. <strong>map</strong> takes one input record, a key–value pair $(k_1, v_1)$, and emits a <em>list</em> of intermediate pairs (zero, one, or many). <strong>reduce</strong> takes one intermediate key $k_2$ and the <em>whole list</em> of values that were emitted under that key, and boils them down to the output.</p>
+
+<p>Between the two sits a step you never write but that does the heavy lifting : the <strong>shuffle</strong> (or <em>group-by-key</em>) <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. It collects every intermediate pair produced by every mapper and regroups them so that all values sharing a key land together, ready for a single reducer.</p>
+
+\[\begin{equation} \text{shuffle}\Big(\bigcup_{(k_1,v_1)\in D}\texttt{map}(k_1,v_1)\Big) = \Big\{\, \big(k,\; [\,v : (k,v) \text{ was emitted}\,]\big) \,\Big\}. \label{eq:shuffle} \end{equation}\]
+
+<p><em>In plain words : mappers each shout out little <code class="language-plaintext highlighter-rouge">(key, value)</code> notes ; the shuffle sorts all the notes into bins, one bin per key ; each reducer empties one bin.</em> The entire computation is the composition</p>
+
+\[\begin{equation} \texttt{MapReduce}(D) = \bigcup_{k \in K_2} \texttt{reduce}\big(k,\ \text{shuffle}(\dots)[k]\big). \label{eq:whole} \end{equation}\]
+
+<h2 id="3-the-canonical-example--counting-words">3. The canonical example : counting words</h2>
+<p>The “hello world” of MapReduce is word counting. The map function turns each word into the pair $(\text{word}, 1)$ ; the shuffle groups identical words ; the reduce sums the ones.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="n">doc_id</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="p">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">emit</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                 <span class="c1"># (k2, v2) = (word, 1)
+</span>
+<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">counts</span><span class="p">):</span>             <span class="c1"># counts = [1, 1, 1, ...]
+</span>    <span class="n">emit</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>           <span class="c1"># (k3, v3) = (word, total)
+</span></code></pre></div></div>
+
+<p>The animation traces three tiny documents through the three stages : <code class="language-plaintext highlighter-rouge">map</code> emits ones, the <code class="language-plaintext highlighter-rouge">shuffle</code> gathers each word’s ones into a bin, and <code class="language-plaintext highlighter-rouge">reduce</code> adds them up.</p>
+
+<figure><center>
+<svg viewBox="0 0 680 340" width="100%" style="max-width:640px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .col { font-size:11px; fill:#7a7a7a; text-anchor:middle; letter-spacing:.06em; text-transform:uppercase; }
+    .doc { fill:#fffefb; stroke:#c9cdd6; stroke-width:1.3; }
+    .pair{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.2; }
+    .bin { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.3; }
+    .out { fill:#faf0ef; stroke:#c72323; stroke-width:1.4; }
+    .t   { font-size:12.5px; fill:#2b2b2b; text-anchor:middle; } .mono{ font-family:'Source Code Pro',monospace; font-size:11.5px; }
+    .fl  { stroke:#b9a06a; stroke-width:1.5; fill:none; stroke-dasharray:4 5; opacity:.8;
+           animation:mrflow 1.5s linear infinite; }
+    @keyframes mrflow { to { stroke-dashoffset:-36; } }
+  </style>
+  <text class="col" x="70" y="20">input</text>
+  <text class="col" x="250" y="20">map → (word, 1)</text>
+  <text class="col" x="440" y="20">shuffle (group by key)</text>
+  <text class="col" x="618" y="20">reduce (sum)</text>
+  <!-- input docs -->
+  <rect class="doc" x="24" y="45" width="96" height="34" rx="5" /><text class="t" x="72" y="66">"the cat"</text>
+  <rect class="doc" x="24" y="150" width="96" height="34" rx="5" /><text class="t" x="72" y="171">"the dog"</text>
+  <rect class="doc" x="24" y="255" width="96" height="34" rx="5" /><text class="t" x="72" y="276">"cat dog"</text>
+  <!-- flow input->map -->
+  <path class="fl" d="M122,62 L188,70" /><path class="fl" d="M122,167 L188,150" /><path class="fl" d="M122,272 L188,230" />
+  <!-- map outputs (pairs) -->
+  <g class="mono" text-anchor="middle" fill="#2b2b2b">
+    <rect class="pair" x="192" y="52" width="86" height="24" rx="4" /><text x="235" y="68">(the,1)</text>
+    <rect class="pair" x="192" y="80" width="86" height="24" rx="4" /><text x="235" y="96">(cat,1)</text>
+    <rect class="pair" x="192" y="140" width="86" height="24" rx="4" /><text x="235" y="156">(the,1)</text>
+    <rect class="pair" x="192" y="168" width="86" height="24" rx="4" /><text x="235" y="184">(dog,1)</text>
+    <rect class="pair" x="192" y="228" width="86" height="24" rx="4" /><text x="235" y="244">(cat,1)</text>
+    <rect class="pair" x="192" y="256" width="86" height="24" rx="4" /><text x="235" y="272">(dog,1)</text>
+  </g>
+  <!-- flow map->shuffle : each word to its bin -->
+  <path class="fl" d="M280,64  C330,64 340,70  382,70" />   <!-- the -->
+  <path class="fl" d="M280,152 C330,152 340,80 382,78" />   <!-- the -->
+  <path class="fl" d="M280,92  C330,92 340,150 382,150" />  <!-- cat -->
+  <path class="fl" d="M280,240 C330,240 340,160 382,158" /> <!-- cat -->
+  <path class="fl" d="M280,180 C330,180 340,235 382,235" /> <!-- dog -->
+  <path class="fl" d="M280,268 C330,268 340,245 382,243" /> <!-- dog -->
+  <!-- shuffle bins -->
+  <g class="mono" text-anchor="middle">
+    <rect class="bin" x="386" y="56" width="108" height="30" rx="5" /><text class="t mono" x="440" y="75">the → [1,1]</text>
+    <rect class="bin" x="386" y="136" width="108" height="30" rx="5" /><text class="t mono" x="440" y="155">cat → [1,1]</text>
+    <rect class="bin" x="386" y="221" width="108" height="30" rx="5" /><text class="t mono" x="440" y="240">dog → [1,1]</text>
+  </g>
+  <!-- flow shuffle->reduce -->
+  <path class="fl" d="M496,71  L560,71" /><path class="fl" d="M496,151 L560,151" /><path class="fl" d="M496,236 L560,236" />
+  <!-- reduce outputs -->
+  <g class="mono" text-anchor="middle">
+    <rect class="out" x="564" y="56" width="96" height="30" rx="5" /><text class="t mono" x="612" y="75">the → 2</text>
+    <rect class="out" x="564" y="136" width="96" height="30" rx="5" /><text class="t mono" x="612" y="155">cat → 2</text>
+    <rect class="out" x="564" y="221" width="96" height="30" rx="5" /><text class="t mono" x="612" y="240">dog → 2</text>
+  </g>
+</svg>
+<figcaption><b>Figure 1 -</b> The word-count dataflow. Each document is mapped to $(\text{word},1)$ pairs (blue) ; the shuffle regroups them into one bin per word (green) ; each reducer sums its bin into a final count (red). The mappers and reducers all run in parallel ; only the shuffle in the middle requires the machines to talk to each other.</figcaption>
+</center></figure>
+
+<h2 id="4-the-algebra-underneath--why-reduce-needs-a-monoid">4. The algebra underneath : why reduce needs a monoid</h2>
+<p>Here is the deep reason MapReduce parallelises so cleanly. A reducer folds a list of values into one result with some binary operation $\oplus$ (for word count, $\oplus$ is addition). For the framework to be free to <em>split that list across machines, aggregate in any grouping, and merge partial results</em>, the operation cannot be arbitrary, it must be <strong>associative</strong>. And because the shuffle delivers a key’s values in no guaranteed order, it should also be <strong>commutative</strong>. An operation that is associative with an identity element is exactly a <strong>monoid</strong>.</p>
+
+<div class="definition">
+	A <b>monoid</b> is a set $M$ with a binary operation $\oplus : M \times M \to M$ that is <b>associative</b>, $(a \oplus b) \oplus c = a \oplus (b \oplus c)$, and has an <b>identity</b> $e$ with $e \oplus a = a \oplus e = a$. If moreover $a \oplus b = b \oplus a$, it is a <b>commutative monoid</b>.
+</div>
+
+<div class="theorem" text="why parallel reduction is correct">
+	If $\oplus$ is associative, the fold $v_1 \oplus v_2 \oplus \cdots \oplus v_n$ has the <b>same value under any parenthesisation</b>. Hence the reducer may combine the values in any grouping, in particular as a balanced binary tree, without changing the result. If $\oplus$ is also commutative, the value is independent of the <b>order</b> of the $v_i$ as well.
+</div>
+
+<p>This is not a technicality, it is the whole game. Associativity is what lets a billion additions be reorganised into a tree of depth $\log_2 n$ and evaluated in parallel : the <em>work</em> stays $O(n)$ but the <em>span</em> (critical-path length) collapses to $O(\log n)$.</p>
+
+<figure><center>
+<svg viewBox="0 0 680 300" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .tl { stroke:#c9cdd6; stroke-width:1.4; }
+    .leaf{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
+    .node{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.4; }
+    .root{ fill:#faf0ef; stroke:#c72323; stroke-width:1.6; }
+    .lt { font-size:12px; fill:#2b2b2b; text-anchor:middle; } .op{ font-size:13px; fill:#5aa06a; text-anchor:middle; }
+    .rise { opacity:0; animation:mrrise .5s ease forwards; }
+    @keyframes mrrise { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+    .dlab{ font-size:11px; fill:#7a7a7a; }
+  </style>
+  <!-- edges -->
+  <g class="tl">
+    <line x1="60" y1="250" x2="100" y2="180" /><line x1="140" y1="250" x2="100" y2="180" />
+    <line x1="220" y1="250" x2="260" y2="180" /><line x1="300" y1="250" x2="260" y2="180" />
+    <line x1="380" y1="250" x2="420" y2="180" /><line x1="460" y1="250" x2="420" y2="180" />
+    <line x1="540" y1="250" x2="580" y2="180" /><line x1="620" y1="250" x2="580" y2="180" />
+    <line x1="100" y1="180" x2="180" y2="110" /><line x1="260" y1="180" x2="180" y2="110" />
+    <line x1="420" y1="180" x2="500" y2="110" /><line x1="580" y1="180" x2="500" y2="110" />
+    <line x1="180" y1="110" x2="340" y2="45" /><line x1="500" y1="110" x2="340" y2="45" />
+  </g>
+  <!-- leaves -->
+  <g class="lt">
+    <g><circle class="leaf" cx="60" cy="250" r="15" /><text x="60" y="254">v₁</text></g>
+    <g><circle class="leaf" cx="140" cy="250" r="15" /><text x="140" y="254">v₂</text></g>
+    <g><circle class="leaf" cx="220" cy="250" r="15" /><text x="220" y="254">v₃</text></g>
+    <g><circle class="leaf" cx="300" cy="250" r="15" /><text x="300" y="254">v₄</text></g>
+    <g><circle class="leaf" cx="380" cy="250" r="15" /><text x="380" y="254">v₅</text></g>
+    <g><circle class="leaf" cx="460" cy="250" r="15" /><text x="460" y="254">v₆</text></g>
+    <g><circle class="leaf" cx="540" cy="250" r="15" /><text x="540" y="254">v₇</text></g>
+    <g><circle class="leaf" cx="620" cy="250" r="15" /><text x="620" y="254">v₈</text></g>
+  </g>
+  <!-- level 1 -->
+  <g class="op">
+    <circle class="node rise" cx="100" cy="180" r="14" style="animation-delay:.4s" /><text class="rise" x="100" y="185" style="animation-delay:.4s">⊕</text>
+    <circle class="node rise" cx="260" cy="180" r="14" style="animation-delay:.4s" /><text class="rise" x="260" y="185" style="animation-delay:.4s">⊕</text>
+    <circle class="node rise" cx="420" cy="180" r="14" style="animation-delay:.4s" /><text class="rise" x="420" y="185" style="animation-delay:.4s">⊕</text>
+    <circle class="node rise" cx="580" cy="180" r="14" style="animation-delay:.4s" /><text class="rise" x="580" y="185" style="animation-delay:.4s">⊕</text>
+  </g>
+  <!-- level 2 -->
+  <g class="op">
+    <circle class="node rise" cx="180" cy="110" r="14" style="animation-delay:.9s" /><text class="rise" x="180" y="115" style="animation-delay:.9s">⊕</text>
+    <circle class="node rise" cx="500" cy="110" r="14" style="animation-delay:.9s" /><text class="rise" x="500" y="115" style="animation-delay:.9s">⊕</text>
+  </g>
+  <!-- root -->
+  <g><circle class="root rise" cx="340" cy="45" r="16" style="animation-delay:1.4s" /><text class="lt rise" x="340" y="50" style="animation-delay:1.4s">Σ</text></g>
+  <!-- depth annotations -->
+  <text class="dlab" x="650" y="250" text-anchor="end">depth 0</text>
+  <text class="dlab" x="650" y="184" text-anchor="end">depth 1</text>
+  <text class="dlab" x="650" y="114" text-anchor="end">depth 2</text>
+  <text class="dlab" x="650" y="49" text-anchor="end">depth 3 = ⌈log₂ 8⌉</text>
+</svg>
+<figcaption><b>Figure 2 -</b> Associativity turns a linear fold of $n$ values into a balanced tree of depth $\lceil \log_2 n \rceil$. Every $\oplus$ at the same level runs in parallel, so $n-1$ operations finish in only $\log_2 n$ parallel rounds. This is also what makes <b>combiners</b> correct.</figcaption>
+</center></figure>
+
+<div class="example">
+	A <b>combiner</b> is a "mini-reduce" run on each mapper before the shuffle, to pre-aggregate its own output and cut the amount of data sent over the network. It is correct <b>exactly when</b> the reduction is an associative-commutative aggregation : summing $1{+}1{+}1{+}1$ on the map side to send a single "$4$" is valid because $+$ is a commutative monoid. But an operation like computing an <i>average</i> is <b>not</b> a monoid (averaging averages is wrong), which is why you must instead carry the monoidal pair $(\text{sum}, \text{count})$ and divide only at the very end.
+</div>
+
+<h2 id="5-the-execution-as-a-dataflow-graph">5. The execution as a dataflow graph</h2>
+<p>Concretely, the input is chopped into $M$ <strong>splits</strong>, one per map task ; the intermediate space of keys is partitioned into $R$ pieces (usually by $\text{hash}(k) \bmod R$), one per reduce task. The physical dataflow is a graph : $M$ map nodes on the left, $R$ reduce nodes on the right, and, crucially, an <strong>all-to-all</strong> connection in the middle, every mapper may have data destined for every reducer.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 280" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .m { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .r { fill:#faf0ef; stroke:#c72323; stroke-width:1.5; }
+    .sh{ stroke:#b9a06a; stroke-width:1.3; fill:none; opacity:.55;
+         stroke-dasharray:4 5; animation:mrflow2 1.6s linear infinite; }
+    @keyframes mrflow2 { to { stroke-dashoffset:-36; } }
+    .lab{ font-size:12px; fill:#2b2b2b; text-anchor:middle; } .cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <text class="cap" x="90" y="28">M mappers</text>
+  <text class="cap" x="330" y="28">shuffle : all-to-all</text>
+  <text class="cap" x="560" y="28">R reducers</text>
+  <!-- all-to-all edges -->
+  <g class="sh">
+    <path d="M120,80  L500,80" /><path d="M120,80  L500,150" /><path d="M120,80  L500,220" />
+    <path d="M120,150 L500,80" /><path d="M120,150 L500,150" /><path d="M120,150 L500,220" />
+    <path d="M120,220 L500,80" /><path d="M120,220 L500,150" /><path d="M120,220 L500,220" />
+  </g>
+  <!-- mappers -->
+  <g class="lab">
+    <circle class="m" cx="100" cy="80" r="22" /><text x="100" y="85">M₁</text>
+    <circle class="m" cx="100" cy="150" r="22" /><text x="100" y="155">M₂</text>
+    <circle class="m" cx="100" cy="220" r="22" /><text x="100" y="225">M₃</text>
+  </g>
+  <!-- reducers -->
+  <g class="lab">
+    <circle class="r" cx="520" cy="80" r="22" /><text x="520" y="85">R₁</text>
+    <circle class="r" cx="520" cy="150" r="22" /><text x="520" y="155">R₂</text>
+    <circle class="r" cx="520" cy="220" r="22" /><text x="520" y="225">R₃</text>
+  </g>
+  <text class="cap" x="320" y="268">up to M × R data streams cross the network — this is the scalability bottleneck</text>
+</svg>
+<figcaption><b>Figure 3 -</b> The execution graph. Map and reduce tasks are embarrassingly parallel, but the shuffle is an all-to-all exchange of up to $M \times R$ streams. Moving intermediate data across the network is the dominant cost of most real MapReduce jobs.</figcaption>
+</center></figure>
+
+<h2 id="6-fault-tolerance-almost-for-free">6. Fault tolerance, almost for free</h2>
+<p>On a cluster of thousands of commodity machines, failures are the norm, not the exception. MapReduce survives them with a strikingly simple idea that is only possible <em>because</em> <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">reduce</code> are <strong>pure, deterministic functions</strong> of their inputs : if a task fails, just <strong>run it again</strong>. A map task’s output depends only on its input split, so re-executing it on another machine reproduces exactly the same intermediate data. The master node monitors tasks and re-schedules any that die.</p>
+
+<p>The same determinism defeats <strong>stragglers</strong>, the occasional slow machine that would otherwise hold up the whole job. Near the end, the framework launches <strong>speculative</strong> backup copies of the still-running tasks ; whichever finishes first wins, and the duplicate is killed. Purity is what makes this safe : running a task twice can never corrupt the result.</p>
+
+<h2 id="7-the-cost-model--replication-versus-reducer-size">7. The cost model : replication versus reducer size</h2>
+<p>For the advanced reader, the interesting theory is <em>quantitative</em> : what does a MapReduce computation actually cost, and what are its limits ? Two parameters, due to Afrati and Ullman <a class="citation" href="#Afrati2013">(Afrati et al., 2013)</a>, capture the fundamental tension.</p>
+
+<div class="definition">
+	The <b>replication rate</b> $r$ is the average number of intermediate $(k,v)$ pairs emitted per input record, that is, the total map-output size divided by the input size. It measures <b>communication</b>. The <b>reducer size</b> $q$ is the largest number of values sent to any single reducer. It measures per-reducer <b>memory / load</b>.
+</div>
+
+<p>These pull in opposite directions. Make each reducer handle a bigger slice of the problem (large $q$) and you need to replicate the input less (small $r$), cheaper communication, but coarser parallelism and fatter reducers. Shrink the reducers (small $q$) for more parallelism and you must broadcast inputs to more of them (large $r$), more network traffic. For many problems one can prove a <strong>lower-bound tradeoff curve</strong> of the shape</p>
+
+\[\begin{equation} r \;\geq\; \frac{c\,|\text{output-dependency}|}{q} \qquad\text{(schematically)}, \label{eq:tradeoff} \end{equation}\]
+
+<p>so that $r$ and $q$ cannot both be small : you pay in communication for what you save in reducer load, and vice versa. This curve, not raw CPU, is what governs the practical scalability of a MapReduce algorithm.</p>
+
+<p>Complementarily, Karloff, Suri and Vassilvitskii <a class="citation" href="#Karloff2010">(Karloff et al., 2010)</a> gave a clean <strong>complexity model</strong> (called $\mathsf{MRC}$) that treats a MapReduce job as a sequence of <em>rounds</em>, subject to <em>sublinear</em> constraints : each machine has memory $O(n^{1-\varepsilon})$, there are $O(n^{1-\varepsilon})$ machines, and a good algorithm finishes in $O(\log n)$ or even $O(1)$ rounds. In this model the scarce resource is the <strong>number of rounds</strong>, since each round pays a full, expensive shuffle. Minimising rounds is the central algorithmic challenge, and it is why iterative algorithms (graph traversal, machine learning) fit MapReduce so awkwardly, each iteration is another round, another shuffle to disk.</p>
+
+<h2 id="8-life-after-mapreduce">8. Life after MapReduce</h2>
+<p>That last observation, that every round writes intermediate data to disk and reads it back, is precisely why the classic MapReduce engine was eventually superseded for many workloads. <strong>Apache Spark</strong> <a class="citation" href="#Zaharia2012">(Zaharia et al., 2012)</a> kept the <em>paradigm</em>, transformations expressed as <code class="language-plaintext highlighter-rouge">map</code>/<code class="language-plaintext highlighter-rouge">reduce</code>-style operators over partitioned data, but kept intermediate results <strong>in memory</strong> and modelled the whole job as a lazy <strong>DAG</strong> of operations, so a ten-round iterative algorithm no longer pays ten trips to disk. The programming model you write still looks like map and reduce ; what changed is the execution engine beneath it.</p>
+
+<p>So MapReduce, the specific Google system, has faded, but MapReduce, <em>the idea</em>, is everywhere : in Spark, in Flink, in the <code class="language-plaintext highlighter-rouge">map</code>/<code class="language-plaintext highlighter-rouge">reduce</code>/<code class="language-plaintext highlighter-rouge">groupByKey</code> of every data framework, and in the humble parallel <code class="language-plaintext highlighter-rouge">reduce</code> of your favourite language, all of them resting on the same algebraic bedrock, an associative operation you are allowed to reparenthesise at will.</p>
+
+<h2 id="9-conclusion">9. Conclusion</h2>
+<p>MapReduce earns its fame by trading generality for tractability : accept the discipline of expressing your job as a <code class="language-plaintext highlighter-rouge">map</code> and a <code class="language-plaintext highlighter-rouge">reduce</code>, and a cluster’s worth of hard problems, partitioning, scheduling, data shuffling, machine failures, stragglers, dissolve into the framework. Underneath the engineering sits a small, beautiful piece of algebra, the reducer is a fold over a <strong>commutative monoid</strong>, and it is associativity that licenses every parallel regrouping, every combiner, every re-execution. The costs, too, are governed by clean mathematics : the replication-rate / reducer-size tradeoff and the number of shuffle rounds, not CPU cycles, are what bound what a cluster can do. Learn to see your computation as “map each piece, then combine associatively”, and a surprising fraction of large-scale data processing suddenly has a shape.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Afrati2013">Afrati, F. N., Das Sarma, A., Salihoglu, S., &amp; Ullman, J. D. (2013). Upper and Lower Bounds on the Cost of a Map-Reduce Computation. <i>Proceedings of the VLDB Endowment</i>, <i>6</i>(4), 277–288.</span>
+
+<div id="Afrati2013-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Afrati2013-bibtex" class="pre pre-scrollable collapse">@article{Afrati2013,
+  author = {Afrati, Foto N. and Das Sarma, Anish and Salihoglu, Semih and Ullman, Jeffrey D.},
+  title = {Upper and Lower Bounds on the Cost of a Map-Reduce Computation},
+  journal = {Proceedings of the VLDB Endowment},
+  volume = {6},
+  number = {4},
+  pages = {277--288},
+  year = {2013}
+}
+</pre>
+
+</div></li>
+<li><span id="Dean2004">Dean, J., &amp; Ghemawat, S. (2004). MapReduce: Simplified Data Processing on Large Clusters. <i>6th Symposium on Operating Systems Design and Implementation (OSDI)</i>, 137–150.</span>
+
+<div id="Dean2004-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Dean2004-bibtex" class="pre pre-scrollable collapse">@inproceedings{Dean2004,
+  author = {Dean, Jeffrey and Ghemawat, Sanjay},
+  title = {MapReduce: Simplified Data Processing on Large Clusters},
+  booktitle = {6th Symposium on Operating Systems Design and Implementation (OSDI)},
+  pages = {137--150},
+  year = {2004}
+}
+</pre>
+
+</div></li>
+<li><span id="Karloff2010">Karloff, H., Suri, S., &amp; Vassilvitskii, S. (2010). A Model of Computation for MapReduce. <i>Proceedings of the 21st Annual ACM-SIAM Symposium on Discrete Algorithms (SODA)</i>, 938–948.</span>
+
+<div id="Karloff2010-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Karloff2010-bibtex" class="pre pre-scrollable collapse">@inproceedings{Karloff2010,
+  author = {Karloff, Howard and Suri, Siddharth and Vassilvitskii, Sergei},
+  title = {A Model of Computation for MapReduce},
+  booktitle = {Proceedings of the 21st Annual ACM-SIAM Symposium on Discrete Algorithms (SODA)},
+  pages = {938--948},
+  year = {2010}
+}
+</pre>
+
+</div></li>
+<li><span id="Zaharia2012">Zaharia, M., Chowdhury, M., Das, T., Dave, A., Ma, J., McCauley, M., Franklin, M. J., Shenker, S., &amp; Stoica, I. (2012). Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing. <i>9th USENIX Symposium on Networked Systems Design and Implementation (NSDI)</i>, 15–28.</span>
+
+<div id="Zaharia2012-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Zaharia2012-bibtex" class="pre pre-scrollable collapse">@inproceedings{Zaharia2012,
+  author = {Zaharia, Matei and Chowdhury, Mosharaf and Das, Tathagata and Dave, Ankur and Ma, Justin and McCauley, Murphy and Franklin, Michael J. and Shenker, Scott and Stoica, Ion},
+  title = {Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing},
+  booktitle = {9th USENIX Symposium on Networked Systems Design and Implementation (NSDI)},
+  pages = {15--28},
+  year = {2012}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>A subtle but important point : the shuffle both <em>groups by key</em> and, in most implementations, <em>sorts</em> the keys. The sort is not required by the abstract model $\eqref{eq:whole}$, but it makes the group-by streamable on machines whose intermediate data does not fit in memory, another place where an algebraic property (a total order on keys) is quietly doing systems work. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
