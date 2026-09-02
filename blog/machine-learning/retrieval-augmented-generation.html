@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Introduction to Retrieval-Augmented Generation</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Introduction to Retrieval-Augmented Generation
+             15 Sep 2025 
+             38 minutes read
+..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/machine-learning/retrieval-augmented-generation">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon" type="image/png" sizes="64x64">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Introduction to Retrieval-Augmented Generation | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Introduction to Retrieval-Augmented Generation" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A language model is a closed-book student. It sat one enormous exam, memorised everything it could into its weights, and now answers from memory alone — confidently, fluently, and sometimes completely wrong, because it cannot tell the difference between remembering and inventing. Retrieval-Augmented Generation turns that into an open-book exam : before answering, the model is handed the three pages of your documentation that actually contain the answer. That single change fixes freshness, fixes attribution, and dramatically reduces invention — and it turns out that almost all the engineering, and almost all the failure, lives in the unglamorous half :…" />
+<meta name="twitter:description" property="og:description" content="A language model is a closed-book student. It sat one enormous exam, memorised everything it could into its weights, and now answers from memory alone — confidently, fluently, and sometimes completely wrong, because it cannot tell the difference between remembering and inventing. Retrieval-Augmented Generation turns that into an open-book exam : before answering, the model is handed the three pages of your documentation that actually contain the answer. That single change fixes freshness, fixes attribution, and dramatically reduces invention — and it turns out that almost all the engineering, and almost all the failure, lives in the unglamorous half :…" />
+<link rel="canonical" href="www.ohmykode.com/blog/machine-learning/retrieval-augmented-generation" />
+<meta property="og:url" content="www.ohmykode.com/blog/machine-learning/retrieval-augmented-generation" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-15T12:00:00+02:00" />
+<meta property="article:modified_time" content="2025-09-15T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Introduction to Retrieval-Augmented Generation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2025-09-15T12:00:00+02:00","datePublished":"2025-09-15T12:00:00+02:00","description":"A language model is a closed-book student. It sat one enormous exam, memorised everything it could into its weights, and now answers from memory alone — confidently, fluently, and sometimes completely wrong, because it cannot tell the difference between remembering and inventing. Retrieval-Augmented Generation turns that into an open-book exam : before answering, the model is handed the three pages of your documentation that actually contain the answer. That single change fixes freshness, fixes attribution, and dramatically reduces invention — and it turns out that almost all the engineering, and almost all the failure, lives in the unglamorous half :…","headline":"Introduction to Retrieval-Augmented Generation","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/retrieval-augmented-generation"},"url":"www.ohmykode.com/blog/machine-learning/retrieval-augmented-generation"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Introduction to Retrieval-Augmented Generation</h1></span></center>
+            <center><p> 15 Sep 2025 </p></center>
+            <center><p class="fa fa-clock-o"> 38 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            50 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>A language model is a closed-book student. It sat one enormous exam, memorised everything it could into its weights, and now answers from memory alone — confidently, fluently, and sometimes completely wrong, because it cannot tell the difference between remembering and inventing. <strong>Retrieval-Augmented Generation</strong> turns that into an <em>open-book</em> exam : before answering, the model is handed the three pages of your documentation that actually contain the answer. That single change fixes freshness, fixes attribution, and dramatically reduces invention — and it turns out that almost all the engineering, and almost all the failure, lives in the unglamorous half : <em>finding the right three pages</em>. This post builds the whole pipeline from first principles, with the geometry, the ranking formulas, and the honest limits.</p>
+</blockquote>
+
+<h2 id="1-why-a-model-needs-a-library">1. Why a model needs a library</h2>
+<p>A <a href="/blog/machine-learning/transformers">Transformer</a> stores what it learned in its weights. That <strong>parametric knowledge</strong> has three structural problems, and none of them is a bug you can train away :</p>
+
+<ul>
+  <li><strong>It is frozen.</strong> The weights encode the world as of the training cut-off. Yesterday’s incident report, this morning’s price change, your company’s internal wiki — none of it is in there, and none of it ever will be.</li>
+  <li><strong>It is unattributable.</strong> The model cannot point at <em>where</em> it learned something, because the fact is not stored anywhere in particular : it is smeared across billions of parameters. “Cite your source” is not a request a purely parametric model can honour.</li>
+  <li><strong>It is confidently lossy.</strong> Training compresses an enormous corpus into a fixed number of weights. Compression loses detail, and when the model reconstructs a half-remembered detail it produces something <em>fluent</em> rather than something <em>true</em>. That is the mechanism behind hallucination.</li>
+</ul>
+
+<p>The instinctive fix — fine-tune on your documents — addresses none of them properly. Fine-tuning is expensive, must be redone whenever the documents change, still gives no citations, and teaches <em>style</em> far more reliably than it teaches <em>facts</em>.</p>
+
+<p>The other fix is embarrassingly simple : <strong>do not make the model remember, let it look things up.</strong> Put the documents in a searchable store ; when a question arrives, find the passages most likely to contain the answer ; paste them into the prompt ; ask the model to answer <em>from those passages and cite them</em>. That is Retrieval-Augmented Generation, introduced under that name by Lewis <em>et al.</em> <a class="citation" href="#Lewis2020">(Lewis et al., 2020)</a>.</p>
+
+<div class="definition">
+	A <b>RAG system</b> is a pair of stages. A <b>retriever</b> $R$ maps a question $q$ to a small ordered set of passages drawn from a corpus $\mathcal{D}$,
+	$$ R(q) = (c_1, \dots, c_k) \subset \mathcal{D}, \qquad k \ll \lvert \mathcal{D} \rvert, $$
+	and a <b>generator</b> $G$ (the language model) produces the answer conditioned on the question <i>and</i> those passages,
+	$$ a = G\big(q,\; R(q)\big). $$
+</div>
+
+<p><em>In plain words : the retriever is a librarian who fetches a handful of pages, and the generator is a reader who answers using only those pages. Every property people like about RAG — freshness, citations, less invention — comes from the fact that the answer is conditioned on text the system can point at.</em></p>
+
+<figure><center>
+<svg viewBox="0 0 640 302" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .ix{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.8; }
+    .bt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .bs{ font-size:9.5px; fill:#7a7a7a; text-anchor:middle; }
+    .ln{ stroke:#4a6da7; stroke-width:1.8; fill:none; }
+    .rt{ stroke:#5aa06a; stroke-linejoin:round; }
+    .sw{ fill:#b5651d; fill-opacity:.10; stroke:#b5651d; stroke-width:2.2; }
+    .lane{ font-size:11.5px; fill:#7a7a7a; font-style:italic; }
+    .on{ fill:#b5651d; }
+  </style>
+  <defs>
+    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#5aa06a" /></marker>
+  </defs>
+  <path class="ln" d="M148.0,63.0 L169.0,63.0" marker-end="url(#am)" />
+  <path class="ln" d="M272.0,63.0 L293.0,63.0" marker-end="url(#am)" />
+  <path class="ln" d="M396.0,63.0 L417.0,63.0" marker-end="url(#am)" />
+  <path class="ln" d="M120.0,246.0 L137.0,246.0" marker-end="url(#am)" />
+  <path class="ln" d="M232.0,246.0 L249.0,246.0" marker-end="url(#am)" />
+  <path class="ln" d="M360.0,246.0 L377.0,246.0" marker-end="url(#am)" />
+  <path class="ln" d="M488.0,246.0 L505.0,246.0" marker-end="url(#am)" />
+  <path class="ln rt" d="M499,90 L499,158 L308,158 L308,217" marker-end="url(#ag)" />
+  <rect class="bx" x="36" y="42" width="112" height="42" rx="5" />
+  <text class="bt" x="92" y="62.0">documents</text>
+  <text class="bs" x="92" y="76.0">your corpus</text>
+  <rect class="bx" x="176" y="42" width="96" height="42" rx="5" />
+  <text class="bt" x="224" y="62.0">chunks</text>
+  <text class="bs" x="224" y="76.0">split + overlap</text>
+  <rect class="bx" x="300" y="42" width="96" height="42" rx="5" />
+  <text class="bt" x="348" y="62.0">embed</text>
+  <text class="bs" x="348" y="76.0">→ vectors</text>
+  <rect class="bx ix" x="424" y="36" width="150" height="54" rx="5" />
+  <text class="bt" x="499" y="62.0">vector index</text>
+  <text class="bs" x="499" y="76.0">ANN structure</text>
+  <rect class="bx" x="16" y="224" width="104" height="44" rx="5" />
+  <text class="bt" x="68" y="245.0">question</text>
+  <text class="bs" x="68" y="259.0">the user asks</text>
+  <rect class="bx" x="144" y="224" width="88" height="44" rx="5" />
+  <text class="bt" x="188" y="245.0">embed</text>
+  <text class="bs" x="188" y="259.0">→ vector q</text>
+  <rect class="bx" x="256" y="224" width="104" height="44" rx="5" />
+  <text class="bt" x="308" y="245.0">retrieve</text>
+  <text class="bs" x="308" y="259.0">top-k by cosine</text>
+  <rect class="bx" x="384" y="224" width="104" height="44" rx="5" />
+  <text class="bt" x="436" y="245.0">prompt</text>
+  <text class="bs" x="436" y="259.0">context + question</text>
+  <rect class="bx" x="512" y="224" width="112" height="44" rx="5" />
+  <text class="bt" x="568" y="245.0">answer</text>
+  <text class="bs" x="568" y="259.0">grounded + cited</text>
+  <rect class="sw" x="16" y="224" width="104" height="44" rx="5"><animate attributeName="x" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="16;144;256;384;512" /><animate attributeName="width" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="104;88;104;104;112" /></rect>
+  <rect class="sw" x="424" y="36" width="150" height="54" rx="5" opacity="0"><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.333;0.5" values="0;1;0" /></rect>
+  <text class="lane" x="36" y="24">offline · indexing, runs once per document</text>
+  <text class="lane on" x="16" y="292">online · retrieval + generation, runs on every question</text>
+</svg>
+<figcaption><b>Figure 1 -</b> The two halves of a RAG system. The top lane is paid once : documents are split, embedded and stored in an index. The bottom lane runs on every question, and touches only $k$ passages. The green route is the one link between them — the query embedding is compared against the index built above.</figcaption>
+</center></figure>
+
+<p>Notice the asymmetry in the figure : the top lane runs <strong>once</strong> (or whenever documents change), the bottom lane runs on <strong>every single question</strong>. That is what makes the design practical — the expensive work of reading the whole corpus is amortised into an index, and a query only touches $k$ passages.</p>
+
+<h2 id="2-turning-meaning-into-geometry--embeddings">2. Turning meaning into geometry : embeddings</h2>
+<p>For the librarian to work, “relevant to this question” must become something a computer can compute. Keyword matching is not enough : a user asking <em>“how do I reset my password ?”</em> should be handed a page titled <em>“Recovering account access”</em>, which shares not a single content word with the question.</p>
+
+<p>The tool for that is the <strong>embedding</strong> : a function $\phi$ mapping a piece of text to a vector in $\mathbb{R}^d$ (typically $d$ between $384$ and $3072$), trained so that texts with similar meaning land close together. Modern embedders are Transformer encoders trained with a contrastive objective — pairs that mean the same thing are pulled together, unrelated pairs pushed apart <a class="citation" href="#Reimers2019">(Reimers &amp; Gurevych, 2019)</a>. Training them specifically on question–passage pairs, rather than on generic sentence similarity, is what made dense retrieval competitive with keyword search in the first place <a class="citation" href="#Karpukhin2020">(Karpukhin et al., 2020)</a>. The result is a space where <em>direction encodes meaning</em>.</p>
+
+<p>Which is why the similarity measure is the <strong>cosine</strong> of the angle between two vectors, not their distance :</p>
+
+<div class="definition">
+	The <b>cosine similarity</b> between two non-zero vectors $u, v \in \mathbb{R}^d$ is
+	$$ \operatorname{sim}(u,v) \;=\; \cos\theta \;=\; \frac{u \cdot v}{\lVert u \rVert\, \lVert v \rVert} \;\in\; [-1, 1], $$
+	equal to $1$ when they point the same way, $0$ when orthogonal, $-1$ when opposite.
+</div>
+
+<p>Why the angle and not the raw distance ? Because <strong>length is noise here</strong>. A long chunk that repeats a term produces a longer vector than a short chunk that says the same thing once ; ranking by dot product alone would systematically prefer the verbose one. Dividing by the norms throws that away and keeps only the direction — the meaning.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 312" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .ax{ stroke:#d8d8d8; stroke-width:1.2; fill:none; }
+    .dv{ stroke:#8fa5c8; stroke-width:1.6; fill:none; }
+    .qv{ stroke:#b5651d; stroke-width:2.6; fill:none; }
+    .dl{ font-size:11.5px; fill:#4a6da7; text-anchor:middle;
+         paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
+    .ql{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold;
+         paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
+    .arc{ stroke:#b5651d; stroke-width:1.3; fill:none; opacity:.8; }
+    .th{ font-size:13px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .bar{ fill:#8fa5c8; }
+    .top{ fill:#e0a878; }
+    .rl{ font-size:12px; fill:#4a6da7; text-anchor:end; }
+    .bv{ font-size:11px; fill:#5a5a5a; text-anchor:start; }
+    .hd2{ font-size:12px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .mk2{ fill:none; stroke:#b5651d; stroke-width:2; }
+    .cap2{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#5aa06a" /></marker>
+  </defs>
+  <path class="ax" d="M58,268 L306,268 M58,268 L58,44" />
+  <path class="dv" d="M58,268 L167.6,127.7" marker-end="url(#am)" />
+  <path class="dv" d="M58,268 L226.9,170.5" marker-end="url(#am)" />
+  <path class="dv" d="M58,268 L119.8,115.0" marker-end="url(#am)" />
+  <path class="dv" d="M58,268 L209.6,235.8" marker-end="url(#am)" />
+  <path class="dv" d="M58,268 L70.6,123.6" marker-end="url(#am)" />
+  <path class="dv" d="M58,268 L182.8,261.5" marker-end="url(#am)" />
+  <path class="qv" d="M58,268 L199.4,126.6" marker-end="url(#ao)" />
+  <text class="dl" x="178.1" y="114.3">d1</text>
+  <text class="dl" x="241.6" y="162.0">d2</text>
+  <text class="dl" x="126.2" y="99.3">d3</text>
+  <text class="dl" x="226.2" y="232.2">d4</text>
+  <text class="dl" x="72.1" y="106.6">d5</text>
+  <text class="dl" x="199.8" y="260.6">d6</text>
+  <text class="ql" x="211.4" y="114.6">query</text>
+  <path class="arc" d="M128.7,197.3 A100,100 0 0 0 95.5,175.3" />
+  <text class="th" x="122.6" y="170.4">θ</text>
+  <text class="cap2" x="150" y="300">length is meaning-free : only the angle to the query counts</text>
+  <text class="hd2" x="477" y="66">cosine with the query</text>
+  <text class="rl" x="362" y="107">d1</text>
+  <rect class="bar top" x="372" y="92" width="208.4" height="20" rx="3" />
+  <text class="bv" x="596" y="107">0.993</text>
+  <text class="rl" x="362" y="139">d2</text>
+  <rect class="bar top" x="372" y="124" width="202.8" height="20" rx="3" />
+  <text class="bv" x="596" y="139">0.966</text>
+  <text class="rl" x="362" y="171">d3</text>
+  <rect class="bar top" x="372" y="156" width="193.3" height="20" rx="3" />
+  <text class="bv" x="596" y="171">0.921</text>
+  <text class="rl" x="362" y="203">d4</text>
+  <rect class="bar" x="372" y="188" width="176.1" height="20" rx="3" />
+  <text class="bv" x="596" y="203">0.839</text>
+  <text class="rl" x="362" y="235">d5</text>
+  <rect class="bar" x="372" y="220" width="160.9" height="20" rx="3" />
+  <text class="bv" x="596" y="235">0.766</text>
+  <text class="rl" x="362" y="267">d6</text>
+  <rect class="bar" x="372" y="252" width="156.1" height="20" rx="3" />
+  <text class="bv" x="596" y="267">0.743</text>
+  <rect class="mk2" x="367" y="92" width="220" height="20" rx="3"><animate attributeName="y" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.333;0.666" values="92;124;156" /></rect>
+  <text class="cap2" x="477" y="300">the top three are what the retriever returns</text>
+</svg>
+<figcaption><b>Figure 2 -</b> Retrieval as geometry. Each document is a direction in embedding space ; the query is another, and $\theta$ (drawn here between the query and $d_3$) is the angle between them. Ranking by $\cos\theta$ ignores the vectors' lengths entirely, so a short passage and a long one that mean the same thing score alike. The bars on the right are the same six documents, sorted by that cosine.</figcaption>
+</center></figure>
+
+<p>In practice every vector is normalised to unit length once, at index time. That is not just an optimisation, it makes two apparently different questions the same question :</p>
+
+<div class="theorem" text="cosine and distance agree on the unit sphere">
+	If $\lVert u \rVert = \lVert v \rVert = 1$, then
+	$$ \lVert u - v \rVert^{2} \;=\; 2\big(1 - \cos\theta\big). $$
+	Consequently, ranking candidates by <i>decreasing</i> cosine similarity and ranking them by <i>increasing</i> Euclidean distance produce exactly the same order.
+	<br /><br />
+	<i>Proof.&nbsp;&nbsp;</i> Expanding the squared norm,
+	$$ \lVert u - v \rVert^{2} = (u-v)\cdot(u-v) = \lVert u \rVert^{2} + \lVert v \rVert^{2} - 2\,u \cdot v = 1 + 1 - 2\cos\theta. $$
+	The right-hand side is a strictly decreasing function of $\cos\theta$, so the two orderings are reverses of one another and select the same top-$k$.
+	<p align="right">$\square$</p>
+</div>
+
+<p>This is a genuinely useful fact : it means a vector database that only knows how to find Euclidean nearest neighbours is a perfectly good cosine search engine, provided you normalise on the way in. It also means the dot product alone suffices, since $u \cdot v = \cos\theta$ for unit vectors — and a dot product against a whole index is one matrix multiplication.</p>
+
+<h2 id="3-chunking--the-boring-step-that-decides-everything">3. Chunking : the boring step that decides everything</h2>
+<p>You cannot embed a 400-page manual as one vector. A single vector has a fixed budget of meaning ; average an entire manual into it and you get a vector that means <em>“this is a manual”</em> and nothing else. So documents are cut into <strong>chunks</strong>, and each chunk is embedded separately.</p>
+
+<p>This is where most RAG systems are silently won or lost, because chunking sets a hard ceiling on what retrieval can ever do :</p>
+
+<ul>
+  <li><strong>Chunks too large</strong> : the embedding is diluted (many topics averaged into one direction), and each retrieved chunk burns context on mostly irrelevant text.</li>
+  <li><strong>Chunks too small</strong> : the chunk no longer carries enough context to be interpretable. A chunk reading <em>“It must be renewed every 90 days.”</em> is useless — the reader cannot tell what “it” is.</li>
+</ul>
+
+<p>The standard mitigation is <strong>overlap</strong> : consecutive chunks share a tail, so a sentence near a boundary appears in both and keeps its neighbourhood. Overlap is not free, and the cost is easy to quantify. With chunk size $c$ and overlap $o &lt; c$, consecutive chunks start every $c - o$ characters, so a document of length $L$ produces</p>
+
+\[\begin{equation} n \;=\; \left\lceil \frac{L - o}{\,c - o\,} \right\rceil \quad\text{chunks, storing}\quad \frac{n\,c}{L} \;\approx\; \frac{c}{c - o} \quad\text{times the original text.} \label{eq:chunks} \end{equation}\]
+
+<p><em>In plain words : a 50 % overlap ($o = c/2$) doubles the size of your index, and a 75 % overlap quadruples it.</em> That is the trade you are making — index size and query cost against the risk of cutting an answer in half.</p>
+
+<div class="note">
+	The best chunking is usually not a fixed character count at all, but the document's own structure : split on headings, on Markdown sections, on function definitions, on table rows. A chunk that corresponds to a real semantic unit needs far less overlap, because its boundaries were never arbitrary in the first place. Fixed-size chunking is the fallback for unstructured text, not the default.
+</div>
+
+<h2 id="4-finding-the-neighbours-fast">4. Finding the neighbours fast</h2>
+<p>Now the search problem. Given the query vector $q$ and an index of $N$ chunk vectors, we want the $k$ largest cosines. Exact search computes all $N$ dot products :</p>
+
+\[\begin{equation} \text{cost} \;=\; \mathcal{O}(N d) \quad\text{per query.} \label{eq:exact} \end{equation}\]
+
+<p>For $N = 10^{4}$ that is nothing — a single NumPy matrix multiply, microseconds, and you should absolutely do it. For $N = 10^{8}$ chunks and $d = 1024$ it is $10^{11}$ multiply-adds per question, which is not a search engine, it is a batch job.</p>
+
+<p>So production systems give up exactness. <strong>Approximate nearest neighbour</strong> (ANN) search accepts a small probability of missing a true neighbour in exchange for orders of magnitude in speed — the very same bargain struck by <a href="/blog/algorithmic/bloom-filters">Bloom filters</a> (a small false-positive rate buys a tiny memory footprint) and <a href="/blog/algorithmic/hyperloglog">HyperLogLog</a> (a few percent of counting error buys kilobytes instead of gigabytes). Approximation is the standard currency for buying scale.</p>
+
+<p>The dominant method is <strong>HNSW</strong>, <em>Hierarchical Navigable Small World</em> graphs <a class="citation" href="#Malkov2020">(Malkov &amp; Yashunin, 2020)</a>. The idea is a skip list in disguise :</p>
+
+<ol>
+  <li>Build a graph where each vector is a node linked to some of its nearest neighbours.</li>
+  <li>Stack several such graphs in layers. A node appears in layer $\ell$ with probability decaying geometrically, so the top layer holds a handful of nodes and the bottom layer holds all $N$.</li>
+  <li>To search, enter at the top layer and walk <strong>greedily</strong> — repeatedly step to the neighbour closest to the query — until no neighbour improves. Then drop one layer and repeat, starting from where you landed.</li>
+</ol>
+
+<figure><center>
+<svg viewBox="0 0 640 340" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .eg{ stroke:#c2ccdc; stroke-width:1.6; fill:none; }
+    .drop{ stroke:#c2ccdc; stroke-width:1.3; fill:none; stroke-dasharray:3 4; }
+    .hi{ stroke:#b5651d; stroke-width:2.6; }
+    .nd{ stroke:#4a6da7; stroke-width:1.5; }
+    .ent{ fill:none; stroke:#5aa06a; stroke-width:1.8; stroke-dasharray:4 3; }
+    .tag{ font-size:11px; fill:#5aa06a; text-anchor:middle; }
+    .hit{ fill:#b5651d; }
+    .ly{ font-size:12px; fill:#4a6da7; text-anchor:start; }
+    .lyr{ font-size:11px; fill:#7a7a7a; text-anchor:end; font-style:italic; }
+  </style>
+  <path class="drop" d="M145.0,74.0 L145.0,168.0" />
+  <path class="drop hi" d="M365.0,74.0 L365.0,168.0" />
+  <path class="drop" d="M520.0,74.0 L520.0,168.0" />
+  <path class="drop" d="M90.0,188.0 L90.0,282.0" />
+  <path class="drop" d="M145.0,188.0 L145.0,282.0" />
+  <path class="drop" d="M255.0,188.0 L255.0,282.0" />
+  <path class="drop" d="M365.0,188.0 L365.0,282.0" />
+  <path class="drop hi" d="M470.0,188.0 L470.0,282.0" />
+  <path class="drop" d="M520.0,188.0 L520.0,282.0" />
+  <path class="eg hi" d="M155.0,64.0 L355.0,64.0" />
+  <path class="eg" d="M375.0,64.0 L510.0,64.0" />
+  <path class="eg" d="M100.0,178.0 L135.0,178.0" />
+  <path class="eg" d="M155.0,178.0 L245.0,178.0" />
+  <path class="eg" d="M265.0,178.0 L355.0,178.0" />
+  <path class="eg hi" d="M375.0,178.0 L460.0,178.0" />
+  <path class="eg" d="M480.0,178.0 L510.0,178.0" />
+  <path class="eg" d="M50.0,292.0 L80.0,292.0" />
+  <path class="eg" d="M100.0,292.0 L135.0,292.0" />
+  <path class="eg" d="M155.0,292.0 L190.0,292.0" />
+  <path class="eg" d="M210.0,292.0 L245.0,292.0" />
+  <path class="eg" d="M265.0,292.0 L300.0,292.0" />
+  <path class="eg" d="M320.0,292.0 L355.0,292.0" />
+  <path class="eg" d="M375.0,292.0 L410.0,292.0" />
+  <path class="eg" d="M430.0,292.0 L460.0,292.0" />
+  <path class="eg hi" d="M480.0,292.0 L510.0,292.0" />
+  <path class="eg" d="M530.0,292.0 L560.0,292.0" />
+  <path class="eg" d="M580.0,292.0 L605.0,292.0" />
+  <circle class="nd" cx="145" cy="64" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a" /></circle>
+  <circle class="nd" cx="365" cy="64" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a" /></circle>
+  <circle class="nd" cx="520" cy="64" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="90" cy="178" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="145" cy="178" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="255" cy="178" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="365" cy="178" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#e8b48a;#e8b48a;#e8b48a;#e8b48a" /></circle>
+  <circle class="nd" cx="470" cy="178" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#e8b48a;#e8b48a" /></circle>
+  <circle class="nd" cx="520" cy="178" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="40" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="90" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="145" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="200" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="255" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="310" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="365" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="420" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="470" cy="292" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#e8b48a" /></circle>
+  <circle class="nd" cx="520" cy="292" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a" /></circle>
+  <circle class="nd" cx="570" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="nd" cx="615" cy="292" r="9" fill="#f0f2f7" />
+  <circle class="ent" cx="145" cy="64" r="15" />
+  <text class="tag" x="145" y="38">entry</text>
+  <text class="tag hit" x="520" y="322">target</text>
+  <text class="ly" x="18" y="40">layer 2</text>
+  <text class="lyr" x="628" y="40">3 nodes · very long hops</text>
+  <text class="ly" x="18" y="154">layer 1</text>
+  <text class="lyr" x="628" y="154">6 nodes · medium hops</text>
+  <text class="ly" x="18" y="268">layer 0</text>
+  <text class="lyr" x="628" y="268">every node · short hops</text>
+</svg>
+<figcaption><b>Figure 3 -</b> An HNSW index. A node appears in a layer with geometrically decaying probability, so the top layer is sparse and its links span the whole space. The search enters at the top, walks greedily to the closest node it can reach, drops one layer (dashed link, same node) and repeats. The orange trail is one query : two hops at the top replace hundreds at the bottom.</figcaption>
+</center></figure>
+
+<p><em>In plain words : the top layers are the motorway network, with a few nodes and very long hops that cross the whole space in a couple of moves. The bottom layer is the local street map. You take the motorway to get roughly there, then exit and navigate street by street.</em> Each layer contributes a constant expected number of hops, and there are $\mathcal{O}(\log N)$ layers, so a query costs</p>
+
+\[\begin{equation} \mathcal{O}(d \log N) \quad\text{instead of}\quad \mathcal{O}(N d). \label{eq:hnsw} \end{equation}\]
+
+<p>At $N = 10^{8}$ that is the difference between a hundred million comparisons and a few hundred. The price is <strong>recall below 1</strong> : the greedy walk can get stuck in a local minimum and miss a true neighbour. Every ANN index exposes a knob (<code class="language-plaintext highlighter-rouge">efSearch</code> in HNSW, <code class="language-plaintext highlighter-rouge">nprobe</code> in IVF-style indexes <a class="citation" href="#Johnson2021">(Johnson et al., 2021)</a>) that trades latency for recall, and that knob is one of the few in a RAG system with an honest, measurable meaning.</p>
+
+<div class="note">
+	Do not reach for an ANN index by reflex. Below roughly $10^{5}$ chunks, brute-force cosine on a normalised matrix is faster than most ANN libraries once you count index build time, it is exact, and it has no tuning knobs to get wrong. Reach for HNSW when $\eqref{eq:exact}$ actually hurts — not before.
+</div>
+
+<h2 id="5-where-dense-retrieval-fails--lexical-search-and-hybrid">5. Where dense retrieval fails : lexical search and hybrid</h2>
+<p>Embeddings are excellent at <em>meaning</em> and surprisingly bad at <em>strings</em>. Ask for error code <code class="language-plaintext highlighter-rouge">ORA-01555</code> or part number <code class="language-plaintext highlighter-rouge">MX-4471-B</code>, and the embedder — which never saw that token during training — maps it to a vague direction near “technical identifier”. Semantically similar, lexically useless : you will get the page about a <em>different</em> error code.</p>
+
+<p>The classical answer is still the right one. <strong>BM25</strong> ranks documents by weighted term overlap <a class="citation" href="#Robertson2009">(Robertson &amp; Zaragoza, 2009)</a> :</p>
+
+\[\begin{equation} \operatorname{BM25}(q,d) \;=\; \sum_{t \in q} \operatorname{IDF}(t)\; \cdot\; \frac{f(t,d)\,(k_1 + 1)}{f(t,d) + k_1\Big(1 - b + b\,\dfrac{\lvert d \rvert}{\text{avgdl}}\Big)}, \label{eq:bm25} \end{equation}\]
+
+<p>where $f(t,d)$ is how often term $t$ occurs in document $d$, $\lvert d \rvert$ is the document length, $\text{avgdl}$ the mean length, and $k_1 \approx 1.5$, $b \approx 0.75$ are the usual constants. Two ideas are worth extracting from that formula, because both are good engineering :</p>
+
+<ul>
+  <li><strong>Saturation.</strong> As $f(t,d) \to \infty$ the fraction tends to $k_1 + 1$, a finite ceiling. A document mentioning a term twenty times is <em>not</em> twenty times more relevant than one mentioning it once — the tenth occurrence tells you almost nothing new. $k_1$ controls how fast the credit saturates.</li>
+  <li><strong>Length normalisation.</strong> The $b \frac{\lvert d \rvert}{\text{avgdl}}$ term penalises long documents, which would otherwise win purely by containing more words. It is the same instinct as dividing by $\lVert v \rVert$ in the cosine.</li>
+</ul>
+
+<p>And $\operatorname{IDF}(t) = \ln!\left(\frac{N - n_t + 0.5}{n_t + 0.5} + 1\right)$, with $n_t$ the number of documents containing $t$, makes rare terms count for much more than common ones — which is exactly why BM25 nails the part number that the embedder smeared away.</p>
+
+<p>So run <strong>both</strong> retrievers and merge. The catch is that a BM25 score of $14.2$ and a cosine of $0.83$ live on incomparable scales, and normalising them is a fiddly, corpus-dependent mess. The robust trick is to throw the scores away and keep only the <strong>ranks</strong> — Reciprocal Rank Fusion <a class="citation" href="#Cormack2009">(Cormack et al., 2009)</a> :</p>
+
+\[\begin{equation} \operatorname{RRF}(d) \;=\; \sum_{r \in \text{rankers}} \frac{1}{\kappa + \operatorname{rank}_r(d)}, \qquad \kappa \approx 60. \label{eq:rrf} \end{equation}\]
+
+<p><em>In plain words : each ranker votes, a first place is worth more than a second, and nobody has to agree on what a “score” means.</em> The constant $\kappa$ flattens the top of the curve so that the difference between rank 1 and rank 2 does not overwhelm the fact that a document was ranked well by <em>both</em> systems.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">rrf</span><span class="p">(</span><span class="n">rankings</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="s">"""Fuse ranked ID lists. Scores are never compared."""</span>
+    <span class="n">fused</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ranking</span> <span class="ow">in</span> <span class="n">rankings</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ranking</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">fused</span><span class="p">[</span><span class="n">doc</span><span class="p">]</span> <span class="o">=</span> <span class="n">fused</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fused</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">fused</span><span class="p">.</span><span class="n">get</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Hybrid retrieval is, in my experience, the single highest-return change in a mediocre RAG system — well ahead of swapping the generator for a bigger one.</p>
+
+<h2 id="6-reranking--cheap-recall-then-expensive-precision">6. Reranking : cheap recall, then expensive precision</h2>
+<p>There is a structural reason retrieval is not very precise, and understanding it explains the standard architecture.</p>
+
+<p>The retriever uses a <strong>bi-encoder</strong> : the question and the chunk are encoded <em>separately</em>, into $\phi(q)$ and $\phi(c)$, and compared by a cosine. That separation is what makes indexing possible — every $\phi(c)$ is computed once, offline, and a query only needs one new embedding. But it also means the encoder must summarise a chunk into a single vector <strong>without knowing what will be asked</strong>. Information is necessarily lost.</p>
+
+<p>A <strong>cross-encoder</strong> does the opposite : it feeds the pair $(q, c)$ through a Transformer <em>together</em>, so every token of the question can attend to every token of the chunk before a single relevance score comes out <a class="citation" href="#Nogueira2019">(Nogueira &amp; Cho, 2019)</a>. Far more accurate — and unusable as a search index, because nothing can be precomputed : ranking $N$ chunks needs $N$ forward passes <em>per query</em>.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 234" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .cs{ fill:#f3faf4; stroke:#5aa06a; }
+    .cx{ fill:#fbeede; stroke:#b5651d; stroke-width:1.8; }
+    .bt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
+    .bs{ font-size:9.5px; fill:#7a7a7a; text-anchor:middle; }
+    .ln{ stroke:#4a6da7; stroke-width:1.7; fill:none; }
+    .lo{ stroke:#b5651d; stroke-width:1.7; fill:none; }
+    .div{ stroke:#dcdcdc; stroke-width:1.2; }
+    .vec{ fill:#eef1f8; stroke:#4a6da7; stroke-width:1.5; }
+    .sc{ fill:#fbeede; stroke:#b5651d; stroke-width:1.8; }
+    .vt{ font-size:11.5px; fill:#2b2b2b; text-anchor:middle; font-style:italic; }
+    .ttl{ font-size:12.5px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .or{ fill:#b5651d; }
+    .nt{ font-size:11px; fill:#5a5a5a; text-anchor:middle; }
+    .st{ fill:#7a7a7a; }
+  </style>
+  <defs>
+    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#5aa06a" /></marker>
+  </defs>
+  <path class="div" d="M318,32 L318,224" />
+  <text class="ttl" x="160" y="24">bi-encoder — builds the index</text>
+  <text class="ttl or" x="480" y="24">cross-encoder — reranks the shortlist</text>
+  <rect class="bx" x="20" y="56" width="68" height="30" rx="5" />
+  <text class="bt" x="54" y="75.0">query</text>
+  <rect class="bx" x="20" y="140" width="68" height="30" rx="5" />
+  <text class="bt" x="54" y="159.0">chunk</text>
+  <rect class="bx" x="108" y="56" width="74" height="30" rx="5" />
+  <text class="bt" x="145" y="75.0">encoder</text>
+  <rect class="bx" x="108" y="140" width="74" height="30" rx="5" />
+  <text class="bt" x="145" y="159.0">encoder</text>
+  <path class="ln" d="M88.0,71.0 L101.0,71.0" marker-end="url(#am)" />
+  <path class="ln" d="M88.0,155.0 L101.0,155.0" marker-end="url(#am)" />
+  <path class="ln" d="M182.0,71.0 L195.0,71.0" marker-end="url(#am)" />
+  <path class="ln" d="M182.0,155.0 L195.0,155.0" marker-end="url(#am)" />
+  <circle class="vec" cx="208" cy="71" r="13" /><text class="vt" x="208" y="76">q</text>
+  <circle class="vec" cx="208" cy="155" r="13" /><text class="vt" x="208" y="160">c</text>
+  <rect class="bx cs" x="240" y="98" width="66" height="30" rx="5" />
+  <text class="bt" x="273" y="117.0">cos</text>
+  <path class="ln" d="M221,79 L237,100" marker-end="url(#am)" />
+  <path class="ln" d="M221,147 L237,126" marker-end="url(#am)" />
+  <text class="nt" x="160" y="204">the chunk tower runs offline, once per chunk :</text>
+  <text class="nt st" x="160" y="219">a query costs one encode + one index lookup</text>
+  <rect class="bx" x="340" y="56" width="68" height="30" rx="5" />
+  <text class="bt" x="374" y="75.0">query</text>
+  <rect class="bx" x="340" y="140" width="68" height="30" rx="5" />
+  <text class="bt" x="374" y="159.0">chunk</text>
+  <rect class="bx cx" x="438" y="84" width="90" height="58" rx="5" />
+  <text class="bt" x="483" y="112.0">encoder</text>
+  <text class="bs" x="483" y="126.0">both at once</text>
+  <path class="lo" d="M408,71 L434,98" marker-end="url(#ao)" />
+  <path class="lo" d="M408,155 L434,128" marker-end="url(#ao)" />
+  <path class="lo" d="M528,113 L545,113" marker-end="url(#ao)" />
+  <circle class="sc" cx="570" cy="113" r="19" /><text class="vt" x="570" y="117">score</text>
+  <text class="nt or" x="480" y="204">nothing can be precomputed :</text>
+  <text class="nt or st" x="480" y="219">one full pass per (query, chunk) pair</text>
+</svg>
+<figcaption><b>Figure 4 -</b> The two ways to score a (query, chunk) pair. The bi-encoder keeps them apart, which loses information but lets every chunk vector be computed once and stored — that is what an index <i>is</i>. The cross-encoder lets the two texts attend to each other, which is far more accurate and impossible to precompute. Retrieval uses the first, reranking the second.</figcaption>
+</center></figure>
+
+<p>Hence the two-stage design that every serious system converges on :</p>
+
+\[\begin{equation} \underbrace{N = 10^{6}\;\text{chunks}}_{\text{corpus}} \;\xrightarrow[\ \mathcal{O}(d\log N)\ ]{\text{bi-encoder + ANN}}\; \underbrace{50\;\text{candidates}}_{\text{high recall}} \;\xrightarrow[\ 50\ \text{forward passes}\ ]{\text{cross-encoder}}\; \underbrace{5\;\text{passages}}_{\text{high precision}} \label{eq:twostage} \end{equation}\]
+
+<p><em>In plain words : cast a wide, cheap net to make sure the answer is somewhere in the catch, then pay for a careful reading of fifty candidates to pick the best five.</em> The first stage is optimised for <strong>recall</strong> (do not lose the right chunk), the second for <strong>precision</strong> (put it first). Reranking fifty candidates is a fixed, affordable cost that does not grow with the corpus.</p>
+
+<h2 id="7-the-generation-half">7. The generation half</h2>
+<p>The retrieved passages now go into the prompt. This half is shorter, but two things matter.</p>
+
+<p><strong>The instruction must be grounding, not decoration.</strong> The generator’s default behaviour is to answer from parametric memory ; it has to be told, explicitly, to prefer the context, to cite, and — critically — that <em>refusing is an acceptable answer</em>. Without that last clause the model will always produce something.</p>
+
+<p><strong>Structure the context.</strong> Number the passages and ask for the numbers back. Citations are not a nicety : they are what makes the output <em>checkable</em>, and a claim carrying a chunk number can be verified mechanically against the chunk.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">anthropic</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">anthropic</span><span class="p">.</span><span class="n">Anthropic</span><span class="p">()</span>
+
+<span class="n">SYSTEM</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">"Answer using only the numbered context passages. "</span>
+    <span class="s">"Cite the passage number for every claim, like [3]. "</span>
+    <span class="s">"If the context does not contain the answer, say so "</span>
+    <span class="s">"plainly instead of guessing."</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">top_k</span><span class="p">(</span><span class="n">query_vec</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="s">"""index : (N, d) matrix of unit-norm chunk vectors."""</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">index</span> <span class="o">@</span> <span class="n">query_vec</span>        <span class="c1"># cosine, rows are unit
+</span>    <span class="n">best</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argpartition</span><span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="p">,</span> <span class="n">k</span><span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">best</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="p">[</span><span class="n">best</span><span class="p">])]</span>
+
+<span class="k">def</span> <span class="nf">answer</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">hits</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n\n</span><span class="s">"</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s">"[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">] </span><span class="si">{</span><span class="n">chunks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hits</span><span class="p">)</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"&lt;context&gt;</span><span class="se">\n</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n</span><span class="s">&lt;/context&gt;</span><span class="se">\n\n</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">"</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">messages</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s">"claude-opus-5"</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span>
+        <span class="n">system</span><span class="o">=</span><span class="n">SYSTEM</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}],</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">response</span><span class="p">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">b</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"text"</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<p>That is a complete, working RAG loop in about twenty lines. Everything else in this post — chunking strategy, hybrid search, ANN indexes, reranking — is about making the <code class="language-plaintext highlighter-rouge">hits</code> on line three of <code class="language-plaintext highlighter-rouge">answer</code> contain the right passages. Which brings us to the only thing that tells you whether they do.</p>
+
+<h2 id="8-measuring-it-and-the-ceiling-you-cannot-cross">8. Measuring it, and the ceiling you cannot cross</h2>
+<p>RAG systems fail in two completely different ways, and lumping them together is why so many are tuned by superstition. <strong>Always evaluate the two stages separately.</strong></p>
+
+<p><strong>Retrieval metrics</strong> need a set of questions with known relevant chunks.</p>
+
+\[\begin{equation} \operatorname{Recall}@k = \frac{\lvert R(q) \cap \text{relevant}(q) \rvert}{\lvert \text{relevant}(q) \rvert}, \qquad \operatorname{MRR} = \frac{1}{\lvert Q \rvert}\sum_{q \in Q} \frac{1}{\operatorname{rank}_q}, \label{eq:recall} \end{equation}\]
+
+<p>where $\operatorname{rank}_q$ is the position of the first relevant chunk. Recall@$k$ asks <em>“did we get it at all ?”</em>, MRR asks <em>“how near the top ?”</em>. When relevance has degrees, nDCG <a class="citation" href="#Jarvelin2002">(Järvelin &amp; Kekäläinen, 2002)</a> weights each hit by its usefulness and discounts it by its position :</p>
+
+\[\begin{equation} \operatorname{DCG}@k = \sum_{i=1}^{k} \frac{2^{\text{rel}_i} - 1}{\log_2(i+1)}, \qquad \operatorname{nDCG}@k = \frac{\operatorname{DCG}@k}{\operatorname{IDCG}@k}. \label{eq:ndcg} \end{equation}\]
+
+<p><strong>Generation metrics</strong> are about faithfulness : is every claim in the answer supported by a retrieved passage, and does the answer address the question ? Both are usually scored by a second model acting as a judge, against the passages actually shown.</p>
+
+<p>Now the result that should govern where you spend your time :</p>
+
+<div class="theorem" text="the retrieval ceiling">
+	Let $A$ be the event that the system answers a question correctly and with grounding, and let $\mathcal{E}$ be the event that at least one passage containing the necessary evidence is in $R(q)$. Since the generator sees nothing but $q$ and $R(q)$, an answer that is <i>grounded</i> in evidence is impossible when no such evidence was retrieved, so $A \subseteq \mathcal{E}$ and therefore
+	$$ \mathbb{P}(A) \;\le\; \mathbb{P}(\mathcal{E}) \;=\; \operatorname{Recall}@k. $$
+</div>
+
+<p><em>In plain words : if the right chunk is only retrieved 70 % of the time, your system cannot be right more than 70 % of the time — no matter which model you plug in, how you word the prompt, or how much you pay per token.</em> The generator can only ever lose accuracy relative to this bound, never gain it.<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<p>This gives a diagnostic that costs nothing and settles most arguments. When an answer is wrong, look at what was retrieved <strong>before</strong> touching anything else :</p>
+
+<ul>
+  <li>The right chunk was <strong>not</strong> retrieved → the fault is in chunking, embedding, or search. Changing the prompt is theatre.</li>
+  <li>The right chunk <strong>was</strong> retrieved and the answer is still wrong → now it is a generation problem : prompt, context ordering, or model.</li>
+</ul>
+
+<h2 id="9-where-rag-breaks">9. Where RAG breaks</h2>
+<p>RAG is a retrieval system with a language model attached, and it inherits every limitation of retrieval.</p>
+
+<p><strong>It cannot aggregate.</strong> <em>“How many of our customers are on the enterprise plan ?”</em> requires scanning the whole corpus ; retrieval returns $k$ passages. The system will confidently count the ones it happened to see and report a number that is not merely wrong but <em>plausibly</em> wrong. RAG is not a database, and questions of the form <em>count / sum / compare all</em> need a different tool — usually generated SQL, or a <a href="/blog/algorithmic/mapreduce">MapReduce</a>-style pass over the full corpus.</p>
+
+<p><strong>It cannot chain.</strong> <em>“Who manages the person who wrote the incident report on the payments outage ?”</em> needs two hops : find the report’s author, then look up their manager. One retrieval round keyed on the original question will rarely surface both facts, because the second query cannot be formed until the first is answered. Multi-hop demands an agentic loop that retrieves, reads, and retrieves again.</p>
+
+<p><strong>Long context is not free attention.</strong> Stuffing fifty passages in “just in case” degrades accuracy : models recover information near the beginning and the end of a long context far more reliably than in the middle, the <em>lost in the middle</em> effect <a class="citation" href="#Liu2024">(Liu et al., 2024)</a>. More context is not more knowledge, and the reranker’s job is precisely to keep the number of passages small and their order meaningful.</p>
+
+<p><strong>The index goes stale silently.</strong> Embeddings are computed once. Change a document and the index still serves the old vector, with no error and no warning — the system confidently answers from a version of the truth that no longer exists. Re-indexing is an operational obligation, not an optimisation.</p>
+
+<p><strong>Changing the embedding model invalidates everything.</strong> Vectors from two different embedders are not comparable — they are coordinates in unrelated spaces. Upgrading the embedder means re-embedding the entire corpus, which for a large index is the most expensive routine operation in the whole system.</p>
+
+<h2 id="10-conclusion">10. Conclusion</h2>
+<p>Retrieval-Augmented Generation is best understood not as a clever prompting trick but as <strong>an information retrieval system that happens to end in a language model</strong>. That framing tells you where the difficulty is, and it is not where most teams look : it is in cutting documents into units that mean something, in mapping meaning to geometry well enough that a cosine ranks correctly, in combining semantic and lexical search because neither alone is sufficient, and in spending a little compute on a careful second read.</p>
+
+<p>The retrieval ceiling is the sentence to remember. Your system cannot be more correct than its retrieval is complete, so the first question about any wrong answer is never <em>“which model should we try ?”</em> but <em>“was the right passage even in the prompt ?”</em> Answer that honestly, with measurements, and the rest of the engineering follows. Answer it by intuition, and you will spend months tuning the half that was never broken.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Cormack2009">Cormack, G. V., Clarke, C. L. A., &amp; Buettcher, S. (2009). Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods. <i>Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval</i>, 758–759.</span>
+
+<div id="Cormack2009-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Cormack2009-bibtex" class="pre pre-scrollable collapse">@inproceedings{Cormack2009,
+  author = {Cormack, Gordon V. and Clarke, Charles L. A. and Buettcher, Stefan},
+  title = {Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods},
+  booktitle = {Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval},
+  pages = {758--759},
+  year = {2009}
+}
+</pre>
+
+</div></li>
+<li><span id="Johnson2021">Johnson, J., Douze, M., &amp; Jégou, H. (2021). Billion-Scale Similarity Search with GPUs. <i>IEEE Transactions on Big Data</i>, <i>7</i>(3), 535–547.</span>
+
+<div id="Johnson2021-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Johnson2021-bibtex" class="pre pre-scrollable collapse">@article{Johnson2021,
+  author = {Johnson, Jeff and Douze, Matthijs and J{\'e}gou, Herv{\'e}},
+  title = {Billion-Scale Similarity Search with GPUs},
+  journal = {IEEE Transactions on Big Data},
+  volume = {7},
+  number = {3},
+  pages = {535--547},
+  year = {2021}
+}
+</pre>
+
+</div></li>
+<li><span id="Jarvelin2002">Järvelin, K., &amp; Kekäläinen, J. (2002). Cumulated Gain-Based Evaluation of IR Techniques. <i>ACM Transactions on Information Systems</i>, <i>20</i>(4), 422–446.</span>
+
+<div id="Jarvelin2002-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Jarvelin2002-bibtex" class="pre pre-scrollable collapse">@article{Jarvelin2002,
+  author = {J{\"a}rvelin, Kalervo and Kek{\"a}l{\"a}inen, Jaana},
+  title = {Cumulated Gain-Based Evaluation of IR Techniques},
+  journal = {ACM Transactions on Information Systems},
+  volume = {20},
+  number = {4},
+  pages = {422--446},
+  year = {2002}
+}
+</pre>
+
+</div></li>
+<li><span id="Karpukhin2020">Karpukhin, V., Oğuz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., &amp; Yih, W.-tau. (2020). Dense Passage Retrieval for Open-Domain Question Answering. <i>Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</i>, 6769–6781.</span>
+
+<div id="Karpukhin2020-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Karpukhin2020-bibtex" class="pre pre-scrollable collapse">@inproceedings{Karpukhin2020,
+  author = {Karpukhin, Vladimir and O{\u{g}}uz, Barlas and Min, Sewon and Lewis, Patrick and Wu, Ledell and Edunov, Sergey and Chen, Danqi and Yih, Wen-tau},
+  title = {Dense Passage Retrieval for Open-Domain Question Answering},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages = {6769--6781},
+  year = {2020}
+}
+</pre>
+
+</div></li>
+<li><span id="Lewis2020">Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W.-tau, Rocktäschel, T., Riedel, S., &amp; Kiela, D. (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. <i>Advances in Neural Information Processing Systems 33 (NeurIPS)</i>, 9459–9474.</span>
+
+<div id="Lewis2020-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Lewis2020-bibtex" class="pre pre-scrollable collapse">@inproceedings{Lewis2020,
+  author = {Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
+  title = {Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks},
+  booktitle = {Advances in Neural Information Processing Systems 33 (NeurIPS)},
+  pages = {9459--9474},
+  year = {2020}
+}
+</pre>
+
+</div></li>
+<li><span id="Liu2024">Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., &amp; Liang, P. (2024). Lost in the Middle: How Language Models Use Long Contexts. <i>Transactions of the Association for Computational Linguistics</i>, <i>12</i>, 157–173.</span>
+
+<div id="Liu2024-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Liu2024-bibtex" class="pre pre-scrollable collapse">@article{Liu2024,
+  author = {Liu, Nelson F. and Lin, Kevin and Hewitt, John and Paranjape, Ashwin and Bevilacqua, Michele and Petroni, Fabio and Liang, Percy},
+  title = {Lost in the Middle: How Language Models Use Long Contexts},
+  journal = {Transactions of the Association for Computational Linguistics},
+  volume = {12},
+  pages = {157--173},
+  year = {2024}
+}
+</pre>
+
+</div></li>
+<li><span id="Malkov2020">Malkov, Y. A., &amp; Yashunin, D. A. (2020). Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs. <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i>, <i>42</i>(4), 824–836.</span>
+
+<div id="Malkov2020-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Malkov2020-bibtex" class="pre pre-scrollable collapse">@article{Malkov2020,
+  author = {Malkov, Yury A. and Yashunin, Dmitry A.},
+  title = {Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume = {42},
+  number = {4},
+  pages = {824--836},
+  year = {2020}
+}
+</pre>
+
+</div></li>
+<li><span id="Nogueira2019">Nogueira, R., &amp; Cho, K. (2019). Passage Re-ranking with BERT. <i>ArXiv Preprint ArXiv:1901.04085</i>.</span>
+
+<div id="Nogueira2019-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Nogueira2019-bibtex" class="pre pre-scrollable collapse">@article{Nogueira2019,
+  author = {Nogueira, Rodrigo and Cho, Kyunghyun},
+  title = {Passage Re-ranking with BERT},
+  journal = {arXiv preprint arXiv:1901.04085},
+  year = {2019}
+}
+</pre>
+
+</div></li>
+<li><span id="Reimers2019">Reimers, N., &amp; Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings Using Siamese BERT-Networks. <i>Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP)</i>, 3982–3992.</span>
+
+<div id="Reimers2019-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Reimers2019-bibtex" class="pre pre-scrollable collapse">@inproceedings{Reimers2019,
+  author = {Reimers, Nils and Gurevych, Iryna},
+  title = {Sentence-BERT: Sentence Embeddings Using Siamese BERT-Networks},
+  booktitle = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages = {3982--3992},
+  year = {2019}
+}
+</pre>
+
+</div></li>
+<li><span id="Robertson2009">Robertson, S., &amp; Zaragoza, H. (2009). The Probabilistic Relevance Framework: BM25 and Beyond. <i>Foundations and Trends in Information Retrieval</i>, <i>3</i>(4), 333–389.</span>
+
+<div id="Robertson2009-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Robertson2009-bibtex" class="pre pre-scrollable collapse">@article{Robertson2009,
+  author = {Robertson, Stephen and Zaragoza, Hugo},
+  title = {The Probabilistic Relevance Framework: BM25 and Beyond},
+  journal = {Foundations and Trends in Information Retrieval},
+  volume = {3},
+  number = {4},
+  pages = {333--389},
+  year = {2009}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The bound is an upper limit on <em>grounded</em> correctness. A model can of course answer correctly from its own parametric memory when retrieval fails — but then the citation is missing or fabricated, and you have no way to distinguish that lucky case from a hallucination. Counting it as a success measures the wrong thing. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
