@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Softmax and Cross-Entropy, How a Network Says "I Think It Is a Cat"
+title: Softmax and Cross-Entropy, Explained
 date: 2022-09-05 12:00
 comments: true
 external-url:
