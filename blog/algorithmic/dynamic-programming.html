@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Dynamic Programming, or How to Stop Solving the Same Problem Twice</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Dynamic Programming, or How to Stop Solving the Same Problem Twice
+             10 Feb 2019 
+         ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/algorithmic/dynamic-programming">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon" type="image/png" sizes="64x64">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Dynamic Programming, or How to Stop Solving the Same Problem Twice | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Dynamic Programming, or How to Stop Solving the Same Problem Twice" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The memoization post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called dynamic programming. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential…" />
+<meta name="twitter:description" property="og:description" content="The memoization post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called dynamic programming. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential…" />
+<link rel="canonical" href="www.ohmykode.com/blog/algorithmic/dynamic-programming" />
+<meta property="og:url" content="www.ohmykode.com/blog/algorithmic/dynamic-programming" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-10T12:00:00+01:00" />
+<meta property="article:modified_time" content="2019-02-10T12:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Dynamic Programming, or How to Stop Solving the Same Problem Twice" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2019-02-10T12:00:00+01:00","datePublished":"2019-02-10T12:00:00+01:00","description":"The memoization post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called dynamic programming. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential…","headline":"Dynamic Programming, or How to Stop Solving the Same Problem Twice","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/algorithmic/dynamic-programming"},"url":"www.ohmykode.com/blog/algorithmic/dynamic-programming"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Dynamic Programming, or How to Stop Solving the Same Problem Twice</h1></span></center>
+            <center><p> 10 Feb 2019 </p></center>
+            <center><p class="fa fa-clock-o"> 31 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            42 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>The <a href="/blog/python/memoization">memoization</a> post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called <strong>dynamic programming</strong>. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential disaster, proves <em>why</em> it is allowed to work, fills two tables by hand, and shows exactly where it stops working.</p>
+</blockquote>
+
+<h2 id="1-the-disaster-we-are-trying-to-fix">1. The disaster we are trying to fix</h2>
+<p>Let us go back to the naive recursive Fibonacci of the <a href="/blog/python/memoization">memoization</a> post and count precisely how bad it is. Let $T(n)$ be the number of calls made by <code class="language-plaintext highlighter-rouge">fibo_recursive(n)</code>. The function returns immediately for $n&lt;2$, and otherwise makes one call for $n-1$ and one for $n-2$ :</p>
+
+\[\begin{equation} T(0) = T(1) = 1, \qquad T(n) = 1 + T(n-1) + T(n-2). \label{eq:calls} \end{equation}\]
+
+<p>That recurrence looks like Fibonacci itself, and it <em>is</em> :</p>
+
+<div class="theorem" text="cost of the naive recursion">
+	The naive recursive computation of $F(n)$ performs exactly $T(n) = 2F(n+1) - 1$ calls.
+	<br /><i>Proof.&nbsp;&nbsp;</i> By strong induction. For $n=0$, $2F(1)-1 = 2\cdot 1 - 1 = 1 = T(0)$, and likewise for $n=1$. Assume the formula holds for $n-1$ and $n-2$. Then by $\eqref{eq:calls}$,
+	$$ T(n) = 1 + \big(2F(n)-1\big) + \big(2F(n-1)-1\big) = 2\big(F(n) + F(n-1)\big) - 1 = 2F(n+1) - 1, $$
+	using the Fibonacci recurrence itself in the last step.
+	<p align="right">$\square$</p>
+</div>
+
+<p>Since $F(n) \sim \varphi^{n}/\sqrt{5}$ with $\varphi = \frac{1+\sqrt 5}{2} \approx 1.618$, the number of calls grows <strong>exponentially</strong>. For $n = 50$ that is $2F(51) - 1 \approx 4.1 \times 10^{10}$ calls, hours of computation, to produce a number that a schoolchild could reach in fifty additions.</p>
+
+<p><em>In plain words : the recursion is not slow because recursion is slow. It is slow because it keeps forgetting.</em> Figure 1 shows exactly what it forgets.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 360" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .e{ stroke:#c2ccdc; stroke-width:1.6; fill:none; stroke-linecap:round; }
+    .n{ stroke:#4a6da7; stroke-width:1.5; }
+    .t{ font-size:12px; fill:#2b2b2b; text-anchor:middle; }
+    .cap{ font-size:13.5px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+  </style>
+  <path class="e" d="M304.9,41.8 L200.1,96.2" />
+  <path class="e" d="M335.4,41.2 L454.6,96.8" />
+  <path class="e" d="M171.9,114.8 L113.1,163.2" />
+  <path class="e" d="M197.6,115.4 L249.4,162.6" />
+  <path class="e" d="M458.4,116.5 L416.6,161.5" />
+  <path class="e" d="M482.7,115.4 L535.3,162.6" />
+  <path class="e" d="M91.3,188.6 L66.7,229.4" />
+  <path class="e" d="M109.9,187.8 L140.1,230.2" />
+  <path class="e" d="M254.6,189.3 L235.4,228.7" />
+  <path class="e" d="M270.1,188.9 L291.9,229.1" />
+  <path class="e" d="M397.4,189.2 L377.6,228.8" />
+  <path class="e" d="M412.9,189.0 L434.1,229.0" />
+  <path class="e" d="M52.3,260.0 L41.7,290.0" />
+  <path class="e" d="M66.2,258.9 L83.8,291.1" />
+  <circle class="n" cx="320" cy="34" r="16" fill="#f0f2f7"></circle><text class="t" x="320" y="39">F5</text>
+  <circle class="n" cx="185" cy="104" r="16" fill="#f0f2f7"></circle><text class="t" x="185" y="109">F4</text>
+  <circle class="n" cx="470" cy="104" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7" /></circle><text class="t" x="470" y="109">F3</text>
+  <circle class="n" cx="100" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7" /></circle><text class="t" x="100" y="179">F3</text>
+  <circle class="n" cx="262" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7" /></circle><text class="t" x="262" y="179">F2</text>
+  <circle class="n" cx="405" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7" /></circle><text class="t" x="405" y="179">F2</text>
+  <circle class="n" cx="548" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7" /></circle><text class="t" x="548" y="179">F1</text>
+  <circle class="n" cx="58" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7" /></circle><text class="t" x="58" y="249">F2</text>
+  <circle class="n" cx="150" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7" /></circle><text class="t" x="150" y="249">F1</text>
+  <circle class="n" cx="228" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7" /></circle><text class="t" x="228" y="249">F1</text>
+  <circle class="n" cx="300" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a" /></circle><text class="t" x="300" y="249">F0</text>
+  <circle class="n" cx="370" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7" /></circle><text class="t" x="370" y="249">F1</text>
+  <circle class="n" cx="442" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a" /></circle><text class="t" x="442" y="249">F0</text>
+  <circle class="n" cx="36" cy="306" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7" /></circle><text class="t" x="36" y="311">F1</text>
+  <circle class="n" cx="92" cy="306" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a" /></circle><text class="t" x="92" y="311">F0</text>
+  <text class="cap" x="320" y="345" opacity="1">F(3) is recomputed 2 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="1;0;0;0" /></text>
+  <text class="cap" x="320" y="345" opacity="0">F(2) is recomputed 3 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;1;0;0" /></text>
+  <text class="cap" x="320" y="345" opacity="0">F(1) is recomputed 5 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;0;1;0" /></text>
+  <text class="cap" x="320" y="345" opacity="0">F(0) is recomputed 3 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;0;0;1" /></text>
+</svg>
+<figcaption><b>Figure 1 -</b> The call tree of $F(5)$ : 15 calls for only 6 distinct values. Watch each value light up everywhere it is recomputed. There are just <b>six</b> different questions in this whole tree, and the recursion asks them fifteen times.</figcaption>
+</center></figure>
+
+<h2 id="2-the-key-realisation--the-tree-is-really-a-graph">2. The key realisation : the tree is really a graph</h2>
+<p>Here is the whole idea of dynamic programming in one sentence. <strong>The recursion tree of Figure 1 is a lie.</strong> All those nodes labelled <code class="language-plaintext highlighter-rouge">F2</code> are not different problems that happen to look alike, they are <em>the same problem</em>, drawn several times because a tree has no way of showing that two branches meet again.</p>
+
+<p>Glue the identical nodes together and the tree collapses into a <strong>directed acyclic graph</strong> (DAG) of subproblems : one node per distinct question, one edge per dependency.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 212" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .ea{ stroke:#4a6da7; stroke-width:1.9; fill:none; }
+    .eb{ stroke:#b5651d; stroke-width:1.7; fill:none; opacity:.85; }
+    .nd{ stroke:#4a6da7; stroke-width:1.7; }
+    .tt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
+    .vv{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold; }
+    .lg{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+  </defs>
+  <path class="ea" d="M96.0,100.0 L136.0,100.0" marker-end="url(#ah1)" />
+  <path class="ea" d="M196.0,100.0 L236.0,100.0" marker-end="url(#ah1)" />
+  <path class="ea" d="M296.0,100.0 L336.0,100.0" marker-end="url(#ah1)" />
+  <path class="ea" d="M396.0,100.0 L436.0,100.0" marker-end="url(#ah1)" />
+  <path class="ea" d="M496.0,100.0 L536.0,100.0" marker-end="url(#ah1)" />
+  <path class="eb" d="M84.3,82.1 Q170.0,7.9 254.4,82.1" marker-end="url(#ah2)" />
+  <path class="eb" d="M184.3,117.9 Q270.0,192.1 354.4,117.9" marker-end="url(#ah2)" />
+  <path class="eb" d="M284.3,82.1 Q370.0,7.9 454.4,82.1" marker-end="url(#ah2)" />
+  <path class="eb" d="M384.3,117.9 Q470.0,192.1 554.4,117.9" marker-end="url(#ah2)" />
+  <circle class="nd" cx="70" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7" /></circle><text class="tt" x="70" y="99">F0</text><text class="vv" x="70" y="114">0</text>
+  <circle class="nd" cx="170" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7" /></circle><text class="tt" x="170" y="99">F1</text><text class="vv" x="170" y="114">1</text>
+  <circle class="nd" cx="270" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7" /></circle><text class="tt" x="270" y="99">F2</text><text class="vv" x="270" y="114">1</text>
+  <circle class="nd" cx="370" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7" /></circle><text class="tt" x="370" y="99">F3</text><text class="vv" x="370" y="114">2</text>
+  <circle class="nd" cx="470" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7" /></circle><text class="tt" x="470" y="99">F4</text><text class="vv" x="470" y="114">3</text>
+  <circle class="nd" cx="570" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a" /></circle><text class="tt" x="570" y="99">F5</text><text class="vv" x="570" y="114">5</text>
+  <text class="lg" x="320" y="204">each node holds its value ; the highlight sweeps them in topological order</text>
+</svg>
+<figcaption><b>Figure 2 -</b> The same computation as a DAG. Every distinct subproblem is one node, and every arrow points from a value towards the value that needs it : blue for the $n-1$ dependency, orange for the $n-2$ one. The orange links alternate above and below the row so that they vault cleanly over the node in between. Fifteen calls became six.</figcaption>
+</center></figure>
+
+<p>This reframing is the definition worth memorising :</p>
+
+<div class="definition">
+	<b>Dynamic programming</b> is the technique of solving a problem by (i) identifying a family of subproblems that form a <b>directed acyclic graph</b> of dependencies, and (ii) solving each node <b>exactly once</b>, in an order where every node is visited after the nodes it depends on (a <i>topological order</i> of the DAG).
+</div>
+
+<p><em>In plain words : write down every distinct question you will ever need to answer, notice that they only depend on each other in one direction, then answer them in the right order and write each answer down.</em> Two ingredients make it possible, and both must be present :</p>
+
+<ul>
+  <li><strong>Overlapping subproblems.</strong> The same question comes up many times. This is what makes remembering worthwhile — it is why Figure 1 collapses. Without it, storing answers is pure overhead.</li>
+  <li><strong>Optimal substructure.</strong> The optimal answer to a problem can be built from optimal answers to its subproblems. This is what makes remembering <em>legal</em> — and, unlike the first, it is a property you must actually prove.</li>
+</ul>
+
+<div class="note">
+	This is exactly what separates dynamic programming from <b>divide and conquer</b>. Merge sort also splits a problem into subproblems, but the two halves of an array are disjoint : no subproblem ever reappears, the "DAG" is a genuine tree, and a cache would never get a single hit. Divide and conquer has optimal substructure without overlap ; dynamic programming needs both.
+</div>
+
+<p>There are two ways to walk the DAG, and they are the same algorithm seen from two ends :</p>
+
+<ul>
+  <li><strong>Top-down</strong> (memoization) : keep the recursion, add a dictionary. The call stack discovers the DAG lazily and, by returning from the deepest calls first, ends up visiting nodes in a valid topological order without you ever computing one.</li>
+  <li><strong>Bottom-up</strong> (tabulation) : throw the recursion away, work out the topological order yourself, and fill a table with a loop.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="c1"># top-down : keep the recursion, just add a memory
+</span><span class="o">@</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># bottom-up : the same DAG, walked in topological order
+</span><span class="k">def</span> <span class="nf">fib_table</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">F</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">F</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">F</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Both are $\mathcal{O}(n)$ : each of the $n+1$ nodes is evaluated once, at constant cost. Top-down is easier to write and only ever touches the subproblems it actually needs ; bottom-up avoids the call stack and, as we will see in section 6, makes it obvious which rows of the table can be thrown away.</p>
+
+<h2 id="3-a-real-optimisation-problem-where-greed-fails">3. A real optimisation problem, where greed fails</h2>
+<p>Fibonacci is a counting problem. Dynamic programming earns its keep on <strong>optimisation</strong> problems, so let us take the smallest honest one.</p>
+
+<blockquote>
+  <p><strong>Coin change.</strong> Given a set of coin denominations $S$ (unlimited supply of each) and a target amount $n$, pay exactly $n$ using as <strong>few coins</strong> as possible.</p>
+</blockquote>
+
+<p>Take $S = \lbrace 1, 3, 4 \rbrace$ and $n = 6$. The obvious strategy is to be <strong>greedy</strong> : always grab the largest coin that still fits. That gives $4 + 1 + 1$, three coins. And it is wrong : $3 + 3$ pays the same amount with two. Greed fails because taking the $4$ is <em>locally</em> the best move and <em>globally</em> a mistake, and nothing in a greedy algorithm ever revisits that decision. <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<p>So we must consider every first move. Let $C(n)$ be the minimum number of coins for amount $n$. Whatever the optimal solution is, it contains at least one coin ; call it $c$. Remove it, and what remains pays $n - c$. That suggests</p>
+
+\[\begin{equation} C(0) = 0, \qquad C(n) = 1 + \min_{\substack{c \in S \\ c \le n}} C(n - c). \label{eq:coin} \end{equation}\]
+
+<p>This is the step where beginners are told to “trust the recurrence”. Let us instead prove it, because the proof <em>is</em> the optimal-substructure property, and it is short.</p>
+
+<div class="theorem" text="optimal substructure of coin change">
+	With $C(n)$ the minimum number of coins paying exactly $n$ (and $C(n) = +\infty$ if $n$ cannot be paid), the recurrence $\eqref{eq:coin}$ holds for every $n \ge 1$.
+	<br /><br />
+	<i>Proof.&nbsp;&nbsp;</i> We show the two inequalities.
+	<br /><b>($\le$)</b> Let $c \in S$ with $c \le n$. Take any optimal payment of $n - c$, which uses $C(n-c)$ coins, and add one coin $c$ to it. The result is a valid payment of $n$ using $C(n-c) + 1$ coins. Since $C(n)$ is the <i>minimum</i> over all valid payments, $C(n) \le 1 + C(n-c)$. This holds for every admissible $c$, hence $C(n) \le 1 + \min_{c} C(n-c)$.
+	<br /><b>($\ge$)</b> Take an optimal payment of $n$, using $C(n)$ coins. Because $n \ge 1$ it contains at least one coin ; pick one and call it $c_0$. Removing it leaves a valid payment of $n - c_0$ using $C(n) - 1$ coins. By minimality of $C(n - c_0)$ we get $C(n - c_0) \le C(n) - 1$, that is $C(n) \ge 1 + C(n - c_0) \ge 1 + \min_{c} C(n - c)$.
+	<br />Both inequalities give equality.
+	<p align="right">$\square$</p>
+</div>
+
+<p>The second half is the classic <strong>cut-and-paste</strong> argument, and it is worth restating in its contrapositive form because that is how you will use it on new problems : <em>if the remainder of an optimal solution were not itself optimal, we could cut it out, paste in a better sub-solution, and obtain a strictly better solution to the whole problem — contradicting the optimality we assumed.</em> Every correct dynamic program rests on an argument of this shape.</p>
+
+<p>Now the recurrence is licensed, we can fill the table $C(0), C(1), \dots, C(6)$ in order, each entry needing only entries already written.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 248" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .cell{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
+    .win{ fill:#fbeede; stroke:#b5651d; stroke-width:2.2; }
+    .sweep{ fill:#5aa06a; fill-opacity:.16; stroke:#5aa06a; stroke-width:2.4; }
+    .idx{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .val{ font-size:19px; fill:#2b2b2b; text-anchor:middle; }
+    .dep{ stroke:#b5651d; stroke-width:1.5; fill:none; opacity:.8; }
+    .dlb{ font-size:11.5px; fill:#b5651d; text-anchor:middle;
+          paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
+    .ttl{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+  </defs>
+  <text class="ttl" x="52" y="62">amount n</text>
+  <text class="ttl" x="52" y="109">C(n)</text>
+  <rect class="cell" x="100" y="74" width="62" height="52" /><text class="idx" x="131" y="62">0</text><text class="val" x="131" y="109">0</text>
+  <rect class="cell" x="162" y="74" width="62" height="52" /><text class="idx" x="193" y="62">1</text><text class="val" x="193" y="109">1</text>
+  <rect class="cell" x="224" y="74" width="62" height="52" /><text class="idx" x="255" y="62">2</text><text class="val" x="255" y="109">2</text>
+  <rect class="cell win" x="286" y="74" width="62" height="52" /><text class="idx" x="317" y="62">3</text><text class="val" x="317" y="109">1</text>
+  <rect class="cell" x="348" y="74" width="62" height="52" /><text class="idx" x="379" y="62">4</text><text class="val" x="379" y="109">1</text>
+  <rect class="cell" x="410" y="74" width="62" height="52" /><text class="idx" x="441" y="62">5</text><text class="val" x="441" y="109">2</text>
+  <rect class="cell win" x="472" y="74" width="62" height="52" /><text class="idx" x="503" y="62">6</text><text class="val" x="503" y="109">2</text>
+  <rect class="sweep" x="100" y="74" width="62" height="52"><animate attributeName="x" dur="7s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1250;0.2500;0.3750;0.5000;0.6250;0.7500" values="100;162;224;286;348;410;472" /></rect>
+  <path class="dep" d="M481,130 Q461.0,174.0 441,130" marker-end="url(#ah3)" />
+  <path class="dep" d="M500,130 Q408.5,230.0 317,130" marker-end="url(#ah3)" />
+  <path class="dep" d="M519,130 Q387.0,290.0 255,130" marker-end="url(#ah3)" />
+  <text class="dlb" x="415.0" y="146.0">coin 1</text>
+  <text class="dlb" x="408.5" y="197.0">coin 3</text>
+  <text class="dlb" x="387.0" y="227.0">coin 4</text>
+</svg>
+<figcaption><b>Figure 3 -</b> The coin-change table for $S=\lbrace 1,3,4 \rbrace$, filled left to right ; the green frame marks the cell being written, and it never comes back. The three arcs below are the only cells $C(6)$ consults, one per coin — they nest instead of crossing. The shaded pair is the winning branch : $C(6) = 1 + C(3) = 2$.</figcaption>
+</center></figure>
+
+<p>The winner for $n = 6$ is the $3$-branch : $C(6) = 1 + C(3) = 1 + 1 = 2$, the two threes that greed could not find. The cost is now obvious : $\mathcal{O}(n \cdot \lvert S \rvert)$ time and $\mathcal{O}(n)$ space, against the $\mathcal{O}(\lvert S \rvert^{\,n})$ of the naive recursion.</p>
+
+<h2 id="4-recovering-the-solution-not-just-its-value">4. Recovering the solution, not just its value</h2>
+<p>The table gives us the <em>number</em> $2$, not the coins. This is a general and often-forgotten point : a dynamic program computes an optimal <strong>value</strong>, and getting an optimal <strong>solution</strong> requires remembering, for each state, which choice achieved the minimum. Then you walk those choices backwards from the final state.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">min_coins</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="n">INF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">"inf"</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">INF</span><span class="p">]</span> <span class="o">*</span> <span class="n">amount</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># coin achieving the min
+</span>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">C</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
+                <span class="n">C</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">choice</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">if</span> <span class="n">C</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">==</span> <span class="n">INF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>                  <span class="c1"># amount cannot be paid
+</span>    <span class="n">bag</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">amount</span>
+    <span class="k">while</span> <span class="n">n</span><span class="p">:</span>                         <span class="c1"># walk the choices back
+</span>        <span class="n">bag</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">choice</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="n">choice</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">C</span><span class="p">[</span><span class="n">amount</span><span class="p">],</span> <span class="n">bag</span>
+
+<span class="n">min_coins</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>              <span class="c1"># (2, [3, 3])
+</span></code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">choice</code> array costs one extra number per state and turns an answer into an explanation.</p>
+
+<h2 id="5-two-dimensions--the-knapsack">5. Two dimensions : the knapsack</h2>
+<p>Not every state is a single integer. Take the other canonical example.</p>
+
+<blockquote>
+  <p><strong>0/1 knapsack.</strong> Given $m$ items, item $i$ having weight $w_i$ and value $v_i$, and a bag of capacity $W$, choose a subset of <strong>maximum total value</strong> whose total weight is at most $W$. Each item may be taken at most once.</p>
+</blockquote>
+
+<p>The “at most once” is what forces a second dimension. If the state were only the remaining capacity, nothing would stop us from taking the same item twice. So the state must record <em>how far down the item list we are</em> as well : let $K(i, c)$ be the best value obtainable using only the first $i$ items with capacity $c$. Facing item $i$ we have exactly two options, and by the same cut-and-paste argument the best overall is the better of the two :</p>
+
+\[\begin{equation} K(i, c) = \max \underbrace{\big\{\, K(i-1,\, c)}_{\text{leave item } i}, \; \underbrace{K(i-1,\, c - w_i) + v_i \,\big\}}_{\text{take it, if } w_i \le c}, \qquad K(0, c) = 0. \label{eq:knap} \end{equation}\]
+
+<p><em>In plain words : go through the items one at a time and, for every possible remaining capacity, ask “am I better off skipping this item, or taking it and having less room for the rest ?”</em> The DAG is now a grid : each cell depends on one cell directly above it and one cell above and to the left.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 262" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .cell2{ fill:#f6f7fb; stroke:#c2ccdc; stroke-width:1.1; }
+    .val2{ font-size:14px; fill:#2b2b2b; text-anchor:middle; }
+    .hdr{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .rhd{ font-size:12.5px; fill:#4a6da7; text-anchor:end; }
+    .sweep2{ fill:#5aa06a; fill-opacity:.13; stroke:#5aa06a; stroke-width:2.2; }
+    .mark{ fill:none; stroke:#b5651d; stroke-width:2.2; }
+    .ord{ fill:#b5651d; }
+    .ordt{ font-size:10px; fill:#fff; text-anchor:middle; font-weight:bold; }
+    .cp{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <text class="hdr" x="320" y="22">capacity c</text>
+  <text class="hdr" x="182" y="48">0</text>
+  <text class="hdr" x="234" y="48">1</text>
+  <text class="hdr" x="286" y="48">2</text>
+  <text class="hdr" x="338" y="48">3</text>
+  <text class="hdr" x="390" y="48">4</text>
+  <text class="hdr" x="442" y="48">5</text>
+  <text class="hdr" x="494" y="48">6</text>
+  <text class="hdr" x="546" y="48">7</text>
+  <text class="rhd" x="144" y="80">no item</text>
+  <rect class="cell2" x="156" y="58" width="52" height="34" /><text class="val2" x="182" y="80">0</text>
+  <rect class="cell2" x="208" y="58" width="52" height="34" /><text class="val2" x="234" y="80">0</text>
+  <rect class="cell2" x="260" y="58" width="52" height="34" /><text class="val2" x="286" y="80">0</text>
+  <rect class="cell2" x="312" y="58" width="52" height="34" /><text class="val2" x="338" y="80">0</text>
+  <rect class="cell2" x="364" y="58" width="52" height="34" /><text class="val2" x="390" y="80">0</text>
+  <rect class="cell2" x="416" y="58" width="52" height="34" /><text class="val2" x="442" y="80">0</text>
+  <rect class="cell2" x="468" y="58" width="52" height="34" /><text class="val2" x="494" y="80">0</text>
+  <rect class="cell2" x="520" y="58" width="52" height="34" /><text class="val2" x="546" y="80">0</text>
+  <text class="rhd" x="144" y="114">+ (1, 1)</text>
+  <rect class="cell2" x="156" y="92" width="52" height="34" /><text class="val2" x="182" y="114">0</text>
+  <rect class="cell2" x="208" y="92" width="52" height="34" /><text class="val2" x="234" y="114">1</text>
+  <rect class="cell2" x="260" y="92" width="52" height="34" /><text class="val2" x="286" y="114">1</text>
+  <rect class="cell2" x="312" y="92" width="52" height="34" /><text class="val2" x="338" y="114">1</text>
+  <rect class="cell2" x="364" y="92" width="52" height="34" /><text class="val2" x="390" y="114">1</text>
+  <rect class="cell2" x="416" y="92" width="52" height="34" /><text class="val2" x="442" y="114">1</text>
+  <rect class="cell2" x="468" y="92" width="52" height="34" /><text class="val2" x="494" y="114">1</text>
+  <rect class="cell2" x="520" y="92" width="52" height="34" /><text class="val2" x="546" y="114">1</text>
+  <text class="rhd" x="144" y="148">+ (3, 4)</text>
+  <rect class="cell2" x="156" y="126" width="52" height="34" /><text class="val2" x="182" y="148">0</text>
+  <rect class="cell2" x="208" y="126" width="52" height="34" /><text class="val2" x="234" y="148">1</text>
+  <rect class="cell2" x="260" y="126" width="52" height="34" /><text class="val2" x="286" y="148">1</text>
+  <rect class="cell2" x="312" y="126" width="52" height="34" /><text class="val2" x="345" y="148">4</text>
+  <rect class="cell2" x="364" y="126" width="52" height="34" /><text class="val2" x="390" y="148">5</text>
+  <rect class="cell2" x="416" y="126" width="52" height="34" /><text class="val2" x="442" y="148">5</text>
+  <rect class="cell2" x="468" y="126" width="52" height="34" /><text class="val2" x="494" y="148">5</text>
+  <rect class="cell2" x="520" y="126" width="52" height="34" /><text class="val2" x="546" y="148">5</text>
+  <text class="rhd" x="144" y="182">+ (4, 5)</text>
+  <rect class="cell2" x="156" y="160" width="52" height="34" /><text class="val2" x="182" y="182">0</text>
+  <rect class="cell2" x="208" y="160" width="52" height="34" /><text class="val2" x="234" y="182">1</text>
+  <rect class="cell2" x="260" y="160" width="52" height="34" /><text class="val2" x="286" y="182">1</text>
+  <rect class="cell2" x="312" y="160" width="52" height="34" /><text class="val2" x="338" y="182">4</text>
+  <rect class="cell2" x="364" y="160" width="52" height="34" /><text class="val2" x="390" y="182">5</text>
+  <rect class="cell2" x="416" y="160" width="52" height="34" /><text class="val2" x="442" y="182">6</text>
+  <rect class="cell2" x="468" y="160" width="52" height="34" /><text class="val2" x="494" y="182">6</text>
+  <rect class="cell2" x="520" y="160" width="52" height="34" /><text class="val2" x="553" y="182">9</text>
+  <text class="rhd" x="144" y="216">+ (5, 7)</text>
+  <rect class="cell2" x="156" y="194" width="52" height="34" /><text class="val2" x="182" y="216">0</text>
+  <rect class="cell2" x="208" y="194" width="52" height="34" /><text class="val2" x="234" y="216">1</text>
+  <rect class="cell2" x="260" y="194" width="52" height="34" /><text class="val2" x="286" y="216">1</text>
+  <rect class="cell2" x="312" y="194" width="52" height="34" /><text class="val2" x="338" y="216">4</text>
+  <rect class="cell2" x="364" y="194" width="52" height="34" /><text class="val2" x="390" y="216">5</text>
+  <rect class="cell2" x="416" y="194" width="52" height="34" /><text class="val2" x="442" y="216">7</text>
+  <rect class="cell2" x="468" y="194" width="52" height="34" /><text class="val2" x="494" y="216">8</text>
+  <rect class="cell2" x="520" y="194" width="52" height="34" /><text class="val2" x="553" y="216">9</text>
+  <rect class="sweep2" x="156" y="58" width="416" height="34"><animate attributeName="y" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="58;92;126;160;194" /></rect>
+  <rect class="mark" x="314.5" y="128.5" width="47.0" height="29.0" rx="4" /><circle class="ord" cx="325.0" cy="138.0" r="7.5" /><text class="ordt" x="325.0" y="141.5">1</text>
+  <rect class="mark" x="522.5" y="162.5" width="47.0" height="29.0" rx="4" /><circle class="ord" cx="533.0" cy="172.0" r="7.5" /><text class="ordt" x="533.0" y="175.5">2</text>
+  <rect class="mark" x="522.5" y="196.5" width="47.0" height="29.0" rx="4" /><circle class="ord" cx="533.0" cy="206.0" r="7.5" /><text class="ordt" x="533.0" y="209.5">3</text>
+  <text class="cp" x="320" y="250">the sweep goes down one item at a time ; each row reads only the row above it</text>
+</svg>
+<figcaption><b>Figure 4 -</b> The knapsack table $K(i,c)$ for items $(1,1), (3,4), (4,5), (5,7)$ and capacity $W=7$. Each row consults only the row directly above, so the grid fills in a single downward sweep. The circled cells are the three decisions that build the optimum $9$, numbered in the order you meet them when walking back from the bottom-right corner.</figcaption>
+</center></figure>
+
+<p>Read the bottom-right corner : the best value is $\mathbf{9}$. Note <em>which</em> items achieve it. Following the choices backwards, $K(4,7) = K(3,7)$ so item $(5,7)$ was <strong>left out</strong> despite being the most valuable single item ; then $K(3,7) \ne K(2,7)$ so item $(4,5)$ is in, dropping us to $K(2,3)$ ; then $K(2,3) \ne K(1,3)$ so item $(3,4)$ is in too. The optimum is ${(3,4), (4,5)}$, weight $7$, value $9$ — again a solution no greedy rule based on value, weight, or value-per-weight would produce.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># items = [(weight, value), ...]
+</span><span class="k">def</span> <span class="nf">knapsack</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">W</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">W</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>              <span class="c1"># leave it
+</span>            <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span>                         <span class="c1"># or take it
+</span>                <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">],</span>
+                              <span class="n">K</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">c</span> <span class="o">-</span> <span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">K</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)][</span><span class="n">W</span><span class="p">]</span>
+
+<span class="n">knapsack</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)],</span> <span class="mi">7</span><span class="p">)</span>   <span class="c1"># 9
+</span></code></pre></div></div>
+
+<h2 id="6-saving-space--the-rolling-table">6. Saving space : the rolling table</h2>
+<p>Look again at $\eqref{eq:knap}$ : row $i$ reads only row $i-1$. Rows $0$ to $i-2$ are dead weight. So we can keep a single array and overwrite it in place, provided we sweep the capacities <strong>downwards</strong> so that <code class="language-plaintext highlighter-rouge">K[c - w]</code> still holds the <em>previous</em> row’s value when we read it :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">knapsack_1d</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">W</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="c1"># downwards, so K[c - w] still holds row i-1
+</span>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">w</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">K</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">K</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">K</span><span class="p">[</span><span class="n">W</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Memory drops from $\mathcal{O}(mW)$ to $\mathcal{O}(W)$, a change that routinely decides whether a dynamic program fits in RAM. The price is that we can no longer backtrack through the table to recover <em>which</em> items were chosen — the same <a href="/blog/python/memoization">memoization</a> trade-off between speed, memory and information, one level up.</p>
+
+<h2 id="7-the-recipe">7. The recipe</h2>
+<p>Every dynamic program you will ever write is these five steps, in this order.</p>
+
+<ol>
+  <li><strong>Name the state.</strong> What is the smallest set of facts that fully describes a subproblem ? ($n$ for coin change ; the pair $(i, c)$ for the knapsack.) Get this wrong and nothing else works.</li>
+  <li><strong>Write the recurrence.</strong> Consider all the possible <em>first</em> (or <em>last</em>) decisions and express the answer in terms of smaller states.</li>
+  <li><strong>Prove optimal substructure.</strong> Cut and paste : assume a sub-solution is not optimal, replace it with a better one, contradict the optimality of the whole.</li>
+  <li><strong>Order the states.</strong> Find a topological order of the dependency DAG — often just “increasing $n$” or “row by row”. Or skip it entirely by memoizing the recursion top-down.</li>
+  <li><strong>Reconstruct the answer</strong>, if you need the solution and not only its value, by storing the argmin/argmax at each state.</li>
+</ol>
+
+<p>The complexity then reads straight off the table : <em>(number of states) $\times$ (cost of one transition)</em>.</p>
+
+<h2 id="8-where-it-breaks-and-why-that-is-interesting">8. Where it breaks, and why that is interesting</h2>
+<p>Dynamic programming is not universal, and knowing its boundary is what turns it from a trick into a tool.</p>
+
+<p><strong>Without optimal substructure, it is simply wrong.</strong> The textbook counterexample <a class="citation" href="#Cormen2009">(Cormen et al., 2009)</a> is the <strong>longest simple path</strong> between two vertices of a graph. Shortest paths decompose beautifully — a sub-path of a shortest path is a shortest path — which is why Dijkstra and Bellman–Ford work. Longest simple paths do not : the sub-paths of an optimal long path need not be optimal, because “simple” (no repeated vertex) is a <em>global</em> constraint that two independently-optimal halves can violate when you glue them together. The problem is NP-hard, and no amount of tabulation will save it.</p>
+
+<p><strong>The table can be exponentially large.</strong> The knapsack runs in $\mathcal{O}(mW)$, which looks polynomial. It is not : the input writes $W$ in about $\log_2 W$ bits, so the table size $W$ is <em>exponential in the size of the input</em>. This is called <strong>pseudo-polynomial</strong>, and it is exactly why the knapsack remains NP-hard even though we just solved it in a dozen lines. The same effect kills exact dynamic programming for the travelling salesman, whose state must record the set of already-visited cities : the Held–Karp algorithm <a class="citation" href="#HeldKarp1962">(Held &amp; Karp, 1962)</a> is $\mathcal{O}(2^{m} m^{2})$, a spectacular improvement on the $\mathcal{O}(m!)$ of brute force, and still hopeless past a few dozen cities. Bellman named this state explosion the <strong>curse of dimensionality</strong> <a class="citation" href="#Bellman1957">(Bellman, 1957)</a>.</p>
+
+<p><strong>And it is stubbornly sequential.</strong> Each cell waits for its predecessors, which is the exact opposite of the independent-chunks structure that <a href="/blog/algorithmic/mapreduce">MapReduce</a> needs to scale. Dynamic programs parallelise only along the <em>anti-diagonals</em> of the table, where cells happen to be mutually independent — never along the direction of the recurrence.</p>
+
+<div class="note">
+	<b>Why such an odd name ?</b> Bellman, who founded the field <a class="citation" href="#Bellman1954">(Bellman, 1954)</a>, chose it for entirely non-mathematical reasons. He was working at RAND under a Secretary of Defense who, in his own words, had "a pathological fear and hatred of the word <i>research</i>" ; "dynamic" sounded impossible to use pejoratively, and "programming" then meant planning, not coding. He admits in his autobiography <a class="citation" href="#Bellman1984">(Bellman, 1984)</a> that he picked a name nobody could object to, as an umbrella for what he was actually doing. So if the term never made intuitive sense to you : it was never supposed to.
+</div>
+
+<h2 id="9-it-is-everywhere-once-you-see-the-dag">9. It is everywhere, once you see the DAG</h2>
+<p>The pattern generalises far beyond puzzles. Sequence alignment and edit distance fill a two-dimensional grid exactly like the knapsack, and are the backbone of <code class="language-plaintext highlighter-rouge">diff</code> and of DNA comparison. Viterbi decoding finds the most likely hidden state sequence by tabulating over (time $\times$ state). The deletion–contraction recurrence used to compute <a href="/blog/mathematics/introduction-chromatic-polynomials">chromatic polynomials</a> generates the same graph over and over, and is a textbook candidate for memoization on isomorphism classes.</p>
+
+<p>And one you have already met : <a href="/blog/machine-learning/backpropagation">backpropagation</a>. The computational graph of a neural network <em>is</em> the DAG, the upstream gradient at each node <em>is</em> the memoized subproblem value, and the backward pass <em>is</em> the topological sweep. It computes every partial derivative in a single pass for the same reason our table did — because it refuses to answer the same question twice.</p>
+
+<h2 id="10-conclusion">10. Conclusion</h2>
+<p>Dynamic programming is not a family of tricks to memorise, it is one observation applied with discipline : <strong>a recursion whose calls overlap is secretly a DAG, and a DAG should be evaluated once, in order.</strong> <a href="/blog/python/memoization">Memoization</a> is that observation applied lazily from the top ; tabulation is the same observation applied deliberately from the bottom. The exponential blow-up of Figure 1 and the polynomial table of Figure 2 describe the <em>same computation</em> — the only difference is whether the algorithm bothers to remember.</p>
+
+<p>What makes it an engineering discipline rather than a reflex is the middle step, the one this post insisted on : proving that the pieces of an optimal solution are themselves optimal. When that cut-and-paste argument goes through, you get an algorithm and a proof at the same time. When it does not — longest simple path — no table in the world will rescue you, and that failure is itself worth knowing.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Bellman1954">Bellman, R. (1954). The Theory of Dynamic Programming. <i>Bulletin of the American Mathematical Society</i>, <i>60</i>(6), 503–515.</span>
+
+<div id="Bellman1954-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Bellman1954-bibtex" class="pre pre-scrollable collapse">@article{Bellman1954,
+  author = {Bellman, Richard},
+  title = {The Theory of Dynamic Programming},
+  journal = {Bulletin of the American Mathematical Society},
+  volume = {60},
+  number = {6},
+  pages = {503--515},
+  year = {1954}
+}
+</pre>
+
+</div></li>
+<li><span id="Bellman1984">Bellman, R. (1984). <i>Eye of the Hurricane: An Autobiography</i>. World Scientific.</span>
+
+<div id="Bellman1984-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Bellman1984-bibtex" class="pre pre-scrollable collapse">@book{Bellman1984,
+  author = {Bellman, Richard},
+  title = {Eye of the Hurricane: An Autobiography},
+  year = {1984},
+  publisher = {World Scientific}
+}
+</pre>
+
+</div></li>
+<li><span id="Bellman1957">Bellman, R. (1957). <i>Dynamic Programming</i>. Princeton University Press.</span>
+
+<div id="Bellman1957-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Bellman1957-bibtex" class="pre pre-scrollable collapse">@book{Bellman1957,
+  author = {Bellman, Richard},
+  title = {Dynamic Programming},
+  year = {1957},
+  publisher = {Princeton University Press}
+}
+</pre>
+
+</div></li>
+<li><span id="Cormen2009">Cormen, T. H., Leiserson, C. E., Rivest, R. L., &amp; Stein, C. (2009). <i>Introduction to Algorithms</i> (3rd ed.). MIT Press.</span>
+
+<div id="Cormen2009-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Cormen2009-bibtex" class="pre pre-scrollable collapse">@book{Cormen2009,
+  author = {Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford},
+  title = {Introduction to Algorithms},
+  edition = {3rd},
+  year = {2009},
+  publisher = {MIT Press}
+}
+</pre>
+
+</div></li>
+<li><span id="HeldKarp1962">Held, M., &amp; Karp, R. M. (1962). A Dynamic Programming Approach to Sequencing Problems. <i>Journal of the Society for Industrial and Applied Mathematics</i>, <i>10</i>(1), 196–210.</span>
+
+<div id="HeldKarp1962-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="HeldKarp1962-bibtex" class="pre pre-scrollable collapse">@article{HeldKarp1962,
+  author = {Held, Michael and Karp, Richard M.},
+  title = {A Dynamic Programming Approach to Sequencing Problems},
+  journal = {Journal of the Society for Industrial and Applied Mathematics},
+  volume = {10},
+  number = {1},
+  pages = {196--210},
+  year = {1962}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The number of coins is not the only sensible objective, and the greedy algorithm is not always wrong : for the “canonical” systems used by real currencies (such as $\lbrace 1,2,5,10,20,50 \rbrace$) greed provably matches the optimum. Deciding whether a given coin system is canonical is itself a non-trivial problem — which is a good reason to reach for $\eqref{eq:coin}$ and stop worrying. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>

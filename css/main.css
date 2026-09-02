@@ -210,7 +210,8 @@ table {
   font-style: normal; }
 
 pre {
-  tab-size: 2; }
+  tab-size: 2;
+  overflow-x: auto; }
 
 /**
  * Syntax highlighting styles
