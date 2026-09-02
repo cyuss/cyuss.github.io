@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dynamic Programming, or How to Stop Solving the Same Problem Twice
+title: Dynamic Programming, Solve It Once
 date: 2019-02-10 12:00
 comments: true
 external-url:
