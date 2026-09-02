@@ -278,7 +278,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 
 \[\begin{equation} p(\text{next word}) = \operatorname{softmax}(h\, W_{\text{vocab}} + b). \label{eq:head} \end{equation}\]
 
-<p>The model picks a word, appends it to the sentence, and runs again to produce the next, this is <strong>autoregressive</strong> generation. ELI5 : <em>it writes like you texting with predictive keyboard, one suggestion at a time, each new word feeding back in as context.</em> The masking $\eqref{eq:mask}$ is what makes training match this behaviour : during training the model sees the whole target sentence but is forbidden from looking ahead, so it learns to predict each word from only the words before it.</p>
+<p>The model picks a word from that distribution, appends it to the sentence, and runs again to produce the next, this is <strong>autoregressive</strong> generation (the <code class="language-plaintext highlighter-rouge">temperature</code> knob you set when sampling is the one described in the <a href="/blog/machine-learning/softmax-cross-entropy">softmax and cross-entropy</a> post). ELI5 : <em>it writes like you texting with predictive keyboard, one suggestion at a time, each new word feeding back in as context.</em> The masking $\eqref{eq:mask}$ is what makes training match this behaviour : during training the model sees the whole target sentence but is forbidden from looking ahead, so it learns to predict each word from only the words before it.</p>
 
 <h2 id="6-why-transformers-took-over">6. Why Transformers took over</h2>
 <ul>

@@ -148,7 +148,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 
 <p><strong>Step 2 — Scale.</strong> Divide by $\sqrt{d_k}$ (with $d_k$ the vector length). We will justify this shortly ; for now, it just keeps the numbers from getting too big.</p>
 
-<p><strong>Step 3 — Softmax.</strong> Turn the scores into positive weights that add up to $1$ (percentages of attention) :</p>
+<p><strong>Step 3 — Softmax.</strong> Turn the scores into positive weights that add up to $1$ (percentages of attention), exactly the <a href="/blog/machine-learning/softmax-cross-entropy">softmax</a> that turns raw scores into a distribution :</p>
 
 \[\begin{equation} \alpha_{j} = \frac{\exp(s_{j}/\sqrt{d_k})}{\sum_{\ell=1}^{n}\exp(s_{\ell}/\sqrt{d_k})}, \qquad \sum_{j}\alpha_{j}=1. \label{eq:softmax} \end{equation}\]
 

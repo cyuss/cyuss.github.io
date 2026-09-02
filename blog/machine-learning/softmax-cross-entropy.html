@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Softmax and Cross-Entropy, How a Network Says "I Think It Is a Cat"</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Softmax and Cross-Entropy, How a Network Says "I Think It Is a Cat"
+             5 Sep 2022 
+         ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/machine-learning/softmax-cross-entropy">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon" type="image/png" sizes="64x64">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Softmax and Cross-Entropy, How a Network Says “I Think It Is a Cat” | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Softmax and Cross-Entropy, How a Network Says “I Think It Is a Cat”" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A neural network does not answer questions, it produces numbers. Ask it to recognise an animal and the last layer hands you something like $(2.0,\; 1.0,\; 0.1)$ for cat, dog, bird. That is not an answer, it is a mood. Two small functions turn that mood into a decision and, crucially, into a lesson : softmax converts the raw scores into honest probabilities, and cross-entropy measures how wrong those probabilities were. Together they are the last two boxes of almost every classifier ever trained, and they hide a small miracle : their combined gradient is simply predicted minus true. This…" />
+<meta name="twitter:description" property="og:description" content="A neural network does not answer questions, it produces numbers. Ask it to recognise an animal and the last layer hands you something like $(2.0,\; 1.0,\; 0.1)$ for cat, dog, bird. That is not an answer, it is a mood. Two small functions turn that mood into a decision and, crucially, into a lesson : softmax converts the raw scores into honest probabilities, and cross-entropy measures how wrong those probabilities were. Together they are the last two boxes of almost every classifier ever trained, and they hide a small miracle : their combined gradient is simply predicted minus true. This…" />
+<link rel="canonical" href="www.ohmykode.com/blog/machine-learning/softmax-cross-entropy" />
+<meta property="og:url" content="www.ohmykode.com/blog/machine-learning/softmax-cross-entropy" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-05T12:00:00+02:00" />
+<meta property="article:modified_time" content="2022-09-05T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Softmax and Cross-Entropy, How a Network Says “I Think It Is a Cat”" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2022-09-05T12:00:00+02:00","datePublished":"2022-09-05T12:00:00+02:00","description":"A neural network does not answer questions, it produces numbers. Ask it to recognise an animal and the last layer hands you something like $(2.0,\\; 1.0,\\; 0.1)$ for cat, dog, bird. That is not an answer, it is a mood. Two small functions turn that mood into a decision and, crucially, into a lesson : softmax converts the raw scores into honest probabilities, and cross-entropy measures how wrong those probabilities were. Together they are the last two boxes of almost every classifier ever trained, and they hide a small miracle : their combined gradient is simply predicted minus true. This…","headline":"Softmax and Cross-Entropy, How a Network Says “I Think It Is a Cat”","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/machine-learning/softmax-cross-entropy"},"url":"www.ohmykode.com/blog/machine-learning/softmax-cross-entropy"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Softmax and Cross-Entropy, How a Network Says "I Think It Is a Cat"</h1></span></center>
+            <center><p> 5 Sep 2022 </p></center>
+            <center><p class="fa fa-clock-o"> 17 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            23 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>A neural network does not answer questions, it produces <strong>numbers</strong>. Ask it to recognise an animal and the last layer hands you something like $(2.0,\; 1.0,\; 0.1)$ for <em>cat, dog, bird</em>. That is not an answer, it is a mood. Two small functions turn that mood into a decision and, crucially, into a <em>lesson</em> : <strong>softmax</strong> converts the raw scores into honest probabilities, and <strong>cross-entropy</strong> measures how wrong those probabilities were. Together they are the last two boxes of almost every classifier ever trained, and they hide a small miracle : their combined gradient is simply <em>predicted minus true</em>. This post builds both from scratch, with numbers, and shows exactly where that miracle comes from.</p>
+</blockquote>
+
+<h2 id="1-the-problem--scores-are-not-probabilities">1. The problem : scores are not probabilities</h2>
+<p>The final layer of a classifier outputs one number per class. These raw numbers are called <strong>logits</strong>. In our example the network is leaning towards <em>cat</em> :</p>
+
+\[\begin{equation} z = (z_{\text{cat}},\, z_{\text{dog}},\, z_{\text{bird}}) = (2.0,\; 1.0,\; 0.1). \label{eq:logits} \end{equation}\]
+
+<p>We would like to say <em>“cat with 66 % confidence”</em>, but $\eqref{eq:logits}$ cannot be read as probabilities : the numbers do not sum to $1$, and nothing stops a logit from being negative. We need a converter that takes any list of real numbers and returns a proper probability distribution : all entries positive, summing to one, and preserving the ranking (whoever scored highest must stay the most likely).</p>
+
+<p>The naive fix, dividing each score by the total, fails immediately on negative numbers : with $z = (-1, 2)$ the sum is $1$ and we would report a probability of $-100\,\%$ for the first class. We need something that makes every number positive <strong>before</strong> normalising.</p>
+
+<h2 id="2-softmax--exponentiate-then-normalise">2. Softmax : exponentiate, then normalise</h2>
+<p>The exponential is exactly the tool for that. It is always positive, and it is increasing, so it never reorders anything. Apply it to each logit and divide by the total :</p>
+
+<div class="definition">
+	The <b>softmax</b> function turns a vector of logits $z = (z_1,\dots,z_K)$ into a probability distribution :
+	$$ \operatorname{softmax}(z)_i \;=\; p_i \;=\; \frac{e^{z_i}}{\sum_{k=1}^{K} e^{z_k}}, \qquad p_i &gt; 0, \quad \sum_{i=1}^{K} p_i = 1. $$
+</div>
+
+<p><em>In plain words : give every class a number of lottery tickets equal to $e^{z}$, then a class’s probability is its share of all the tickets in the urn. Because the ticket count grows exponentially with the score, a slightly better score buys a lot more tickets.</em> On our example :</p>
+
+\[\begin{aligned}
+e^{2.0} &amp;= 7.389, &amp; e^{1.0} &amp;= 2.718, &amp; e^{0.1} &amp;= 1.105, &amp; \text{sum} &amp;= 11.212, \\
+p_{\text{cat}} &amp;= \tfrac{7.389}{11.212} = 0.659, &amp; p_{\text{dog}} &amp;= \tfrac{2.718}{11.212} = 0.242, &amp; p_{\text{bird}} &amp;= \tfrac{1.105}{11.212} = 0.099. &amp;&amp;
+\end{aligned}\]
+
+<figure><center>
+<svg viewBox="0 0 640 240" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .lb{ fill:#8fa5c8; stroke:#4a6da7; stroke-width:1.2; }
+    .pb{ fill:#e0a878; stroke:#b5651d; stroke-width:1.2; }
+    .ax{ stroke:#bdbdbd; stroke-width:1.2; }
+    .cl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
+    .vl{ font-size:12px; fill:#2b2b2b; text-anchor:middle; }
+    .hd{ font-size:13px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .hd2{ font-size:13px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .arw{ stroke:#7a7a7a; stroke-width:1.6; fill:none; }
+    .op{ font-size:13px; fill:#5a5a5a; text-anchor:middle; }
+    .fl{ fill:#5aa06a; }
+  </style>
+  <!-- left panel : logits -->
+  <text class="hd" x="115" y="26">logits z (raw scores)</text>
+  <line class="ax" x1="35" y1="190" x2="200" y2="190" />
+  <rect class="lb" x="52" y="130" width="34" height="60" /><text class="vl" x="69" y="122">2.0</text><text class="cl" x="69" y="206">cat</text>
+  <rect class="lb" x="100" y="160" width="34" height="30" /><text class="vl" x="117" y="152">1.0</text><text class="cl" x="117" y="206">dog</text>
+  <rect class="lb" x="148" y="187" width="34" height="3" /> <text class="vl" x="165" y="179">0.1</text><text class="cl" x="165" y="206">bird</text>
+  <!-- middle : the two operations -->
+  <path class="arw" d="M215,150 L300,150" /><path class="arw" d="M300,150 l-8,-5 M300,150 l-8,5" />
+  <text class="op" x="257" y="140">e ᶻ</text>
+  <text class="op" x="257" y="172" font-size="11">7.389 · 2.718 · 1.105</text>
+  <path class="arw" d="M320,150 L405,150" /><path class="arw" d="M405,150 l-8,-5 M405,150 l-8,5" />
+  <text class="op" x="362" y="140">÷ 11.212</text>
+  <text class="op" x="362" y="172" font-size="11">(the total)</text>
+  <!-- travelling dot -->
+  <circle class="fl" r="5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M215,150 L405,150" /></circle>
+  <!-- right panel : probabilities -->
+  <text class="hd2" x="520" y="26">probabilities p (sum = 1)</text>
+  <line class="ax" x1="425" y1="190" x2="615" y2="190" />
+  <rect class="pb" x="446" y="104" width="34" height="86" /><text class="vl" x="463" y="96" fill="#b5651d">0.659</text><text class="cl" x="463" y="206">cat</text>
+  <rect class="pb" x="500" y="158" width="34" height="32" /><text class="vl" x="517" y="150" fill="#b5651d">0.242</text><text class="cl" x="517" y="206">dog</text>
+  <rect class="pb" x="554" y="177" width="34" height="13" /><text class="vl" x="571" y="169" fill="#b5651d">0.099</text><text class="cl" x="571" y="206">bird</text>
+  <text class="cl" x="320" y="230" fill="#7a7a7a">softmax : exponentiate to make everything positive, then normalise to make it a distribution</text>
+</svg>
+<figcaption><b>Figure 1 -</b> Softmax in two moves. The exponential turns arbitrary scores into positive "ticket counts", the division by their sum turns those counts into shares. The order of the classes is untouched.</figcaption>
+</center></figure>
+
+<p>Two properties are worth keeping in your pocket. First, softmax depends <strong>only on the differences</strong> between logits : adding the same constant $c$ to every score changes nothing, since $e^{z_i+c} = e^{c}e^{z_i}$ and the $e^{c}$ cancels between numerator and denominator. Second, with only two classes it collapses to the familiar sigmoid of <a href="/blog/machine-learning/backpropagation">backpropagation</a> :</p>
+
+\[\begin{equation} p_1 = \frac{e^{z_1}}{e^{z_1}+e^{z_2}} = \frac{1}{1 + e^{-(z_1 - z_2)}} = \sigma(z_1 - z_2). \label{eq:sigmoid} \end{equation}\]
+
+<p>So the sigmoid was never a different animal, it is softmax with $K=2$ looking at a single score gap.</p>
+
+<div class="example">
+	<b>The name is a warning.</b> Softmax is <i>not</i> a smooth version of the <code>max</code> function, it is a smooth version of <code>argmax</code> : a hard argmax would return $(1,0,0)$, softmax returns the blurred $(0.659, 0.242, 0.099)$. That blur is the whole point, because a hard argmax has a derivative of zero everywhere and would tell <a href="/blog/machine-learning/gradient-descent">gradient descent</a> absolutely nothing.
+</div>
+
+<h2 id="3-measuring-the-mistake--surprise-then-cross-entropy">3. Measuring the mistake : surprise, then cross-entropy</h2>
+<p>The network has now given an opinion. Suppose the picture was actually a <strong>dog</strong>. How bad is that opinion ? We need a loss, and it must respect one intuition : being confidently wrong should hurt far more than being hesitantly wrong.</p>
+
+<p>Information theory gives the natural measure. Shannon <a class="citation" href="#Shannon1948">(Shannon, 1948)</a> defines the <strong>surprise</strong> of an event you assigned probability $p$ as $-\log p$. Predict the truth with $p=1$ and you are not surprised at all ($-\log 1 = 0$) ; predict it with $p = 0.01$ and you are very surprised ($-\log 0.01 = 4.6$) ; predict it with $p \to 0$ and your surprise goes to infinity.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .axis{ stroke:#9a9a9a; stroke-width:1.3; }
+    .grid{ stroke:#e6e6e6; stroke-width:1; }
+    .crv{ stroke:#b5651d; stroke-width:2.4; fill:none; }
+    .tk{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .tky{ font-size:11px; fill:#7a7a7a; text-anchor:end; }
+    .lbl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; font-style:italic; }
+    .mk{ fill:#4a6da7; } .mklb{ font-size:11px; fill:#4a6da7; text-anchor:middle; }
+    .dsh{ stroke:#4a6da7; stroke-width:1; stroke-dasharray:3 3; }
+  </style>
+  <line class="grid" x1="70" y1="164" x2="600" y2="164" />
+  <line class="grid" x1="70" y1="128" x2="600" y2="128" />
+  <line class="grid" x1="70" y1="92" x2="600" y2="92" />
+  <line class="grid" x1="70" y1="56" x2="600" y2="56" />
+  <line class="axis" x1="70" y1="200" x2="610" y2="200" />
+  <line class="axis" x1="70" y1="200" x2="70" y2="26" />
+  <text class="tky" x="63" y="204">0</text><text class="tky" x="63" y="168">1</text><text class="tky" x="63" y="132">2</text><text class="tky" x="63" y="96">3</text><text class="tky" x="63" y="60">4</text>
+  <text class="tk" x="70" y="218">0</text><text class="tk" x="330" y="218">0.5</text><text class="tk" x="590" y="218">1</text>
+  <text class="lbl" x="340" y="238">probability the model gave to the correct class</text>
+  <text class="lbl" x="18" y="112" transform="rotate(-90 18,112)">loss  −ln p</text>
+  <path class="crv" d="M75,34 L80,59 L96,92 L122,117 L174,142 L226,157 L278,167 L330,175 L382,182 L434,187 L486,192 L538,196 L590,200" />
+  <!-- marker at p = 0.242 -->
+  <line class="dsh" x1="196" y1="200" x2="196" y2="149" />
+  <line class="dsh" x1="70" y1="149" x2="196" y2="149" />
+  <circle class="mk" cx="196" cy="149" r="4.5" />
+  <text class="mklb" x="238" y="140">our dog : 1.417</text>
+  <text class="tk" x="196" y="218" fill="#4a6da7">0.242</text>
+</svg>
+<figcaption><b>Figure 2 -</b> The loss $-\ln p$ as a function of the probability given to the <i>correct</i> class. It is gentle when you were nearly right and explodes as your confidence in the truth approaches zero, which is exactly the asymmetry we wanted.</figcaption>
+</center></figure>
+
+<p>Now write the truth as a <strong>one-hot</strong> vector : $y = (0, 1, 0)$ for <em>dog</em>, meaning “the true distribution puts all its mass on dog”. The <strong>cross-entropy</strong> between the truth $y$ and the prediction $p$ averages the surprise over the true distribution :</p>
+
+<div class="definition">
+	The <b>cross-entropy loss</b> between a target distribution $y$ and a predicted distribution $p$ over $K$ classes is
+	$$ L(y, p) \;=\; -\sum_{i=1}^{K} y_i \log p_i . $$
+	When $y$ is one-hot on the true class $c$, every term but one vanishes and this collapses to $L = -\log p_c$.
+</div>
+
+<p><em>In plain words : the loss only ever looks at the probability you assigned to the right answer, and asks how surprised you were to learn it was right.</em> For our misclassified dog :</p>
+
+\[\begin{equation} L = -\log p_{\text{dog}} = -\log(0.242) = 1.417. \label{eq:loss} \end{equation}\]
+
+<p>Had the network said $p_{\text{dog}} = 0.9$ the loss would have been $0.105$ ; had it said $0.01$, it would have been $4.6$. That steepness is what makes the network flee confident mistakes.</p>
+
+<div class="example">
+	<b>Why "cross"-entropy ?</b> The entropy $H(y) = -\sum_i y_i \log y_i$ is the surprise you would feel using the <i>true</i> distribution ; the cross-entropy is the surprise you feel using <i>your</i> distribution while the world follows $y$. Their difference is the Kullback–Leibler divergence <a class="citation" href="#Kullback1951">(Kullback &amp; Leibler, 1951)</a> : $\;H(y,p) = H(y) + \mathrm{KL}(y \,\|\, p)$. For a one-hot target $H(y) = 0$, so minimising cross-entropy is <i>exactly</i> minimising the KL divergence between the truth and the prediction. The loss is not an arbitrary choice, it is the information-theoretic distance to the right answer.
+</div>
+
+<h2 id="4-the-miracle--the-gradient-is-just-p---y">4. The miracle : the gradient is just $p - y$</h2>
+<p>So far, two reasonable functions. Here is why they are always used <em>together</em>. Chain them, $z \to p = \operatorname{softmax}(z) \to L = -\sum_i y_i\log p_i$, and ask what <a href="/blog/machine-learning/backpropagation">backpropagation</a> needs : the gradient of the loss with respect to the logits.</p>
+
+<div class="theorem" text="softmax + cross-entropy gradient">
+	If $p = \operatorname{softmax}(z)$ and $L = -\sum_i y_i \log p_i$ with $\sum_i y_i = 1$, then
+	$$ \frac{\partial L}{\partial z_k} = p_k - y_k . $$
+</div>
+
+<p>No exponentials, no fractions, no special cases : <strong>predicted minus true</strong>. The derivation is two lines. Write $S = \sum_k e^{z_k}$, so $\log p_i = z_i - \log S$ and therefore</p>
+
+\[L = -\sum_i y_i\,(z_i - \log S) = -\sum_i y_i z_i + \log S .\]
+
+<p>Differentiating with respect to one logit $z_k$, the first sum contributes $-y_k$, and the second gives $\frac{\partial \log S}{\partial z_k} = \frac{e^{z_k}}{S} = p_k$. Adding them :</p>
+
+\[\begin{equation} \frac{\partial L}{\partial z_k} = p_k - y_k . \label{eq:grad} \end{equation}\]
+
+<p>On our example the gradient is $(0.659,\; 0.242 - 1,\; 0.099) = (0.659,\; -0.758,\; 0.099)$. Read it as an instruction : <em>lower the cat score, raise the dog score, lower the bird score a little</em> — each by an amount proportional to how badly it was misjudged. Gradient descent then does the obvious thing, $z \leftarrow z - \eta(p-y)$, and the network’s next opinion is a little less wrong.</p>
+
+<p>This is not a coincidence. The logarithm in the loss is precisely the inverse of the exponential in the softmax, and the two annihilate. Pair softmax with the squared-error loss instead and the gradient picks up a factor $p_k(1-p_k)$, which is nearly zero whenever the network is confident — including when it is <em>confidently wrong</em>, exactly the case you most need to fix. That is the vanishing-gradient trap of <a href="/blog/machine-learning/backpropagation">backpropagation</a> reappearing at the very last layer, and cross-entropy is what removes it.</p>
+
+<h2 id="5-temperature--the-same-scores-more-or-less-bold">5. Temperature : the same scores, more or less bold</h2>
+<p>Because softmax reads only the <em>differences</em> between logits, scaling them all by a constant changes the shape of the distribution without changing the ranking. Divide the logits by a <strong>temperature</strong> $T$ before the softmax :</p>
+
+\[\begin{equation} p_i(T) = \frac{e^{z_i/T}}{\sum_k e^{z_k/T}}. \label{eq:temp} \end{equation}\]
+
+<p>A small $T$ magnifies the gaps and makes the model decisive ; a large $T$ shrinks them towards a uniform distribution and makes it hesitant. In the limit, $T \to 0$ gives a hard argmax and $T \to \infty$ gives pure uniform noise.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 240" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .tb{ fill:#e0a878; stroke:#b5651d; stroke-width:1.2; }
+    .ax2{ stroke:#bdbdbd; stroke-width:1.2; }
+    .cl2{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
+    .tt{ font-size:16px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .cp{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <line class="ax2" x1="180" y1="180" x2="460" y2="180" />
+  <rect class="tb" x="205" y="94" width="46" height="86">
+    <animate attributeName="height" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="112;86;65;86;112" />
+    <animate attributeName="y" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="68;94;115;94;68" />
+  </rect>
+  <rect class="tb" x="297" y="148" width="46" height="32">
+    <animate attributeName="height" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="15;31.5;39.5;31.5;15" />
+    <animate attributeName="y" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="165;148.5;140.5;148.5;165" />
+  </rect>
+  <rect class="tb" x="389" y="167" width="46" height="13">
+    <animate attributeName="height" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="2.5;12.8;25.2;12.8;2.5" />
+    <animate attributeName="y" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="177.5;167.2;154.8;167.2;177.5" />
+  </rect>
+  <text class="cl2" x="228" y="196">cat</text><text class="cl2" x="320" y="196">dog</text><text class="cl2" x="412" y="196">bird</text>
+  <text class="tt" x="320" y="42">T = 0.5  (decisive)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.2;0.25;0.75;0.8;1" values="1;1;0;0;1;1" /></text>
+  <text class="tt" x="320" y="42">T = 1  (as trained)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.2;0.3;0.45;0.55;0.7;0.8;1" values="0;0;1;1;0;0;1;0" /></text>
+  <text class="tt" x="320" y="42">T = 2  (hesitant)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.45;0.5;0.55;1" values="0;0;1;0;0" /></text>
+  <text class="cp" x="320" y="224">same logits (2.0, 1.0, 0.1), different temperature</text>
+</svg>
+<figcaption><b>Figure 3 -</b> Temperature reshapes the same three scores. Cooling sharpens the distribution towards the winner, heating flattens it towards uniform. Nothing about the model changed, only how boldly we read it.</figcaption>
+</center></figure>
+
+<p>This is the <code class="language-plaintext highlighter-rouge">temperature</code> knob you set when sampling text from a <a href="/blog/machine-learning/transformers">Transformer</a> : low temperature gives safe, repetitive prose, high temperature gives creative and occasionally deranged prose. The same rescaling appears inside <a href="/blog/machine-learning/attention-mechanism">attention</a> as the division by $\sqrt{d_k}$, whose job is to keep the softmax away from the saturated regime where all the gradients die.</p>
+
+<h2 id="6-making-it-survive-a-computer">6. Making it survive a computer</h2>
+<p>There is one practical trap. Logits of a few hundred are common in a large model, and $e^{800}$ overflows to infinity in floating point, turning the whole distribution into <code class="language-plaintext highlighter-rouge">NaN</code>. The fix uses the shift invariance we noticed earlier : subtracting a constant from every logit changes nothing mathematically, so subtract the largest one.</p>
+
+\[\begin{equation} p_i = \frac{e^{z_i - m}}{\sum_k e^{z_k - m}}, \qquad m = \max_k z_k . \label{eq:stable} \end{equation}\]
+
+<p>Now the biggest exponent is $e^{0} = 1$ and every other is smaller, so nothing can overflow. This is the <strong>log-sum-exp trick</strong>, and it is why the loss is computed in log space directly :</p>
+
+\[L = -\log p_c = -(z_c - m) + \log\!\sum_k e^{z_k - m}.\]
+
+<p>It is also why every framework offers a <em>fused</em> operation that takes the raw logits, never the probabilities : <code class="language-plaintext highlighter-rouge">torch.nn.CrossEntropyLoss</code> and <code class="language-plaintext highlighter-rouge">tf.nn.softmax_cross_entropy_with_logits</code> both apply the softmax internally. Computing <code class="language-plaintext highlighter-rouge">softmax</code> yourself and then feeding it to a separate <code class="language-plaintext highlighter-rouge">log</code> is the single most common beginner bug in this corner of deep learning : it throws away the numerical stability <em>and</em> the clean $p-y$ gradient of $\eqref{eq:grad}$.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">z</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span>                      <span class="c1"># shift : eq. (7), no overflow
+</span>    <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">e</span> <span class="o">/</span> <span class="n">e</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">cross_entropy</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>                 <span class="c1"># c = index of the true class
+</span>    <span class="n">m</span> <span class="o">=</span> <span class="n">z</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">m</span><span class="p">).</span><span class="nb">sum</span><span class="p">())</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>                           <span class="c1"># [0.659, 0.242, 0.099]
+</span><span class="n">loss</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>               <span class="c1"># 1.417  (truth = dog)
+</span><span class="n">grad</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>        <span class="c1"># [0.659, -0.758, 0.099]
+</span></code></pre></div></div>
+
+<p>Nine lines, and they are the last two boxes of nearly every classifier in production.</p>
+
+<h2 id="7-conclusion">7. Conclusion</h2>
+<p>Softmax and cross-entropy are a matched pair, not two independent choices. Softmax answers <em>“how do I turn arbitrary scores into a distribution ?”</em> with the only construction that is positive, order-preserving and depends solely on score differences ; cross-entropy answers <em>“how wrong is that distribution ?”</em> with the information-theoretic surprise of the true answer, which is the same thing as the KL divergence to the truth. Chained together, the exponential and the logarithm cancel and leave the cleanest gradient in machine learning, $p - y$ : <em>push down what you predicted, push up what was true.</em> Hand that to <a href="/blog/machine-learning/backpropagation">backpropagation</a>, let <a href="/blog/machine-learning/gradient-descent">gradient descent</a> take a small step, and repeat. <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<p>The name <em>softmax</em> itself dates back to Bridle <a class="citation" href="#Bridle1990">(Bridle, 1990)</a>, who introduced it precisely so that a classifier’s outputs could be read as probabilities and trained by maximum likelihood — which, once you take the logarithm and flip the sign, is exactly the cross-entropy of this post. Goodfellow, Bengio and Courville <a class="citation" href="#Goodfellow2016">(Goodfellow et al., 2016)</a> give the full treatment.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Bridle1990">Bridle, J. S. (1990). Probabilistic Interpretation of Feedforward Classification Network Outputs, with Relationships to Statistical Pattern Recognition. <i>Neurocomputing: Algorithms, Architectures and Applications</i>, <i>68</i>, 227–236.</span>
+
+<div id="Bridle1990-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Bridle1990-bibtex" class="pre pre-scrollable collapse">@inproceedings{Bridle1990,
+  author = {Bridle, John S.},
+  title = {Probabilistic Interpretation of Feedforward Classification Network Outputs, with Relationships to Statistical Pattern Recognition},
+  booktitle = {Neurocomputing: Algorithms, Architectures and Applications},
+  series = {NATO ASI Series},
+  volume = {68},
+  pages = {227--236},
+  year = {1990},
+  publisher = {Springer}
+}
+</pre>
+
+</div></li>
+<li><span id="Goodfellow2016">Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <i>Deep Learning</i>. MIT Press.</span>
+
+<div id="Goodfellow2016-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Goodfellow2016-bibtex" class="pre pre-scrollable collapse">@book{Goodfellow2016,
+  author = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron},
+  title = {Deep Learning},
+  year = {2016},
+  publisher = {MIT Press}
+}
+</pre>
+
+</div></li>
+<li><span id="Kullback1951">Kullback, S., &amp; Leibler, R. A. (1951). On Information and Sufficiency. <i>The Annals of Mathematical Statistics</i>, <i>22</i>(1), 79–86.</span>
+
+<div id="Kullback1951-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Kullback1951-bibtex" class="pre pre-scrollable collapse">@article{Kullback1951,
+  author = {Kullback, Solomon and Leibler, Richard A.},
+  title = {On Information and Sufficiency},
+  journal = {The Annals of Mathematical Statistics},
+  volume = {22},
+  number = {1},
+  pages = {79--86},
+  year = {1951}
+}
+</pre>
+
+</div></li>
+<li><span id="Shannon1948">Shannon, C. E. (1948). A Mathematical Theory of Communication. <i>The Bell System Technical Journal</i>, <i>27</i>(3), 379–423.</span>
+
+<div id="Shannon1948-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Shannon1948-bibtex" class="pre pre-scrollable collapse">@article{Shannon1948,
+  author = {Shannon, Claude E.},
+  title = {A Mathematical Theory of Communication},
+  journal = {The Bell System Technical Journal},
+  volume = {27},
+  number = {3},
+  pages = {379--423},
+  year = {1948}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The same pairing shows up under different names all over statistics and machine learning : with $K=2$ it is <em>logistic regression</em> trained by <em>log-loss</em>, which is also the default objective of the <a href="/blog/machine-learning/xgboost">gradient boosting</a> machinery, and in general it is nothing but <em>maximum likelihood estimation</em> for a categorical distribution. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
