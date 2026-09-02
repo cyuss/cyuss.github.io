@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="theme-color" content="hsl(35, 36%, 95%)">
-  <title>Dynamic Programming, or How to Stop Solving the Same Problem Twice</title>
+  <title>Dynamic Programming, Solve It Once</title>
 
   
   <meta name="description" content="
@@ -13,9 +13,10 @@
     
         
               
-            Dynamic Programming, or How to Stop Solving the Same Problem Twice
+            Dynamic Programming, Solve It Once
              10 Feb 2019 
-         ..." />
+             31 minutes read
+            ..." />
 
   
   <meta name="keywords" content="" />
@@ -65,9 +66,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 </head>
 
     <!-- Begin Jekyll SEO tag v2.9.0 -->
-<title>Dynamic Programming, or How to Stop Solving the Same Problem Twice | Oh My Kode</title>
+<title>Dynamic Programming, Solve It Once | Oh My Kode</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="Dynamic Programming, or How to Stop Solving the Same Problem Twice" />
+<meta property="og:title" content="Dynamic Programming, Solve It Once" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="The memoization post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called dynamic programming. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential…" />
@@ -79,9 +80,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="article:published_time" content="2019-02-10T12:00:00+01:00" />
 <meta property="article:modified_time" content="2019-02-10T12:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Dynamic Programming, or How to Stop Solving the Same Problem Twice" />
+<meta name="twitter:title" content="Dynamic Programming, Solve It Once" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2019-02-10T12:00:00+01:00","datePublished":"2019-02-10T12:00:00+01:00","description":"The memoization post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called dynamic programming. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential…","headline":"Dynamic Programming, or How to Stop Solving the Same Problem Twice","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/algorithmic/dynamic-programming"},"url":"www.ohmykode.com/blog/algorithmic/dynamic-programming"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2019-02-10T12:00:00+01:00","datePublished":"2019-02-10T12:00:00+01:00","description":"The memoization post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called dynamic programming. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential…","headline":"Dynamic Programming, Solve It Once","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/algorithmic/dynamic-programming"},"url":"www.ohmykode.com/blog/algorithmic/dynamic-programming"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -90,7 +91,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     <div class="row">
         <header>
             <center>  <a class="fa fa-home home_button" href="/"></a></center>
-            <center><span itemprop="name"><h1>Dynamic Programming, or How to Stop Solving the Same Problem Twice</h1></span></center>
+            <center><span itemprop="name"><h1>Dynamic Programming, Solve It Once</h1></span></center>
             <center><p> 10 Feb 2019 </p></center>
             <center><p class="fa fa-clock-o"> 31 minutes read</p></center>
             <!--<center><p class="fa fa-clock-o"> 
