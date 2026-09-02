@@ -284,6 +284,17 @@ table {
   counter-increment: definitions;
 }
 
+.note {
+  display: block;
+}
+
+.note:before {
+  content: "Note. ";
+  font-weight: bold;
+  font-style: normal;
+}
+
 pre {
-    tab-size: 2;
+  tab-size: 2;
+  overflow-x: auto;
 }

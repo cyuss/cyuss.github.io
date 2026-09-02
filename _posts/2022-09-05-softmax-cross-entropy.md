@@ -217,18 +217,18 @@ It is also why every framework offers a *fused* operation that takes the raw log
 import numpy as np
 
 def softmax(z):
-    z = z - z.max()                      # shift : eq. (7), no overflow
+    z = z - z.max()            # subtract max : no overflow
     e = np.exp(z)
     return e / e.sum()
 
-def cross_entropy(z, c):                 # c = index of the true class
+def cross_entropy(z, c):       # c = index of the true class
     m = z.max()
     return -(z[c] - m) + np.log(np.exp(z - m).sum())
 
 z = np.array([2.0, 1.0, 0.1])
-p = softmax(z)                           # [0.659, 0.242, 0.099]
-loss = cross_entropy(z, 1)               # 1.417  (truth = dog)
-grad = p - np.array([0., 1., 0.])        # [0.659, -0.758, 0.099]
+p = softmax(z)                 # [0.659, 0.242, 0.099]
+loss = cross_entropy(z, 1)     # 1.417  (truth = dog)
+grad = p - np.array([0., 1., 0.])   # [0.659, -0.758, 0.099]
 ```
 
 Nine lines, and they are the last two boxes of nearly every classifier in production.
