@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Statistical Inference, from Scratch</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Statistical Inference, from Scratch
+             18 Feb 2024 
+             68 minutes read
+           ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/statistical-inference">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon" type="image/png" sizes="64x64">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Statistical Inference, from Scratch | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Statistical Inference, from Scratch" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="You are cooking a large pot of soup. You want to know whether it needs salt. You do not drink the pot — you stir it, take one spoonful, and taste. That spoonful is a sample, the pot is the population, and the leap you just made without thinking about it is the whole of statistics : using a small piece to say something honest about a whole you will never see. This post builds that leap carefully, in three passes. The first needs nothing but arithmetic. The second adds the two ideas everybody misuses — confidence intervals and p-values…" />
+<meta name="twitter:description" property="og:description" content="You are cooking a large pot of soup. You want to know whether it needs salt. You do not drink the pot — you stir it, take one spoonful, and taste. That spoonful is a sample, the pot is the population, and the leap you just made without thinking about it is the whole of statistics : using a small piece to say something honest about a whole you will never see. This post builds that leap carefully, in three passes. The first needs nothing but arithmetic. The second adds the two ideas everybody misuses — confidence intervals and p-values…" />
+<link rel="canonical" href="www.ohmykode.com/blog/mathematics/statistical-inference" />
+<meta property="og:url" content="www.ohmykode.com/blog/mathematics/statistical-inference" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-02-18T12:00:00+01:00" />
+<meta property="article:modified_time" content="2024-02-18T12:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Statistical Inference, from Scratch" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2024-02-18T12:00:00+01:00","datePublished":"2024-02-18T12:00:00+01:00","description":"You are cooking a large pot of soup. You want to know whether it needs salt. You do not drink the pot — you stir it, take one spoonful, and taste. That spoonful is a sample, the pot is the population, and the leap you just made without thinking about it is the whole of statistics : using a small piece to say something honest about a whole you will never see. This post builds that leap carefully, in three passes. The first needs nothing but arithmetic. The second adds the two ideas everybody misuses — confidence intervals and p-values…","headline":"Statistical Inference, from Scratch","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/statistical-inference"},"url":"www.ohmykode.com/blog/mathematics/statistical-inference"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Statistical Inference, from Scratch</h1></span></center>
+            <center><p> 18 Feb 2024 </p></center>
+            <center><p class="fa fa-clock-o"> 68 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            91 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>You are cooking a large pot of soup. You want to know whether it needs salt. You do not drink the pot — you stir it, take one spoonful, and taste. That spoonful is a <em>sample</em>, the pot is the <em>population</em>, and the leap you just made without thinking about it is the whole of statistics : <strong>using a small piece to say something honest about a whole you will never see</strong>. This post builds that leap carefully, in three passes. The first needs nothing but arithmetic. The second adds the two ideas everybody misuses — confidence intervals and p-values — and takes the time to say what they actually mean. The third goes underneath, to where the formulas come from and where they stop working. Read the first part and you will understand what a statistician is doing ; read all three and you will be able to check their work.</p>
+</blockquote>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART I — THE FOUNDATIONS</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">nothing here needs more than arithmetic</span>
+</div>
+
+<h2 id="1-the-one-problem-statistics-solves">1. The one problem statistics solves</h2>
+<p>Everything that follows is an answer to a single question :</p>
+
+<blockquote>
+  <p>There is a number I care about. I cannot measure it, because measuring it would mean examining <em>everyone</em> or <em>everything</em>. I can only afford to look at a few. <strong>What can I honestly say ?</strong></p>
+</blockquote>
+
+<p>Two words carry all the weight, so let us fix them properly.</p>
+
+<div class="definition">
+	The <b>population</b> is the entire collection you actually care about — every customer, every patient, every possible roll of the die. A <b>parameter</b> is a number describing it : the true average $\mu$, the true proportion $p$. Parameters are <b>fixed and unknown</b>.
+	<br /><br />
+	A <b>sample</b> is the handful you actually observed, $x_1, \dots, x_n$. A <b>statistic</b> is any number you compute from it, such as the sample average $\bar{x}$. Statistics are <b>known and random</b> — random because a different sample would have given a different one.
+</div>
+
+<p><em>In plain words : the pot has one true saltiness, and it is not going to change while you think about it. Your spoonful, on the other hand, could have come out saltier or blander by luck. The truth is fixed ; your view of it wobbles.</em></p>
+
+<p>That single sentence is the hinge of the entire subject, and almost every classic misunderstanding comes from getting it backwards. Say it once more, because we will need it in section 4 : <strong>the parameter does not move. The data moves.</strong></p>
+
+<figure><center>
+<svg viewBox="0 0 640 330" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .pd{ fill:#8fa5c8; opacity:.55; }
+    .sd{ fill:#4a6da7; }
+    .rl{ stroke:#e2e6ee; stroke-width:1.2; }
+    .mk{ fill:#b5651d; }
+    .mu{ stroke:#b5651d; stroke-width:1.8; stroke-dasharray:5 4; }
+    .mut{ font-size:12px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .hd{ font-size:12px; fill:#7a7a7a; font-style:italic; }
+    .rn{ font-size:11px; fill:#7a7a7a; text-anchor:end; }
+    .sw{ fill:none; stroke:#5aa06a; stroke-width:1.8; }
+  </style>
+  <text class="hd" x="70" y="34">the population — you never get to see this</text>
+  <circle class="pd" cx="245.2" cy="55.4" r="2.1" />
+  <circle class="pd" cx="327.5" cy="54.0" r="2.1" />
+  <circle class="pd" cx="337.0" cy="58.8" r="2.1" />
+  <circle class="pd" cx="419.6" cy="87.1" r="2.1" />
+  <circle class="pd" cx="414.9" cy="98.2" r="2.1" />
+  <circle class="pd" cx="363.7" cy="68.8" r="2.1" />
+  <circle class="pd" cx="459.7" cy="92.5" r="2.1" />
+  <circle class="pd" cx="330.8" cy="72.3" r="2.1" />
+  <circle class="pd" cx="435.4" cy="70.6" r="2.1" />
+  <circle class="pd" cx="388.3" cy="53.8" r="2.1" />
+  <circle class="pd" cx="332.2" cy="59.9" r="2.1" />
+  <circle class="pd" cx="275.8" cy="63.9" r="2.1" />
+  <circle class="pd" cx="393.0" cy="95.8" r="2.1" />
+  <circle class="pd" cx="211.1" cy="64.7" r="2.1" />
+  <circle class="pd" cx="486.2" cy="85.5" r="2.1" />
+  <circle class="pd" cx="287.2" cy="91.2" r="2.1" />
+  <circle class="pd" cx="262.1" cy="88.3" r="2.1" />
+  <circle class="pd" cx="288.8" cy="79.5" r="2.1" />
+  <circle class="pd" cx="382.1" cy="97.0" r="2.1" />
+  <circle class="pd" cx="371.7" cy="102.7" r="2.1" />
+  <circle class="pd" cx="300.3" cy="87.3" r="2.1" />
+  <circle class="pd" cx="368.5" cy="92.1" r="2.1" />
+  <circle class="pd" cx="217.7" cy="73.8" r="2.1" />
+  <circle class="pd" cx="147.9" cy="93.7" r="2.1" />
+  <circle class="pd" cx="414.6" cy="97.9" r="2.1" />
+  <circle class="pd" cx="181.1" cy="72.3" r="2.1" />
+  <circle class="pd" cx="410.4" cy="68.8" r="2.1" />
+  <circle class="pd" cx="278.5" cy="100.5" r="2.1" />
+  <circle class="pd" cx="404.7" cy="75.9" r="2.1" />
+  <circle class="pd" cx="265.3" cy="59.9" r="2.1" />
+  <circle class="pd" cx="407.4" cy="97.4" r="2.1" />
+  <circle class="pd" cx="511.2" cy="83.9" r="2.1" />
+  <circle class="pd" cx="292.2" cy="57.8" r="2.1" />
+  <circle class="pd" cx="321.9" cy="97.7" r="2.1" />
+  <circle class="pd" cx="506.1" cy="64.0" r="2.1" />
+  <circle class="pd" cx="275.5" cy="92.9" r="2.1" />
+  <circle class="pd" cx="291.9" cy="54.2" r="2.1" />
+  <circle class="pd" cx="323.5" cy="100.3" r="2.1" />
+  <circle class="pd" cx="395.5" cy="74.5" r="2.1" />
+  <circle class="pd" cx="420.6" cy="106.7" r="2.1" />
+  <circle class="pd" cx="270.3" cy="56.5" r="2.1" />
+  <circle class="pd" cx="341.8" cy="56.8" r="2.1" />
+  <circle class="pd" cx="340.2" cy="83.7" r="2.1" />
+  <circle class="pd" cx="465.2" cy="88.4" r="2.1" />
+  <circle class="pd" cx="456.6" cy="92.4" r="2.1" />
+  <circle class="pd" cx="298.8" cy="65.2" r="2.1" />
+  <circle class="pd" cx="439.3" cy="100.9" r="2.1" />
+  <circle class="pd" cx="421.1" cy="59.8" r="2.1" />
+  <circle class="pd" cx="294.7" cy="74.7" r="2.1" />
+  <circle class="pd" cx="401.7" cy="99.9" r="2.1" />
+  <circle class="pd" cx="519.4" cy="97.5" r="2.1" />
+  <circle class="pd" cx="372.7" cy="66.0" r="2.1" />
+  <circle class="pd" cx="354.8" cy="90.0" r="2.1" />
+  <circle class="pd" cx="427.8" cy="88.3" r="2.1" />
+  <circle class="pd" cx="424.4" cy="95.0" r="2.1" />
+  <circle class="pd" cx="383.3" cy="56.3" r="2.1" />
+  <circle class="pd" cx="292.7" cy="102.4" r="2.1" />
+  <circle class="pd" cx="269.6" cy="58.5" r="2.1" />
+  <circle class="pd" cx="348.7" cy="101.9" r="2.1" />
+  <circle class="pd" cx="387.3" cy="68.0" r="2.1" />
+  <circle class="pd" cx="87.6" cy="52.6" r="2.1" />
+  <circle class="pd" cx="174.7" cy="58.0" r="2.1" />
+  <circle class="pd" cx="286.6" cy="71.1" r="2.1" />
+  <circle class="pd" cx="357.5" cy="66.2" r="2.1" />
+  <circle class="pd" cx="384.8" cy="106.7" r="2.1" />
+  <circle class="pd" cx="254.0" cy="72.0" r="2.1" />
+  <circle class="pd" cx="382.7" cy="87.2" r="2.1" />
+  <circle class="pd" cx="332.7" cy="88.7" r="2.1" />
+  <circle class="pd" cx="261.5" cy="70.1" r="2.1" />
+  <circle class="pd" cx="364.7" cy="80.6" r="2.1" />
+  <circle class="pd" cx="412.2" cy="63.9" r="2.1" />
+  <circle class="pd" cx="319.8" cy="79.3" r="2.1" />
+  <circle class="pd" cx="280.8" cy="78.2" r="2.1" />
+  <circle class="pd" cx="257.5" cy="59.5" r="2.1" />
+  <circle class="pd" cx="387.4" cy="103.8" r="2.1" />
+  <circle class="pd" cx="290.5" cy="64.5" r="2.1" />
+  <circle class="pd" cx="315.2" cy="75.2" r="2.1" />
+  <circle class="pd" cx="274.7" cy="84.1" r="2.1" />
+  <circle class="pd" cx="428.4" cy="78.9" r="2.1" />
+  <circle class="pd" cx="208.0" cy="91.0" r="2.1" />
+  <circle class="pd" cx="337.4" cy="83.4" r="2.1" />
+  <circle class="pd" cx="204.5" cy="54.0" r="2.1" />
+  <circle class="pd" cx="453.7" cy="98.8" r="2.1" />
+  <circle class="pd" cx="309.2" cy="63.9" r="2.1" />
+  <circle class="pd" cx="189.3" cy="104.1" r="2.1" />
+  <circle class="pd" cx="320.0" cy="89.9" r="2.1" />
+  <circle class="pd" cx="331.1" cy="98.6" r="2.1" />
+  <circle class="pd" cx="411.1" cy="89.2" r="2.1" />
+  <circle class="pd" cx="349.8" cy="75.1" r="2.1" />
+  <circle class="pd" cx="270.8" cy="91.6" r="2.1" />
+  <circle class="pd" cx="349.1" cy="93.4" r="2.1" />
+  <circle class="pd" cx="268.2" cy="67.0" r="2.1" />
+  <circle class="pd" cx="467.8" cy="68.3" r="2.1" />
+  <circle class="pd" cx="132.2" cy="76.0" r="2.1" />
+  <circle class="pd" cx="323.1" cy="54.0" r="2.1" />
+  <circle class="pd" cx="345.4" cy="92.0" r="2.1" />
+  <circle class="pd" cx="222.2" cy="87.3" r="2.1" />
+  <circle class="pd" cx="369.0" cy="68.7" r="2.1" />
+  <circle class="pd" cx="320.5" cy="85.2" r="2.1" />
+  <circle class="pd" cx="223.6" cy="68.5" r="2.1" />
+  <circle class="pd" cx="265.1" cy="87.0" r="2.1" />
+  <circle class="pd" cx="369.4" cy="69.8" r="2.1" />
+  <circle class="pd" cx="261.4" cy="74.4" r="2.1" />
+  <circle class="pd" cx="317.6" cy="84.3" r="2.1" />
+  <circle class="pd" cx="324.7" cy="76.5" r="2.1" />
+  <circle class="pd" cx="339.7" cy="101.7" r="2.1" />
+  <circle class="pd" cx="399.2" cy="63.7" r="2.1" />
+  <circle class="pd" cx="512.6" cy="57.1" r="2.1" />
+  <circle class="pd" cx="301.8" cy="102.7" r="2.1" />
+  <circle class="pd" cx="538.9" cy="65.7" r="2.1" />
+  <circle class="pd" cx="401.9" cy="56.0" r="2.1" />
+  <circle class="pd" cx="212.2" cy="97.4" r="2.1" />
+  <circle class="pd" cx="419.4" cy="67.3" r="2.1" />
+  <circle class="pd" cx="583.6" cy="102.8" r="2.1" />
+  <circle class="pd" cx="499.0" cy="71.7" r="2.1" />
+  <circle class="pd" cx="241.6" cy="95.4" r="2.1" />
+  <circle class="pd" cx="315.3" cy="52.6" r="2.1" />
+  <circle class="pd" cx="387.0" cy="84.4" r="2.1" />
+  <circle class="pd" cx="127.1" cy="70.7" r="2.1" />
+  <circle class="pd" cx="261.3" cy="76.4" r="2.1" />
+  <circle class="pd" cx="308.4" cy="69.3" r="2.1" />
+  <circle class="pd" cx="200.0" cy="62.9" r="2.1" />
+  <circle class="pd" cx="393.0" cy="103.9" r="2.1" />
+  <circle class="pd" cx="299.5" cy="71.1" r="2.1" />
+  <circle class="pd" cx="289.9" cy="73.1" r="2.1" />
+  <circle class="pd" cx="255.6" cy="89.2" r="2.1" />
+  <circle class="pd" cx="383.4" cy="98.4" r="2.1" />
+  <circle class="pd" cx="282.4" cy="86.0" r="2.1" />
+  <circle class="pd" cx="398.3" cy="52.3" r="2.1" />
+  <circle class="pd" cx="267.0" cy="106.4" r="2.1" />
+  <circle class="pd" cx="417.7" cy="71.3" r="2.1" />
+  <circle class="pd" cx="356.5" cy="60.0" r="2.1" />
+  <circle class="pd" cx="403.8" cy="84.9" r="2.1" />
+  <circle class="pd" cx="171.2" cy="91.5" r="2.1" />
+  <circle class="pd" cx="323.4" cy="56.8" r="2.1" />
+  <circle class="pd" cx="305.2" cy="99.6" r="2.1" />
+  <circle class="pd" cx="306.1" cy="82.6" r="2.1" />
+  <circle class="pd" cx="306.4" cy="102.5" r="2.1" />
+  <circle class="pd" cx="253.7" cy="98.9" r="2.1" />
+  <circle class="pd" cx="272.9" cy="98.1" r="2.1" />
+  <circle class="pd" cx="460.3" cy="101.0" r="2.1" />
+  <circle class="pd" cx="240.9" cy="64.5" r="2.1" />
+  <circle class="pd" cx="501.3" cy="100.9" r="2.1" />
+  <circle class="pd" cx="272.2" cy="99.4" r="2.1" />
+  <circle class="pd" cx="218.9" cy="104.3" r="2.1" />
+  <circle class="pd" cx="376.6" cy="84.4" r="2.1" />
+  <circle class="pd" cx="122.6" cy="103.1" r="2.1" />
+  <circle class="pd" cx="418.6" cy="64.1" r="2.1" />
+  <circle class="pd" cx="276.0" cy="71.2" r="2.1" />
+  <text class="hd" x="70" y="152">four samples of 12 — this is all you ever get</text>
+  <line class="rl" x1="78" y1="180" x2="592" y2="180" />
+  <circle class="sd" cx="329.4" cy="180" r="2.6" />
+  <circle class="sd" cx="298.2" cy="180" r="2.6" />
+  <circle class="sd" cx="263.6" cy="180" r="2.6" />
+  <circle class="sd" cx="216.2" cy="180" r="2.6" />
+  <circle class="sd" cx="526.0" cy="180" r="2.6" />
+  <circle class="sd" cx="271.0" cy="180" r="2.6" />
+  <circle class="sd" cx="363.2" cy="180" r="2.6" />
+  <circle class="sd" cx="427.1" cy="180" r="2.6" />
+  <circle class="sd" cx="540.0" cy="180" r="2.6" />
+  <circle class="sd" cx="319.0" cy="180" r="2.6" />
+  <circle class="sd" cx="262.2" cy="180" r="2.6" />
+  <circle class="sd" cx="258.7" cy="180" r="2.6" />
+  <path class="mk" d="M345.6,169 l6,-9 l-12,0 z" />
+  <text class="rn" x="70" y="184">sample 1</text>
+  <line class="rl" x1="78" y1="214" x2="592" y2="214" />
+  <circle class="sd" cx="363.9" cy="214" r="2.6" />
+  <circle class="sd" cx="294.1" cy="214" r="2.6" />
+  <circle class="sd" cx="293.7" cy="214" r="2.6" />
+  <circle class="sd" cx="295.0" cy="214" r="2.6" />
+  <circle class="sd" cx="298.9" cy="214" r="2.6" />
+  <circle class="sd" cx="287.6" cy="214" r="2.6" />
+  <circle class="sd" cx="213.6" cy="214" r="2.6" />
+  <circle class="sd" cx="356.5" cy="214" r="2.6" />
+  <circle class="sd" cx="424.9" cy="214" r="2.6" />
+  <circle class="sd" cx="122.0" cy="214" r="2.6" />
+  <circle class="sd" cx="279.6" cy="214" r="2.6" />
+  <circle class="sd" cx="293.1" cy="214" r="2.6" />
+  <path class="mk" d="M299.6,203 l6,-9 l-12,0 z" />
+  <text class="rn" x="70" y="218">sample 2</text>
+  <line class="rl" x1="78" y1="248" x2="592" y2="248" />
+  <circle class="sd" cx="320.8" cy="248" r="2.6" />
+  <circle class="sd" cx="499.9" cy="248" r="2.6" />
+  <circle class="sd" cx="205.7" cy="248" r="2.6" />
+  <circle class="sd" cx="471.1" cy="248" r="2.6" />
+  <circle class="sd" cx="254.8" cy="248" r="2.6" />
+  <circle class="sd" cx="245.5" cy="248" r="2.6" />
+  <circle class="sd" cx="350.3" cy="248" r="2.6" />
+  <circle class="sd" cx="350.5" cy="248" r="2.6" />
+  <circle class="sd" cx="363.3" cy="248" r="2.6" />
+  <circle class="sd" cx="327.9" cy="248" r="2.6" />
+  <circle class="sd" cx="288.1" cy="248" r="2.6" />
+  <circle class="sd" cx="183.4" cy="248" r="2.6" />
+  <path class="mk" d="M327.8,237 l6,-9 l-12,0 z" />
+  <text class="rn" x="70" y="252">sample 3</text>
+  <line class="rl" x1="78" y1="282" x2="592" y2="282" />
+  <circle class="sd" cx="320.9" cy="282" r="2.6" />
+  <circle class="sd" cx="525.8" cy="282" r="2.6" />
+  <circle class="sd" cx="158.2" cy="282" r="2.6" />
+  <circle class="sd" cx="281.4" cy="282" r="2.6" />
+  <circle class="sd" cx="358.5" cy="282" r="2.6" />
+  <circle class="sd" cx="319.4" cy="282" r="2.6" />
+  <circle class="sd" cx="423.2" cy="282" r="2.6" />
+  <circle class="sd" cx="423.9" cy="282" r="2.6" />
+  <circle class="sd" cx="392.3" cy="282" r="2.6" />
+  <circle class="sd" cx="366.7" cy="282" r="2.6" />
+  <circle class="sd" cx="110.1" cy="282" r="2.6" />
+  <circle class="sd" cx="379.1" cy="282" r="2.6" />
+  <path class="mk" d="M344.3,271 l6,-9 l-12,0 z" />
+  <text class="rn" x="70" y="286">sample 4</text>
+  <line class="mu" x1="330" y1="44" x2="330" y2="300" />
+  <text class="mut" x="330" y="320">μ — fixed, unknown, and it never moves</text>
+  <rect class="sw" x="72" y="166" width="526" height="28" rx="4"><animate attributeName="y" dur="7s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="166;200;234;268" /></rect>
+</svg>
+<figcaption><b>Figure 1 -</b> The whole setup in one picture. The dashed line is the truth : one number, fixed, invisible. Each sample is a handful of draws, and each produces its own estimate (the orange triangle). The estimates scatter around the line — that scatter is the only thing statistics is ever really talking about.</figcaption>
+</center></figure>
+
+<p>One more thing the soup teaches, and it is not a detail. You <em>stirred</em> before tasting. If you had skimmed a spoonful off the top of an unstirred pot you would have learned about the top of the pot, not the pot. Stirring is what makes the spoonful representative, and its statistical name is <strong>random sampling</strong> : every member of the population must have a known, non-zero chance of ending up in your sample. Everything in this post assumes you stirred. Section 12 is about what happens when you did not.</p>
+
+<h2 id="2-estimation--making-the-guess">2. Estimation : making the guess</h2>
+<p>The first job is to produce a number. This is <strong>estimation</strong>, and it comes with a distinction worth keeping straight :</p>
+
+<ul>
+  <li>an <strong>estimator</strong> is the <em>recipe</em> — “add them up and divide by how many” ;</li>
+  <li>an <strong>estimate</strong> is the <em>number that recipe produced this time</em> — $\bar{x} = 4.2$.</li>
+</ul>
+
+<p>The recipe is fixed ; the number it produces is random, because the data is. So we judge the <strong>recipe</strong>, not the number. And there are exactly two questions to ask of a recipe.</p>
+
+<p><strong>Question one : does it aim at the right place ?</strong> Run the recipe on every possible sample and average the answers. If that average lands on the truth, the recipe is <strong>unbiased</strong>. For the sample mean this is a one-line calculation :</p>
+
+\[\begin{equation} \mathbb{E}[\bar{X}] = \mathbb{E}\!\left[\frac{1}{n}\sum_{i=1}^{n} X_i\right] = \frac{1}{n}\sum_{i=1}^{n}\mathbb{E}[X_i] = \frac{1}{n}\cdot n\mu = \mu. \label{eq:unbiased} \end{equation}\]
+
+<p><em>In plain words : the spoonful is sometimes saltier than the pot and sometimes blander, but there is no systematic pull in either direction. Over many spoonfuls the errors cancel.</em></p>
+
+<p><strong>Question two : how much does it wobble ?</strong> Unbiased is not enough — a recipe that returns “the truth plus or minus a thousand” is unbiased and useless. We want the <em>spread</em> of the estimates around the truth. Using the fact that variances of independent things add :</p>
+
+\[\begin{equation} \operatorname{Var}(\bar{X}) = \operatorname{Var}\!\left(\frac{1}{n}\sum_{i=1}^{n} X_i\right) = \frac{1}{n^{2}}\sum_{i=1}^{n}\operatorname{Var}(X_i) = \frac{n\sigma^{2}}{n^{2}} = \frac{\sigma^{2}}{n}. \label{eq:var} \end{equation}\]
+
+<p>Take the square root to get back to the original units and you have the single most useful quantity in applied statistics :</p>
+
+<div class="definition">
+	The <b>standard error</b> of the sample mean is the typical distance between your estimate and the truth :
+	$$ \operatorname{SE}(\bar{X}) \;=\; \frac{\sigma}{\sqrt{n}}. $$
+	It is <i>not</i> the spread of the data ($\sigma$ is that). It is the spread of the <i>estimate</i>.
+</div>
+
+<p>Read $\eqref{eq:var}$ again, because it contains a law that governs the cost of every study, survey and A/B test ever run. The error shrinks like $\sqrt{n}$, not like $n$.</p>
+
+<div class="theorem" text="the square-root law">
+	To halve the standard error you must <b>quadruple</b> the sample. To divide it by ten you need <b>a hundred times</b> the data.
+</div>
+
+<figure><center>
+<svg viewBox="0 0 640 326" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .ax{ stroke:#bdbdbd; stroke-width:1.3; }
+    .cv{ stroke:#4a6da7; stroke-width:2.4; fill:none; }
+    .gd{ stroke:#c9c9c9; stroke-width:1; stroke-dasharray:3 3; fill:none; }
+    .pt{ fill:#b5651d; }
+    .hl{ fill:none; stroke:#5aa06a; stroke-width:2; }
+    .yl{ font-size:11px; fill:#b5651d; text-anchor:end; }
+    .xl{ font-size:11px; fill:#b5651d; text-anchor:middle; }
+    .an{ font-size:11.5px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .axl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
+  </style>
+  <line class="ax" x1="70" y1="250" x2="612" y2="250" />
+  <line class="ax" x1="70" y1="250" x2="70" y2="38" />
+  <path class="cv" d="M70.0,50.0 L71.3,70.9 L72.7,86.4 L74.0,98.5 L75.3,108.2 L76.6,116.3 L78.0,123.1 L79.3,129.0 L80.6,134.1 L81.9,138.7 L83.2,142.7 L84.6,146.3 L85.9,149.6 L87.2,152.6 L88.5,155.4 L89.9,157.9 L91.2,160.2 L92.5,162.4 L93.8,164.4 L95.2,166.2 L96.5,168.0 L97.8,169.7 L99.2,171.2 L100.5,172.7 L101.8,174.1 L103.1,175.4 L104.4,176.7 L105.8,177.8 L107.1,179.0 L108.4,180.1 L109.8,181.1 L111.1,182.1 L112.4,183.0 L113.7,183.9 L115.0,184.8 L116.4,185.7 L117.7,186.5 L119.0,187.2 L120.3,188.0 L121.7,188.7 L123.0,189.4 L124.3,190.1 L125.6,190.8 L127.0,191.4 L128.3,192.0 L129.6,192.6 L130.9,193.2 L132.3,193.7 L133.6,194.3 L134.9,194.8 L136.2,195.3 L137.6,195.8 L138.9,196.3 L140.2,196.8 L141.6,197.2 L142.9,197.7 L144.2,198.1 L145.5,198.5 L146.9,199.0 L148.2,199.4 L149.5,199.8 L150.8,200.2 L152.1,200.5 L153.5,200.9 L154.8,201.3 L156.1,201.6 L157.5,202.0 L158.8,202.3 L160.1,202.6 L161.4,203.0 L162.8,203.3 L164.1,203.6 L165.4,203.9 L166.7,204.2 L168.1,204.5 L169.4,204.8 L170.7,205.1 L172.0,205.3 L173.3,205.6 L174.7,205.9 L176.0,206.1 L177.3,206.4 L178.7,206.7 L180.0,206.9 L181.3,207.2 L182.6,207.4 L183.9,207.6 L185.3,207.9 L186.6,208.1 L187.9,208.3 L189.2,208.5 L190.6,208.8 L191.9,209.0 L193.2,209.2 L194.6,209.4 L195.9,209.6 L197.2,209.8 L198.5,210.0 L199.8,210.2 L201.2,210.4 L202.5,210.6 L203.8,210.8 L205.2,211.0 L206.5,211.1 L207.8,211.3 L209.1,211.5 L210.4,211.7 L211.8,211.8 L213.1,212.0 L214.4,212.2 L215.8,212.4 L217.1,212.5 L218.4,212.7 L219.7,212.8 L221.1,213.0 L222.4,213.2 L223.7,213.3 L225.0,213.5 L226.3,213.6 L227.7,213.8 L229.0,213.9 L230.3,214.0 L231.7,214.2 L233.0,214.3 L234.3,214.5 L235.6,214.6 L237.0,214.7 L238.3,214.9 L239.6,215.0 L240.9,215.1 L242.2,215.3 L243.6,215.4 L244.9,215.5 L246.2,215.7 L247.6,215.8 L248.9,215.9 L250.2,216.0 L251.5,216.1 L252.9,216.3 L254.2,216.4 L255.5,216.5 L256.8,216.6 L258.2,216.7 L259.5,216.8 L260.8,217.0 L262.1,217.1 L263.4,217.2 L264.8,217.3 L266.1,217.4 L267.4,217.5 L268.8,217.6 L270.1,217.7 L271.4,217.8 L272.7,217.9 L274.1,218.0 L275.4,218.1 L276.7,218.2 L278.0,218.3 L279.3,218.4 L280.7,218.5 L282.0,218.6 L283.3,218.7 L284.6,218.8 L286.0,218.9 L287.3,219.0 L288.6,219.1 L289.9,219.2 L291.3,219.3 L292.6,219.4 L293.9,219.4 L295.2,219.5 L296.6,219.6 L297.9,219.7 L299.2,219.8 L300.5,219.9 L301.9,220.0 L303.2,220.0 L304.5,220.1 L305.9,220.2 L307.2,220.3 L308.5,220.4 L309.8,220.4 L311.2,220.5 L312.5,220.6 L313.8,220.7 L315.1,220.8 L316.4,220.8 L317.8,220.9 L319.1,221.0 L320.4,221.1 L321.8,221.1 L323.1,221.2 L324.4,221.3 L325.7,221.4 L327.1,221.4 L328.4,221.5 L329.7,221.6 L331.0,221.6 L332.4,221.7 L333.7,221.8 L335.0,221.9 L336.3,221.9 L337.6,222.0 L339.0,222.1 L340.3,222.1 L341.6,222.2 L342.9,222.3 L344.3,222.3 L345.6,222.4 L346.9,222.5 L348.2,222.5 L349.6,222.6 L350.9,222.6 L352.2,222.7 L353.6,222.8 L354.9,222.8 L356.2,222.9 L357.5,223.0 L358.8,223.0 L360.2,223.1 L361.5,223.1 L362.8,223.2 L364.1,223.3 L365.5,223.3 L366.8,223.4 L368.1,223.4 L369.5,223.5 L370.8,223.6 L372.1,223.6 L373.4,223.7 L374.8,223.7 L376.1,223.8 L377.4,223.8 L378.7,223.9 L380.1,223.9 L381.4,224.0 L382.7,224.1 L384.0,224.1 L385.4,224.2 L386.7,224.2 L388.0,224.3 L389.3,224.3 L390.7,224.4 L392.0,224.4 L393.3,224.5 L394.6,224.5 L395.9,224.6 L397.3,224.6 L398.6,224.7 L399.9,224.7 L401.2,224.8 L402.6,224.8 L403.9,224.9 L405.2,224.9 L406.6,225.0 L407.9,225.0 L409.2,225.1 L410.5,225.1 L411.8,225.2 L413.2,225.2 L414.5,225.3 L415.8,225.3 L417.1,225.4 L418.5,225.4 L419.8,225.4 L421.1,225.5 L422.4,225.5 L423.8,225.6 L425.1,225.6 L426.4,225.7 L427.8,225.7 L429.1,225.8 L430.4,225.8 L431.7,225.8 L433.0,225.9 L434.4,225.9 L435.7,226.0 L437.0,226.0 L438.4,226.1 L439.7,226.1 L441.0,226.1 L442.3,226.2 L443.6,226.2 L445.0,226.3 L446.3,226.3 L447.6,226.4 L448.9,226.4 L450.3,226.4 L451.6,226.5 L452.9,226.5 L454.2,226.6 L455.6,226.6 L456.9,226.6 L458.2,226.7 L459.5,226.7 L460.9,226.8 L462.2,226.8 L463.5,226.8 L464.8,226.9 L466.2,226.9 L467.5,226.9 L468.8,227.0 L470.2,227.0 L471.5,227.1 L472.8,227.1 L474.1,227.1 L475.5,227.2 L476.8,227.2 L478.1,227.2 L479.4,227.3 L480.8,227.3 L482.1,227.4 L483.4,227.4 L484.7,227.4 L486.1,227.5 L487.4,227.5 L488.7,227.5 L490.0,227.6 L491.4,227.6 L492.7,227.6 L494.0,227.7 L495.3,227.7 L496.6,227.7 L498.0,227.8 L499.3,227.8 L500.6,227.8 L502.0,227.9 L503.3,227.9 L504.6,227.9 L505.9,228.0 L507.2,228.0 L508.6,228.0 L509.9,228.1 L511.2,228.1 L512.6,228.1 L513.9,228.2 L515.2,228.2 L516.5,228.2 L517.9,228.3 L519.2,228.3 L520.5,228.3 L521.8,228.4 L523.1,228.4 L524.5,228.4 L525.8,228.5 L527.1,228.5 L528.5,228.5 L529.8,228.5 L531.1,228.6 L532.4,228.6 L533.8,228.6 L535.1,228.7 L536.4,228.7 L537.7,228.7 L539.0,228.8 L540.4,228.8 L541.7,228.8 L543.0,228.8 L544.4,228.9 L545.7,228.9 L547.0,228.9 L548.3,229.0 L549.6,229.0 L551.0,229.0 L552.3,229.0 L553.6,229.1 L554.9,229.1 L556.3,229.1 L557.6,229.2 L558.9,229.2 L560.2,229.2 L561.6,229.2 L562.9,229.3 L564.2,229.3 L565.5,229.3 L566.9,229.4 L568.2,229.4 L569.5,229.4 L570.9,229.4 L572.2,229.5 L573.5,229.5 L574.8,229.5 L576.1,229.5 L577.5,229.6 L578.8,229.6 L580.1,229.6 L581.4,229.6 L582.8,229.7 L584.1,229.7 L585.4,229.7 L586.8,229.7 L588.1,229.8 L589.4,229.8 L590.7,229.8 L592.0,229.8 L593.4,229.9 L594.7,229.9 L596.0,229.9 L597.3,230.0 L598.7,230.0 L600.0,230.0" />
+  <path class="gd" d="M70,150.0 L86.1,150.0 L86.1,250" />
+  <circle class="pt" cx="86.1" cy="150.0" r="4.5" />
+  <text class="yl" x="64" y="154.0">0.50</text>
+  <text class="xl" x="86.1" y="266">n = 4</text>
+  <path class="gd" d="M70,200.0 L150.3,200.0 L150.3,250" />
+  <circle class="pt" cx="150.3" cy="200.0" r="4.5" />
+  <text class="yl" x="64" y="204.0">0.25</text>
+  <text class="xl" x="150.3" y="266">n = 16</text>
+  <path class="gd" d="M70,225.0 L407.3,225.0 L407.3,250" />
+  <circle class="pt" cx="407.3" cy="225.0" r="4.5" />
+  <text class="yl" x="64" y="229.0">0.125</text>
+  <text class="xl" x="407.3" y="266">n = 64</text>
+  <text class="an" x="330" y="288">each marked step multiplies n by 4 — and only halves the error</text>
+  <text class="axl" x="340" y="314">sample size n</text>
+  <text class="axl" x="16" y="130" transform="rotate(-90 16,130)">standard error, in units of σ</text>
+  <circle class="hl" cx="86.1" cy="150.0" r="10"><animate attributeName="cx" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.2778;0.5556" values="86.1;150.3;407.3" /><animate attributeName="cy" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.2778;0.5556" values="150.0;200.0;225.0" /></circle>
+</svg>
+<figcaption><b>Figure 2 -</b> The square-root law, and why data gets expensive. Going from 4 observations to 16 halves the standard error ; halving it again costs another 48. The curve flattens fast — which is exactly why a poll of 1000 people and a poll of 1500 give you almost the same precision.</figcaption>
+</center></figure>
+
+<p><em>In plain words : the first hundred observations teach you a great deal ; the next hundred teach you much less ; going from ten thousand to eleven thousand is nearly pointless.</em> This is why polls of a thousand people report a margin of about three points, and why polling ten thousand — ten times the cost — only takes it to one point.</p>
+
+<div class="note">
+	You have met this law before if you read the <a href="/blog/algorithmic/hyperloglog">HyperLogLog</a> post : that algorithm's relative error is $1.04/\sqrt{m}$ with $m$ registers. Same $\sqrt{\cdot}$, same bargain. It is not a coincidence — HyperLogLog <i>is</i> estimating a parameter from a random sketch, and it pays the same price everyone pays.
+</div>
+
+<p>Bias and wobble combine into one honest measure of a recipe’s quality, the <strong>mean squared error</strong> :</p>
+
+\[\begin{equation} \operatorname{MSE}(\hat\theta) = \mathbb{E}\big[(\hat\theta - \theta)^{2}\big] = \underbrace{\big(\mathbb{E}[\hat\theta] - \theta\big)^{2}}_{\text{bias}^{2}} + \underbrace{\operatorname{Var}(\hat\theta)}_{\text{wobble}}. \label{eq:mse} \end{equation}\]
+
+<p>Keep this decomposition in mind : collecting more data shrinks the second term and does absolutely nothing to the first. We will come back to that with some force in section 12.</p>
+
+<h2 id="3-why-the-average-behaves-so-well">3. Why the average behaves so well</h2>
+<p>Two theorems explain why the sample mean is the workhorse of the whole subject. Neither needs a proof here, but both deserve to be understood rather than memorised.</p>
+
+<p><strong>The law of large numbers</strong> says the wobble eventually goes away : as $n$ grows, $\bar{X}_n$ settles onto $\mu$ and stays there. That is the formal version of “a bigger spoonful is more reliable”, and $\eqref{eq:var}$ already told us why — the variance $\sigma^2/n$ goes to zero.</p>
+
+<p>The second is genuinely surprising, and it is the reason the same handful of formulas works everywhere.</p>
+
+<div class="theorem" text="central limit theorem">
+	Let $X_1, \dots, X_n$ be independent draws from <i>any</i> distribution with mean $\mu$ and finite variance $\sigma^{2}$. Then as $n$ grows,
+	$$ \frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \;\xrightarrow{\;d\;}\; \mathcal{N}(0, 1), $$
+	that is, the sample mean behaves like a bell curve centred at $\mu$ with standard deviation $\sigma/\sqrt{n}$ — <b>whatever the shape of the original population</b>.
+</div>
+
+<p><em>In plain words : the population can be wildly lopsided, spiky, or shaped like a camel. Average enough draws from it and the averages you get will pile up into a symmetric bell. The lopsidedness averages away.</em></p>
+
+<figure><center>
+<svg viewBox="0 0 640 224" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .ar{ fill:#dce3ef; stroke:#4a6da7; stroke-width:1.6; }
+    .nm{ fill:none; stroke:#b5651d; stroke-width:1.8; stroke-dasharray:4 3; }
+    .bs{ stroke:#bdbdbd; stroke-width:1.2; }
+    .tm{ stroke:#b5651d; stroke-width:1.2; stroke-dasharray:3 3; }
+    .pl{ font-size:13px; fill:#4a6da7; text-anchor:middle; }
+    .ps{ font-size:10.5px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .mt{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .sw3{ fill:none; stroke:#5aa06a; stroke-width:1.8; }
+  </style>
+  <path class="ar" d="M30.1,62.1 L30.8,63.5 L31.5,64.9 L32.3,66.3 L33.0,67.7 L33.7,69.0 L34.4,70.3 L35.1,71.6 L35.8,72.9 L36.6,74.2 L37.3,75.5 L38.0,76.7 L38.7,78.0 L39.4,79.2 L40.1,80.4 L40.9,81.6 L41.6,82.7 L42.3,83.9 L43.0,85.0 L43.7,86.2 L44.4,87.3 L45.2,88.4 L45.9,89.5 L46.6,90.6 L47.3,91.6 L48.0,92.7 L48.7,93.7 L49.5,94.7 L50.2,95.7 L50.9,96.7 L51.6,97.7 L52.3,98.7 L53.0,99.6 L53.7,100.6 L54.5,101.5 L55.2,102.4 L55.9,103.4 L56.6,104.3 L57.3,105.2 L58.0,106.0 L58.8,106.9 L59.5,107.8 L60.2,108.6 L60.9,109.4 L61.6,110.3 L62.3,111.1 L63.1,111.9 L63.8,112.7 L64.5,113.5 L65.2,114.2 L65.9,115.0 L66.6,115.8 L67.4,116.5 L68.1,117.3 L68.8,118.0 L69.5,118.7 L70.2,119.4 L70.9,120.1 L71.7,120.8 L72.4,121.5 L73.1,122.2 L73.8,122.8 L74.5,123.5 L75.2,124.2 L76.0,124.8 L76.7,125.4 L77.4,126.1 L78.1,126.7 L78.8,127.3 L79.5,127.9 L80.2,128.5 L81.0,129.1 L81.7,129.7 L82.4,130.2 L83.1,130.8 L83.8,131.4 L84.5,131.9 L85.3,132.5 L86.0,133.0 L86.7,133.5 L87.4,134.1 L88.1,134.6 L88.8,135.1 L89.6,135.6 L90.3,136.1 L91.0,136.6 L91.7,137.1 L92.4,137.6 L93.1,138.1 L93.9,138.5 L94.6,139.0 L95.3,139.5 L96.0,139.9 L96.7,140.4 L97.4,140.8 L98.2,141.2 L98.9,141.7 L99.6,142.1 L100.3,142.5 L101.0,142.9 L101.7,143.3 L102.4,143.7 L103.2,144.1 L103.9,144.5 L104.6,144.9 L105.3,145.3 L106.0,145.7 L106.7,146.1 L107.5,146.4 L108.2,146.8 L108.9,147.2 L109.6,147.5 L110.3,147.9 L111.0,148.2 L111.8,148.6 L112.5,148.9 L113.2,149.3 L113.9,149.6 L114.6,149.9 L115.3,150.2 L116.1,150.6 L116.8,150.9 L117.5,151.2 L118.2,151.5 L118.9,151.8 L119.6,152.1 L120.4,152.4 L121.1,152.7 L121.8,153.0 L122.5,153.3 L123.2,153.6 L123.9,153.8 L124.7,154.1 L125.4,154.4 L126.1,154.6 L126.8,154.9 L127.5,155.2 L128.2,155.4 L128.9,155.7 L129.7,155.9 L130.4,156.2 L131.1,156.4 L131.8,156.7 L132.5,156.9 L133.2,157.2 L134.0,157.4 L134.7,157.6 L135.4,157.8 L136.1,158.1 L136.8,158.3 L137.5,158.5 L138.3,158.7 L139.0,158.9 L139.7,159.2 L140.4,159.4 L141.1,159.6 L141.8,159.8 L142.6,160.0 L143.3,160.2 L144.0,160.4 L144.7,160.6 L145.4,160.8 L146.1,160.9 L146.9,161.1 L147.6,161.3 L148.3,161.5 L149.0,161.7 L149.7,161.9 L150.4,162.0 L151.2,162.2 L151.9,162.4 L152.6,162.5 L153.3,162.7 L154.0,162.9 L154.7,163.0 L155.4,163.2 L156.2,163.4 L156.9,163.5 L157.6,163.7 L158.3,163.8 L159.0,164.0 L159.7,164.1 L160.5,164.3 L161.2,164.4 L161.9,164.6 L162.6,164.7 L163.3,164.8 L164.0,165.0 L164.8,165.1 L165.5,165.3 L166.2,165.4 L166.9,165.5 L167.6,165.7 L168.3,165.8 L169.1,165.9 L169.8,166.0 L170.5,166.2 L171.2,166.3 L171.9,166.4 L172.6,166.5 L173.4,166.6 L174.1,166.8 L174.8,166.9 L175.5,167.0 L176.2,167.1 L176.9,167.2 L177.6,167.3 L178.4,167.4 L179.1,167.5 L179.8,167.6 L180.5,167.7 L181.2,167.8 L181.9,167.9 L182.7,168.0 L183.4,168.1 L184.1,168.2 L184.8,168.3 L185.5,168.4 L186.2,168.5 L187.0,168.6 L187.7,168.7 L188.4,168.8 L189.1,168.9 L189.8,169.0 L190.5,169.1 L191.3,169.1 L192.0,169.2 L192.7,169.3 L193.4,169.4 L194.1,169.5 L194.8,169.6 L195.6,169.6 L196.3,169.7 L197.0,169.8 L197.7,169.9 L198.4,170.0 L199.1,170.0 L199.9,170.1 L200.6,170.2 L201.3,170.2 L202.0,170.3 L202.0,176.0 L30.1,176.0 Z" />
+  <line class="bs" x1="30" y1="176" x2="202" y2="176" />
+  <line class="tm" x1="87.3" y1="176" x2="87.3" y2="56" />
+  <text class="pl" x="116.0" y="44">n = 1</text>
+  <text class="ps" x="116.0" y="194">the raw population</text>
+  <path class="ar" d="M234.1,176.0 L234.8,176.0 L235.5,176.0 L236.3,176.0 L237.0,175.9 L237.7,175.8 L238.4,175.6 L239.1,175.4 L239.8,175.0 L240.6,174.5 L241.3,173.9 L242.0,173.1 L242.7,172.2 L243.4,171.1 L244.1,169.9 L244.9,168.4 L245.6,166.8 L246.3,165.0 L247.0,163.1 L247.7,160.9 L248.4,158.6 L249.2,156.2 L249.9,153.6 L250.6,150.9 L251.3,148.1 L252.0,145.2 L252.7,142.2 L253.5,139.1 L254.2,135.9 L254.9,132.7 L255.6,129.5 L256.3,126.2 L257.0,122.9 L257.7,119.6 L258.5,116.3 L259.2,113.1 L259.9,109.9 L260.6,106.7 L261.3,103.6 L262.0,100.6 L262.8,97.7 L263.5,94.8 L264.2,92.0 L264.9,89.3 L265.6,86.8 L266.3,84.3 L267.1,82.0 L267.8,79.8 L268.5,77.7 L269.2,75.7 L269.9,73.9 L270.6,72.2 L271.4,70.6 L272.1,69.2 L272.8,67.9 L273.5,66.7 L274.2,65.7 L274.9,64.8 L275.7,64.0 L276.4,63.4 L277.1,62.9 L277.8,62.5 L278.5,62.2 L279.2,62.0 L280.0,62.0 L280.7,62.1 L281.4,62.2 L282.1,62.5 L282.8,62.9 L283.5,63.4 L284.2,63.9 L285.0,64.6 L285.7,65.3 L286.4,66.1 L287.1,67.0 L287.8,68.0 L288.5,69.0 L289.3,70.1 L290.0,71.3 L290.7,72.5 L291.4,73.7 L292.1,75.1 L292.8,76.4 L293.6,77.8 L294.3,79.2 L295.0,80.7 L295.7,82.2 L296.4,83.7 L297.1,85.2 L297.9,86.8 L298.6,88.4 L299.3,90.0 L300.0,91.6 L300.7,93.2 L301.4,94.8 L302.2,96.4 L302.9,98.1 L303.6,99.7 L304.3,101.3 L305.0,102.9 L305.7,104.5 L306.4,106.1 L307.2,107.7 L307.9,109.3 L308.6,110.9 L309.3,112.5 L310.0,114.0 L310.7,115.5 L311.5,117.0 L312.2,118.5 L312.9,120.0 L313.6,121.5 L314.3,122.9 L315.0,124.3 L315.8,125.7 L316.5,127.1 L317.2,128.4 L317.9,129.7 L318.6,131.0 L319.3,132.3 L320.1,133.6 L320.8,134.8 L321.5,136.0 L322.2,137.2 L322.9,138.3 L323.6,139.4 L324.4,140.5 L325.1,141.6 L325.8,142.7 L326.5,143.7 L327.2,144.7 L327.9,145.7 L328.7,146.6 L329.4,147.6 L330.1,148.5 L330.8,149.4 L331.5,150.2 L332.2,151.1 L332.9,151.9 L333.7,152.7 L334.4,153.5 L335.1,154.2 L335.8,155.0 L336.5,155.7 L337.2,156.4 L338.0,157.0 L338.7,157.7 L339.4,158.3 L340.1,158.9 L340.8,159.5 L341.5,160.1 L342.3,160.7 L343.0,161.2 L343.7,161.7 L344.4,162.2 L345.1,162.7 L345.8,163.2 L346.6,163.7 L347.3,164.1 L348.0,164.6 L348.7,165.0 L349.4,165.4 L350.1,165.8 L350.9,166.2 L351.6,166.5 L352.3,166.9 L353.0,167.2 L353.7,167.6 L354.4,167.9 L355.2,168.2 L355.9,168.5 L356.6,168.8 L357.3,169.0 L358.0,169.3 L358.7,169.6 L359.4,169.8 L360.2,170.1 L360.9,170.3 L361.6,170.5 L362.3,170.7 L363.0,170.9 L363.7,171.1 L364.5,171.3 L365.2,171.5 L365.9,171.7 L366.6,171.9 L367.3,172.0 L368.0,172.2 L368.8,172.3 L369.5,172.5 L370.2,172.6 L370.9,172.8 L371.6,172.9 L372.3,173.0 L373.1,173.2 L373.8,173.3 L374.5,173.4 L375.2,173.5 L375.9,173.6 L376.6,173.7 L377.4,173.8 L378.1,173.9 L378.8,174.0 L379.5,174.1 L380.2,174.1 L380.9,174.2 L381.6,174.3 L382.4,174.4 L383.1,174.4 L383.8,174.5 L384.5,174.6 L385.2,174.6 L385.9,174.7 L386.7,174.7 L387.4,174.8 L388.1,174.8 L388.8,174.9 L389.5,174.9 L390.2,175.0 L391.0,175.0 L391.7,175.1 L392.4,175.1 L393.1,175.2 L393.8,175.2 L394.5,175.2 L395.3,175.3 L396.0,175.3 L396.7,175.3 L397.4,175.4 L398.1,175.4 L398.8,175.4 L399.6,175.4 L400.3,175.5 L401.0,175.5 L401.7,175.5 L402.4,175.5 L403.1,175.5 L403.9,175.6 L404.6,175.6 L405.3,175.6 L406.0,175.6 L406.0,176.0 L234.1,176.0 Z" />
+  <line class="bs" x1="234" y1="176" x2="406" y2="176" />
+  <line class="tm" x1="291.3" y1="176" x2="291.3" y2="56" />
+  <text class="pl" x="320.0" y="44">n = 5</text>
+  <text class="ps" x="320.0" y="194">already less lopsided</text>
+  <path class="ar" d="M438.1,176.0 L438.8,176.0 L439.5,176.0 L440.3,176.0 L441.0,176.0 L441.7,176.0 L442.4,176.0 L443.1,176.0 L443.8,176.0 L444.6,176.0 L445.3,176.0 L446.0,176.0 L446.7,176.0 L447.4,176.0 L448.1,176.0 L448.9,176.0 L449.6,176.0 L450.3,176.0 L451.0,176.0 L451.7,176.0 L452.4,176.0 L453.2,176.0 L453.9,176.0 L454.6,176.0 L455.3,176.0 L456.0,176.0 L456.7,176.0 L457.5,176.0 L458.2,176.0 L458.9,176.0 L459.6,176.0 L460.3,176.0 L461.0,176.0 L461.7,176.0 L462.5,175.9 L463.2,175.9 L463.9,175.8 L464.6,175.8 L465.3,175.7 L466.0,175.5 L466.8,175.3 L467.5,175.0 L468.2,174.6 L468.9,174.1 L469.6,173.5 L470.3,172.7 L471.1,171.7 L471.8,170.5 L472.5,169.1 L473.2,167.4 L473.9,165.4 L474.6,163.0 L475.4,160.4 L476.1,157.4 L476.8,154.0 L477.5,150.3 L478.2,146.2 L478.9,141.9 L479.7,137.2 L480.4,132.3 L481.1,127.1 L481.8,121.8 L482.5,116.3 L483.2,110.8 L484.0,105.4 L484.7,100.0 L485.4,94.7 L486.1,89.6 L486.8,84.9 L487.5,80.4 L488.2,76.4 L489.0,72.7 L489.7,69.6 L490.4,67.0 L491.1,64.9 L491.8,63.4 L492.5,62.4 L493.3,62.0 L494.0,62.1 L494.7,62.8 L495.4,64.0 L496.1,65.7 L496.8,67.9 L497.6,70.4 L498.3,73.3 L499.0,76.6 L499.7,80.1 L500.4,83.9 L501.1,87.9 L501.9,92.0 L502.6,96.2 L503.3,100.4 L504.0,104.7 L504.7,109.0 L505.4,113.2 L506.2,117.4 L506.9,121.4 L507.6,125.3 L508.3,129.1 L509.0,132.8 L509.7,136.2 L510.4,139.5 L511.2,142.7 L511.9,145.6 L512.6,148.4 L513.3,150.9 L514.0,153.3 L514.7,155.5 L515.5,157.6 L516.2,159.5 L516.9,161.2 L517.6,162.8 L518.3,164.2 L519.0,165.5 L519.8,166.7 L520.5,167.8 L521.2,168.7 L521.9,169.6 L522.6,170.4 L523.3,171.0 L524.1,171.7 L524.8,172.2 L525.5,172.7 L526.2,173.1 L526.9,173.5 L527.6,173.8 L528.4,174.1 L529.1,174.4 L529.8,174.6 L530.5,174.8 L531.2,175.0 L531.9,175.1 L532.7,175.2 L533.4,175.3 L534.1,175.4 L534.8,175.5 L535.5,175.6 L536.2,175.7 L536.9,175.7 L537.7,175.8 L538.4,175.8 L539.1,175.8 L539.8,175.9 L540.5,175.9 L541.2,175.9 L542.0,175.9 L542.7,175.9 L543.4,175.9 L544.1,175.9 L544.8,176.0 L545.5,176.0 L546.3,176.0 L547.0,176.0 L547.7,176.0 L548.4,176.0 L549.1,176.0 L549.8,176.0 L550.6,176.0 L551.3,176.0 L552.0,176.0 L552.7,176.0 L553.4,176.0 L554.1,176.0 L554.9,176.0 L555.6,176.0 L556.3,176.0 L557.0,176.0 L557.7,176.0 L558.4,176.0 L559.2,176.0 L559.9,176.0 L560.6,176.0 L561.3,176.0 L562.0,176.0 L562.7,176.0 L563.4,176.0 L564.2,176.0 L564.9,176.0 L565.6,176.0 L566.3,176.0 L567.0,176.0 L567.7,176.0 L568.5,176.0 L569.2,176.0 L569.9,176.0 L570.6,176.0 L571.3,176.0 L572.0,176.0 L572.8,176.0 L573.5,176.0 L574.2,176.0 L574.9,176.0 L575.6,176.0 L576.3,176.0 L577.1,176.0 L577.8,176.0 L578.5,176.0 L579.2,176.0 L579.9,176.0 L580.6,176.0 L581.4,176.0 L582.1,176.0 L582.8,176.0 L583.5,176.0 L584.2,176.0 L584.9,176.0 L585.6,176.0 L586.4,176.0 L587.1,176.0 L587.8,176.0 L588.5,176.0 L589.2,176.0 L589.9,176.0 L590.7,176.0 L591.4,176.0 L592.1,176.0 L592.8,176.0 L593.5,176.0 L594.2,176.0 L595.0,176.0 L595.7,176.0 L596.4,176.0 L597.1,176.0 L597.8,176.0 L598.5,176.0 L599.3,176.0 L600.0,176.0 L600.7,176.0 L601.4,176.0 L602.1,176.0 L602.8,176.0 L603.6,176.0 L604.3,176.0 L605.0,176.0 L605.7,176.0 L606.4,176.0 L607.1,176.0 L607.9,176.0 L608.6,176.0 L609.3,176.0 L610.0,176.0 L610.0,176.0 L438.1,176.0 Z" />
+  <path class="nm" d="M458.1,175.8 L458.5,175.8 L459.0,175.7 L459.5,175.7 L459.9,175.6 L460.4,175.6 L460.9,175.5 L461.3,175.4 L461.8,175.3 L462.3,175.2 L462.7,175.1 L463.2,175.0 L463.7,174.8 L464.1,174.7 L464.6,174.5 L465.1,174.3 L465.5,174.0 L466.0,173.8 L466.5,173.5 L466.9,173.1 L467.4,172.8 L467.8,172.4 L468.3,171.9 L468.8,171.4 L469.2,170.9 L469.7,170.3 L470.2,169.6 L470.6,168.9 L471.1,168.2 L471.6,167.3 L472.0,166.4 L472.5,165.4 L473.0,164.4 L473.4,163.2 L473.9,162.0 L474.4,160.7 L474.8,159.2 L475.3,157.7 L475.8,156.1 L476.2,154.4 L476.7,152.6 L477.2,150.7 L477.6,148.7 L478.1,146.6 L478.6,144.4 L479.0,142.1 L479.5,139.7 L480.0,137.2 L480.4,134.6 L480.9,132.0 L481.4,129.2 L481.8,126.4 L482.3,123.6 L482.8,120.6 L483.2,117.6 L483.7,114.6 L484.2,111.6 L484.6,108.5 L485.1,105.4 L485.6,102.3 L486.0,99.3 L486.5,96.3 L486.9,93.3 L487.4,90.4 L487.9,87.5 L488.3,84.8 L488.8,82.1 L489.3,79.6 L489.7,77.1 L490.2,74.9 L490.7,72.7 L491.1,70.8 L491.6,69.0 L492.1,67.4 L492.5,66.0 L493.0,64.8 L493.5,63.8 L493.9,63.0 L494.4,62.5 L494.9,62.1 L495.3,62.0 L495.8,62.1 L496.3,62.5 L496.7,63.0 L497.2,63.8 L497.7,64.8 L498.1,66.0 L498.6,67.4 L499.1,69.0 L499.5,70.8 L500.0,72.7 L500.5,74.9 L500.9,77.1 L501.4,79.6 L501.9,82.1 L502.3,84.8 L502.8,87.5 L503.3,90.4 L503.7,93.3 L504.2,96.3 L504.6,99.3 L505.1,102.3 L505.6,105.4 L506.0,108.5 L506.5,111.6 L507.0,114.6 L507.4,117.6 L507.9,120.6 L508.4,123.6 L508.8,126.4 L509.3,129.2 L509.8,132.0 L510.2,134.6 L510.7,137.2 L511.2,139.7 L511.6,142.1 L512.1,144.4 L512.6,146.6 L513.0,148.7 L513.5,150.7 L514.0,152.6 L514.4,154.4 L514.9,156.1 L515.4,157.7 L515.8,159.2 L516.3,160.7 L516.8,162.0 L517.2,163.2 L517.7,164.4 L518.2,165.4 L518.6,166.4 L519.1,167.3 L519.6,168.2 L520.0,168.9 L520.5,169.6 L521.0,170.3 L521.4,170.9 L521.9,171.4 L522.4,171.9 L522.8,172.4 L523.3,172.8 L523.7,173.1 L524.2,173.5 L524.7,173.8 L525.1,174.0 L525.6,174.3 L526.1,174.5 L526.5,174.7 L527.0,174.8 L527.5,175.0 L527.9,175.1 L528.4,175.2 L528.9,175.3 L529.3,175.4 L529.8,175.5 L530.3,175.6 L530.7,175.6 L531.2,175.7 L531.7,175.7 L532.1,175.8 L532.6,175.8" />
+  <line class="bs" x1="438" y1="176" x2="610" y2="176" />
+  <line class="tm" x1="495.3" y1="176" x2="495.3" y2="56" />
+  <text class="pl" x="524.0" y="44">n = 30</text>
+  <text class="ps" x="524.0" y="194">a bell, near enough</text>
+  <text class="mt" x="320.0" y="212">the vertical line is the true mean ; it is in the same place every time</text>
+  <rect class="sw3" x="24" y="52" width="184" height="132" rx="4"><animate attributeName="x" dur="6.6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.2778;0.5556" values="24;228;432" /></rect>
+</svg>
+<figcaption><b>Figure 3 -</b> The central limit theorem at work. The population on the left is as lopsided as it gets — an exponential, all its mass bunched near zero with a long tail. Average just 5 draws and the lopsidedness is already fading ; average 30 and the distribution of the average is almost exactly the bell curve drawn in dashes. Each panel is scaled to its own height.</figcaption>
+</center></figure>
+
+<p>This is what makes the subject practical. You almost never know the shape of the population — but you do not need to. As long as you are working with an <strong>average</strong> of enough independent observations, you know the shape of its wobble. Every formula in Part II is built on that one gift.</p>
+
+<div class="note">
+	"Enough" is not a fixed number. For a roughly symmetric population, $n \approx 15$ is plenty. For something as skewed as an exponential, $n \approx 30$ is the traditional rule of thumb. For very heavy tails — income, insurance claims, network traffic — even $n = 1000$ can be too few, and section 12 explains why.
+</div>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART II — SAYING HOW SURE YOU ARE</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">the two tools everybody uses and most people misquote</span>
+</div>
+
+<h2 id="4-confidence-intervals--a-range-instead-of-a-number">4. Confidence intervals : a range instead of a number</h2>
+<p>An estimate alone is a bad answer, because it hides how much it wobbles. “The average is 4.2” and “the average is 4.2, give or take 0.05” and “the average is 4.2, give or take 3” are three completely different states of knowledge. A <strong>confidence interval</strong>, an idea Neyman set out precisely in 1937 <a class="citation" href="#Neyman1937">(Neyman, 1937)</a>, reports the give-or-take.</p>
+
+<p>Building one is now just algebra on the central limit theorem. The CLT says $Z = (\bar{X} - \mu)/(\sigma/\sqrt{n})$ is a standard bell, and a standard bell sits between $-1.96$ and $+1.96$ about 95 % of the time :</p>
+
+\[\mathbb{P}\!\left(-1.96 \;\le\; \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \;\le\; 1.96 \right) = 0.95 .\]
+
+<p>Multiply through by $\sigma/\sqrt{n}$, subtract $\bar{X}$, multiply by $-1$ (which flips the inequalities), and the same statement reads :</p>
+
+\[\begin{equation} \mathbb{P}\Big(\bar{X} - 1.96\,\tfrac{\sigma}{\sqrt{n}} \;\le\; \mu \;\le\; \bar{X} + 1.96\,\tfrac{\sigma}{\sqrt{n}}\Big) = 0.95 . \label{eq:ci} \end{equation}\]
+
+<p>So the recipe is <strong>estimate $\pm$ 1.96 standard errors</strong>. Nothing more.</p>
+
+<p>Now the part that matters more than the formula. Look hard at $\eqref{eq:ci}$ and ask <em>what is random in it</em>. Not $\mu$ — $\mu$ is a fixed number that has never moved. The random things are $\bar{X}$, and therefore the two endpoints. The interval is what jumps around ; the truth stands still.</p>
+
+<div class="theorem" text="what 95 % confidence actually means">
+	The number 95 % is a property of the <b>procedure</b>, not of the interval in front of you. It says : if you repeated the whole study many times, about 95 % of the intervals you built this way would contain $\mu$. Your particular interval either contains $\mu$ or it does not — there is no probability left in it once the data is in.
+</div>
+
+<figure><center>
+<svg viewBox="0 0 640 334" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .iv{ stroke:#4a6da7; stroke-width:1.7; fill:none; }
+    .miss{ stroke:#b5651d; stroke-width:2.3; }
+    .dt{ fill:#4a6da7; } .miss2{ fill:#b5651d; }
+    .mu4{ stroke:#b5651d; stroke-width:1.8; }
+    .mut4{ font-size:11.5px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .ms{ font-size:10.5px; fill:#b5651d; font-style:italic; }
+    .cap4{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .sw4{ fill:none; stroke:#5aa06a; stroke-width:1.6; }
+  </style>
+  <line class="mu4" x1="340" y1="30" x2="340" y2="304" />
+  <text class="mut4" x="340" y="22">μ — the truth, fixed</text>
+  <path class="iv" d="M283.5,42.0 L416.7,42.0 M283.5,42.0 l0,-4 l0,8 M416.7,42.0 l0,-4 l0,8" />
+  <circle class="dt" cx="350.1" cy="42.0" r="2.6" />
+  <path class="iv" d="M270.4,55.2 L403.7,55.2 M270.4,55.2 l0,-4 l0,8 M403.7,55.2 l0,-4 l0,8" />
+  <circle class="dt" cx="337.0" cy="55.2" r="2.6" />
+  <path class="iv miss" d="M203.9,68.4 L337.1,68.4 M203.9,68.4 l0,-4 l0,8 M337.1,68.4 l0,-4 l0,8" />
+  <circle class="dt miss2" cx="270.5" cy="68.4" r="2.6" />
+  <text class="ms" x="349.1" y="72.4" text-anchor="start">this one misses</text>
+  <path class="iv" d="M275.9,81.6 L409.2,81.6 M275.9,81.6 l0,-4 l0,8 M409.2,81.6 l0,-4 l0,8" />
+  <circle class="dt" cx="342.6" cy="81.6" r="2.6" />
+  <path class="iv" d="M279.4,94.8 L412.7,94.8 M279.4,94.8 l0,-4 l0,8 M412.7,94.8 l0,-4 l0,8" />
+  <circle class="dt" cx="346.0" cy="94.8" r="2.6" />
+  <path class="iv" d="M290.9,108.0 L424.2,108.0 M290.9,108.0 l0,-4 l0,8 M424.2,108.0 l0,-4 l0,8" />
+  <circle class="dt" cx="357.6" cy="108.0" r="2.6" />
+  <path class="iv" d="M250.2,121.2 L383.5,121.2 M250.2,121.2 l0,-4 l0,8 M383.5,121.2 l0,-4 l0,8" />
+  <circle class="dt" cx="316.9" cy="121.2" r="2.6" />
+  <path class="iv" d="M257.7,134.4 L391.0,134.4 M257.7,134.4 l0,-4 l0,8 M391.0,134.4 l0,-4 l0,8" />
+  <circle class="dt" cx="324.3" cy="134.4" r="2.6" />
+  <path class="iv" d="M215.2,147.6 L348.4,147.6 M215.2,147.6 l0,-4 l0,8 M348.4,147.6 l0,-4 l0,8" />
+  <circle class="dt" cx="281.8" cy="147.6" r="2.6" />
+  <path class="iv" d="M271.2,160.8 L404.5,160.8 M271.2,160.8 l0,-4 l0,8 M404.5,160.8 l0,-4 l0,8" />
+  <circle class="dt" cx="337.8" cy="160.8" r="2.6" />
+  <path class="iv" d="M264.5,174.0 L397.8,174.0 M264.5,174.0 l0,-4 l0,8 M397.8,174.0 l0,-4 l0,8" />
+  <circle class="dt" cx="331.2" cy="174.0" r="2.6" />
+  <path class="iv" d="M263.2,187.2 L396.5,187.2 M263.2,187.2 l0,-4 l0,8 M396.5,187.2 l0,-4 l0,8" />
+  <circle class="dt" cx="329.9" cy="187.2" r="2.6" />
+  <path class="iv" d="M296.4,200.4 L429.7,200.4 M296.4,200.4 l0,-4 l0,8 M429.7,200.4 l0,-4 l0,8" />
+  <circle class="dt" cx="363.0" cy="200.4" r="2.6" />
+  <path class="iv" d="M252.3,213.6 L385.5,213.6 M252.3,213.6 l0,-4 l0,8 M385.5,213.6 l0,-4 l0,8" />
+  <circle class="dt" cx="318.9" cy="213.6" r="2.6" />
+  <path class="iv" d="M297.5,226.8 L430.7,226.8 M297.5,226.8 l0,-4 l0,8 M430.7,226.8 l0,-4 l0,8" />
+  <circle class="dt" cx="364.1" cy="226.8" r="2.6" />
+  <path class="iv" d="M265.1,240.0 L398.3,240.0 M265.1,240.0 l0,-4 l0,8 M398.3,240.0 l0,-4 l0,8" />
+  <circle class="dt" cx="331.7" cy="240.0" r="2.6" />
+  <path class="iv" d="M264.2,253.2 L397.5,253.2 M264.2,253.2 l0,-4 l0,8 M397.5,253.2 l0,-4 l0,8" />
+  <circle class="dt" cx="330.9" cy="253.2" r="2.6" />
+  <path class="iv" d="M239.2,266.4 L372.5,266.4 M239.2,266.4 l0,-4 l0,8 M372.5,266.4 l0,-4 l0,8" />
+  <circle class="dt" cx="305.9" cy="266.4" r="2.6" />
+  <path class="iv" d="M317.7,279.6 L450.9,279.6 M317.7,279.6 l0,-4 l0,8 M450.9,279.6 l0,-4 l0,8" />
+  <circle class="dt" cx="384.3" cy="279.6" r="2.6" />
+  <path class="iv" d="M258.6,292.8 L391.9,292.8 M258.6,292.8 l0,-4 l0,8 M391.9,292.8 l0,-4 l0,8" />
+  <circle class="dt" cx="325.3" cy="292.8" r="2.6" />
+  <text class="cap4" x="320" y="324">19 of these 20 intervals cover μ — but from the inside, none of them can tell</text>
+  <rect class="sw4" x="150" y="35" width="380" height="14" rx="3"><animate attributeName="y" dur="9s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.0476;0.0952;0.1429;0.1905;0.2381;0.2857;0.3333;0.3810;0.4286;0.4762;0.5238;0.5714;0.6190;0.6667;0.7143;0.7619;0.8095;0.8571;0.9048" values="35.0;48.2;61.4;74.6;87.8;101.0;114.2;127.4;140.6;153.8;167.0;180.2;193.4;206.6;219.8;233.0;246.2;259.4;272.6;285.8" /></rect>
+</svg>
+<figcaption><b>Figure 4 -</b> Twenty studies of the same fixed quantity. Every interval was built by the identical, correct procedure — yet one of them does not contain μ. That is not a mistake, it is the 5 % working as advertised. The confidence is in the method, not in any one interval, and nothing about the unlucky one looks wrong from the inside.</figcaption>
+</center></figure>
+
+<p>Figure 4 is worth more than any sentence about this. Twenty studies, twenty intervals, one fixed truth. Most of the intervals cover it ; one does not. Nothing about the unlucky interval looks different from the inside — that is the entire point, and it is why “95 % confidence” cannot be a statement about the interval you happen to be holding.</p>
+
+<p>The width of the interval is $2 \times 1.96 \times \sigma/\sqrt{n}$, so the square-root law from section 2 governs precision too : <strong>to make your interval half as wide, get four times the data.</strong></p>
+
+<h2 id="5-when-you-do-not-know-sigma--students-t">5. When you do not know $\sigma$ : Student’s t</h2>
+<p>Formula $\eqref{eq:ci}$ has a cheat in it. It uses $\sigma$, the true spread of the population — which you do not know, for the same reason you do not know $\mu$. In practice you estimate it from the sample :</p>
+
+\[\begin{equation} s^{2} = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^{2}. \label{eq:s2} \end{equation}\]
+
+<p><em>Why $n-1$ and not $n$ ? Because the deviations are measured from $\bar{x}$, not from the true $\mu$, and $\bar{x}$ sits by construction as close to your data as possible. That makes the squared deviations a little too small. Dividing by $n-1$ corrects exactly for it. The intuitive bookkeeping : you had $n$ independent numbers, you spent one of them working out where the centre was, so $n-1$ pieces of information remain — the</em> <strong>degrees of freedom</strong>.</p>
+
+<p>Substituting an estimate for $\sigma$ adds a second source of wobble, so the multiplier $1.96$ is no longer right — it is too optimistic. Gosset worked out the correct distribution in 1908, publishing under the pen name <em>Student</em> because his employer, Guinness, would not let him publish under his own <a class="citation" href="#Student1908">(Student, 1908)</a>. The <strong>t-distribution with $n-1$ degrees of freedom</strong> looks like a bell with fatter tails, and the fatter the fewer the observations :</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>sample size $n$</th>
+      <th>multiplier for 95 %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5</td>
+      <td>2.78</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>2.26</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>2.05</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>1.98</td>
+    </tr>
+    <tr>
+      <td>$\infty$</td>
+      <td>1.96</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>In plain words : with five observations you must be considerably more cautious than the textbook $1.96$, because you are unsure about the spread as well as the centre. By $n = 30$ the correction is small, and by $n = 100$ it hardly matters.</em> Use $t$ by default ; it is right for small samples and costs nothing for large ones.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span><span class="p">,</span> <span class="n">statistics</span>
+
+<span class="k">def</span> <span class="nf">mean_ci</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">mult</span><span class="o">=</span><span class="mf">1.96</span><span class="p">):</span>
+    <span class="s">"""95 % interval for a mean. Use a t table for small n."""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">fmean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">mult</span> <span class="o">*</span> <span class="n">se</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="n">mult</span> <span class="o">*</span> <span class="n">se</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="6-hypothesis-tests--the-same-picture-read-backwards">6. Hypothesis tests : the same picture, read backwards</h2>
+<p>A confidence interval answers <em>“what values are plausible ?”</em>. A <strong>hypothesis test</strong> answers a narrower question : <em>“is this specific value still plausible ?”</em> — usually the boring value, the one meaning <em>nothing is happening</em>.</p>
+
+<p>The logic is proof by contradiction, softened with a probability :</p>
+
+<ol>
+  <li><strong>Assume nothing is happening.</strong> This is the <strong>null hypothesis</strong> $H_0$ — the coin is fair, the drug does nothing, the two versions convert equally.</li>
+  <li><strong>Ask how surprising your data would be</strong> if that were true.</li>
+  <li><strong>If it would be very surprising, stop believing $H_0$.</strong> If it would not, you have learned nothing and you say so.</li>
+</ol>
+
+<p><em>In plain words : a courtroom. The defendant is presumed innocent ; the evidence is weighed against that presumption ; only if the evidence would be very unlikely for an innocent person do we convict. And crucially — an acquittal is not a proof of innocence, it is a failure to prove guilt.</em></p>
+
+<p>The measure of surprise is the <strong>p-value</strong>, and it deserves a formal definition because nearly everything said about it in casual conversation is wrong.</p>
+
+<div class="definition">
+	Let $T$ be a test statistic — a number summarising how far the data sits from what $H_0$ predicts. The <b>p-value</b> is
+	$$ p \;=\; \mathbb{P}\big(\,T \text{ at least as extreme as observed} \;\mid\; H_0 \text{ is true}\,\big). $$
+	It is the probability of <b>the data given the hypothesis</b>. It is <i>not</i> the probability of the hypothesis given the data.
+</div>
+
+<p>That last sentence is the one to tattoo somewhere. Conditional probabilities do not flip. Almost every dog has four legs, so $\mathbb{P}(\text{four legs} \mid \text{dog}) \approx 1$ ; but plenty of four-legged things are not dogs, so $\mathbb{P}(\text{dog} \mid \text{four legs})$ is small. A p-value is the first kind of statement. Reading it as the second — <em>“p = 0.03, so there is a 3 % chance the drug does nothing”</em> — is the single most common error in the applied literature <a class="citation" href="#Wasserstein2016">(Wasserstein &amp; Lazar, 2016)</a>.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 270" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .bell{ fill:none; stroke:#4a6da7; stroke-width:2.2; }
+    .tail{ fill:#e0a878; fill-opacity:.65; stroke:#b5651d; stroke-width:1.2; }
+    .ax5{ stroke:#bdbdbd; stroke-width:1.3; }
+    .obs{ stroke:#b5651d; stroke-width:2; stroke-dasharray:4 3; }
+    .obt{ font-size:11.5px; fill:#b5651d; text-anchor:middle; }
+    .pv{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .ttl5{ font-size:12px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .cap5{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <path class="bell" d="M76.0,197.9 L77.8,197.8 L79.5,197.8 L81.3,197.8 L83.0,197.8 L84.8,197.8 L86.6,197.8 L88.3,197.7 L90.1,197.7 L91.8,197.7 L93.6,197.7 L95.4,197.6 L97.1,197.6 L98.9,197.5 L100.6,197.5 L102.4,197.5 L104.2,197.4 L105.9,197.4 L107.7,197.3 L109.4,197.3 L111.2,197.2 L113.0,197.1 L114.7,197.1 L116.5,197.0 L118.2,196.9 L120.0,196.8 L121.8,196.7 L123.5,196.6 L125.3,196.5 L127.0,196.4 L128.8,196.3 L130.6,196.2 L132.3,196.0 L134.1,195.9 L135.8,195.7 L137.6,195.6 L139.4,195.4 L141.1,195.2 L142.9,195.0 L144.6,194.8 L146.4,194.6 L148.2,194.3 L149.9,194.1 L151.7,193.8 L153.4,193.5 L155.2,193.2 L157.0,192.9 L158.7,192.6 L160.5,192.3 L162.2,191.9 L164.0,191.5 L165.8,191.1 L167.5,190.7 L169.3,190.2 L171.0,189.8 L172.8,189.3 L174.6,188.8 L176.3,188.2 L178.1,187.6 L179.8,187.0 L181.6,186.4 L183.4,185.8 L185.1,185.1 L186.9,184.4 L188.6,183.7 L190.4,182.9 L192.2,182.1 L193.9,181.3 L195.7,180.4 L197.4,179.5 L199.2,178.6 L201.0,177.6 L202.7,176.6 L204.5,175.6 L206.2,174.5 L208.0,173.4 L209.8,172.3 L211.5,171.1 L213.3,169.9 L215.0,168.7 L216.8,167.4 L218.6,166.0 L220.3,164.7 L222.1,163.3 L223.8,161.9 L225.6,160.4 L227.4,158.9 L229.1,157.3 L230.9,155.8 L232.6,154.2 L234.4,152.5 L236.2,150.8 L237.9,149.1 L239.7,147.4 L241.4,145.6 L243.2,143.8 L245.0,142.0 L246.7,140.1 L248.5,138.3 L250.2,136.4 L252.0,134.4 L253.8,132.5 L255.5,130.5 L257.3,128.5 L259.0,126.6 L260.8,124.6 L262.6,122.5 L264.3,120.5 L266.1,118.5 L267.8,116.4 L269.6,114.4 L271.4,112.4 L273.1,110.3 L274.9,108.3 L276.6,106.3 L278.4,104.3 L280.2,102.3 L281.9,100.4 L283.7,98.4 L285.4,96.5 L287.2,94.6 L289.0,92.7 L290.7,90.9 L292.5,89.1 L294.2,87.3 L296.0,85.5 L297.8,83.9 L299.5,82.2 L301.3,80.6 L303.0,79.1 L304.8,77.6 L306.6,76.1 L308.3,74.8 L310.1,73.4 L311.8,72.2 L313.6,71.0 L315.4,69.9 L317.1,68.8 L318.9,67.8 L320.6,66.9 L322.4,66.1 L324.2,65.3 L325.9,64.6 L327.7,64.0 L329.4,63.5 L331.2,63.0 L333.0,62.7 L334.7,62.4 L336.5,62.2 L338.2,62.0 L340.0,62.0 L341.8,62.0 L343.5,62.2 L345.3,62.4 L347.0,62.7 L348.8,63.0 L350.6,63.5 L352.3,64.0 L354.1,64.6 L355.8,65.3 L357.6,66.1 L359.4,66.9 L361.1,67.8 L362.9,68.8 L364.6,69.9 L366.4,71.0 L368.2,72.2 L369.9,73.4 L371.7,74.8 L373.4,76.1 L375.2,77.6 L377.0,79.1 L378.7,80.6 L380.5,82.2 L382.2,83.9 L384.0,85.5 L385.8,87.3 L387.5,89.1 L389.3,90.9 L391.0,92.7 L392.8,94.6 L394.6,96.5 L396.3,98.4 L398.1,100.4 L399.8,102.3 L401.6,104.3 L403.4,106.3 L405.1,108.3 L406.9,110.3 L408.6,112.4 L410.4,114.4 L412.2,116.4 L413.9,118.5 L415.7,120.5 L417.4,122.5 L419.2,124.6 L421.0,126.6 L422.7,128.5 L424.5,130.5 L426.2,132.5 L428.0,134.4 L429.8,136.4 L431.5,138.3 L433.3,140.1 L435.0,142.0 L436.8,143.8 L438.6,145.6 L440.3,147.4 L442.1,149.1 L443.8,150.8 L445.6,152.5 L447.4,154.2 L449.1,155.8 L450.9,157.3 L452.6,158.9 L454.4,160.4 L456.2,161.9 L457.9,163.3 L459.7,164.7 L461.4,166.0 L463.2,167.4 L465.0,168.7 L466.7,169.9 L468.5,171.1 L470.2,172.3 L472.0,173.4 L473.8,174.5 L475.5,175.6 L477.3,176.6 L479.0,177.6 L480.8,178.6 L482.6,179.5 L484.3,180.4 L486.1,181.3 L487.8,182.1 L489.6,182.9 L491.4,183.7 L493.1,184.4 L494.9,185.1 L496.6,185.8 L498.4,186.4 L500.2,187.0 L501.9,187.6 L503.7,188.2 L505.4,188.8 L507.2,189.3 L509.0,189.8 L510.7,190.2 L512.5,190.7 L514.2,191.1 L516.0,191.5 L517.8,191.9 L519.5,192.3 L521.3,192.6 L523.0,192.9 L524.8,193.2 L526.6,193.5 L528.3,193.8 L530.1,194.1 L531.8,194.3 L533.6,194.6 L535.4,194.8 L537.1,195.0 L538.9,195.2 L540.6,195.4 L542.4,195.6 L544.2,195.7 L545.9,195.9 L547.7,196.0 L549.4,196.2 L551.2,196.3 L553.0,196.4 L554.7,196.5 L556.5,196.6 L558.2,196.7 L560.0,196.8 L561.8,196.9 L563.5,197.0 L565.3,197.1 L567.0,197.1 L568.8,197.2 L570.6,197.3 L572.3,197.3 L574.1,197.4 L575.8,197.4 L577.6,197.5 L579.4,197.5 L581.1,197.5 L582.9,197.6 L584.6,197.6 L586.4,197.7 L588.2,197.7 L589.9,197.7 L591.7,197.7 L593.4,197.8 L595.2,197.8 L597.0,197.8 L598.7,197.8 L600.5,197.8 L602.2,197.8 L604.0,197.9" />
+  <line class="ax5" x1="68" y1="198" x2="612" y2="198" />
+  <text class="ttl5" x="340" y="34">if nothing were going on, the statistic would land like this</text>
+  <g opacity="1"><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.3030;0.6061" values="1;0;0" />
+    <path class="tail" d="M504.1,188.3 L505.2,188.7 L506.3,189.0 L507.4,189.3 L508.5,189.6 L509.7,189.9 L510.8,190.2 L511.9,190.5 L513.0,190.8 L514.1,191.1 L515.2,191.3 L516.3,191.6 L517.4,191.8 L518.5,192.1 L519.6,192.3 L520.8,192.5 L521.9,192.7 L523.0,192.9 L524.1,193.1 L525.2,193.3 L526.3,193.5 L527.4,193.7 L528.5,193.9 L529.6,194.0 L530.7,194.2 L531.9,194.3 L533.0,194.5 L534.1,194.6 L535.2,194.8 L536.3,194.9 L537.4,195.0 L538.5,195.2 L539.6,195.3 L540.7,195.4 L541.8,195.5 L543.0,195.6 L544.1,195.7 L545.2,195.8 L546.3,195.9 L547.4,196.0 L548.5,196.1 L549.6,196.2 L550.7,196.3 L551.8,196.3 L552.9,196.4 L554.1,196.5 L555.2,196.6 L556.3,196.6 L557.4,196.7 L558.5,196.7 L559.6,196.8 L560.7,196.9 L561.8,196.9 L562.9,197.0 L564.0,197.0 L565.2,197.1 L566.3,197.1 L567.4,197.2 L568.5,197.2 L569.6,197.2 L570.7,197.3 L571.8,197.3 L572.9,197.3 L574.0,197.4 L575.1,197.4 L576.3,197.4 L577.4,197.5 L578.5,197.5 L579.6,197.5 L580.7,197.5 L581.8,197.6 L582.9,197.6 L584.0,197.6 L585.1,197.6 L586.2,197.6 L587.4,197.7 L588.5,197.7 L589.6,197.7 L590.7,197.7 L591.8,197.7 L592.9,197.7 L594.0,197.8 L595.1,197.8 L596.2,197.8 L597.3,197.8 L598.5,197.8 L599.6,197.8 L600.7,197.8 L601.8,197.8 L602.9,197.8 L604.0,197.9 L604.0,198.0 L504.1,198.0 Z" />
+    <path class="tail" d="M76.0,197.9 L77.1,197.8 L78.2,197.8 L79.3,197.8 L80.4,197.8 L81.5,197.8 L82.7,197.8 L83.8,197.8 L84.9,197.8 L86.0,197.8 L87.1,197.7 L88.2,197.7 L89.3,197.7 L90.4,197.7 L91.5,197.7 L92.6,197.7 L93.8,197.6 L94.9,197.6 L96.0,197.6 L97.1,197.6 L98.2,197.6 L99.3,197.5 L100.4,197.5 L101.5,197.5 L102.6,197.5 L103.7,197.4 L104.9,197.4 L106.0,197.4 L107.1,197.3 L108.2,197.3 L109.3,197.3 L110.4,197.2 L111.5,197.2 L112.6,197.2 L113.7,197.1 L114.8,197.1 L116.0,197.0 L117.1,197.0 L118.2,196.9 L119.3,196.9 L120.4,196.8 L121.5,196.7 L122.6,196.7 L123.7,196.6 L124.8,196.6 L125.9,196.5 L127.1,196.4 L128.2,196.3 L129.3,196.3 L130.4,196.2 L131.5,196.1 L132.6,196.0 L133.7,195.9 L134.8,195.8 L135.9,195.7 L137.0,195.6 L138.2,195.5 L139.3,195.4 L140.4,195.3 L141.5,195.2 L142.6,195.0 L143.7,194.9 L144.8,194.8 L145.9,194.6 L147.0,194.5 L148.1,194.3 L149.3,194.2 L150.4,194.0 L151.5,193.9 L152.6,193.7 L153.7,193.5 L154.8,193.3 L155.9,193.1 L157.0,192.9 L158.1,192.7 L159.2,192.5 L160.4,192.3 L161.5,192.1 L162.6,191.8 L163.7,191.6 L164.8,191.3 L165.9,191.1 L167.0,190.8 L168.1,190.5 L169.2,190.2 L170.3,189.9 L171.5,189.6 L172.6,189.3 L173.7,189.0 L174.8,188.7 L175.9,188.3 L175.9,198.0 L76.0,198.0 Z" />
+    <line class="obs" x1="504.1" y1="198" x2="504.1" y2="162.3" />
+    <text class="obt" x="504.1" y="155.3">observed  t = 2.3</text>
+    <text class="pv" x="340" y="238">p = 0.021 — the shaded area in <tspan font-style="italic">both</tspan> tails</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.3030;0.6061" values="0;1;0" />
+    <path class="tail" d="M454.2,160.2 L455.8,161.6 L457.5,162.9 L459.2,164.3 L460.8,165.6 L462.5,166.8 L464.2,168.1 L465.8,169.3 L467.5,170.4 L469.1,171.6 L470.8,172.7 L472.5,173.7 L474.1,174.8 L475.8,175.8 L477.5,176.7 L479.1,177.7 L480.8,178.6 L482.5,179.5 L484.1,180.3 L485.8,181.1 L487.5,181.9 L489.1,182.7 L490.8,183.4 L492.5,184.1 L494.1,184.8 L495.8,185.5 L497.4,186.1 L499.1,186.7 L500.8,187.3 L502.4,187.8 L504.1,188.3 L505.8,188.9 L507.4,189.3 L509.1,189.8 L510.8,190.2 L512.4,190.7 L514.1,191.1 L515.8,191.5 L517.4,191.8 L519.1,192.2 L520.8,192.5 L522.4,192.8 L524.1,193.1 L525.8,193.4 L527.4,193.7 L529.1,193.9 L530.7,194.2 L532.4,194.4 L534.1,194.6 L535.7,194.8 L537.4,195.0 L539.1,195.2 L540.7,195.4 L542.4,195.6 L544.1,195.7 L545.7,195.9 L547.4,196.0 L549.1,196.1 L550.7,196.3 L552.4,196.4 L554.1,196.5 L555.7,196.6 L557.4,196.7 L559.0,196.8 L560.7,196.9 L562.4,196.9 L564.0,197.0 L565.7,197.1 L567.4,197.2 L569.0,197.2 L570.7,197.3 L572.4,197.3 L574.0,197.4 L575.7,197.4 L577.4,197.5 L579.0,197.5 L580.7,197.5 L582.4,197.6 L584.0,197.6 L585.7,197.6 L587.4,197.7 L589.0,197.7 L590.7,197.7 L592.3,197.7 L594.0,197.8 L595.7,197.8 L597.3,197.8 L599.0,197.8 L600.7,197.8 L602.3,197.8 L604.0,197.9 L604.0,198.0 L454.2,198.0 Z" />
+    <path class="tail" d="M76.0,197.9 L77.7,197.8 L79.3,197.8 L81.0,197.8 L82.7,197.8 L84.3,197.8 L86.0,197.8 L87.7,197.7 L89.3,197.7 L91.0,197.7 L92.6,197.7 L94.3,197.6 L96.0,197.6 L97.6,197.6 L99.3,197.5 L101.0,197.5 L102.6,197.5 L104.3,197.4 L106.0,197.4 L107.6,197.3 L109.3,197.3 L111.0,197.2 L112.6,197.2 L114.3,197.1 L116.0,197.0 L117.6,196.9 L119.3,196.9 L121.0,196.8 L122.6,196.7 L124.3,196.6 L125.9,196.5 L127.6,196.4 L129.3,196.3 L130.9,196.1 L132.6,196.0 L134.3,195.9 L135.9,195.7 L137.6,195.6 L139.3,195.4 L140.9,195.2 L142.6,195.0 L144.3,194.8 L145.9,194.6 L147.6,194.4 L149.3,194.2 L150.9,193.9 L152.6,193.7 L154.2,193.4 L155.9,193.1 L157.6,192.8 L159.2,192.5 L160.9,192.2 L162.6,191.8 L164.2,191.5 L165.9,191.1 L167.6,190.7 L169.2,190.2 L170.9,189.8 L172.6,189.3 L174.2,188.9 L175.9,188.3 L177.6,187.8 L179.2,187.3 L180.9,186.7 L182.6,186.1 L184.2,185.5 L185.9,184.8 L187.5,184.1 L189.2,183.4 L190.9,182.7 L192.5,181.9 L194.2,181.1 L195.9,180.3 L197.5,179.5 L199.2,178.6 L200.9,177.7 L202.5,176.7 L204.2,175.8 L205.9,174.8 L207.5,173.7 L209.2,172.7 L210.9,171.6 L212.5,170.4 L214.2,169.3 L215.8,168.1 L217.5,166.8 L219.2,165.6 L220.8,164.3 L222.5,162.9 L224.2,161.6 L225.8,160.2 L225.8,198.0 L76.0,198.0 Z" />
+    <line class="obs" x1="454.2" y1="198" x2="454.2" y2="134.2" />
+    <text class="obt" x="454.2" y="127.2">observed  t = 1.6</text>
+    <text class="pv" x="340" y="238">p = 0.110 — the shaded area in <tspan font-style="italic">both</tspan> tails</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.3030;0.6061" values="0;0;1" />
+    <path class="tail" d="M411.4,115.5 L413.5,118.0 L415.6,120.5 L417.8,122.9 L419.9,125.4 L422.1,127.8 L424.2,130.2 L426.3,132.6 L428.5,135.0 L430.6,137.3 L432.8,139.6 L434.9,141.8 L437.0,144.1 L439.2,146.2 L441.3,148.4 L443.5,150.5 L445.6,152.5 L447.7,154.5 L449.9,156.5 L452.0,158.3 L454.2,160.2 L456.3,162.0 L458.4,163.7 L460.6,165.4 L462.7,167.0 L464.9,168.6 L467.0,170.1 L469.1,171.6 L471.3,173.0 L473.4,174.3 L475.6,175.6 L477.7,176.9 L479.8,178.1 L482.0,179.2 L484.1,180.3 L486.3,181.4 L488.4,182.4 L490.6,183.3 L492.7,184.2 L494.8,185.1 L497.0,185.9 L499.1,186.7 L501.3,187.4 L503.4,188.1 L505.5,188.8 L507.7,189.4 L509.8,190.0 L512.0,190.5 L514.1,191.1 L516.2,191.6 L518.4,192.0 L520.5,192.5 L522.7,192.9 L524.8,193.2 L526.9,193.6 L529.1,193.9 L531.2,194.3 L533.4,194.5 L535.5,194.8 L537.6,195.1 L539.8,195.3 L541.9,195.5 L544.1,195.7 L546.2,195.9 L548.3,196.1 L550.5,196.2 L552.6,196.4 L554.8,196.5 L556.9,196.7 L559.0,196.8 L561.2,196.9 L563.3,197.0 L565.5,197.1 L567.6,197.2 L569.8,197.2 L571.9,197.3 L574.0,197.4 L576.2,197.4 L578.3,197.5 L580.5,197.5 L582.6,197.6 L584.7,197.6 L586.9,197.7 L589.0,197.7 L591.2,197.7 L593.3,197.8 L595.4,197.8 L597.6,197.8 L599.7,197.8 L601.9,197.8 L604.0,197.9 L604.0,198.0 L411.4,198.0 Z" />
+    <path class="tail" d="M76.0,197.9 L78.1,197.8 L80.3,197.8 L82.4,197.8 L84.6,197.8 L86.7,197.8 L88.8,197.7 L91.0,197.7 L93.1,197.7 L95.3,197.6 L97.4,197.6 L99.5,197.5 L101.7,197.5 L103.8,197.4 L106.0,197.4 L108.1,197.3 L110.2,197.2 L112.4,197.2 L114.5,197.1 L116.7,197.0 L118.8,196.9 L121.0,196.8 L123.1,196.7 L125.2,196.5 L127.4,196.4 L129.5,196.2 L131.7,196.1 L133.8,195.9 L135.9,195.7 L138.1,195.5 L140.2,195.3 L142.4,195.1 L144.5,194.8 L146.6,194.5 L148.8,194.3 L150.9,193.9 L153.1,193.6 L155.2,193.2 L157.3,192.9 L159.5,192.5 L161.6,192.0 L163.8,191.6 L165.9,191.1 L168.0,190.5 L170.2,190.0 L172.3,189.4 L174.5,188.8 L176.6,188.1 L178.7,187.4 L180.9,186.7 L183.0,185.9 L185.2,185.1 L187.3,184.2 L189.4,183.3 L191.6,182.4 L193.7,181.4 L195.9,180.3 L198.0,179.2 L200.2,178.1 L202.3,176.9 L204.4,175.6 L206.6,174.3 L208.7,173.0 L210.9,171.6 L213.0,170.1 L215.1,168.6 L217.3,167.0 L219.4,165.4 L221.6,163.7 L223.7,162.0 L225.8,160.2 L228.0,158.3 L230.1,156.5 L232.3,154.5 L234.4,152.5 L236.5,150.5 L238.7,148.4 L240.8,146.2 L243.0,144.1 L245.1,141.8 L247.2,139.6 L249.4,137.3 L251.5,135.0 L253.7,132.6 L255.8,130.2 L257.9,127.8 L260.1,125.4 L262.2,122.9 L264.4,120.5 L266.5,118.0 L268.6,115.5 L268.6,198.0 L76.0,198.0 Z" />
+    <line class="obs" x1="411.4" y1="198" x2="411.4" y2="89.5" />
+    <text class="obt" x="411.4" y="82.5">observed  t = 1.0</text>
+    <text class="pv" x="340" y="238">p = 0.317 — the shaded area in <tspan font-style="italic">both</tspan> tails</text>
+  </g>
+  <text class="cap5" x="340" y="258">the further out the observation, the smaller the shaded area, the more surprising the data</text>
+</svg>
+<figcaption><b>Figure 5 -</b> What a p-value is. The curve is where the test statistic would fall <i>if the null hypothesis were true</i>. The shaded tails are everything at least as extreme as what you actually observed, and their area is $p$. Note what the picture does not contain : any information about whether $H_0$ is true. It only says how unusual your data would be if it were.</figcaption>
+</center></figure>
+
+<p>The mechanics are the same algebra as before. For a mean :</p>
+
+\[\begin{equation} t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} \quad\text{— how many standard errors is the data from the null value ?} \label{eq:tstat} \end{equation}\]
+
+<p>Then $p$ is the area in the tails of the null distribution beyond $\pm t$. Compare $p$ to a threshold $\alpha$ (conventionally $0.05$, a number Fisher chose for convenience <a class="citation" href="#Fisher1925">(Fisher, 1925)</a> and which has no deeper justification <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>) and <em>reject</em> or <em>fail to reject</em>. Never <em>accept</em> — see the courtroom.</p>
+
+<p>Now the observation that ties Part II together, and which most courses leave as a footnote.</p>
+
+<div class="theorem" text="tests and intervals are the same thing">
+	A 95 % confidence interval is <b>exactly</b> the set of null values $\mu_0$ that a two-sided test at $\alpha = 0.05$ would fail to reject.
+	<br /><br />
+	<i>Proof.&nbsp;&nbsp;</i> The test rejects $\mu_0$ precisely when the statistic exceeds the critical value :
+	$$ \left\lvert \frac{\bar{x} - \mu_0}{\operatorname{SE}} \right\rvert &gt; 1.96 \iff \lvert \bar{x} - \mu_0 \rvert &gt; 1.96\operatorname{SE} \iff \mu_0 \notin \big[\bar{x} - 1.96\operatorname{SE},\; \bar{x} + 1.96\operatorname{SE}\big].$$
+	So $\mu_0$ is <i>not</i> rejected exactly when it lies inside the interval $\eqref{eq:ci}$.
+	<p align="right">$\square$</p>
+</div>
+
+<p><em>In plain words : the interval already contains every test you could have run. Look at whether it covers the boring value and you have your answer — with the size of the effect and its uncertainty thrown in for free.</em> This is why experienced people report intervals rather than p-values : the interval is strictly more informative, and it is much harder to misread.</p>
+
+<h2 id="7-the-two-ways-to-be-wrong">7. The two ways to be wrong</h2>
+<p>A test makes a decision, and decisions can go wrong in two directions. Naming both, and reframing testing as a choice between two kinds of mistake rather than a verdict on truth, is Neyman and Pearson’s contribution <a class="citation" href="#NeymanPearson1933">(Neyman &amp; Pearson, 1933)</a>. The whole design of an experiment is about choosing how much of each error to tolerate.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>$H_0$ is true (nothing happening)</th>
+      <th>$H_0$ is false (something real)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>reject $H_0$</strong></td>
+      <td><strong>Type I error</strong> — false alarm, rate $\alpha$</td>
+      <td>correct detection, rate $1-\beta$</td>
+    </tr>
+    <tr>
+      <td><strong>fail to reject</strong></td>
+      <td>correct silence</td>
+      <td><strong>Type II error</strong> — missed it, rate $\beta$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>In plain words : a Type I error is crying wolf. A Type II error is missing the wolf. A smoke alarm set to be very sensitive rarely misses a fire but goes off when you make toast ; set it less sensitive and the toast is fine but you might sleep through something real.</em></p>
+
+<div class="definition">
+	The <b>power</b> of a test is $1 - \beta$, the probability of detecting an effect that is genuinely there. Power depends on four things and nothing else : the size of the real effect $\Delta$, the noise $\sigma$, the sample size $n$, and the threshold $\alpha$.
+</div>
+
+<figure><center>
+<svg viewBox="0 0 640 264" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .reg{ stroke:none; }
+    .a{ fill:#e0a878; fill-opacity:.7; }
+    .b{ fill:#8fa5c8; fill-opacity:.55; }
+    .pulse{ stroke:none; }
+    .c0{ fill:none; stroke:#4a6da7; stroke-width:2.1; }
+    .c1{ fill:none; stroke:#5aa06a; stroke-width:2.1; }
+    .ax6{ stroke:#bdbdbd; stroke-width:1.3; }
+    .thr{ stroke:#2b2b2b; stroke-width:1.5; stroke-dasharray:5 4; }
+    .thl{ font-size:11px; fill:#2b2b2b; text-anchor:middle; }
+    .cl{ font-size:11.5px; text-anchor:middle; font-style:italic; }
+    .c0t{ fill:#4a6da7; } .c1t{ fill:#5aa06a; }
+    .ld{ stroke:#9a9a9a; stroke-width:1; fill:none; }
+    .lb{ font-size:11.5px; }
+    .b2{ fill:#4a6da7; text-anchor:end; } .a2{ fill:#b5651d; text-anchor:start; }
+    .cap6{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <path class="reg b" d="M60.0,196.0 L62.1,196.0 L64.3,196.0 L66.4,196.0 L68.6,196.0 L70.7,196.0 L72.9,196.0 L75.0,196.0 L77.2,196.0 L79.3,196.0 L81.4,196.0 L83.6,196.0 L85.7,196.0 L87.9,196.0 L90.0,196.0 L92.2,196.0 L94.3,196.0 L96.5,196.0 L98.6,196.0 L100.7,196.0 L102.9,196.0 L105.0,196.0 L107.2,196.0 L109.3,196.0 L111.5,196.0 L113.6,196.0 L115.8,196.0 L117.9,196.0 L120.0,196.0 L122.2,196.0 L124.3,196.0 L126.5,196.0 L128.6,196.0 L130.8,196.0 L132.9,196.0 L135.1,196.0 L137.2,196.0 L139.3,196.0 L141.5,196.0 L143.6,196.0 L145.8,196.0 L147.9,196.0 L150.1,196.0 L152.2,196.0 L154.4,196.0 L156.5,196.0 L158.7,196.0 L160.8,196.0 L162.9,196.0 L165.1,196.0 L167.2,196.0 L169.4,196.0 L171.5,196.0 L173.7,196.0 L175.8,196.0 L178.0,196.0 L180.1,196.0 L182.2,196.0 L184.4,196.0 L186.5,196.0 L188.7,196.0 L190.8,196.0 L193.0,196.0 L195.1,196.0 L197.3,196.0 L199.4,196.0 L201.5,196.0 L203.7,195.9 L205.8,195.9 L208.0,195.9 L210.1,195.9 L212.3,195.9 L214.4,195.9 L216.6,195.9 L218.7,195.9 L220.8,195.8 L223.0,195.8 L225.1,195.8 L227.3,195.7 L229.4,195.7 L231.6,195.7 L233.7,195.6 L235.9,195.5 L238.0,195.5 L240.1,195.4 L242.3,195.3 L244.4,195.2 L246.6,195.1 L248.7,195.0 L250.9,194.9 L253.0,194.7 L255.2,194.6 L257.3,194.4 L259.4,194.2 L261.6,194.0 L263.7,193.8 L265.9,193.5 L268.0,193.2 L270.2,192.9 L272.3,192.5 L274.5,192.1 L276.6,191.7 L278.7,191.3 L280.9,190.8 L283.0,190.2 L285.2,189.6 L287.3,189.0 L289.5,188.3 L291.6,187.6 L293.8,186.7 L295.9,185.9 L298.0,185.0 L300.2,184.0 L302.3,182.9 L304.5,181.8 L306.6,180.5 L308.8,179.3 L310.9,177.9 L313.1,176.5 L315.2,174.9 L317.3,173.3 L319.5,171.6 L321.6,169.8 L323.8,168.0 L325.9,166.0 L328.1,164.0 L330.2,161.9 L332.4,159.7 L334.5,157.4 L336.6,155.0 L338.8,152.6 L340.9,150.0 L343.1,147.5 L345.2,144.8 L347.4,142.1 L349.5,139.3 L351.7,136.5 L353.8,133.7 L356.0,130.8 L358.1,127.9 L360.2,125.0 L360.2,196.0 L60.0,196.0 Z" />
+  <path class="reg a" d="M360.2,178.1 L362.0,179.2 L363.7,180.2 L365.4,181.2 L367.1,182.2 L368.8,183.1 L370.5,183.9 L372.2,184.7 L373.9,185.5 L375.7,186.2 L377.4,186.9 L379.1,187.5 L380.8,188.1 L382.5,188.7 L384.2,189.2 L385.9,189.7 L387.6,190.2 L389.4,190.6 L391.1,191.0 L392.8,191.4 L394.5,191.8 L396.2,192.1 L397.9,192.4 L399.6,192.7 L401.3,193.0 L403.1,193.2 L404.8,193.5 L406.5,193.7 L408.2,193.9 L409.9,194.1 L411.6,194.2 L413.3,194.4 L415.0,194.5 L416.8,194.7 L418.5,194.8 L420.2,194.9 L421.9,195.0 L423.6,195.1 L425.3,195.2 L427.0,195.3 L428.7,195.3 L430.5,195.4 L432.2,195.5 L433.9,195.5 L435.6,195.6 L437.3,195.6 L439.0,195.6 L440.7,195.7 L442.4,195.7 L444.2,195.7 L445.9,195.8 L447.6,195.8 L449.3,195.8 L451.0,195.8 L452.7,195.9 L454.4,195.9 L456.1,195.9 L457.9,195.9 L459.6,195.9 L461.3,195.9 L463.0,195.9 L464.7,195.9 L466.4,195.9 L468.1,196.0 L469.8,196.0 L471.6,196.0 L473.3,196.0 L475.0,196.0 L476.7,196.0 L478.4,196.0 L480.1,196.0 L481.8,196.0 L483.5,196.0 L485.3,196.0 L487.0,196.0 L488.7,196.0 L490.4,196.0 L492.1,196.0 L493.8,196.0 L495.5,196.0 L497.2,196.0 L499.0,196.0 L500.7,196.0 L502.4,196.0 L504.1,196.0 L505.8,196.0 L507.5,196.0 L509.2,196.0 L510.9,196.0 L512.7,196.0 L514.4,196.0 L516.1,196.0 L517.8,196.0 L519.5,196.0 L521.2,196.0 L522.9,196.0 L524.6,196.0 L526.4,196.0 L528.1,196.0 L529.8,196.0 L531.5,196.0 L533.2,196.0 L534.9,196.0 L536.6,196.0 L538.3,196.0 L540.1,196.0 L541.8,196.0 L543.5,196.0 L545.2,196.0 L546.9,196.0 L548.6,196.0 L550.3,196.0 L552.0,196.0 L553.8,196.0 L555.5,196.0 L557.2,196.0 L558.9,196.0 L560.6,196.0 L562.3,196.0 L564.0,196.0 L565.7,196.0 L567.5,196.0 L569.2,196.0 L570.9,196.0 L572.6,196.0 L574.3,196.0 L576.0,196.0 L577.7,196.0 L579.4,196.0 L581.2,196.0 L582.9,196.0 L584.6,196.0 L586.3,196.0 L588.0,196.0 L589.7,196.0 L591.4,196.0 L593.1,196.0 L594.9,196.0 L596.6,196.0 L598.3,196.0 L600.0,196.0 L600.0,196.0 L360.2,196.0 Z" />
+  <path class="c0" d="M60.0,195.8 L61.8,195.8 L63.6,195.8 L65.4,195.7 L67.2,195.7 L69.0,195.7 L70.8,195.6 L72.6,195.6 L74.4,195.5 L76.2,195.5 L78.0,195.4 L79.8,195.3 L81.6,195.3 L83.4,195.2 L85.2,195.1 L87.0,195.0 L88.8,194.9 L90.6,194.8 L92.4,194.6 L94.2,194.5 L96.0,194.3 L97.8,194.2 L99.6,194.0 L101.4,193.8 L103.2,193.6 L105.0,193.3 L106.8,193.1 L108.6,192.8 L110.4,192.5 L112.2,192.2 L114.0,191.8 L115.8,191.5 L117.6,191.1 L119.4,190.6 L121.2,190.2 L123.0,189.7 L124.8,189.2 L126.6,188.6 L128.4,188.0 L130.2,187.3 L132.0,186.7 L133.8,185.9 L135.6,185.2 L137.4,184.3 L139.2,183.5 L141.0,182.5 L142.8,181.6 L144.6,180.6 L146.4,179.5 L148.2,178.4 L150.0,177.2 L151.8,175.9 L153.6,174.6 L155.4,173.3 L157.2,171.9 L159.0,170.4 L160.8,168.8 L162.6,167.2 L164.4,165.6 L166.2,163.9 L168.0,162.1 L169.8,160.2 L171.6,158.3 L173.4,156.4 L175.2,154.4 L177.0,152.3 L178.8,150.2 L180.6,148.1 L182.4,145.8 L184.2,143.6 L186.0,141.3 L187.8,139.0 L189.6,136.6 L191.4,134.2 L193.2,131.8 L195.0,129.4 L196.8,126.9 L198.6,124.5 L200.4,122.0 L202.2,119.5 L204.0,117.1 L205.8,114.6 L207.6,112.2 L209.4,109.8 L211.2,107.4 L213.0,105.1 L214.8,102.8 L216.6,100.5 L218.4,98.3 L220.2,96.2 L222.0,94.1 L223.8,92.1 L225.6,90.2 L227.4,88.3 L229.2,86.6 L231.0,84.9 L232.8,83.4 L234.6,81.9 L236.4,80.6 L238.2,79.4 L240.0,78.3 L241.8,77.3 L243.6,76.4 L245.4,75.7 L247.2,75.1 L249.0,74.6 L250.8,74.3 L252.6,74.1 L254.4,74.0 L256.2,74.1 L258.0,74.3 L259.8,74.6 L261.6,75.1 L263.4,75.7 L265.2,76.4 L267.0,77.3 L268.8,78.3 L270.6,79.4 L272.4,80.6 L274.2,81.9 L276.0,83.4 L277.8,84.9 L279.6,86.6 L281.4,88.3 L283.2,90.2 L285.0,92.1 L286.8,94.1 L288.6,96.2 L290.4,98.3 L292.2,100.5 L294.0,102.8 L295.8,105.1 L297.6,107.4 L299.4,109.8 L301.2,112.2 L303.0,114.6 L304.8,117.1 L306.6,119.5 L308.4,122.0 L310.2,124.5 L312.0,126.9 L313.8,129.4 L315.6,131.8 L317.4,134.2 L319.2,136.6 L321.0,139.0 L322.8,141.3 L324.6,143.6 L326.4,145.8 L328.2,148.1 L330.0,150.2 L331.8,152.3 L333.6,154.4 L335.4,156.4 L337.2,158.3 L339.0,160.2 L340.8,162.1 L342.6,163.9 L344.4,165.6 L346.2,167.2 L348.0,168.8 L349.8,170.4 L351.6,171.9 L353.4,173.3 L355.2,174.6 L357.0,175.9 L358.8,177.2 L360.6,178.4 L362.4,179.5 L364.2,180.6 L366.0,181.6 L367.8,182.5 L369.6,183.5 L371.4,184.3 L373.2,185.2 L375.0,185.9 L376.8,186.7 L378.6,187.3 L380.4,188.0 L382.2,188.6 L384.0,189.2 L385.8,189.7 L387.6,190.2 L389.4,190.6 L391.2,191.1 L393.0,191.5 L394.8,191.8 L396.6,192.2 L398.4,192.5 L400.2,192.8 L402.0,193.1 L403.8,193.3 L405.6,193.6 L407.4,193.8 L409.2,194.0 L411.0,194.2 L412.8,194.3 L414.6,194.5 L416.4,194.6 L418.2,194.8 L420.0,194.9 L421.8,195.0 L423.6,195.1 L425.4,195.2 L427.2,195.3 L429.0,195.3 L430.8,195.4 L432.6,195.5 L434.4,195.5 L436.2,195.6 L438.0,195.6 L439.8,195.7 L441.6,195.7 L443.4,195.7 L445.2,195.8 L447.0,195.8 L448.8,195.8 L450.6,195.8 L452.4,195.9 L454.2,195.9 L456.0,195.9 L457.8,195.9 L459.6,195.9 L461.4,195.9 L463.2,195.9 L465.0,195.9 L466.8,195.9 L468.6,196.0 L470.4,196.0 L472.2,196.0 L474.0,196.0 L475.8,196.0 L477.6,196.0 L479.4,196.0 L481.2,196.0 L483.0,196.0 L484.8,196.0 L486.6,196.0 L488.4,196.0 L490.2,196.0 L492.0,196.0 L493.8,196.0 L495.6,196.0 L497.4,196.0 L499.2,196.0 L501.0,196.0 L502.8,196.0 L504.6,196.0 L506.4,196.0 L508.2,196.0 L510.0,196.0 L511.8,196.0 L513.6,196.0 L515.4,196.0 L517.2,196.0 L519.0,196.0 L520.8,196.0 L522.6,196.0 L524.4,196.0 L526.2,196.0 L528.0,196.0 L529.8,196.0 L531.6,196.0 L533.4,196.0 L535.2,196.0 L537.0,196.0 L538.8,196.0 L540.6,196.0 L542.4,196.0 L544.2,196.0 L546.0,196.0 L547.8,196.0 L549.6,196.0 L551.4,196.0 L553.2,196.0 L555.0,196.0 L556.8,196.0 L558.6,196.0 L560.4,196.0 L562.2,196.0 L564.0,196.0 L565.8,196.0 L567.6,196.0 L569.4,196.0 L571.2,196.0 L573.0,196.0 L574.8,196.0 L576.6,196.0 L578.4,196.0 L580.2,196.0 L582.0,196.0 L583.8,196.0 L585.6,196.0 L587.4,196.0 L589.2,196.0 L591.0,196.0 L592.8,196.0 L594.6,196.0 L596.4,196.0 L598.2,196.0 L600.0,196.0" />
+  <path class="c1" d="M60.0,196.0 L61.8,196.0 L63.6,196.0 L65.4,196.0 L67.2,196.0 L69.0,196.0 L70.8,196.0 L72.6,196.0 L74.4,196.0 L76.2,196.0 L78.0,196.0 L79.8,196.0 L81.6,196.0 L83.4,196.0 L85.2,196.0 L87.0,196.0 L88.8,196.0 L90.6,196.0 L92.4,196.0 L94.2,196.0 L96.0,196.0 L97.8,196.0 L99.6,196.0 L101.4,196.0 L103.2,196.0 L105.0,196.0 L106.8,196.0 L108.6,196.0 L110.4,196.0 L112.2,196.0 L114.0,196.0 L115.8,196.0 L117.6,196.0 L119.4,196.0 L121.2,196.0 L123.0,196.0 L124.8,196.0 L126.6,196.0 L128.4,196.0 L130.2,196.0 L132.0,196.0 L133.8,196.0 L135.6,196.0 L137.4,196.0 L139.2,196.0 L141.0,196.0 L142.8,196.0 L144.6,196.0 L146.4,196.0 L148.2,196.0 L150.0,196.0 L151.8,196.0 L153.6,196.0 L155.4,196.0 L157.2,196.0 L159.0,196.0 L160.8,196.0 L162.6,196.0 L164.4,196.0 L166.2,196.0 L168.0,196.0 L169.8,196.0 L171.6,196.0 L173.4,196.0 L175.2,196.0 L177.0,196.0 L178.8,196.0 L180.6,196.0 L182.4,196.0 L184.2,196.0 L186.0,196.0 L187.8,196.0 L189.6,196.0 L191.4,196.0 L193.2,196.0 L195.0,196.0 L196.8,196.0 L198.6,196.0 L200.4,196.0 L202.2,196.0 L204.0,195.9 L205.8,195.9 L207.6,195.9 L209.4,195.9 L211.2,195.9 L213.0,195.9 L214.8,195.9 L216.6,195.9 L218.4,195.9 L220.2,195.8 L222.0,195.8 L223.8,195.8 L225.6,195.8 L227.4,195.7 L229.2,195.7 L231.0,195.7 L232.8,195.6 L234.6,195.6 L236.4,195.5 L238.2,195.5 L240.0,195.4 L241.8,195.3 L243.6,195.3 L245.4,195.2 L247.2,195.1 L249.0,195.0 L250.8,194.9 L252.6,194.8 L254.4,194.6 L256.2,194.5 L258.0,194.3 L259.8,194.2 L261.6,194.0 L263.4,193.8 L265.2,193.6 L267.0,193.3 L268.8,193.1 L270.6,192.8 L272.4,192.5 L274.2,192.2 L276.0,191.8 L277.8,191.5 L279.6,191.1 L281.4,190.6 L283.2,190.2 L285.0,189.7 L286.8,189.2 L288.6,188.6 L290.4,188.0 L292.2,187.3 L294.0,186.7 L295.8,185.9 L297.6,185.2 L299.4,184.3 L301.2,183.5 L303.0,182.5 L304.8,181.6 L306.6,180.6 L308.4,179.5 L310.2,178.4 L312.0,177.2 L313.8,175.9 L315.6,174.6 L317.4,173.3 L319.2,171.9 L321.0,170.4 L322.8,168.8 L324.6,167.2 L326.4,165.6 L328.2,163.9 L330.0,162.1 L331.8,160.2 L333.6,158.3 L335.4,156.4 L337.2,154.4 L339.0,152.3 L340.8,150.2 L342.6,148.1 L344.4,145.8 L346.2,143.6 L348.0,141.3 L349.8,139.0 L351.6,136.6 L353.4,134.2 L355.2,131.8 L357.0,129.4 L358.8,126.9 L360.6,124.5 L362.4,122.0 L364.2,119.5 L366.0,117.1 L367.8,114.6 L369.6,112.2 L371.4,109.8 L373.2,107.4 L375.0,105.1 L376.8,102.8 L378.6,100.5 L380.4,98.3 L382.2,96.2 L384.0,94.1 L385.8,92.1 L387.6,90.2 L389.4,88.3 L391.2,86.6 L393.0,84.9 L394.8,83.4 L396.6,81.9 L398.4,80.6 L400.2,79.4 L402.0,78.3 L403.8,77.3 L405.6,76.4 L407.4,75.7 L409.2,75.1 L411.0,74.6 L412.8,74.3 L414.6,74.1 L416.4,74.0 L418.2,74.1 L420.0,74.3 L421.8,74.6 L423.6,75.1 L425.4,75.7 L427.2,76.4 L429.0,77.3 L430.8,78.3 L432.6,79.4 L434.4,80.6 L436.2,81.9 L438.0,83.4 L439.8,84.9 L441.6,86.6 L443.4,88.3 L445.2,90.2 L447.0,92.1 L448.8,94.1 L450.6,96.2 L452.4,98.3 L454.2,100.5 L456.0,102.8 L457.8,105.1 L459.6,107.4 L461.4,109.8 L463.2,112.2 L465.0,114.6 L466.8,117.1 L468.6,119.5 L470.4,122.0 L472.2,124.5 L474.0,126.9 L475.8,129.4 L477.6,131.8 L479.4,134.2 L481.2,136.6 L483.0,139.0 L484.8,141.3 L486.6,143.6 L488.4,145.8 L490.2,148.1 L492.0,150.2 L493.8,152.3 L495.6,154.4 L497.4,156.4 L499.2,158.3 L501.0,160.2 L502.8,162.1 L504.6,163.9 L506.4,165.6 L508.2,167.2 L510.0,168.8 L511.8,170.4 L513.6,171.9 L515.4,173.3 L517.2,174.6 L519.0,175.9 L520.8,177.2 L522.6,178.4 L524.4,179.5 L526.2,180.6 L528.0,181.6 L529.8,182.5 L531.6,183.5 L533.4,184.3 L535.2,185.2 L537.0,185.9 L538.8,186.7 L540.6,187.3 L542.4,188.0 L544.2,188.6 L546.0,189.2 L547.8,189.7 L549.6,190.2 L551.4,190.6 L553.2,191.1 L555.0,191.5 L556.8,191.8 L558.6,192.2 L560.4,192.5 L562.2,192.8 L564.0,193.1 L565.8,193.3 L567.6,193.6 L569.4,193.8 L571.2,194.0 L573.0,194.2 L574.8,194.3 L576.6,194.5 L578.4,194.6 L580.2,194.8 L582.0,194.9 L583.8,195.0 L585.6,195.1 L587.4,195.2 L589.2,195.3 L591.0,195.3 L592.8,195.4 L594.6,195.5 L596.4,195.5 L598.2,195.6 L600.0,195.6" />
+  <line class="ax6" x1="54" y1="196" x2="606" y2="196" />
+  <line class="thr" x1="360.2" y1="58" x2="360.2" y2="196" />
+  <text class="thl" x="360.2" y="50">decision threshold</text>
+  <text class="cl c0t" x="150" y="96">if nothing is happening</text>
+  <text class="cl c1t" x="510" y="96">if the effect is real</text>
+  <path class="ld" d="M258,220 L303.0,180" />
+  <text class="lb b2" x="196" y="228">β — the wolf you miss</text>
+  <path class="ld" d="M452,220 L381.3,188" />
+  <text class="lb a2" x="512" y="228">α — crying wolf</text>
+  <text class="cap6" x="330" y="252">here β = 0.15, so the power is 85% — the two shaded areas only shrink together if n grows</text>
+  <path class="pulse a" d="M360.2,178.1 L362.0,179.2 L363.7,180.2 L365.4,181.2 L367.1,182.2 L368.8,183.1 L370.5,183.9 L372.2,184.7 L373.9,185.5 L375.7,186.2 L377.4,186.9 L379.1,187.5 L380.8,188.1 L382.5,188.7 L384.2,189.2 L385.9,189.7 L387.6,190.2 L389.4,190.6 L391.1,191.0 L392.8,191.4 L394.5,191.8 L396.2,192.1 L397.9,192.4 L399.6,192.7 L401.3,193.0 L403.1,193.2 L404.8,193.5 L406.5,193.7 L408.2,193.9 L409.9,194.1 L411.6,194.2 L413.3,194.4 L415.0,194.5 L416.8,194.7 L418.5,194.8 L420.2,194.9 L421.9,195.0 L423.6,195.1 L425.3,195.2 L427.0,195.3 L428.7,195.3 L430.5,195.4 L432.2,195.5 L433.9,195.5 L435.6,195.6 L437.3,195.6 L439.0,195.6 L440.7,195.7 L442.4,195.7 L444.2,195.7 L445.9,195.8 L447.6,195.8 L449.3,195.8 L451.0,195.8 L452.7,195.9 L454.4,195.9 L456.1,195.9 L457.9,195.9 L459.6,195.9 L461.3,195.9 L463.0,195.9 L464.7,195.9 L466.4,195.9 L468.1,196.0 L469.8,196.0 L471.6,196.0 L473.3,196.0 L475.0,196.0 L476.7,196.0 L478.4,196.0 L480.1,196.0 L481.8,196.0 L483.5,196.0 L485.3,196.0 L487.0,196.0 L488.7,196.0 L490.4,196.0 L492.1,196.0 L493.8,196.0 L495.5,196.0 L497.2,196.0 L499.0,196.0 L500.7,196.0 L502.4,196.0 L504.1,196.0 L505.8,196.0 L507.5,196.0 L509.2,196.0 L510.9,196.0 L512.7,196.0 L514.4,196.0 L516.1,196.0 L517.8,196.0 L519.5,196.0 L521.2,196.0 L522.9,196.0 L524.6,196.0 L526.4,196.0 L528.1,196.0 L529.8,196.0 L531.5,196.0 L533.2,196.0 L534.9,196.0 L536.6,196.0 L538.3,196.0 L540.1,196.0 L541.8,196.0 L543.5,196.0 L545.2,196.0 L546.9,196.0 L548.6,196.0 L550.3,196.0 L552.0,196.0 L553.8,196.0 L555.5,196.0 L557.2,196.0 L558.9,196.0 L560.6,196.0 L562.3,196.0 L564.0,196.0 L565.7,196.0 L567.5,196.0 L569.2,196.0 L570.9,196.0 L572.6,196.0 L574.3,196.0 L576.0,196.0 L577.7,196.0 L579.4,196.0 L581.2,196.0 L582.9,196.0 L584.6,196.0 L586.3,196.0 L588.0,196.0 L589.7,196.0 L591.4,196.0 L593.1,196.0 L594.9,196.0 L596.6,196.0 L598.3,196.0 L600.0,196.0 L600.0,196.0 L360.2,196.0 Z"><animate attributeName="fill-opacity" dur="3.2s" repeatCount="indefinite" values="0.55;0.85;0.55" /></path>
+</svg>
+<figcaption><b>Figure 6 -</b> The two errors, and why they fight. Everything right of the threshold is called a detection : that is the orange sliver of the null curve (false alarms, rate α) plus most of the green curve (correct detections). Everything left of it is called silence, including the blue region under the green curve — real effects you missed, rate β. Slide the threshold either way and one area grows as the other shrinks. Only more data, which narrows both curves, improves both at once.</figcaption>
+</center></figure>
+
+<p>Figure 6 shows why $\alpha$ and $\beta$ trade off. Move the decision threshold left and you catch more real effects but raise more false alarms ; move it right and the reverse. <strong>Only one thing improves both at once, and it is more data</strong> — more data narrows both curves, so they overlap less.</p>
+
+<p>That relationship can be solved for $n$. To detect a difference $\Delta$ between two groups with power $1-\beta$ at level $\alpha$, you need about</p>
+
+\[\begin{equation} n \;\approx\; \frac{2\,\sigma^{2}\,\big(z_{1-\alpha/2} + z_{1-\beta}\big)^{2}}{\Delta^{2}} \quad\text{per group.} \label{eq:power} \end{equation}\]
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">n_per_group</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">z_alpha</span><span class="o">=</span><span class="mf">1.96</span><span class="p">,</span> <span class="n">z_beta</span><span class="o">=</span><span class="mf">0.84</span><span class="p">):</span>
+    <span class="s">"""z values shown are alpha = 0.05, power = 0.80."""</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z_alpha</span> <span class="o">+</span> <span class="n">z_beta</span>
+    <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">sd</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">n_per_group</span><span class="p">(</span><span class="n">delta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>     <span class="c1"># 63 per group
+</span><span class="n">n_per_group</span><span class="p">(</span><span class="n">delta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>     <span class="c1"># 1570 per group
+</span></code></pre></div></div>
+
+<p>Look at the $\Delta^{2}$ in the denominator : <strong>halving the effect you want to catch multiplies the required sample by four.</strong> Small effects are expensive, and this formula should be run <em>before</em> the experiment, not after.</p>
+
+<p>Which leads to the most useful thing in this section :</p>
+
+<div class="note">
+	A non-significant result from an underpowered study means <b>nothing at all</b>. If your design had a 30 % chance of detecting the effect even when it was real, failing to detect it is not evidence of absence — it is the expected outcome either way. "We found no significant difference" is only informative alongside "and we had 90 % power to find a difference of this size".
+</div>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART III — THE FINE PRINT</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">where the formulas come from, and where they break</span>
+</div>
+
+<h2 id="8-significance-is-not-importance">8. Significance is not importance</h2>
+<p>A p-value answers <em>whether</em> there is an effect, never <em>how big</em>. And because the standard error shrinks like $1/\sqrt{n}$, a large enough study makes <strong>any</strong> non-zero difference significant. Test a landing page on ten million users and a conversion improvement of $0.001$ percentage points will come back with $p &lt; 0.001$ — real, reproducible, and completely worthless.</p>
+
+<p>So always report the <strong>effect size</strong> alongside. In raw units when they mean something (“4.10 euros more per order”), or standardised when they do not — Cohen’s $d = (\bar{x}<em>1 - \bar{x}_2)/s</em>{\text{pooled}}$, conventionally small at $0.2$, medium at $0.5$, large at $0.8$ <a class="citation" href="#Cohen1988">(Cohen, 1988)</a>. Better still, report the confidence interval, which carries the size and the uncertainty in one object.</p>
+
+<p>There is a matching trap in the other direction. A wide interval that includes zero does not mean “no effect” ; it means “we do not know”. Distinguishing <em>“the effect is somewhere between $-0.1$ and $+0.1$, so it is negligible”</em> from <em>“the effect is somewhere between $-8$ and $+9$, so we learned nothing”</em> is impossible from a p-value and immediate from an interval.</p>
+
+<h2 id="9-the-multiple-comparisons-trap">9. The multiple comparisons trap</h2>
+<p>Here is the mistake that quietly invalidates more analyses than any other. A test at $\alpha = 0.05$ raises a false alarm 5 % of the time <em>per test</em>. Run many tests and the alarms accumulate. If the tests are independent and nothing at all is going on,</p>
+
+\[\begin{equation} \mathbb{P}(\text{at least one false alarm}) = 1 - (1 - \alpha)^{m}. \label{eq:fwer} \end{equation}\]
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.95</span> <span class="o">**</span> <span class="n">m</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="c1"># 1 0.05   5 0.226   20 0.642   100 0.994
+</span></code></pre></div></div>
+
+<p><strong>Twenty comparisons and it is more likely than not that you will find something.</strong> Segment an A/B test by country, device, browser and hour and you have run dozens of tests without ever intending to — and the one “significant” cell you then report is the expected output of pure noise.</p>
+
+<p>The blunt fix is <strong>Bonferroni</strong> : test each hypothesis at $\alpha/m$ instead of $\alpha$, which keeps the overall false-alarm rate under $\alpha$. It is simple and provably safe, but conservative — with many tests it destroys your power. When you have hundreds or thousands of comparisons, the modern choice is to control the <strong>false discovery rate</strong> instead : rather than demanding <em>no</em> false alarms, accept that a controlled fraction (say 5 %) of your reported discoveries will be wrong. The Benjamini–Hochberg procedure <a class="citation" href="#Benjamini1995">(Benjamini &amp; Hochberg, 1995)</a> does this and is far more powerful.</p>
+
+<p>The subtler version of this trap needs no explicit tests at all. If you try a few outlier rules, a couple of transformations, and three ways of grouping, then report the analysis that “worked”, you have searched a large space of tests while performing only one — Gelman and Loken’s <em>garden of forking paths</em> <a class="citation" href="#Gelman2014">(Gelman &amp; Loken, 2014)</a>. The only real defence is to decide the analysis <strong>before</strong> seeing the outcome, and to label anything found afterwards as exploratory. This mechanism is a large part of why so much published research fails to replicate <a class="citation" href="#Ioannidis2005">(Ioannidis, 2005)</a>.</p>
+
+<h2 id="10-where-the-formulas-come-from--likelihood">10. Where the formulas come from : likelihood</h2>
+<p>So far every formula has been about means, because the CLT hands us means for free. But you will want intervals for medians, odds ratios, regression coefficients, model parameters. There is one principle underneath all of them.</p>
+
+<div class="definition">
+	Given data $x_1,\dots,x_n$ and a family of candidate distributions indexed by $\theta$, the <b>likelihood</b> is the probability of the data you actually saw, read as a function of $\theta$ :
+	$$ L(\theta) = \prod_{i=1}^{n} f(x_i \mid \theta), \qquad \ell(\theta) = \log L(\theta) = \sum_{i=1}^{n}\log f(x_i \mid \theta). $$
+	The <b>maximum likelihood estimator</b> $\hat\theta$ is the value making the observed data least surprising.
+</div>
+
+<p><em>In plain words : you saw what you saw. Among all the possible worlds, pick the one in which what you saw was most expected.</em> Applied to a normal population this returns the sample mean — so section 2 was a special case all along.</p>
+
+<p>Two results make this the general engine of the subject. First, there is a <strong>floor on precision</strong> : no unbiased recipe, however clever, can wobble less than a certain amount.</p>
+
+<div class="theorem" text="Cramér–Rao bound">
+	Define the <b>Fisher information</b> $I(\theta) = -\mathbb{E}\left[\frac{\partial^{2}}{\partial\theta^{2}}\log f(X\mid\theta)\right]$, a measure of how sharply the likelihood peaks. Then any unbiased estimator $\hat\theta$ built from $n$ independent observations satisfies
+	$$ \operatorname{Var}(\hat\theta) \;\ge\; \frac{1}{n\,I(\theta)} . $$
+</div>
+
+<p><em>In plain words : a flat likelihood means the data barely distinguishes nearby values of $\theta$, and no amount of cleverness can extract precision that is not in the data. Information sets a hard limit</em> <a class="citation" href="#Cramer1946">(Cramér, 1946)</a>.</p>
+
+<p>Second, the maximum likelihood estimator <strong>attains that floor</strong>, asymptotically, and is asymptotically normal :</p>
+
+\[\begin{equation} \sqrt{n}\,\big(\hat\theta - \theta\big) \;\xrightarrow{\;d\;}\; \mathcal{N}\!\left(0, \;\frac{1}{I(\theta)}\right). \label{eq:mle} \end{equation}\]
+
+<p>This is the licence for everything in Part II. It says that for <em>any</em> parameter estimated by maximum likelihood, with enough data, “estimate $\pm 1.96$ standard errors” is a valid 95 % interval — the same recipe, far beyond means.</p>
+
+<div class="note">
+	If you have read the <a href="/blog/machine-learning/softmax-cross-entropy">softmax and cross-entropy</a> post, you have already done maximum likelihood without the name. Minimising cross-entropy <i>is</i> maximising the log-likelihood of a categorical model, and <a href="/blog/machine-learning/gradient-descent">gradient descent</a> is simply how you climb $\ell(\theta)$ when no closed form exists. Training a classifier and fitting a statistical model are the same operation.
+</div>
+
+<h2 id="11-when-you-cannot-do-the-maths--the-bootstrap">11. When you cannot do the maths : the bootstrap</h2>
+<p>Sometimes there is no formula. What is the standard error of a <strong>median</strong>? Of the ratio of two correlations? Of the 90th percentile? Deriving these is hard or impossible — and since 1979 you have not needed to <a class="citation" href="#Efron1979">(Efron, 1979)</a>.</p>
+
+<p>The idea is almost impudent. You do not have the population, but you do have the best available picture of it : your sample. So <strong>treat the sample as the population and resample from it</strong>, with replacement, thousands of times. The spread of the statistic across those resamples estimates the spread it would have had across real repeat samples.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span><span class="p">,</span> <span class="n">statistics</span>
+
+<span class="k">def</span> <span class="nf">bootstrap_ci</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="n">statistics</span><span class="p">.</span><span class="n">median</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="s">"""A 95 % interval for any statistic, no algebra."""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">draws</span> <span class="o">=</span> <span class="p">(</span><span class="n">stat</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choices</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+    <span class="n">reps</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">draws</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">reps</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.025</span> <span class="o">*</span> <span class="n">B</span><span class="p">)],</span> <span class="n">reps</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.975</span> <span class="o">*</span> <span class="n">B</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<p>Four lines, and it works for essentially any statistic. It is not magic — it still needs independent observations, and it is unreliable for statistics that depend on the extreme tail (the maximum, for instance, since no resample can ever exceed the largest value you saw). But it converts an analytical problem into a computational one, and computation is cheap. The resamples are also completely independent of one another, which makes the bootstrap a textbook <a href="/blog/algorithmic/mapreduce">MapReduce</a> job when $B$ needs to be large.</p>
+
+<h2 id="12-the-assumptions-that-actually-break-things">12. The assumptions that actually break things</h2>
+<p>Formulas fail quietly. These are the ones that matter, in the order they cause damage.</p>
+
+<p><strong>Independence.</strong> This is the big one, and $\eqref{eq:var}$ shows why : the derivation of $\sigma^2/n$ used independence to add the variances. If your observations are correlated — repeated measurements on the same users, sensor readings over time, pupils within the same classroom — then the effective sample size is much smaller than $n$. Your standard errors come out too small, your intervals too narrow, your p-values too impressive. Nothing in the output warns you. Clustered or time-series data needs methods that model the dependence.</p>
+
+<p><strong>Finite variance.</strong> The CLT requires $\sigma^2 &lt; \infty$. Distributions with very heavy tails — some financial returns, city sizes, network traffic — can violate this or approach it so slowly that $n = 10{,}000$ is still not “enough”. A histogram and a look at the extreme values costs a minute and is worth it.</p>
+
+<p><strong>Representativeness, and why more data does not save you.</strong> Return to $\eqref{eq:mse}$ : $\operatorname{MSE} = \text{bias}^2 + \text{variance}$. Sample size only attacks the second term. If your sampling procedure is systematically skewed — you surveyed only the users who answered the phone, only the patients who came back, only the servers that did not crash — then collecting ten times the data shrinks the interval by a factor of three around the <em>wrong number</em>.</p>
+
+<div class="theorem" text="the most important sentence in this post">
+	Bias does not shrink with $n$. Variance does. A biased sample plus a lot of data does not give you the truth — it gives you a narrow, confident interval that does not contain it.
+</div>
+
+<p>That is the failure mode behind the famous polling disasters, and it is not fixable by any amount of arithmetic downstream. Go back and stir the pot.</p>
+
+<h2 id="13-a-checklist-for-the-future-you">13. A checklist for the future you</h2>
+<p>Reference material, in the order you will need it.</p>
+
+<p><strong>Before collecting anything.</strong></p>
+<ol>
+  <li>Write down the one question and the one number that answers it.</li>
+  <li>Decide the smallest effect that would actually change a decision. Not the smallest detectable — the smallest <em>useful</em>.</li>
+  <li>Run $\eqref{eq:power}$ with that effect to get the sample size. If the answer is unaffordable, say so now rather than running an underpowered study.</li>
+  <li>Write down the analysis you will perform, before any data exists.</li>
+</ol>
+
+<p><strong>When the data is in.</strong></p>
+<ol>
+  <li>Plot it first. Always. Distribution shape, outliers, and impossible values are visible in ten seconds and invisible in a summary table.</li>
+  <li>Check independence honestly. Ask what could make two observations resemble each other.</li>
+  <li>Report the estimate, the confidence interval, and $n$. The interval is the deliverable ; the p-value is at best a footnote.</li>
+</ol>
+
+<p><strong>When reading someone else’s.</strong></p>
+<ol>
+  <li>Was the effect size reported, or only significance ?</li>
+  <li>How many comparisons were actually made — including the ones not reported ?</li>
+  <li>Was the analysis chosen before or after seeing the outcome ?</li>
+  <li>For a null result : what was the power ? Without it, “no difference” means nothing.</li>
+  <li>Where did the sample come from, and who could not have ended up in it ?</li>
+</ol>
+
+<h2 id="14-conclusion">14. Conclusion</h2>
+<p>Strip away the vocabulary and this whole subject is one honest admission repeated in different registers : <strong>you saw a piece, not the whole, so anything you say must come with the size of your ignorance attached.</strong></p>
+
+<p>Estimation produces the guess. The standard error $\sigma/\sqrt{n}$ measures how much that guess wobbles, and its square root sets the price of every study ever run. The confidence interval reports the guess and the wobble together, and its 95 % is a promise about the <em>method</em>, never about the interval in your hand. The hypothesis test is the same interval read backwards, asking only whether one particular value survives — which is why the interval, carrying the effect and its uncertainty at once, is almost always the better thing to report. Underneath, maximum likelihood generalises the whole machinery beyond averages, and the bootstrap rescues you when the algebra runs out.</p>
+
+<p>And one thing sits outside all of it. Every formula here assumes you stirred the pot. No amount of data, no correction, no cleverer estimator repairs a sample that was never representative — it only makes you more confident about the wrong answer. That is the part worth remembering when everything else has faded.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Benjamini1995">Benjamini, Y., &amp; Hochberg, Y. (1995). Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing. <i>Journal of the Royal Statistical Society, Series B</i>, <i>57</i>(1), 289–300.</span>
+
+<div id="Benjamini1995-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Benjamini1995-bibtex" class="pre pre-scrollable collapse">@article{Benjamini1995,
+  author = {Benjamini, Yoav and Hochberg, Yosef},
+  title = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal = {Journal of the Royal Statistical Society, Series B},
+  volume = {57},
+  number = {1},
+  pages = {289--300},
+  year = {1995}
+}
+</pre>
+
+</div></li>
+<li><span id="Cohen1988">Cohen, J. (1988). <i>Statistical Power Analysis for the Behavioral Sciences</i> (2nd ed.). Lawrence Erlbaum Associates.</span>
+
+<div id="Cohen1988-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Cohen1988-bibtex" class="pre pre-scrollable collapse">@book{Cohen1988,
+  author = {Cohen, Jacob},
+  title = {Statistical Power Analysis for the Behavioral Sciences},
+  edition = {2nd},
+  year = {1988},
+  publisher = {Lawrence Erlbaum Associates}
+}
+</pre>
+
+</div></li>
+<li><span id="Cramer1946">Cramér, H. (1946). <i>Mathematical Methods of Statistics</i>. Princeton University Press.</span>
+
+<div id="Cramer1946-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Cramer1946-bibtex" class="pre pre-scrollable collapse">@book{Cramer1946,
+  author = {Cram{\'e}r, Harald},
+  title = {Mathematical Methods of Statistics},
+  year = {1946},
+  publisher = {Princeton University Press}
+}
+</pre>
+
+</div></li>
+<li><span id="Efron1979">Efron, B. (1979). Bootstrap Methods: Another Look at the Jackknife. <i>The Annals of Statistics</i>, <i>7</i>(1), 1–26.</span>
+
+<div id="Efron1979-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Efron1979-bibtex" class="pre pre-scrollable collapse">@article{Efron1979,
+  author = {Efron, Bradley},
+  title = {Bootstrap Methods: Another Look at the Jackknife},
+  journal = {The Annals of Statistics},
+  volume = {7},
+  number = {1},
+  pages = {1--26},
+  year = {1979}
+}
+</pre>
+
+</div></li>
+<li><span id="Fisher1925">Fisher, R. A. (1925). <i>Statistical Methods for Research Workers</i>. Oliver and Boyd.</span>
+
+<div id="Fisher1925-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Fisher1925-bibtex" class="pre pre-scrollable collapse">@book{Fisher1925,
+  author = {Fisher, Ronald A.},
+  title = {Statistical Methods for Research Workers},
+  year = {1925},
+  publisher = {Oliver and Boyd}
+}
+</pre>
+
+</div></li>
+<li><span id="Gelman2014">Gelman, A., &amp; Loken, E. (2014). The Statistical Crisis in Science. <i>American Scientist</i>, <i>102</i>(6), 460–465.</span>
+
+<div id="Gelman2014-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Gelman2014-bibtex" class="pre pre-scrollable collapse">@article{Gelman2014,
+  author = {Gelman, Andrew and Loken, Eric},
+  title = {The Statistical Crisis in Science},
+  journal = {American Scientist},
+  volume = {102},
+  number = {6},
+  pages = {460--465},
+  year = {2014}
+}
+</pre>
+
+</div></li>
+<li><span id="Ioannidis2005">Ioannidis, J. P. A. (2005). Why Most Published Research Findings Are False. <i>PLoS Medicine</i>, <i>2</i>(8), e124.</span>
+
+<div id="Ioannidis2005-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Ioannidis2005-bibtex" class="pre pre-scrollable collapse">@article{Ioannidis2005,
+  author = {Ioannidis, John P. A.},
+  title = {Why Most Published Research Findings Are False},
+  journal = {PLoS Medicine},
+  volume = {2},
+  number = {8},
+  pages = {e124},
+  year = {2005}
+}
+</pre>
+
+</div></li>
+<li><span id="Neyman1937">Neyman, J. (1937). Outline of a Theory of Statistical Estimation Based on the Classical Theory of Probability. <i>Philosophical Transactions of the Royal Society A</i>, <i>236</i>(767), 333–380.</span>
+
+<div id="Neyman1937-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Neyman1937-bibtex" class="pre pre-scrollable collapse">@article{Neyman1937,
+  author = {Neyman, Jerzy},
+  title = {Outline of a Theory of Statistical Estimation Based on the Classical Theory of Probability},
+  journal = {Philosophical Transactions of the Royal Society A},
+  volume = {236},
+  number = {767},
+  pages = {333--380},
+  year = {1937}
+}
+</pre>
+
+</div></li>
+<li><span id="NeymanPearson1933">Neyman, J., &amp; Pearson, E. S. (1933). On the Problem of the Most Efficient Tests of Statistical Hypotheses. <i>Philosophical Transactions of the Royal Society A</i>, <i>231</i>, 289–337.</span>
+
+<div id="NeymanPearson1933-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="NeymanPearson1933-bibtex" class="pre pre-scrollable collapse">@article{NeymanPearson1933,
+  author = {Neyman, Jerzy and Pearson, Egon S.},
+  title = {On the Problem of the Most Efficient Tests of Statistical Hypotheses},
+  journal = {Philosophical Transactions of the Royal Society A},
+  volume = {231},
+  pages = {289--337},
+  year = {1933}
+}
+</pre>
+
+</div></li>
+<li><span id="Wasserstein2016">Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA Statement on p-Values: Context, Process, and Purpose. <i>The American Statistician</i>, <i>70</i>(2), 129–133.</span>
+
+<div id="Wasserstein2016-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Wasserstein2016-bibtex" class="pre pre-scrollable collapse">@article{Wasserstein2016,
+  author = {Wasserstein, Ronald L. and Lazar, Nicole A.},
+  title = {The ASA Statement on p-Values: Context, Process, and Purpose},
+  journal = {The American Statistician},
+  volume = {70},
+  number = {2},
+  pages = {129--133},
+  year = {2016}
+}
+</pre>
+
+</div></li>
+<li><span id="Student1908">Student. (1908). The Probable Error of a Mean. <i>Biometrika</i>, <i>6</i>(1), 1–25.</span>
+
+<div id="Student1908-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Student1908-bibtex" class="pre pre-scrollable collapse">@article{Student1908,
+  author = {{Student}},
+  title = {The Probable Error of a Mean},
+  journal = {Biometrika},
+  volume = {6},
+  number = {1},
+  pages = {1--25},
+  year = {1908}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The threshold $\alpha = 0.05$ has no mathematical standing whatsoever. Fisher suggested it as a convenience — “it is convenient to take this point as a limit in judging whether a deviation is to be considered significant or not” — and a convention hardened around it. Fields with more at stake pick their own : particle physics requires roughly $5\sigma$, about $p &lt; 3 \times 10^{-7}$, precisely because it runs an enormous number of comparisons. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>
