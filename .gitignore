@@ -7,3 +7,5 @@ _includes/toc.html
 _posts/.DS_Store
 assets/.DS_Store
 assets/world_map.png
+.jekyll-cache
+_drafts

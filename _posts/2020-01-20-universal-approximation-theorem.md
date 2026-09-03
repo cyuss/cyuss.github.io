@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The Universal Approximation Theorem
-date: 2021-04-16 12:00
+date: 2020-01-20 12:00
 comments: true
 external-url:
 categories: Mathematics
@@ -30,6 +30,8 @@ $$ \begin{equation} G(x) = \sum_{j=1}^{N} \alpha_{j} \, \sigma(w_{j}^{T} x + b_{
 where $\alpha_{j}, b_{j} \in \Bbb{R}$ and $w_{j} \in \Bbb{R}^{n}$. The set of all functions of the form $\eqref{eq:network}$, for every possible width $N$ and every choice of parameters, is exactly the class of functions that a shallow network can *represent*.
 
 The question is then very natural. Given a target function $ƒ$ that we would like the network to compute, and a tolerance $\varepsilon > 0$, does there always exist a choice of parameters such that $G$ is $\varepsilon$-close to $ƒ$ everywhere ? The Universal Approximation Theorem says **yes**, provided $ƒ$ is continuous, the domain is compact, and $\sigma$ is chosen sensibly. What is striking is that a *single* hidden layer already suffices ; depth is not required for representability.
+
+*In plain words : think of each neuron as a little adjustable "bump" or "step". Give yourself enough bumps of the right height, width and position, and you can trace the outline of any smooth curve, the way a row of dimmer switches can approximate any lighting pattern. The theorem promises that this always works ; it does not promise the bumps are easy to find.*
 
 <div class="definition">
 	A function $\sigma : \Bbb{R} \rightarrow \Bbb{R}$ is said to be <b>sigmoidal</b> if it is bounded and satisfies
@@ -113,7 +115,7 @@ The Universal Approximation Theorem is often invoked as a slogan (*"neural netwo
 
 - **It says nothing about generalisation.** Approximating $ƒ$ well on the training domain is not the same as behaving well on unseen data. The theorem lives in the world of *approximation*, not *statistical estimation*.
 
-This is precisely the tension that motivates <a href="https://en.wikipedia.org/wiki/Deep_learning">deep</a> networks. Depth does not extend *what* can be represented, that battle was already won by a single layer, but it can drastically reduce *how many* neurons are needed. Certain functions expressible by a deep network of modest size provably require an exponentially wider shallow network to match. Universality tells us the destination exists ; depth is about getting there efficiently.
+This is precisely the tension that motivates <a href="https://en.wikipedia.org/wiki/Deep_learning">deep</a> networks. Depth does not extend *what* can be represented, that battle was already won by a single layer, but it can drastically reduce *how many* neurons are needed. Certain functions expressible by a deep network of modest size provably require an exponentially wider shallow network to match. Universality tells us the destination exists ; depth is about getting there efficiently. The modern [Transformer]({{ site.baseurl }}/blog/machine-learning/transformers) is the spectacular payoff of this idea : a very deep stack whose feed-forward layers are exactly these universal approximators, wired together with [attention]({{ site.baseurl }}/blog/machine-learning/attention-mechanism).
 
 ##1. A historical cousin
 It would be unfair to close without mentioning that the idea predates neural networks. In 1957, answering a version of Hilbert's thirteenth problem, Kolmogorov {% cite Kolmogorov1957 %} proved that *every* continuous function of several variables can be written as a superposition of continuous functions of a **single** variable and addition,

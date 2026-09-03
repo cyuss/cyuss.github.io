@@ -2,12 +2,11 @@
 title: "Oh My Kode"
 author: "Maâmra Youcef"
 description: "<b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why."
-#</br>The choice of the programming language and the code itself are important, but the idea that defines our thinking is at the heart of our work. <br/>A programming language is a tool that allows us to concretize our ideas. Writing is the unique way used to explain and describe our ideas in detail and in a formal way."
-# Everyday, we wake up and try to learn something new. Each of us has his or her own way of doing it: going to work, going to school, reading books... Learning is the best thing a person can accomplish. Sharing and communicating our experiences help us structure our ideas and what we have already learned.
 
 keywords: "Software Engineering, Mathematics, Python, Programming, Machine Learning, Data Science, Artificial Intelligence, Statistics, Probability, Emacs, Org-mode"
-biography: "An ordinary developer looking to share and learn about Mathematics and Algorithms. Working in Machine Learning and Natural Language Processing. I like coding with Python and <a href='https://www.gnu.org/software/emacs/'>Emacs</a>."
-colophon: "© MMXVIII by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> 
+biography: "Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self."
+
+colophon: "© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> 
 <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> 
 <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/>"
 # <a class='fa fa-twitter' href='https://twitter.com/{{site.twitter_username}}' title='Twitter'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/{{site.linkedin_username}}' title='LinkedIn'></a>
@@ -24,6 +23,8 @@ markdown: kramdown
 highlighter: rouge
 #permalink: /blog/:year/:month/:day/:title/
 permalink: /blog/:categories/:title/
+
+email: maamra.youcef@gmail.com
 
 social:
   name: Maamra Youcef
