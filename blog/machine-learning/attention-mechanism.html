@@ -161,33 +161,33 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 300" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .word { font-size:15px; fill:#2b2b2b; } .q { font-style:italic; fill:#b5651d; }
-    .bar  { fill:#4a6da7; transform-box:fill-box; transform-origin:bottom;
+    .g1-word { font-size:15px; fill:#2b2b2b; } .g1-q { font-style:italic; fill:#b5651d; }
+    .g1-bar  { fill:#4a6da7; transform-box:fill-box; transform-origin:bottom;
             animation:grow 4s ease-in-out infinite; }
     @keyframes grow { 0%{transform:scaleY(0)} 25%{transform:scaleY(1)} 85%{transform:scaleY(1)} 100%{transform:scaleY(0)} }
-    .cap { font-size:12px; fill:#7a7a7a; }
-    .spot{ fill:#b5651d; opacity:.12; animation:sweep 4s ease-in-out infinite; }
+    .g1-cap { font-size:12px; fill:#7a7a7a; }
+    .g1-spot{ fill:#b5651d; opacity:.12; animation:sweep 4s ease-in-out infinite; }
     @keyframes sweep { 0%{opacity:0} 30%{opacity:.16} 100%{opacity:.16} }
-    .pct { font-size:10.5px; fill:#4a6da7; }
+    .g1-pct { font-size:10.5px; fill:#4a6da7; }
   </style>
-  <text class="word q" x="320" y="30" text-anchor="middle">query : "it"  →  who / what ?</text>
+  <text class="g1-word g1-q" x="320" y="30" text-anchor="middle">query : "it"  →  who / what ?</text>
   <!-- 7 words, bars proportional to attention weight -->
   <!-- x positions -->
   <!-- The:0.03 cat:0.55 sat:0.10 because:0.05 it:0.02 was:0.05 tired:0.20 -->
   <!-- baseline y=230; max bar height 150 -->
   <!-- cat spotlight -->
-  <rect class="spot" x="112" y="70" width="70" height="200" rx="6" />
+  <rect class="g1-spot" x="112" y="70" width="70" height="200" rx="6" />
   <g text-anchor="middle">
-    <rect class="bar" x="36" y="225" width="30" height="5" style="animation-delay:.0s" /><text class="word" x="51" y="252">The</text>   <text class="pct" x="51" y="266">3%</text>
-    <rect class="bar" x="118" y="80" width="58" height="150" style="animation-delay:.1s" /><text class="word" x="147" y="252">cat</text>   <text class="pct" x="147" y="266">55%</text>
-    <rect class="bar" x="196" y="200" width="30" height="30" style="animation-delay:.2s" /><text class="word" x="211" y="252">sat</text>   <text class="pct" x="211" y="266">10%</text>
-    <rect class="bar" x="262" y="215" width="46" height="15" style="animation-delay:.3s" /><text class="word" x="285" y="252">because</text><text class="pct" x="285" y="266">5%</text>
-    <rect class="bar" x="336" y="222" width="24" height="8" style="animation-delay:.4s" /><text class="word q" x="348" y="252">it</text>    <text class="pct" x="348" y="266">2%</text>
-    <rect class="bar" x="382" y="215" width="34" height="15" style="animation-delay:.5s" /><text class="word" x="399" y="252">was</text>   <text class="pct" x="399" y="266">5%</text>
-    <rect class="bar" x="438" y="170" width="46" height="60" style="animation-delay:.6s" /><text class="word" x="461" y="252">tired</text> <text class="pct" x="461" y="266">20%</text>
+    <rect class="g1-bar" x="36" y="225" width="30" height="5" style="animation-delay:.0s" /><text class="g1-word" x="51" y="252">The</text>   <text class="g1-pct" x="51" y="266">3%</text>
+    <rect class="g1-bar" x="118" y="80" width="58" height="150" style="animation-delay:.1s" /><text class="g1-word" x="147" y="252">cat</text>   <text class="g1-pct" x="147" y="266">55%</text>
+    <rect class="g1-bar" x="196" y="200" width="30" height="30" style="animation-delay:.2s" /><text class="g1-word" x="211" y="252">sat</text>   <text class="g1-pct" x="211" y="266">10%</text>
+    <rect class="g1-bar" x="262" y="215" width="46" height="15" style="animation-delay:.3s" /><text class="g1-word" x="285" y="252">because</text><text class="g1-pct" x="285" y="266">5%</text>
+    <rect class="g1-bar" x="336" y="222" width="24" height="8" style="animation-delay:.4s" /><text class="g1-word g1-q" x="348" y="252">it</text>    <text class="g1-pct" x="348" y="266">2%</text>
+    <rect class="g1-bar" x="382" y="215" width="34" height="15" style="animation-delay:.5s" /><text class="g1-word" x="399" y="252">was</text>   <text class="g1-pct" x="399" y="266">5%</text>
+    <rect class="g1-bar" x="438" y="170" width="46" height="60" style="animation-delay:.6s" /><text class="g1-word" x="461" y="252">tired</text> <text class="g1-pct" x="461" y="266">20%</text>
   </g>
   <line x1="24" y1="230" x2="500" y2="230" stroke="#ccc" stroke-width="1" />
-  <text class="cap" x="320" y="290" text-anchor="middle">attention weights αⱼ (they sum to 100%) — "it" attends mostly to "cat"</text>
+  <text class="g1-cap" x="320" y="290" text-anchor="middle">attention weights αⱼ (they sum to 100%) — "it" attends mostly to "cat"</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Attention from the word <i>"it"</i>. Each bar is the learned weight $\alpha_j$ from $\eqref{eq:softmax}$. The output for <i>"it"</i> becomes mostly the <i>value</i> of <i>"cat"</i>, so the model now "knows" what <i>it</i> refers to.</figcaption>
 </center></figure>
@@ -211,34 +211,34 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .box { rx:8; stroke-width:1.6; } 
-    .bq{ fill:#f6f7fb; stroke:#4a6da7; } .bk{ fill:#f6f7fb; stroke:#4a6da7; }
-    .bv{ fill:#f3faf4; stroke:#5aa06a; } .bs{ fill:#faf6f2; stroke:#b5651d; }
-    .bo{ fill:#fff; stroke:#2b2b2b; }
-    .t { font-size:14px; fill:#2b2b2b; text-anchor:middle; } .op{ font-size:20px; fill:#7a7a7a; text-anchor:middle; }
-    .sm{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
-    .arrow{ stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:5 6; animation:aflow 1.8s linear infinite; }
+    .g2-box { rx:8; stroke-width:1.6; } 
+    .g2-bq{ fill:#f6f7fb; stroke:#4a6da7; } .g2-bk{ fill:#f6f7fb; stroke:#4a6da7; }
+    .g2-bv{ fill:#f3faf4; stroke:#5aa06a; } .g2-bs{ fill:#faf6f2; stroke:#b5651d; }
+    .g2-bo{ fill:#fff; stroke:#2b2b2b; }
+    .g2-t { font-size:14px; fill:#2b2b2b; text-anchor:middle; } .g2-op{ font-size:20px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-sm{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-arrow{ stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:5 6; animation:aflow 1.8s linear infinite; }
     @keyframes aflow { to { stroke-dashoffset:-44; } }
   </style>
   <!-- Q x K^T -->
-  <rect class="box bq" x="20" y="60" width="60" height="60" /><text class="t" x="50" y="96">Q</text>
-  <text class="op" x="95" y="96">×</text>
-  <rect class="box bk" x="110" y="60" width="60" height="60" /><text class="t" x="140" y="96">Kᵀ</text>
-  <path class="arrow" d="M175,90 L215,90" />
+  <rect class="g2-box g2-bq" x="20" y="60" width="60" height="60" /><text class="g2-t" x="50" y="96">Q</text>
+  <text class="g2-op" x="95" y="96">×</text>
+  <rect class="g2-box g2-bk" x="110" y="60" width="60" height="60" /><text class="g2-t" x="140" y="96">Kᵀ</text>
+  <path class="g2-arrow" d="M175,90 L215,90" />
   <!-- scores -->
-  <rect class="box bs" x="220" y="55" width="70" height="70" /><text class="t" x="255" y="88">QKᵀ</text><text class="sm" x="255" y="104">/ √dₖ</text>
-  <path class="arrow" d="M295,90 L335,90" />
+  <rect class="g2-box g2-bs" x="220" y="55" width="70" height="70" /><text class="g2-t" x="255" y="88">QKᵀ</text><text class="g2-sm" x="255" y="104">/ √dₖ</text>
+  <path class="g2-arrow" d="M295,90 L335,90" />
   <!-- softmax -->
-  <rect class="box bs" x="340" y="55" width="90" height="70" /><text class="t" x="385" y="95">softmax</text>
-  <text class="sm" x="385" y="145">attention weights A</text>
-  <path class="arrow" d="M435,90 L475,90" />
-  <text class="op" x="497" y="96">×</text>
+  <rect class="g2-box g2-bs" x="340" y="55" width="90" height="70" /><text class="g2-t" x="385" y="95">softmax</text>
+  <text class="g2-sm" x="385" y="145">attention weights A</text>
+  <path class="g2-arrow" d="M435,90 L475,90" />
+  <text class="g2-op" x="497" y="96">×</text>
   <!-- V -->
-  <rect class="box bv" x="515" y="60" width="55" height="60" /><text class="t" x="542" y="96">V</text>
+  <rect class="g2-box g2-bv" x="515" y="60" width="55" height="60" /><text class="g2-t" x="542" y="96">V</text>
   <!-- output -->
-  <path class="arrow" d="M542,125 L542,165" />
-  <rect class="box bo" x="500" y="170" width="85" height="55" /><text class="t" x="542" y="203">output</text>
-  <text class="sm" x="300" y="185">scores → weights (each row sums to 1)</text>
+  <path class="g2-arrow" d="M542,125 L542,165" />
+  <rect class="g2-box g2-bo" x="500" y="170" width="85" height="55" /><text class="g2-t" x="542" y="203">output</text>
+  <text class="g2-sm" x="300" y="185">scores → weights (each row sums to 1)</text>
 </svg>
 <figcaption><b>Figure 2 -</b> The pipeline of scaled dot-product attention. Scores are computed ($QK^{\top}$), scaled, softmaxed into a weight table $A$, and used to average the values $V$.</figcaption>
 </center></figure>
@@ -253,60 +253,60 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 300" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .hl { font-size:12.5px; fill:#2b2b2b; }
-    .cellh { stroke:#fff; stroke-width:2; }
-    .rowscan { fill:#b5651d; opacity:0; animation:rowsweep 5s steps(1) infinite; }
+    .g3-hl { font-size:12.5px; fill:#2b2b2b; }
+    .g3-cellh { stroke:#fff; stroke-width:2; }
+    .g3-rowscan { fill:#b5651d; opacity:0; animation:rowsweep 5s steps(1) infinite; }
     @keyframes rowsweep { 0%,100%{opacity:0} }
-    .lab{ font-size:11px; fill:#7a7a7a; }
+    .g3-lab{ font-size:11px; fill:#7a7a7a; }
   </style>
   <!-- 5 words -->
   <!-- labels top (keys) and left (queries) -->
-  <text class="lab" x="330" y="24" text-anchor="middle">keys  (looked at)  →</text>
-  <text class="lab" x="20" y="160" text-anchor="middle" transform="rotate(-90 20 160)">queries  (doing the looking)  →</text>
-  <g class="hl" text-anchor="middle">
+  <text class="g3-lab" x="330" y="24" text-anchor="middle">keys  (looked at)  →</text>
+  <text class="g3-lab" x="20" y="160" text-anchor="middle" transform="rotate(-90 20 160)">queries  (doing the looking)  →</text>
+  <g class="g3-hl" text-anchor="middle">
     <text x="120" y="52">The</text><text x="190" y="52">cat</text><text x="260" y="52">sat</text><text x="330" y="52">on</text><text x="400" y="52">mat</text>
   </g>
-  <g class="hl" text-anchor="end">
+  <g class="g3-hl" text-anchor="end">
     <text x="86" y="90">The</text><text x="86" y="140">cat</text><text x="86" y="190">sat</text><text x="86" y="240">on</text><text x="86" y="290">mat</text>
   </g>
   <!-- heat cells: opacity encodes weight. rows sum ~1 -->
   <g transform="translate(95,64)">
     <!-- row The -->
-    <rect class="cellh" x="0" y="0" width="50" height="40" fill="#4a6da7" opacity="0.75" />
-    <rect class="cellh" x="70" y="0" width="50" height="40" fill="#4a6da7" opacity="0.10" />
-    <rect class="cellh" x="140" y="0" width="50" height="40" fill="#4a6da7" opacity="0.06" />
-    <rect class="cellh" x="210" y="0" width="50" height="40" fill="#4a6da7" opacity="0.05" />
-    <rect class="cellh" x="280" y="0" width="50" height="40" fill="#4a6da7" opacity="0.04" />
+    <rect class="g3-cellh" x="0" y="0" width="50" height="40" fill="#4a6da7" opacity="0.75" />
+    <rect class="g3-cellh" x="70" y="0" width="50" height="40" fill="#4a6da7" opacity="0.10" />
+    <rect class="g3-cellh" x="140" y="0" width="50" height="40" fill="#4a6da7" opacity="0.06" />
+    <rect class="g3-cellh" x="210" y="0" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="g3-cellh" x="280" y="0" width="50" height="40" fill="#4a6da7" opacity="0.04" />
     <!-- row cat -->
-    <rect class="cellh" x="0" y="50" width="50" height="40" fill="#4a6da7" opacity="0.08" />
-    <rect class="cellh" x="70" y="50" width="50" height="40" fill="#4a6da7" opacity="0.62" />
-    <rect class="cellh" x="140" y="50" width="50" height="40" fill="#4a6da7" opacity="0.20" />
-    <rect class="cellh" x="210" y="50" width="50" height="40" fill="#4a6da7" opacity="0.05" />
-    <rect class="cellh" x="280" y="50" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="g3-cellh" x="0" y="50" width="50" height="40" fill="#4a6da7" opacity="0.08" />
+    <rect class="g3-cellh" x="70" y="50" width="50" height="40" fill="#4a6da7" opacity="0.62" />
+    <rect class="g3-cellh" x="140" y="50" width="50" height="40" fill="#4a6da7" opacity="0.20" />
+    <rect class="g3-cellh" x="210" y="50" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="g3-cellh" x="280" y="50" width="50" height="40" fill="#4a6da7" opacity="0.05" />
     <!-- row sat -->
-    <rect class="cellh" x="0" y="100" width="50" height="40" fill="#4a6da7" opacity="0.06" />
-    <rect class="cellh" x="70" y="100" width="50" height="40" fill="#4a6da7" opacity="0.30" />
-    <rect class="cellh" x="140" y="100" width="50" height="40" fill="#4a6da7" opacity="0.44" />
-    <rect class="cellh" x="210" y="100" width="50" height="40" fill="#4a6da7" opacity="0.12" />
-    <rect class="cellh" x="280" y="100" width="50" height="40" fill="#4a6da7" opacity="0.08" />
+    <rect class="g3-cellh" x="0" y="100" width="50" height="40" fill="#4a6da7" opacity="0.06" />
+    <rect class="g3-cellh" x="70" y="100" width="50" height="40" fill="#4a6da7" opacity="0.30" />
+    <rect class="g3-cellh" x="140" y="100" width="50" height="40" fill="#4a6da7" opacity="0.44" />
+    <rect class="g3-cellh" x="210" y="100" width="50" height="40" fill="#4a6da7" opacity="0.12" />
+    <rect class="g3-cellh" x="280" y="100" width="50" height="40" fill="#4a6da7" opacity="0.08" />
     <!-- row on -->
-    <rect class="cellh" x="0" y="150" width="50" height="40" fill="#4a6da7" opacity="0.05" />
-    <rect class="cellh" x="70" y="150" width="50" height="40" fill="#4a6da7" opacity="0.08" />
-    <rect class="cellh" x="140" y="150" width="50" height="40" fill="#4a6da7" opacity="0.22" />
-    <rect class="cellh" x="210" y="150" width="50" height="40" fill="#4a6da7" opacity="0.45" />
-    <rect class="cellh" x="280" y="150" width="50" height="40" fill="#4a6da7" opacity="0.20" />
+    <rect class="g3-cellh" x="0" y="150" width="50" height="40" fill="#4a6da7" opacity="0.05" />
+    <rect class="g3-cellh" x="70" y="150" width="50" height="40" fill="#4a6da7" opacity="0.08" />
+    <rect class="g3-cellh" x="140" y="150" width="50" height="40" fill="#4a6da7" opacity="0.22" />
+    <rect class="g3-cellh" x="210" y="150" width="50" height="40" fill="#4a6da7" opacity="0.45" />
+    <rect class="g3-cellh" x="280" y="150" width="50" height="40" fill="#4a6da7" opacity="0.20" />
     <!-- row mat -->
-    <rect class="cellh" x="0" y="200" width="50" height="40" fill="#4a6da7" opacity="0.04" />
-    <rect class="cellh" x="70" y="200" width="50" height="40" fill="#4a6da7" opacity="0.18" />
-    <rect class="cellh" x="140" y="200" width="50" height="40" fill="#4a6da7" opacity="0.10" />
-    <rect class="cellh" x="210" y="200" width="50" height="40" fill="#4a6da7" opacity="0.20" />
-    <rect class="cellh" x="280" y="200" width="50" height="40" fill="#4a6da7" opacity="0.48" />
+    <rect class="g3-cellh" x="0" y="200" width="50" height="40" fill="#4a6da7" opacity="0.04" />
+    <rect class="g3-cellh" x="70" y="200" width="50" height="40" fill="#4a6da7" opacity="0.18" />
+    <rect class="g3-cellh" x="140" y="200" width="50" height="40" fill="#4a6da7" opacity="0.10" />
+    <rect class="g3-cellh" x="210" y="200" width="50" height="40" fill="#4a6da7" opacity="0.20" />
+    <rect class="g3-cellh" x="280" y="200" width="50" height="40" fill="#4a6da7" opacity="0.48" />
     <!-- animated highlight sweeping down the rows -->
     <rect x="-4" y="-4" width="338" height="48" fill="none" stroke="#b5651d" stroke-width="2.4" rx="3">
       <animate attributeName="y" values="-4;46;96;146;196;-4" dur="5s" repeatCount="indefinite" />
     </rect>
   </g>
-  <text class="lab" x="330" y="288" text-anchor="middle">darker = more attention · the moving box scans one query (row) at a time</text>
+  <text class="g3-lab" x="330" y="288" text-anchor="middle">darker = more attention · the moving box scans one query (row) at a time</text>
 </svg>
 <figcaption><b>Figure 3 -</b> A self-attention heatmap for <i>"The cat sat on mat"</i>. Each row is one word's attention distribution over all words. Notice the diagonal (words attend to themselves) plus meaningful off-diagonal links like <i>sat</i>→<i>cat</i>.</figcaption>
 </center></figure>

@@ -130,17 +130,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .tgt{ fill:none; stroke:#c9cdd6; stroke-width:2.4; stroke-dasharray:5 5; }
-    .pred{ fill:none; stroke:#7a5c9e; stroke-width:2.8; stroke-linejoin:round; }
-    .ax{ stroke:#e2e2e2; stroke-width:1; }
-    .cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g1-tgt{ fill:none; stroke:#c9cdd6; stroke-width:2.4; stroke-dasharray:5 5; }
+    .g1-pred{ fill:none; stroke:#7a5c9e; stroke-width:2.8; stroke-linejoin:round; }
+    .g1-ax{ stroke:#e2e2e2; stroke-width:1; }
+    .g1-cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
   </style>
-  <line class="ax" x1="60" y1="215" x2="600" y2="215" />
-  <path class="tgt" d="M60,116 L95,93 L130,103 L165,108 L200,96 L235,99 L270,147 L305,194 L327,202 L351,187 L384,153 L419,134 L451,134 L478,127 L510,97 L540,71 L556,69 L589,99 L600,115" />
-  <path class="pred" d="M60.0,98.9 L127.5,98.9 L127.5,105.8 L195.0,105.8 L195.0,104.8 L262.5,104.8 L262.5,178.6 L330.0,178.6 L330.0,173.6 L397.5,173.6 L397.5,135.0 L465.0,135.0 L465.0,107.6 L532.5,107.6 L532.5,81.5 L600.0,81.5">
+  <line class="g1-ax" x1="60" y1="215" x2="600" y2="215" />
+  <path class="g1-tgt" d="M60,116 L95,93 L130,103 L165,108 L200,96 L235,99 L270,147 L305,194 L327,202 L351,187 L384,153 L419,134 L451,134 L478,127 L510,97 L540,71 L556,69 L589,99 L600,115" />
+  <path class="g1-pred" d="M60.0,98.9 L127.5,98.9 L127.5,105.8 L195.0,105.8 L195.0,104.8 L262.5,104.8 L262.5,178.6 L330.0,178.6 L330.0,173.6 L397.5,173.6 L397.5,135.0 L465.0,135.0 L465.0,107.6 L532.5,107.6 L532.5,81.5 L600.0,81.5">
     <animate attributeName="d" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="M60.0,123.1 L60.0,123.1 L600.0,123.1;M60.0,123.2 L60.0,123.2 L330.0,123.2 L330.0,125.5 L600.0,125.5;M60.0,102.4 L60.0,102.4 L195.0,102.4 L195.0,142.0 L330.0,142.0 L330.0,154.7 L465.0,154.7 L465.0,95.4 L600.0,95.4;M60.0,98.9 L60.0,98.9 L127.5,98.9 L127.5,105.8 L195.0,105.8 L195.0,104.8 L262.5,104.8 L262.5,178.6 L330.0,178.6 L330.0,173.6 L397.5,173.6 L397.5,135.0 L465.0,135.0 L465.0,107.6 L532.5,107.6 L532.5,81.5 L600.0,81.5" />
   </path>
-  <text class="cap" x="330" y="238">grey = truth · purple = ensemble prediction as trees are added (1 → 2 → 4 → 8)</text>
+  <text class="g1-cap" x="330" y="238">grey = truth · purple = ensemble prediction as trees are added (1 → 2 → 4 → 8)</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Boosting in action. With one tree the prediction is a crude flat guess ; each added tree carves the input into finer regions to fix the remaining error, and the staircase closes in on the target function.</figcaption>
 </center></figure>
@@ -178,24 +178,24 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 250" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .nd{ fill:#f1ecf7; stroke:#7a5c9e; stroke-width:1.6; }
-    .leaf{ fill:#eef7ef; stroke:#5aa06a; stroke-width:1.6; }
-    .br{ stroke:#b9a7d4; stroke-width:2; fill:none; }
-    .q{ font-size:13px; fill:#2b2b2b; text-anchor:middle; } .e{ font-size:11px; fill:#7a7a7a; }
-    .w{ font-size:12px; fill:#4e8f5e; text-anchor:middle; font-weight:bold; }
-    .pulse{ animation:pl 2.5s ease-in-out infinite; } @keyframes pl { 0%,100%{opacity:.85} 50%{opacity:1} }
+    .g2-nd{ fill:#f1ecf7; stroke:#7a5c9e; stroke-width:1.6; }
+    .g2-leaf{ fill:#eef7ef; stroke:#5aa06a; stroke-width:1.6; }
+    .g2-br{ stroke:#b9a7d4; stroke-width:2; fill:none; }
+    .g2-q{ font-size:13px; fill:#2b2b2b; text-anchor:middle; } .g2-e{ font-size:11px; fill:#7a7a7a; }
+    .g2-w{ font-size:12px; fill:#4e8f5e; text-anchor:middle; font-weight:bold; }
+    .g2-pulse{ animation:pl 2.5s ease-in-out infinite; } @keyframes pl { 0%,100%{opacity:.85} 50%{opacity:1} }
   </style>
-  <path class="br" d="M320,60 L180,120" /><path class="br" d="M320,60 L460,120" />
-  <path class="br" d="M180,145 L110,195" /><path class="br" d="M180,145 L250,195" />
-  <text class="e" x="238" y="88">yes</text><text class="e" x="405" y="88">no</text>
-  <text class="e" x="128" y="178">yes</text><text class="e" x="223" y="178">no</text>
-  <rect class="nd pulse" x="252" y="32" width="136" height="42" rx="8" /><text class="q" x="320" y="58">age &lt; 30 ?</text>
-  <rect class="nd" x="120" y="120" width="120" height="40" rx="8" /><text class="q" x="180" y="145" font-size="12">income &lt; 40k ?</text>
-  <rect class="leaf" x="410" y="122" width="100" height="40" rx="8" /><text class="q" x="460" y="141" font-size="12">leaf</text><text class="w" x="460" y="155">w = +0.7</text>
-  <rect class="leaf" x="60" y="196" width="100" height="40" rx="8" /><text class="w" x="110" y="221">w = −0.4</text>
-  <rect class="leaf" x="200" y="196" width="100" height="40" rx="8" /><text class="w" x="250" y="221">w = +0.2</text>
-  <text class="e" x="540" y="205" text-anchor="end">each leaf outputs a small</text>
-  <text class="e" x="540" y="221" text-anchor="end">correction wⱼ from eq. (3)</text>
+  <path class="g2-br" d="M320,60 L180,120" /><path class="g2-br" d="M320,60 L460,120" />
+  <path class="g2-br" d="M180,145 L110,195" /><path class="g2-br" d="M180,145 L250,195" />
+  <text class="g2-e" x="238" y="88">yes</text><text class="g2-e" x="405" y="88">no</text>
+  <text class="g2-e" x="128" y="178">yes</text><text class="g2-e" x="223" y="178">no</text>
+  <rect class="g2-nd g2-pulse" x="252" y="32" width="136" height="42" rx="8" /><text class="g2-q" x="320" y="58">age &lt; 30 ?</text>
+  <rect class="g2-nd" x="120" y="120" width="120" height="40" rx="8" /><text class="g2-q" x="180" y="145" font-size="12">income &lt; 40k ?</text>
+  <rect class="g2-leaf" x="410" y="122" width="100" height="40" rx="8" /><text class="g2-q" x="460" y="141" font-size="12">leaf</text><text class="g2-w" x="460" y="155">w = +0.7</text>
+  <rect class="g2-leaf" x="60" y="196" width="100" height="40" rx="8" /><text class="g2-w" x="110" y="221">w = −0.4</text>
+  <rect class="g2-leaf" x="200" y="196" width="100" height="40" rx="8" /><text class="g2-w" x="250" y="221">w = +0.2</text>
+  <text class="g2-e" x="540" y="205" text-anchor="end">each leaf outputs a small</text>
+  <text class="g2-e" x="540" y="221" text-anchor="end">correction wⱼ from eq. (3)</text>
 </svg>
 <figcaption><b>Figure 2 -</b> One weak learner : a shallow tree. It routes an example through yes/no questions to a leaf, whose value $w_j$ (chosen by $\eqref{eq:leaf}$) is the correction this tree contributes. XGBoost adds hundreds of such trees, each scaled by a small <b>learning rate</b> $\eta$ (shrinkage) so no single tree dominates.</figcaption>
 </center></figure>

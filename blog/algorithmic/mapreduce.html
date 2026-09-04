@@ -153,55 +153,55 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 680 340" width="100%" style="max-width:640px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .col { font-size:11px; fill:#7a7a7a; text-anchor:middle; letter-spacing:.06em; text-transform:uppercase; }
-    .doc { fill:#fffefb; stroke:#c9cdd6; stroke-width:1.3; }
-    .pair{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.2; }
-    .bin { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.3; }
-    .out { fill:#faf0ef; stroke:#c72323; stroke-width:1.4; }
-    .t   { font-size:12.5px; fill:#2b2b2b; text-anchor:middle; } .mono{ font-family:'Source Code Pro',monospace; font-size:11.5px; }
-    .fl  { stroke:#b9a06a; stroke-width:1.5; fill:none; stroke-dasharray:4 5; opacity:.8;
+    .g1-col { font-size:11px; fill:#7a7a7a; text-anchor:middle; letter-spacing:.06em; text-transform:uppercase; }
+    .g1-doc { fill:#fffefb; stroke:#c9cdd6; stroke-width:1.3; }
+    .g1-pair{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.2; }
+    .g1-bin { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.3; }
+    .g1-out { fill:#faf0ef; stroke:#c72323; stroke-width:1.4; }
+    .g1-t   { font-size:12.5px; fill:#2b2b2b; text-anchor:middle; } .g1-mono{ font-family:'Source Code Pro',monospace; font-size:11.5px; }
+    .g1-fl  { stroke:#b9a06a; stroke-width:1.5; fill:none; stroke-dasharray:4 5; opacity:.8;
            animation:mrflow 1.5s linear infinite; }
     @keyframes mrflow { to { stroke-dashoffset:-36; } }
   </style>
-  <text class="col" x="70" y="20">input</text>
-  <text class="col" x="250" y="20">map → (word, 1)</text>
-  <text class="col" x="440" y="20">shuffle (group by key)</text>
-  <text class="col" x="618" y="20">reduce (sum)</text>
+  <text class="g1-col" x="70" y="20">input</text>
+  <text class="g1-col" x="250" y="20">map → (word, 1)</text>
+  <text class="g1-col" x="440" y="20">shuffle (group by key)</text>
+  <text class="g1-col" x="618" y="20">reduce (sum)</text>
   <!-- input docs -->
-  <rect class="doc" x="24" y="45" width="96" height="34" rx="5" /><text class="t" x="72" y="66">"the cat"</text>
-  <rect class="doc" x="24" y="150" width="96" height="34" rx="5" /><text class="t" x="72" y="171">"the dog"</text>
-  <rect class="doc" x="24" y="255" width="96" height="34" rx="5" /><text class="t" x="72" y="276">"cat dog"</text>
+  <rect class="g1-doc" x="24" y="45" width="96" height="34" rx="5" /><text class="g1-t" x="72" y="66">"the cat"</text>
+  <rect class="g1-doc" x="24" y="150" width="96" height="34" rx="5" /><text class="g1-t" x="72" y="171">"the dog"</text>
+  <rect class="g1-doc" x="24" y="255" width="96" height="34" rx="5" /><text class="g1-t" x="72" y="276">"cat dog"</text>
   <!-- flow input->map -->
-  <path class="fl" d="M122,62 L188,70" /><path class="fl" d="M122,167 L188,150" /><path class="fl" d="M122,272 L188,230" />
+  <path class="g1-fl" d="M122,62 L188,70" /><path class="g1-fl" d="M122,167 L188,150" /><path class="g1-fl" d="M122,272 L188,230" />
   <!-- map outputs (pairs) -->
-  <g class="mono" text-anchor="middle" fill="#2b2b2b">
-    <rect class="pair" x="192" y="52" width="86" height="24" rx="4" /><text x="235" y="68">(the,1)</text>
-    <rect class="pair" x="192" y="80" width="86" height="24" rx="4" /><text x="235" y="96">(cat,1)</text>
-    <rect class="pair" x="192" y="140" width="86" height="24" rx="4" /><text x="235" y="156">(the,1)</text>
-    <rect class="pair" x="192" y="168" width="86" height="24" rx="4" /><text x="235" y="184">(dog,1)</text>
-    <rect class="pair" x="192" y="228" width="86" height="24" rx="4" /><text x="235" y="244">(cat,1)</text>
-    <rect class="pair" x="192" y="256" width="86" height="24" rx="4" /><text x="235" y="272">(dog,1)</text>
+  <g class="g1-mono" text-anchor="middle" fill="#2b2b2b">
+    <rect class="g1-pair" x="192" y="52" width="86" height="24" rx="4" /><text x="235" y="68">(the,1)</text>
+    <rect class="g1-pair" x="192" y="80" width="86" height="24" rx="4" /><text x="235" y="96">(cat,1)</text>
+    <rect class="g1-pair" x="192" y="140" width="86" height="24" rx="4" /><text x="235" y="156">(the,1)</text>
+    <rect class="g1-pair" x="192" y="168" width="86" height="24" rx="4" /><text x="235" y="184">(dog,1)</text>
+    <rect class="g1-pair" x="192" y="228" width="86" height="24" rx="4" /><text x="235" y="244">(cat,1)</text>
+    <rect class="g1-pair" x="192" y="256" width="86" height="24" rx="4" /><text x="235" y="272">(dog,1)</text>
   </g>
   <!-- flow map->shuffle : coloured by destination word so the grouping is legible -->
-  <path class="fl" style="stroke:#4a6da7" d="M280,64  C330,64 340,70  382,70" />   <!-- the -->
-  <path class="fl" style="stroke:#4a6da7" d="M280,152 C330,152 340,80 382,78" />   <!-- the -->
-  <path class="fl" style="stroke:#5aa06a" d="M280,92  C330,92 340,150 382,150" />  <!-- cat -->
-  <path class="fl" style="stroke:#5aa06a" d="M280,240 C330,240 340,160 382,158" /> <!-- cat -->
-  <path class="fl" style="stroke:#b5651d" d="M280,180 C330,180 340,235 382,235" /> <!-- dog -->
-  <path class="fl" style="stroke:#b5651d" d="M280,268 C330,268 340,245 382,243" /> <!-- dog -->
+  <path class="g1-fl" style="stroke:#4a6da7" d="M280,64  C330,64 340,70  382,70" />   <!-- the -->
+  <path class="g1-fl" style="stroke:#4a6da7" d="M280,152 C330,152 340,80 382,78" />   <!-- the -->
+  <path class="g1-fl" style="stroke:#5aa06a" d="M280,92  C330,92 340,150 382,150" />  <!-- cat -->
+  <path class="g1-fl" style="stroke:#5aa06a" d="M280,240 C330,240 340,160 382,158" /> <!-- cat -->
+  <path class="g1-fl" style="stroke:#b5651d" d="M280,180 C330,180 340,235 382,235" /> <!-- dog -->
+  <path class="g1-fl" style="stroke:#b5651d" d="M280,268 C330,268 340,245 382,243" /> <!-- dog -->
   <!-- shuffle bins -->
-  <g class="mono" text-anchor="middle">
-    <rect class="bin" x="386" y="56" width="108" height="30" rx="5" /><text class="t mono" x="440" y="75">the → [1,1]</text>
-    <rect class="bin" x="386" y="136" width="108" height="30" rx="5" /><text class="t mono" x="440" y="155">cat → [1,1]</text>
-    <rect class="bin" x="386" y="221" width="108" height="30" rx="5" /><text class="t mono" x="440" y="240">dog → [1,1]</text>
+  <g class="g1-mono" text-anchor="middle">
+    <rect class="g1-bin" x="386" y="56" width="108" height="30" rx="5" /><text class="g1-t g1-mono" x="440" y="75">the → [1,1]</text>
+    <rect class="g1-bin" x="386" y="136" width="108" height="30" rx="5" /><text class="g1-t g1-mono" x="440" y="155">cat → [1,1]</text>
+    <rect class="g1-bin" x="386" y="221" width="108" height="30" rx="5" /><text class="g1-t g1-mono" x="440" y="240">dog → [1,1]</text>
   </g>
   <!-- flow shuffle->reduce -->
-  <path class="fl" d="M496,71  L560,71" /><path class="fl" d="M496,151 L560,151" /><path class="fl" d="M496,236 L560,236" />
+  <path class="g1-fl" d="M496,71  L560,71" /><path class="g1-fl" d="M496,151 L560,151" /><path class="g1-fl" d="M496,236 L560,236" />
   <!-- reduce outputs -->
-  <g class="mono" text-anchor="middle">
-    <rect class="out" x="564" y="56" width="96" height="30" rx="5" /><text class="t mono" x="612" y="75">the → 2</text>
-    <rect class="out" x="564" y="136" width="96" height="30" rx="5" /><text class="t mono" x="612" y="155">cat → 2</text>
-    <rect class="out" x="564" y="221" width="96" height="30" rx="5" /><text class="t mono" x="612" y="240">dog → 2</text>
+  <g class="g1-mono" text-anchor="middle">
+    <rect class="g1-out" x="564" y="56" width="96" height="30" rx="5" /><text class="g1-t g1-mono" x="612" y="75">the → 2</text>
+    <rect class="g1-out" x="564" y="136" width="96" height="30" rx="5" /><text class="g1-t g1-mono" x="612" y="155">cat → 2</text>
+    <rect class="g1-out" x="564" y="221" width="96" height="30" rx="5" /><text class="g1-t g1-mono" x="612" y="240">dog → 2</text>
   </g>
 </svg>
 <figcaption><b>Figure 1 -</b> The word-count dataflow. Each document is mapped to $(\text{word},1)$ pairs (blue) ; the shuffle regroups them into one bin per word (green) ; each reducer sums its bin into a final count (red). The mappers and reducers all run in parallel ; only the shuffle in the middle requires the machines to talk to each other.</figcaption>
@@ -223,63 +223,63 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 680 400" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .sec  { font-size:12.5px; fill:#2b2b2b; font-weight:bold; }
-    .secn { font-size:11px; fill:#8a8a8a; }
-    .val  { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
-    .opn  { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.4; }
-    .root { fill:#faf0ef; stroke:#c72323; stroke-width:1.6; }
-    .lt   { font-size:12px; fill:#2b2b2b; text-anchor:middle; }
-    .op   { font-size:12px; fill:#4e8f5e; text-anchor:middle; }
-    .edge { stroke:#c9cdd6; stroke-width:1.4; fill:none; }
-    .oplab{ font-size:12px; fill:#b3a892; text-anchor:middle; }
-    .rlab { font-size:10.5px; fill:#7a7a7a; }
-    .divider { stroke:#e7ded0; stroke-width:1; }
+    .g2-sec  { font-size:12.5px; fill:#2b2b2b; font-weight:bold; }
+    .g2-secn { font-size:11px; fill:#8a8a8a; }
+    .g2-val  { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
+    .g2-opn  { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.4; }
+    .g2-root { fill:#faf0ef; stroke:#c72323; stroke-width:1.6; }
+    .g2-lt   { font-size:12px; fill:#2b2b2b; text-anchor:middle; }
+    .g2-op   { font-size:12px; fill:#4e8f5e; text-anchor:middle; }
+    .g2-edge { stroke:#c9cdd6; stroke-width:1.4; fill:none; }
+    .g2-oplab{ font-size:12px; fill:#b3a892; text-anchor:middle; }
+    .g2-rlab { font-size:10.5px; fill:#7a7a7a; }
+    .g2-divider { stroke:#e7ded0; stroke-width:1; }
     /* sequential : a single accumulator token crawls the whole chain, slowly */
-    .stok { fill:#c72323; }
-    .strail { stroke:#c72323; stroke-width:3; fill:none; stroke-linecap:round;
+    .g2-stok { fill:#c72323; }
+    .g2-strail { stroke:#c72323; stroke-width:3; fill:none; stroke-linecap:round;
               stroke-dasharray:560; stroke-dashoffset:560; opacity:.35;
               animation:seqfill 5s linear infinite; }
     @keyframes seqfill { to { stroke-dashoffset:0; } }
     /* parallel : whole levels light up together, one round at a time */
-    .rd { opacity:0; animation:pop .45s ease forwards; }
-    .round1 { animation-delay:.4s; } .round2 { animation-delay:1.25s; } .round3 { animation-delay:2.1s; }
+    .g2-rd { opacity:0; animation:pop .45s ease forwards; }
+    .g2-round1 { animation-delay:.4s; } .g2-round2 { animation-delay:1.25s; } .g2-round3 { animation-delay:2.1s; }
     @keyframes pop { from{opacity:0; transform:scale(.7);} to{opacity:1; transform:scale(1);} }
-    circle.rd, text.rd { transform-box:fill-box; transform-origin:center; }
+    circle.g2-rd, text.g2-rd { transform-box:fill-box; transform-origin:center; }
   </style>
 
   <!-- ================= SEQUENTIAL PANEL ================= -->
-  <text class="sec" x="40" y="26">Sequential fold</text>
-  <text class="secn" x="150" y="26">— each ⊕ must wait for the previous result</text>
+  <text class="g2-sec" x="40" y="26">Sequential fold</text>
+  <text class="g2-secn" x="150" y="26">— each ⊕ must wait for the previous result</text>
   <!-- chain baseline + animated red trail showing the single running accumulator -->
-  <line class="edge" x1="60" y1="78" x2="620" y2="78" />
-  <path class="strail" d="M60,78 L620,78" />
+  <line class="g2-edge" x1="60" y1="78" x2="620" y2="78" />
+  <path class="g2-strail" d="M60,78 L620,78" />
   <!-- 7 plus-signs in the gaps -->
-  <g class="oplab">
+  <g class="g2-oplab">
     <text x="100" y="62">⊕</text><text x="180" y="62">⊕</text><text x="260" y="62">⊕</text><text x="340" y="62">⊕</text>
     <text x="420" y="62">⊕</text><text x="500" y="62">⊕</text><text x="580" y="62">⊕</text>
   </g>
   <!-- 8 value nodes -->
-  <g class="lt">
-    <circle class="val" cx="60" cy="78" r="14" /><text x="60" y="82">v₁</text>
-    <circle class="val" cx="140" cy="78" r="14" /><text x="140" y="82">v₂</text>
-    <circle class="val" cx="220" cy="78" r="14" /><text x="220" y="82">v₃</text>
-    <circle class="val" cx="300" cy="78" r="14" /><text x="300" y="82">v₄</text>
-    <circle class="val" cx="380" cy="78" r="14" /><text x="380" y="82">v₅</text>
-    <circle class="val" cx="460" cy="78" r="14" /><text x="460" y="82">v₆</text>
-    <circle class="val" cx="540" cy="78" r="14" /><text x="540" y="82">v₇</text>
-    <circle class="val" cx="620" cy="78" r="14" /><text x="620" y="82">v₈</text>
+  <g class="g2-lt">
+    <circle class="g2-val" cx="60" cy="78" r="14" /><text x="60" y="82">v₁</text>
+    <circle class="g2-val" cx="140" cy="78" r="14" /><text x="140" y="82">v₂</text>
+    <circle class="g2-val" cx="220" cy="78" r="14" /><text x="220" y="82">v₃</text>
+    <circle class="g2-val" cx="300" cy="78" r="14" /><text x="300" y="82">v₄</text>
+    <circle class="g2-val" cx="380" cy="78" r="14" /><text x="380" y="82">v₅</text>
+    <circle class="g2-val" cx="460" cy="78" r="14" /><text x="460" y="82">v₆</text>
+    <circle class="g2-val" cx="540" cy="78" r="14" /><text x="540" y="82">v₇</text>
+    <circle class="g2-val" cx="620" cy="78" r="14" /><text x="620" y="82">v₈</text>
   </g>
   <!-- crawling accumulator -->
-  <circle class="stok" r="6"><animateMotion dur="5s" repeatCount="indefinite" path="M60,78 L620,78" /></circle>
-  <text class="rlab" x="40" y="108">span (critical path) = n − 1 = 7 steps, strictly one after another</text>
+  <circle class="g2-stok" r="6"><animateMotion dur="5s" repeatCount="indefinite" path="M60,78 L620,78" /></circle>
+  <text class="g2-rlab" x="40" y="108">span (critical path) = n − 1 = 7 steps, strictly one after another</text>
 
-  <line class="divider" x1="30" y1="130" x2="650" y2="130" />
+  <line class="g2-divider" x1="30" y1="130" x2="650" y2="130" />
 
   <!-- ================= PARALLEL (TREE) PANEL ================= -->
-  <text class="sec" x="40" y="158">Associative regrouping</text>
-  <text class="secn" x="205" y="158">— re-parenthesise into a balanced tree; each level runs at once</text>
+  <text class="g2-sec" x="40" y="158">Associative regrouping</text>
+  <text class="g2-secn" x="205" y="158">— re-parenthesise into a balanced tree; each level runs at once</text>
   <!-- tree edges (leaves y=360 → l1 y=305 → l2 y=250 → root y=200) -->
-  <g class="edge">
+  <g class="g2-edge">
     <line x1="60" y1="360" x2="100" y2="305" /><line x1="140" y1="360" x2="100" y2="305" />
     <line x1="220" y1="360" x2="260" y2="305" /><line x1="300" y1="360" x2="260" y2="305" />
     <line x1="380" y1="360" x2="420" y2="305" /><line x1="460" y1="360" x2="420" y2="305" />
@@ -289,37 +289,37 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     <line x1="180" y1="250" x2="340" y2="200" /><line x1="500" y1="250" x2="340" y2="200" />
   </g>
   <!-- leaves -->
-  <g class="lt">
-    <circle class="val" cx="60" cy="360" r="13" /><text x="60" y="364">v₁</text>
-    <circle class="val" cx="140" cy="360" r="13" /><text x="140" y="364">v₂</text>
-    <circle class="val" cx="220" cy="360" r="13" /><text x="220" y="364">v₃</text>
-    <circle class="val" cx="300" cy="360" r="13" /><text x="300" y="364">v₄</text>
-    <circle class="val" cx="380" cy="360" r="13" /><text x="380" y="364">v₅</text>
-    <circle class="val" cx="460" cy="360" r="13" /><text x="460" y="364">v₆</text>
-    <circle class="val" cx="540" cy="360" r="13" /><text x="540" y="364">v₇</text>
-    <circle class="val" cx="620" cy="360" r="13" /><text x="620" y="364">v₈</text>
+  <g class="g2-lt">
+    <circle class="g2-val" cx="60" cy="360" r="13" /><text x="60" y="364">v₁</text>
+    <circle class="g2-val" cx="140" cy="360" r="13" /><text x="140" y="364">v₂</text>
+    <circle class="g2-val" cx="220" cy="360" r="13" /><text x="220" y="364">v₃</text>
+    <circle class="g2-val" cx="300" cy="360" r="13" /><text x="300" y="364">v₄</text>
+    <circle class="g2-val" cx="380" cy="360" r="13" /><text x="380" y="364">v₅</text>
+    <circle class="g2-val" cx="460" cy="360" r="13" /><text x="460" y="364">v₆</text>
+    <circle class="g2-val" cx="540" cy="360" r="13" /><text x="540" y="364">v₇</text>
+    <circle class="g2-val" cx="620" cy="360" r="13" /><text x="620" y="364">v₈</text>
   </g>
   <!-- round 1 : four ⊕ at once -->
-  <g class="op">
-    <circle class="opn rd round1" cx="100" cy="305" r="13" /><text class="rd round1" x="100" y="309">⊕</text>
-    <circle class="opn rd round1" cx="260" cy="305" r="13" /><text class="rd round1" x="260" y="309">⊕</text>
-    <circle class="opn rd round1" cx="420" cy="305" r="13" /><text class="rd round1" x="420" y="309">⊕</text>
-    <circle class="opn rd round1" cx="580" cy="305" r="13" /><text class="rd round1" x="580" y="309">⊕</text>
+  <g class="g2-op">
+    <circle class="g2-opn g2-rd g2-round1" cx="100" cy="305" r="13" /><text class="g2-rd g2-round1" x="100" y="309">⊕</text>
+    <circle class="g2-opn g2-rd g2-round1" cx="260" cy="305" r="13" /><text class="g2-rd g2-round1" x="260" y="309">⊕</text>
+    <circle class="g2-opn g2-rd g2-round1" cx="420" cy="305" r="13" /><text class="g2-rd g2-round1" x="420" y="309">⊕</text>
+    <circle class="g2-opn g2-rd g2-round1" cx="580" cy="305" r="13" /><text class="g2-rd g2-round1" x="580" y="309">⊕</text>
   </g>
   <!-- round 2 : two ⊕ -->
-  <g class="op">
-    <circle class="opn rd round2" cx="180" cy="250" r="13" /><text class="rd round2" x="180" y="254">⊕</text>
-    <circle class="opn rd round2" cx="500" cy="250" r="13" /><text class="rd round2" x="500" y="254">⊕</text>
+  <g class="g2-op">
+    <circle class="g2-opn g2-rd g2-round2" cx="180" cy="250" r="13" /><text class="g2-rd g2-round2" x="180" y="254">⊕</text>
+    <circle class="g2-opn g2-rd g2-round2" cx="500" cy="250" r="13" /><text class="g2-rd g2-round2" x="500" y="254">⊕</text>
   </g>
   <!-- round 3 : root -->
-  <circle class="root rd round3" cx="340" cy="200" r="15" /><text class="lt rd round3" x="340" y="205">Σ</text>
+  <circle class="g2-root g2-rd g2-round3" cx="340" cy="200" r="15" /><text class="g2-lt g2-rd g2-round3" x="340" y="205">Σ</text>
   <!-- round brackets on the right -->
-  <g class="rlab" text-anchor="start">
+  <g class="g2-rlab" text-anchor="start">
     <text x="600" y="309">round 1</text>
     <text x="536" y="254">round 2</text>
     <text x="360" y="205">round 3</text>
   </g>
-  <text class="rlab" x="40" y="392">span = ⌈log₂ n⌉ = 3 rounds — the work (7 operations) is the same, the depth collapses</text>
+  <text class="g2-rlab" x="40" y="392">span = ⌈log₂ n⌉ = 3 rounds — the work (7 operations) is the same, the depth collapses</text>
 </svg>
 <figcaption><b>Figure 2 -</b> Why associativity buys parallelism. <b>Top :</b> a naive fold is a chain, one accumulator crawling through all $n-1$ additions in sequence. <b>Bottom :</b> because $\oplus$ is associative we may re-parenthesise the very same $n-1$ operations into a balanced tree and run each level at once, finishing in $\lceil \log_2 n \rceil$ rounds instead of $n-1$. Same work, far shorter critical path, and this is exactly what makes <b>combiners</b> correct.</figcaption>
 </center></figure>
@@ -334,46 +334,46 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 280" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .m { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
-    .r { fill:#faf0ef; stroke:#c72323; stroke-width:1.5; }
-    .sh{ stroke:#c9b98c; stroke-width:1.3; fill:none; opacity:.5;
+    .g3-m { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .g3-r { fill:#faf0ef; stroke:#c72323; stroke-width:1.5; }
+    .g3-sh{ stroke:#c9b98c; stroke-width:1.3; fill:none; opacity:.5;
          stroke-dasharray:4 5; animation:mrflow2 1.6s linear infinite; }
-    .sh.hi path, .sh.hi { stroke:#c72323; stroke-width:1.8; opacity:.85; }
-    .mhi{ stroke-width:2.2; }
+    .g3-sh.g3-hi path, .g3-sh.g3-hi { stroke:#c72323; stroke-width:1.8; opacity:.85; }
+    .g3-mhi{ stroke-width:2.2; }
     @keyframes mrflow2 { to { stroke-dashoffset:-36; } }
-    .lab{ font-size:12px; fill:#2b2b2b; text-anchor:middle; } .cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
-    .part{ font-size:9.5px; fill:#9a9a9a; text-anchor:start; }
+    .g3-lab{ font-size:12px; fill:#2b2b2b; text-anchor:middle; } .g3-cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g3-part{ font-size:9.5px; fill:#9a9a9a; text-anchor:start; }
   </style>
-  <text class="cap" x="90" y="28">M mappers</text>
-  <text class="cap" x="330" y="28">shuffle : all-to-all</text>
-  <text class="cap" x="560" y="28">R reducers</text>
+  <text class="g3-cap" x="90" y="28">M mappers</text>
+  <text class="g3-cap" x="330" y="28">shuffle : all-to-all</text>
+  <text class="g3-cap" x="560" y="28">R reducers</text>
   <!-- all-to-all edges ; M1's three outgoing streams are highlighted -->
-  <g class="sh">
+  <g class="g3-sh">
     <path d="M120,150 L500,80" /><path d="M120,150 L500,150" /><path d="M120,150 L500,220" />
     <path d="M120,220 L500,80" /><path d="M120,220 L500,150" /><path d="M120,220 L500,220" />
   </g>
-  <g class="sh hi">
+  <g class="g3-sh g3-hi">
     <path d="M120,80 L500,80" /><path d="M120,80 L500,150" /><path d="M120,80 L500,220" />
   </g>
   <!-- mappers -->
-  <g class="lab">
-    <circle class="m mhi" cx="100" cy="80" r="22" /><text x="100" y="85">M₁</text>
-    <circle class="m" cx="100" cy="150" r="22" /><text x="100" y="155">M₂</text>
-    <circle class="m" cx="100" cy="220" r="22" /><text x="100" y="225">M₃</text>
+  <g class="g3-lab">
+    <circle class="g3-m g3-mhi" cx="100" cy="80" r="22" /><text x="100" y="85">M₁</text>
+    <circle class="g3-m" cx="100" cy="150" r="22" /><text x="100" y="155">M₂</text>
+    <circle class="g3-m" cx="100" cy="220" r="22" /><text x="100" y="225">M₃</text>
   </g>
   <!-- reducers with their key partition -->
-  <g class="lab">
-    <circle class="r" cx="520" cy="80" r="22" /><text x="520" y="85">R₁</text>
-    <circle class="r" cx="520" cy="150" r="22" /><text x="520" y="155">R₂</text>
-    <circle class="r" cx="520" cy="220" r="22" /><text x="520" y="225">R₃</text>
+  <g class="g3-lab">
+    <circle class="g3-r" cx="520" cy="80" r="22" /><text x="520" y="85">R₁</text>
+    <circle class="g3-r" cx="520" cy="150" r="22" /><text x="520" y="155">R₂</text>
+    <circle class="g3-r" cx="520" cy="220" r="22" /><text x="520" y="225">R₃</text>
   </g>
-  <g class="part">
+  <g class="g3-part">
     <text x="550" y="84">hash≡0</text>
     <text x="550" y="154">hash≡1</text>
     <text x="550" y="224">hash≡2</text>
   </g>
   <text x="100" y="52" text-anchor="middle" font-size="10" fill="#c72323">M₁ → every reducer</text>
-  <text class="cap" x="320" y="268">up to M × R data streams cross the network — this is the scalability bottleneck</text>
+  <text class="g3-cap" x="320" y="268">up to M × R data streams cross the network — this is the scalability bottleneck</text>
 </svg>
 <figcaption><b>Figure 3 -</b> The execution graph. Map and reduce tasks are embarrassingly parallel, but the shuffle is an all-to-all exchange of up to $M \times R$ streams. Moving intermediate data across the network is the dominant cost of most real MapReduce jobs.</figcaption>
 </center></figure>

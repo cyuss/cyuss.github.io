@@ -138,67 +138,67 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 720 415" width="100%" style="max-width:640px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .edge { stroke:#9db2d8; stroke-width:1.4; fill:none; opacity:.55;
+    .g1-edge { stroke:#9db2d8; stroke-width:1.4; fill:none; opacity:.55;
             stroke-dasharray:5 9; animation:kflow 2.6s linear infinite; }
-    .edge2{ stroke:#d8b89d; stroke-width:1.6; fill:none; opacity:.75;
+    .g1-edge2{ stroke:#d8b89d; stroke-width:1.6; fill:none; opacity:.75;
             stroke-dasharray:5 9; animation:kflow 2.6s linear infinite; }
     @keyframes kflow { to { stroke-dashoffset:-56; } }
-    .lbl { font-size:16px; fill:#2b2b2b; } .lblf{ font-style:italic; }
-    .sub { font-size:11px; }
-    .cap { font-size:12.5px; fill:#7a7a7a; }
-    .nin { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
-    .ninr{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
-    .nout{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
+    .g1-lbl { font-size:16px; fill:#2b2b2b; } .g1-lblf{ font-style:italic; }
+    .g1-sub { font-size:11px; }
+    .g1-cap { font-size:12.5px; fill:#7a7a7a; }
+    .g1-nin { fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .g1-ninr{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .g1-nout{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
   </style>
   <!-- column captions -->
-  <text class="cap" x="70" y="26" text-anchor="middle">inputs</text>
-  <text class="cap" x="270" y="26" text-anchor="middle">inner (φ)</text>
-  <text class="cap" x="470" y="26" text-anchor="middle">outer (Φ)</text>
-  <text class="cap" x="650" y="26" text-anchor="middle">output</text>
+  <text class="g1-cap" x="70" y="26" text-anchor="middle">inputs</text>
+  <text class="g1-cap" x="270" y="26" text-anchor="middle">inner (φ)</text>
+  <text class="g1-cap" x="470" y="26" text-anchor="middle">outer (Φ)</text>
+  <text class="g1-cap" x="650" y="26" text-anchor="middle">output</text>
   <!-- edges inputs -> inner -->
   <g>
-    <path class="edge" d="M92,150 L248,70" />  <path class="edge" d="M92,150 L248,145" />
-    <path class="edge" d="M92,150 L248,215" /> <path class="edge" d="M92,150 L248,285" />
-    <path class="edge" d="M92,150 L248,360" />
-    <path class="edge" d="M92,280 L248,70" />  <path class="edge" d="M92,280 L248,145" />
-    <path class="edge" d="M92,280 L248,215" /> <path class="edge" d="M92,280 L248,285" />
-    <path class="edge" d="M92,280 L248,360" />
+    <path class="g1-edge" d="M92,150 L248,70" />  <path class="g1-edge" d="M92,150 L248,145" />
+    <path class="g1-edge" d="M92,150 L248,215" /> <path class="g1-edge" d="M92,150 L248,285" />
+    <path class="g1-edge" d="M92,150 L248,360" />
+    <path class="g1-edge" d="M92,280 L248,70" />  <path class="g1-edge" d="M92,280 L248,145" />
+    <path class="g1-edge" d="M92,280 L248,215" /> <path class="g1-edge" d="M92,280 L248,285" />
+    <path class="g1-edge" d="M92,280 L248,360" />
   </g>
   <!-- edges inner -> outer (one-to-one) -->
   <g>
-    <path class="edge2" d="M292,70  L448,70" />  <path class="edge2" d="M292,145 L448,145" />
-    <path class="edge2" d="M292,215 L448,215" /> <path class="edge2" d="M292,285 L448,285" />
-    <path class="edge2" d="M292,360 L448,360" />
+    <path class="g1-edge2" d="M292,70  L448,70" />  <path class="g1-edge2" d="M292,145 L448,145" />
+    <path class="g1-edge2" d="M292,215 L448,215" /> <path class="g1-edge2" d="M292,285 L448,285" />
+    <path class="g1-edge2" d="M292,360 L448,360" />
   </g>
   <!-- edges outer -> sum -->
   <g>
-    <path class="edge2" d="M492,70  L628,215" /> <path class="edge2" d="M492,145 L628,215" />
-    <path class="edge2" d="M492,215 L628,215" /> <path class="edge2" d="M492,285 L628,215" />
-    <path class="edge2" d="M492,360 L628,215" />
+    <path class="g1-edge2" d="M492,70  L628,215" /> <path class="g1-edge2" d="M492,145 L628,215" />
+    <path class="g1-edge2" d="M492,215 L628,215" /> <path class="g1-edge2" d="M492,285 L628,215" />
+    <path class="g1-edge2" d="M492,360 L628,215" />
   </g>
   <!-- input nodes -->
-  <circle class="nin" cx="70" cy="150" r="22" /><text class="lbl lblf" x="70" y="156" text-anchor="middle">x<tspan class="sub" dy="4">1</tspan></text>
-  <circle class="nin" cx="70" cy="280" r="22" /><text class="lbl lblf" x="70" y="286" text-anchor="middle">x<tspan class="sub" dy="4">2</tspan></text>
+  <circle class="g1-nin" cx="70" cy="150" r="22" /><text class="g1-lbl g1-lblf" x="70" y="156" text-anchor="middle">x<tspan class="g1-sub" dy="4">1</tspan></text>
+  <circle class="g1-nin" cx="70" cy="280" r="22" /><text class="g1-lbl g1-lblf" x="70" y="286" text-anchor="middle">x<tspan class="g1-sub" dy="4">2</tspan></text>
   <!-- inner nodes: z_q -->
-  <g class="lbl lblf" text-anchor="middle">
-    <circle class="ninr" cx="270" cy="70" r="20" /><text x="270" y="76">z<tspan class="sub" dy="4">0</tspan></text>
-    <circle class="ninr" cx="270" cy="145" r="20" /><text x="270" y="151">z<tspan class="sub" dy="4">1</tspan></text>
-    <circle class="ninr" cx="270" cy="215" r="20" /><text x="270" y="221">z<tspan class="sub" dy="4">2</tspan></text>
-    <circle class="ninr" cx="270" cy="285" r="20" /><text x="270" y="291">z<tspan class="sub" dy="4">3</tspan></text>
-    <circle class="ninr" cx="270" cy="360" r="20" /><text x="270" y="366">z<tspan class="sub" dy="4">4</tspan></text>
+  <g class="g1-lbl g1-lblf" text-anchor="middle">
+    <circle class="g1-ninr" cx="270" cy="70" r="20" /><text x="270" y="76">z<tspan class="g1-sub" dy="4">0</tspan></text>
+    <circle class="g1-ninr" cx="270" cy="145" r="20" /><text x="270" y="151">z<tspan class="g1-sub" dy="4">1</tspan></text>
+    <circle class="g1-ninr" cx="270" cy="215" r="20" /><text x="270" y="221">z<tspan class="g1-sub" dy="4">2</tspan></text>
+    <circle class="g1-ninr" cx="270" cy="285" r="20" /><text x="270" y="291">z<tspan class="g1-sub" dy="4">3</tspan></text>
+    <circle class="g1-ninr" cx="270" cy="360" r="20" /><text x="270" y="366">z<tspan class="g1-sub" dy="4">4</tspan></text>
   </g>
   <!-- outer nodes: Phi_q -->
-  <g class="lbl" text-anchor="middle">
-    <circle class="nout" cx="470" cy="70" r="20" /><text x="470" y="76">Φ<tspan class="sub" dy="4">0</tspan></text>
-    <circle class="nout" cx="470" cy="145" r="20" /><text x="470" y="151">Φ<tspan class="sub" dy="4">1</tspan></text>
-    <circle class="nout" cx="470" cy="215" r="20" /><text x="470" y="221">Φ<tspan class="sub" dy="4">2</tspan></text>
-    <circle class="nout" cx="470" cy="285" r="20" /><text x="470" y="291">Φ<tspan class="sub" dy="4">3</tspan></text>
-    <circle class="nout" cx="470" cy="360" r="20" /><text x="470" y="366">Φ<tspan class="sub" dy="4">4</tspan></text>
+  <g class="g1-lbl" text-anchor="middle">
+    <circle class="g1-nout" cx="470" cy="70" r="20" /><text x="470" y="76">Φ<tspan class="g1-sub" dy="4">0</tspan></text>
+    <circle class="g1-nout" cx="470" cy="145" r="20" /><text x="470" y="151">Φ<tspan class="g1-sub" dy="4">1</tspan></text>
+    <circle class="g1-nout" cx="470" cy="215" r="20" /><text x="470" y="221">Φ<tspan class="g1-sub" dy="4">2</tspan></text>
+    <circle class="g1-nout" cx="470" cy="285" r="20" /><text x="470" y="291">Φ<tspan class="g1-sub" dy="4">3</tspan></text>
+    <circle class="g1-nout" cx="470" cy="360" r="20" /><text x="470" y="366">Φ<tspan class="g1-sub" dy="4">4</tspan></text>
   </g>
   <!-- sum node -->
   <circle cx="650" cy="215" r="26" fill="#fff" stroke="#2b2b2b" stroke-width="1.8" />
-  <text class="lbl" x="650" y="224" text-anchor="middle" font-size="24">Σ</text>
-  <text class="lbl lblf" x="650" y="272" text-anchor="middle">ƒ(x<tspan class="sub" dy="4">1</tspan><tspan dy="-4">,x</tspan><tspan class="sub" dy="4">2</tspan><tspan dy="-4">)</tspan></text>
+  <text class="g1-lbl" x="650" y="224" text-anchor="middle" font-size="24">Σ</text>
+  <text class="g1-lbl g1-lblf" x="650" y="272" text-anchor="middle">ƒ(x<tspan class="g1-sub" dy="4">1</tspan><tspan dy="-4">,x</tspan><tspan class="g1-sub" dy="4">2</tspan><tspan dy="-4">)</tspan></text>
 </svg>
 <figcaption><b>Figure 1 -</b> Kolmogorov's representation for $n=2$. Each input passes through inner univariate maps $\phi_{q,p}$ (green), the coordinate contributions are summed into $z_q$, reshaped by outer maps $\Phi_q$ (orange), and finally added. The animated dashes suggest the direction of the computation.</figcaption>
 </center></figure>

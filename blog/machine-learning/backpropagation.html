@@ -128,36 +128,36 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 220" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .ed{ stroke:#4a6da7; stroke-width:2; fill:none; opacity:.55; }
-    .op{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
-    .inp{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
-    .lo{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
-    .nm{ font-size:15px; fill:#2b2b2b; text-anchor:middle; } .it{ font-style:italic; }
-    .vl{ font-size:12px; fill:#4a6da7; text-anchor:middle; }
-    .fdot{ fill:#4a6da7; }
+    .g1-ed{ stroke:#4a6da7; stroke-width:2; fill:none; opacity:.55; }
+    .g1-op{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .g1-inp{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .g1-lo{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
+    .g1-nm{ font-size:15px; fill:#2b2b2b; text-anchor:middle; } .g1-it{ font-style:italic; }
+    .g1-vl{ font-size:12px; fill:#4a6da7; text-anchor:middle; }
+    .g1-fdot{ fill:#4a6da7; }
   </style>
   <!-- edges -->
-  <path class="ed" d="M92,60 L204,95" />
-  <path class="ed" d="M92,125 L204,105" />
-  <path class="ed" d="M256,100 L336,110" />
-  <path class="ed" d="M92,190 L336,128" />
-  <path class="ed" d="M392,118 L452,118" />
-  <path class="ed" d="M508,118 L556,118" />
+  <path class="g1-ed" d="M92,60 L204,95" />
+  <path class="g1-ed" d="M92,125 L204,105" />
+  <path class="g1-ed" d="M256,100 L336,110" />
+  <path class="g1-ed" d="M92,190 L336,128" />
+  <path class="g1-ed" d="M392,118 L452,118" />
+  <path class="g1-ed" d="M508,118 L556,118" />
   <!-- input nodes -->
-  <circle class="inp" cx="70" cy="60" r="20" /><text class="nm it" x="70" y="65">x</text><text class="vl" x="70" y="30">1</text>
-  <circle class="inp" cx="70" cy="125" r="20" /><text class="nm it" x="70" y="130">w</text><text class="vl" x="30" y="130">0.5</text>
-  <circle class="inp" cx="70" cy="190" r="20" /><text class="nm it" x="70" y="195">b</text><text class="vl" x="30" y="195">0</text>
+  <circle class="g1-inp" cx="70" cy="60" r="20" /><text class="g1-nm g1-it" x="70" y="65">x</text><text class="g1-vl" x="70" y="30">1</text>
+  <circle class="g1-inp" cx="70" cy="125" r="20" /><text class="g1-nm g1-it" x="70" y="130">w</text><text class="g1-vl" x="30" y="130">0.5</text>
+  <circle class="g1-inp" cx="70" cy="190" r="20" /><text class="g1-nm g1-it" x="70" y="195">b</text><text class="g1-vl" x="30" y="195">0</text>
   <!-- mul -->
-  <circle class="op" cx="230" cy="100" r="22" /><text class="nm" x="230" y="106">×</text><text class="vl" x="230" y="68">0.5</text>
+  <circle class="g1-op" cx="230" cy="100" r="22" /><text class="g1-nm" x="230" y="106">×</text><text class="g1-vl" x="230" y="68">0.5</text>
   <!-- add -->
-  <circle class="op" cx="364" cy="118" r="22" /><text class="nm" x="364" y="124">+</text><text class="vl" x="364" y="86">z = 0.5</text>
+  <circle class="g1-op" cx="364" cy="118" r="22" /><text class="g1-nm" x="364" y="124">+</text><text class="g1-vl" x="364" y="86">z = 0.5</text>
   <!-- sigma -->
-  <circle class="op" cx="480" cy="118" r="22" /><text class="nm" x="480" y="124">σ</text><text class="vl" x="480" y="86">a = 0.622</text>
+  <circle class="g1-op" cx="480" cy="118" r="22" /><text class="g1-nm" x="480" y="124">σ</text><text class="g1-vl" x="480" y="86">a = 0.622</text>
   <!-- loss -->
-  <circle class="lo" cx="580" cy="118" r="24" /><text class="nm" x="580" y="123">L</text><text class="vl" x="580" y="84">0.143</text>
+  <circle class="g1-lo" cx="580" cy="118" r="24" /><text class="g1-nm" x="580" y="123">L</text><text class="g1-vl" x="580" y="84">0.143</text>
   <!-- moving forward dot -->
-  <circle class="fdot" r="6"><animateMotion dur="3s" repeatCount="indefinite" path="M70,60 L230,100 L364,118 L480,118 L580,118" /></circle>
-  <text class="vl" x="320" y="205" fill="#7a7a7a" font-size="12">forward pass : evaluate each box left → right (y = 1 enters the loss)</text>
+  <circle class="g1-fdot" r="6"><animateMotion dur="3s" repeatCount="indefinite" path="M70,60 L230,100 L364,118 L480,118 L580,118" /></circle>
+  <text class="g1-vl" x="320" y="205" fill="#7a7a7a" font-size="12">forward pass : evaluate each box left → right (y = 1 enters the loss)</text>
 </svg>
 <figcaption><b>Figure 1 -</b> The forward pass. Each node computes its output from its inputs : $wx = 0.5$, then $+b = 0.5 = z$, then $\sigma(z) = 0.622 = a$, then $(a-y)^2 = 0.143 = L$. We store every intermediate value.</figcaption>
 </center></figure>
@@ -193,30 +193,30 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figure><center>
 <svg viewBox="0 0 640 220" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .edb{ stroke:#b5651d; stroke-width:2; fill:none; opacity:.5; }
-    .op2{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
-    .inp2{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
-    .lo2{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
-    .nm2{ font-size:15px; fill:#2b2b2b; text-anchor:middle; } .it{ font-style:italic; }
-    .gr{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold; }
-    .bdot{ fill:#b5651d; }
+    .g2-edb{ stroke:#b5651d; stroke-width:2; fill:none; opacity:.5; }
+    .g2-op2{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .g2-inp2{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .g2-lo2{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
+    .g2-nm2{ font-size:15px; fill:#2b2b2b; text-anchor:middle; } .g2-it{ font-style:italic; }
+    .g2-gr{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold; }
+    .g2-bdot{ fill:#b5651d; }
   </style>
-  <path class="edb" d="M92,60 L204,95" />
-  <path class="edb" d="M92,125 L204,105" />
-  <path class="edb" d="M256,100 L336,110" />
-  <path class="edb" d="M92,190 L336,128" />
-  <path class="edb" d="M392,118 L452,118" />
-  <path class="edb" d="M508,118 L556,118" />
-  <circle class="inp2" cx="70" cy="60" r="20" /><text class="nm2 it" x="70" y="65">x</text><text class="gr" x="70" y="30">−0.089</text>
-  <circle class="inp2" cx="70" cy="125" r="20" /><text class="nm2 it" x="70" y="130">w</text><text class="gr" x="24" y="130">−0.177</text>
-  <circle class="inp2" cx="70" cy="190" r="20" /><text class="nm2 it" x="70" y="195">b</text><text class="gr" x="24" y="195">−0.177</text>
-  <circle class="op2" cx="230" cy="100" r="22" /><text class="nm2" x="230" y="106">×</text>
-  <circle class="op2" cx="364" cy="118" r="22" /><text class="nm2" x="364" y="124">+</text>
-  <circle class="op2" cx="480" cy="118" r="22" /><text class="nm2" x="480" y="124">σ</text><text class="gr" x="440" y="86">−0.177</text>
-  <circle class="lo2" cx="580" cy="118" r="24" /><text class="nm2" x="580" y="123">L</text><text class="gr" x="580" y="84">−0.755</text>
+  <path class="g2-edb" d="M92,60 L204,95" />
+  <path class="g2-edb" d="M92,125 L204,105" />
+  <path class="g2-edb" d="M256,100 L336,110" />
+  <path class="g2-edb" d="M92,190 L336,128" />
+  <path class="g2-edb" d="M392,118 L452,118" />
+  <path class="g2-edb" d="M508,118 L556,118" />
+  <circle class="g2-inp2" cx="70" cy="60" r="20" /><text class="g2-nm2 g2-it" x="70" y="65">x</text><text class="g2-gr" x="70" y="30">−0.089</text>
+  <circle class="g2-inp2" cx="70" cy="125" r="20" /><text class="g2-nm2 g2-it" x="70" y="130">w</text><text class="g2-gr" x="24" y="130">−0.177</text>
+  <circle class="g2-inp2" cx="70" cy="190" r="20" /><text class="g2-nm2 g2-it" x="70" y="195">b</text><text class="g2-gr" x="24" y="195">−0.177</text>
+  <circle class="g2-op2" cx="230" cy="100" r="22" /><text class="g2-nm2" x="230" y="106">×</text>
+  <circle class="g2-op2" cx="364" cy="118" r="22" /><text class="g2-nm2" x="364" y="124">+</text>
+  <circle class="g2-op2" cx="480" cy="118" r="22" /><text class="g2-nm2" x="480" y="124">σ</text><text class="g2-gr" x="440" y="86">−0.177</text>
+  <circle class="g2-lo2" cx="580" cy="118" r="24" /><text class="g2-nm2" x="580" y="123">L</text><text class="g2-gr" x="580" y="84">−0.755</text>
   <!-- moving backward dot -->
-  <circle class="bdot" r="6"><animateMotion dur="3s" repeatCount="indefinite" path="M580,118 L480,118 L364,118 L230,100 L70,125" /></circle>
-  <text class="gr" x="320" y="205" fill="#7a7a7a" font-size="12" font-weight="normal">backward pass : the gradient flows right → left, scaled at each box</text>
+  <circle class="g2-bdot" r="6"><animateMotion dur="3s" repeatCount="indefinite" path="M580,118 L480,118 L364,118 L230,100 L70,125" /></circle>
+  <text class="g2-gr" x="320" y="205" fill="#7a7a7a" font-size="12" font-weight="normal">backward pass : the gradient flows right → left, scaled at each box</text>
 </svg>
 <figcaption><b>Figure 2 -</b> The backward pass over the <i>same</i> graph. The orange number reaching each node is $\partial L / \partial(\text{that value})$. Each box multiplied the gradient handed to it by its own local derivative, precisely the backprop rule.</figcaption>
 </center></figure>
