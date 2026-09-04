@@ -31,32 +31,32 @@ $$ \begin{equation} \begin{aligned} PE(pos, 2i)   &= \sin\!\left( \frac{pos}{100
 <figure><center>
 <svg viewBox="0 0 640 260" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .axp{ stroke:#bbb; stroke-width:1; }
-    .w1{ fill:none; stroke:#4a6da7; stroke-width:2; }
-    .w2{ fill:none; stroke:#5aa06a; stroke-width:2; }
-    .w3{ fill:none; stroke:#b5651d; stroke-width:2; }
-    .scan{ stroke:#2b2b2b; stroke-width:1.4; stroke-dasharray:3 3; }
-    .dot{ r:4.5; }
-    .lab{ font-size:12px; fill:#7a7a7a; } .k{ font-size:12px; }
+    .g1-axp{ stroke:#bbb; stroke-width:1; }
+    .g1-w1{ fill:none; stroke:#4a6da7; stroke-width:2; }
+    .g1-w2{ fill:none; stroke:#5aa06a; stroke-width:2; }
+    .g1-w3{ fill:none; stroke:#b5651d; stroke-width:2; }
+    .g1-scan{ stroke:#2b2b2b; stroke-width:1.4; stroke-dasharray:3 3; }
+    .g1-dot{ r:4.5; }
+    .g1-lab{ font-size:12px; fill:#7a7a7a; } .g1-k{ font-size:12px; }
   </style>
-  <line class="axp" x1="40" y1="130" x2="600" y2="130"/>
-  <text class="lab" x="320" y="250" text-anchor="middle">position  →   (a vertical slice = that position's unique fingerprint)</text>
+  <line class="g1-axp" x1="40" y1="130" x2="600" y2="130"/>
+  <text class="g1-lab" x="320" y="250" text-anchor="middle">position  →   (a vertical slice = that position's unique fingerprint)</text>
   <!-- three sine waves of different wavelengths over x 40..600 -->
   <!-- fast -->
-  <path class="w3" d="M40,130 Q55,70 70,130 T100,130 T130,130 T160,130 T190,130 T220,130 T250,130 T280,130 T310,130 T340,130 T370,130 T400,130 T430,130 T460,130 T490,130 T520,130 T550,130 T580,130 T600,130"/>
+  <path class="g1-w3" d="M40,130 Q55,70 70,130 T100,130 T130,130 T160,130 T190,130 T220,130 T250,130 T280,130 T310,130 T340,130 T370,130 T400,130 T430,130 T460,130 T490,130 T520,130 T550,130 T580,130 T600,130"/>
   <!-- medium (green) : use a real sine sampled -->
-  <path class="w2" d="M40,130 C90,50 140,50 190,130 C240,210 290,210 340,130 C390,50 440,50 490,130 C540,210 590,210 620,130"/>
+  <path class="g1-w2" d="M40,130 C90,50 140,50 190,130 C240,210 290,210 340,130 C390,50 440,50 490,130 C540,210 590,210 620,130"/>
   <!-- slow (blue) -->
-  <path class="w1" d="M40,130 C140,40 240,40 340,130 C440,220 540,220 620,130"/>
+  <path class="g1-w1" d="M40,130 C140,40 240,40 340,130 C440,220 540,220 620,130"/>
   <!-- animated scan line -->
-  <line class="scan" x1="40" y1="20" x2="40" y2="235">
+  <line class="g1-scan" x1="40" y1="20" x2="40" y2="235">
     <animate attributeName="x1" values="40;600;40" dur="6s" repeatCount="indefinite"/>
     <animate attributeName="x2" values="40;600;40" dur="6s" repeatCount="indefinite"/>
   </line>
-  <circle class="dot" fill="#4a6da7"><animateMotion path="M40,130 C140,40 240,40 340,130 C440,220 540,220 620,130" dur="6s" repeatCount="indefinite"/></circle>
-  <text class="k" x="70"  y="40" fill="#b5651d">dim i : fast wave</text>
-  <text class="k" x="360" y="40" fill="#5aa06a">dim j : medium</text>
-  <text class="k" x="360" y="220" fill="#4a6da7">dim k : slow wave</text>
+  <circle class="g1-dot" fill="#4a6da7"><animateMotion path="M40,130 C140,40 240,40 340,130 C440,220 540,220 620,130" dur="6s" repeatCount="indefinite"/></circle>
+  <text class="g1-k" x="70"  y="40" fill="#b5651d">dim i : fast wave</text>
+  <text class="g1-k" x="360" y="40" fill="#5aa06a">dim j : medium</text>
+  <text class="g1-k" x="360" y="220" fill="#4a6da7">dim k : slow wave</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Sinusoidal positional encodings $\eqref{eq:posenc}$. Different embedding dimensions oscillate at different wavelengths ; reading one vertical slice gives a position its unique code. The scanning line sweeps through positions.</figcaption>
 </center></figure>
@@ -78,39 +78,39 @@ $$ \begin{equation} \operatorname{FFN}(z) = \max(0,\; z W_1 + b_1)\, W_2 + b_2. 
 <figure><center>
 <svg viewBox="0 0 480 430" width="100%" style="max-width:380px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .flow{ stroke:#4a6da7; stroke-width:2.2; fill:none; marker-end:url(#ah);
+    .g2-flow{ stroke:#4a6da7; stroke-width:2.2; fill:none; marker-end:url(#g2-ah);
            stroke-dasharray:6 7; animation:tflow 2.2s linear infinite; }
     @keyframes tflow { to { stroke-dashoffset:-52; } }
-    .res { stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:4 4; }
-    .b   { rx:9; stroke-width:1.7; }
-    .att { fill:#f6f7fb; stroke:#4a6da7; } .ffn{ fill:#f3faf4; stroke:#5aa06a; }
-    .an  { fill:#faf6f2; stroke:#b5651d; } .io{ fill:#fff; stroke:#2b2b2b; }
-    .t   { font-size:13px; fill:#2b2b2b; text-anchor:middle; }
-    .rt  { font-size:11px; fill:#b5651d; }
+    .g2-res { stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:4 4; }
+    .g2-b   { rx:9; stroke-width:1.7; }
+    .g2-att { fill:#f6f7fb; stroke:#4a6da7; } .g2-ffn{ fill:#f3faf4; stroke:#5aa06a; }
+    .g2-an  { fill:#faf6f2; stroke:#b5651d; } .g2-io{ fill:#fff; stroke:#2b2b2b; }
+    .g2-t   { font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .g2-rt  { font-size:11px; fill:#b5651d; }
   </style>
-  <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4a6da7"/></marker></defs>
+  <defs><marker id="g2-ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4a6da7"/></marker></defs>
   <!-- input -->
-  <rect class="b io" x="175" y="388" width="130" height="34"/><text class="t" x="240" y="410">input  X</text>
-  <path class="flow" d="M240,388 L240,352"/>
+  <rect class="g2-b g2-io" x="175" y="388" width="130" height="34"/><text class="g2-t" x="240" y="410">input  X</text>
+  <path class="g2-flow" d="M240,388 L240,352"/>
   <!-- attention -->
-  <rect class="b att" x="120" y="300" width="240" height="48"/><text class="t" x="240" y="329">Multi-Head Self-Attention</text>
-  <path class="flow" d="M240,300 L240,270"/>
+  <rect class="g2-b g2-att" x="120" y="300" width="240" height="48"/><text class="g2-t" x="240" y="329">Multi-Head Self-Attention</text>
+  <path class="g2-flow" d="M240,300 L240,270"/>
   <!-- add & norm 1 -->
-  <rect class="b an" x="150" y="234" width="180" height="34"/><text class="t" x="240" y="256">Add &amp; Norm</text>
-  <path class="flow" d="M240,234 L240,204"/>
+  <rect class="g2-b g2-an" x="150" y="234" width="180" height="34"/><text class="g2-t" x="240" y="256">Add &amp; Norm</text>
+  <path class="g2-flow" d="M240,234 L240,204"/>
   <!-- ffn -->
-  <rect class="b ffn" x="140" y="156" width="200" height="46"/><text class="t" x="240" y="184">Feed-Forward</text>
-  <path class="flow" d="M240,156 L240,126"/>
+  <rect class="g2-b g2-ffn" x="140" y="156" width="200" height="46"/><text class="g2-t" x="240" y="184">Feed-Forward</text>
+  <path class="g2-flow" d="M240,156 L240,126"/>
   <!-- add & norm 2 -->
-  <rect class="b an" x="150" y="90" width="180" height="34"/><text class="t" x="240" y="112">Add &amp; Norm</text>
-  <path class="flow" d="M240,90 L240,58"/>
+  <rect class="g2-b g2-an" x="150" y="90" width="180" height="34"/><text class="g2-t" x="240" y="112">Add &amp; Norm</text>
+  <path class="g2-flow" d="M240,90 L240,58"/>
   <!-- output -->
-  <rect class="b io" x="165" y="20" width="150" height="34"/><text class="t" x="240" y="42">block output</text>
+  <rect class="g2-b g2-io" x="165" y="20" width="150" height="34"/><text class="g2-t" x="240" y="42">block output</text>
   <!-- residual arrows -->
-  <path class="res" d="M120,370 C70,360 70,270 145,251"/>
-  <path class="res" d="M120,286 C58,270 58,120 145,107"/>
-  <text class="rt" x="40" y="315" transform="rotate(-90 40 315)">residual +</text>
-  <text class="rt" x="30" y="200" transform="rotate(-90 30 200)">residual +</text>
+  <path class="g2-res" d="M120,370 C70,360 70,270 145,251"/>
+  <path class="g2-res" d="M120,286 C58,270 58,120 145,107"/>
+  <text class="g2-rt" x="40" y="315" transform="rotate(-90 40 315)">residual +</text>
+  <text class="g2-rt" x="30" y="200" transform="rotate(-90 30 200)">residual +</text>
 </svg>
 <figcaption><b>Figure 2 -</b> One Transformer block $\eqref{eq:block}$. Data flows bottom to top (blue) : self-attention, then a feed-forward network, each wrapped in a residual "skip" (orange) and layer normalisation. Stack this block $N$ times to get an encoder.</figcaption>
 </center></figure>
@@ -128,41 +128,41 @@ $$ \begin{equation} \big(\text{mask}\big)_{ij} = \begin{cases} 0 & j \le i \quad
 <figure><center>
 <svg viewBox="0 0 640 380" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .stack{ rx:8; stroke-width:1.6; }
-    .enc{ fill:#f6f7fb; stroke:#4a6da7; } .dec{ fill:#f3faf4; stroke:#5aa06a; }
-    .io{ fill:#fff; stroke:#2b2b2b; rx:8; stroke-width:1.6; }
-    .t{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; } .nx{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
-    .up{ stroke:#4a6da7; stroke-width:2; fill:none; marker-end:url(#a2); stroke-dasharray:6 6; animation:uf 2s linear infinite;}
-    .cross{ stroke:#b5651d; stroke-width:2; fill:none; marker-end:url(#a3); stroke-dasharray:5 5; animation:uf 2s linear infinite;}
+    .g3-stack{ rx:8; stroke-width:1.6; }
+    .g3-enc{ fill:#f6f7fb; stroke:#4a6da7; } .g3-dec{ fill:#f3faf4; stroke:#5aa06a; }
+    .g3-io{ fill:#fff; stroke:#2b2b2b; rx:8; stroke-width:1.6; }
+    .g3-t{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; } .g3-nx{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g3-up{ stroke:#4a6da7; stroke-width:2; fill:none; marker-end:url(#g3-a2); stroke-dasharray:6 6; animation:uf 2s linear infinite;}
+    .g3-cross{ stroke:#b5651d; stroke-width:2; fill:none; marker-end:url(#g3-a3); stroke-dasharray:5 5; animation:uf 2s linear infinite;}
     @keyframes uf{ to{ stroke-dashoffset:-48; } }
   </style>
   <defs>
-    <marker id="a2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4a6da7"/></marker>
-    <marker id="a3" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b5651d"/></marker>
+    <marker id="g3-a2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4a6da7"/></marker>
+    <marker id="g3-a3" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b5651d"/></marker>
   </defs>
   <!-- ENCODER -->
-  <text class="nx" x="150" y="26">ENCODER  (reads source)</text>
-  <rect class="io" x="90" y="320" width="120" height="34"/><text class="t" x="150" y="342">"le chat"</text>
-  <path class="up" d="M150,320 L150,292"/>
-  <rect class="stack enc" x="80" y="230" width="140" height="58"/><text class="t" x="150" y="256">Self-Attention</text><text class="t" x="150" y="274">+ Feed-Forward</text>
-  <text class="nx" x="150" y="305">× N blocks</text>
-  <path class="up" d="M150,230 L150,150"/>
-  <rect class="stack enc" x="80" y="92" width="140" height="58" opacity=".5"/><text class="t" x="150" y="126">encoded source</text>
+  <text class="g3-nx" x="150" y="26">ENCODER  (reads source)</text>
+  <rect class="g3-io" x="90" y="320" width="120" height="34"/><text class="g3-t" x="150" y="342">"le chat"</text>
+  <path class="g3-up" d="M150,320 L150,292"/>
+  <rect class="g3-stack g3-enc" x="80" y="230" width="140" height="58"/><text class="g3-t" x="150" y="256">Self-Attention</text><text class="g3-t" x="150" y="274">+ Feed-Forward</text>
+  <text class="g3-nx" x="150" y="305">× N blocks</text>
+  <path class="g3-up" d="M150,230 L150,150"/>
+  <rect class="g3-stack g3-enc" x="80" y="92" width="140" height="58" opacity=".5"/><text class="g3-t" x="150" y="126">encoded source</text>
   <!-- DECODER -->
-  <text class="nx" x="470" y="26">DECODER  (writes target)</text>
-  <rect class="io" x="410" y="320" width="150" height="34"/><text class="t" x="485" y="342">"the ___" (so far)</text>
-  <path class="up" d="M485,320 L485,296"/>
-  <rect class="stack dec" x="395" y="236" width="180" height="30"/><text class="t" x="485" y="256">Masked Self-Attention</text>
-  <path class="up" d="M485,236 L485,214"/>
-  <rect class="stack dec" x="395" y="176" width="180" height="34"/><text class="t" x="485" y="198">Cross-Attention</text>
-  <path class="up" d="M485,176 L485,150"/>
-  <rect class="stack dec" x="395" y="112" width="180" height="34"/><text class="t" x="485" y="134">Feed-Forward</text>
-  <text class="nx" x="485" y="300">× N blocks</text>
-  <path class="up" d="M485,112 L485,84"/>
-  <rect class="io" x="410" y="46" width="150" height="34"/><text class="t" x="485" y="68">next word : "cat"</text>
+  <text class="g3-nx" x="470" y="26">DECODER  (writes target)</text>
+  <rect class="g3-io" x="410" y="320" width="150" height="34"/><text class="g3-t" x="485" y="342">"the ___" (so far)</text>
+  <path class="g3-up" d="M485,320 L485,296"/>
+  <rect class="g3-stack g3-dec" x="395" y="236" width="180" height="30"/><text class="g3-t" x="485" y="256">Masked Self-Attention</text>
+  <path class="g3-up" d="M485,236 L485,214"/>
+  <rect class="g3-stack g3-dec" x="395" y="176" width="180" height="34"/><text class="g3-t" x="485" y="198">Cross-Attention</text>
+  <path class="g3-up" d="M485,176 L485,150"/>
+  <rect class="g3-stack g3-dec" x="395" y="112" width="180" height="34"/><text class="g3-t" x="485" y="134">Feed-Forward</text>
+  <text class="g3-nx" x="485" y="300">× N blocks</text>
+  <path class="g3-up" d="M485,112 L485,84"/>
+  <rect class="g3-io" x="410" y="46" width="150" height="34"/><text class="g3-t" x="485" y="68">next word : "cat"</text>
   <!-- cross attention link encoder -> decoder -->
-  <path class="cross" d="M220,121 C300,121 320,193 388,193"/>
-  <text class="nx" x="300" y="176" fill="#b5651d">keys / values</text>
+  <path class="g3-cross" d="M220,121 C300,121 320,193 388,193"/>
+  <text class="g3-nx" x="300" y="176" fill="#b5651d">keys / values</text>
 </svg>
 <figcaption><b>Figure 3 -</b> The encoder–decoder Transformer. The encoder (blue) turns the source into a set of key/value vectors ; the decoder (green) generates the target word by word, using masked self-attention over what it has written and cross-attention (orange) into the encoder's output.</figcaption>
 </center></figure>

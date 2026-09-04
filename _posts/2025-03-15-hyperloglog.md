@@ -27,27 +27,27 @@ HyperLogLog plays exactly this game with **hashes**. Each item is hashed to a ra
 <figure><center>
 <svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .bit{ font-family:'Source Code Pro', monospace; font-size:17px; fill:#2b2b2b; }
-    .z{ fill:#b5651d; font-weight:bold; }
-    .item{ font-size:13px; fill:#7a7a7a; font-style:italic; }
-    .lab{ font-size:12px; fill:#7a7a7a; }
-    .reg{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
-    .rt{ font-size:14px; fill:#2b2b2b; text-anchor:middle; }
-    .pulse{ animation:pz 3s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+    .g1-bit{ font-family:'Source Code Pro', monospace; font-size:17px; fill:#2b2b2b; }
+    .g1-z{ fill:#b5651d; font-weight:bold; }
+    .g1-item{ font-size:13px; fill:#7a7a7a; font-style:italic; }
+    .g1-lab{ font-size:12px; fill:#7a7a7a; }
+    .g1-reg{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .g1-rt{ font-size:14px; fill:#2b2b2b; text-anchor:middle; }
+    .g1-pulse{ animation:pz 3s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
     @keyframes pz { 0%,100%{opacity:.6} 50%{opacity:1} }
   </style>
-  <text class="item" x="30" y="46">"alice@…"</text>
-  <text class="bit" x="150" y="50"><tspan class="z">000</tspan>10110101101001</text>
-  <text class="lab" x="470" y="46">→ ρ = 3 leading zeros</text>
-  <text class="item" x="30" y="96">"bob@…"</text>
-  <text class="bit" x="150" y="100"><tspan class="z">0</tspan>110100101100110</text>
-  <text class="lab" x="470" y="96">→ ρ = 1</text>
-  <text class="item" x="30" y="146">"carol@…"</text>
-  <text class="bit" x="150" y="150"><tspan class="z">00000</tspan>101011010011</text>
-  <text class="lab" x="470" y="146">→ ρ = 5   (rare! )</text>
+  <text class="g1-item" x="30" y="46">"alice@…"</text>
+  <text class="g1-bit" x="150" y="50"><tspan class="g1-z">000</tspan>10110101101001</text>
+  <text class="g1-lab" x="470" y="46">→ ρ = 3 leading zeros</text>
+  <text class="g1-item" x="30" y="96">"bob@…"</text>
+  <text class="g1-bit" x="150" y="100"><tspan class="g1-z">0</tspan>110100101100110</text>
+  <text class="g1-lab" x="470" y="96">→ ρ = 1</text>
+  <text class="g1-item" x="30" y="146">"carol@…"</text>
+  <text class="g1-bit" x="150" y="150"><tspan class="g1-z">00000</tspan>101011010011</text>
+  <text class="g1-lab" x="470" y="146">→ ρ = 5   (rare! )</text>
   <!-- max register -->
-  <rect class="reg pulse" x="150" y="180" width="230" height="42" rx="8"/>
-  <text class="rt" x="265" y="207">max ρ so far  =  5   ⇒   ≈ 2⁵ = 32 distinct</text>
+  <rect class="g1-reg g1-pulse" x="150" y="180" width="230" height="42" rx="8"/>
+  <text class="g1-rt" x="265" y="207">max ρ so far  =  5   ⇒   ≈ 2⁵ = 32 distinct</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Each item is hashed ; we count its leading zeros $\rho$. The <b>maximum</b> $\rho$ ever seen is a (very rough) exponent for the cardinality : the rarer the pattern we have stumbled on, the more items we must have drawn.</figcaption>
 </center></figure>
@@ -64,29 +64,29 @@ where $M[j]$ is the maximum leading-zero count in register $j$ and $\alpha_m$ is
 <figure><center>
 <svg viewBox="0 0 640 210" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .reg2{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
-    .rv{ font-size:14px; fill:#2b2b2b; text-anchor:middle; } .ri{ font-size:9.5px; fill:#9a9a9a; text-anchor:middle; }
-    .flow{ stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:5 6; animation:hf 1.6s linear infinite; }
+    .g2-reg2{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
+    .g2-rv{ font-size:14px; fill:#2b2b2b; text-anchor:middle; } .g2-ri{ font-size:9.5px; fill:#9a9a9a; text-anchor:middle; }
+    .g2-flow{ stroke:#b5651d; stroke-width:1.8; fill:none; stroke-dasharray:5 6; animation:hf 1.6s linear infinite; }
     @keyframes hf { to { stroke-dashoffset:-44; } }
-    .cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; } .comb{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
+    .g2-cap{ font-size:12px; fill:#7a7a7a; text-anchor:middle; } .g2-comb{ fill:#faf6f2; stroke:#b5651d; stroke-width:1.6; }
   </style>
-  <text class="cap" x="320" y="26">hash routes each item to one of m registers ; each keeps its own max ρ</text>
+  <text class="g2-cap" x="320" y="26">hash routes each item to one of m registers ; each keeps its own max ρ</text>
   <!-- stream in -->
-  <path class="flow" d="M20,70 L70,70"/>
+  <path class="g2-flow" d="M20,70 L70,70"/>
   <g>
-    <rect class="reg2" x="72"  y="52" width="40" height="36" rx="5"/><text class="rv" x="92"  y="76">2</text><text class="ri" x="92"  y="100">M[0]</text>
-    <rect class="reg2" x="120" y="52" width="40" height="36" rx="5"/><text class="rv" x="140" y="76">5</text><text class="ri" x="140" y="100">M[1]</text>
-    <rect class="reg2" x="168" y="52" width="40" height="36" rx="5"/><text class="rv" x="188" y="76">1</text><text class="ri" x="188" y="100">M[2]</text>
-    <rect class="reg2" x="216" y="52" width="40" height="36" rx="5"/><text class="rv" x="236" y="76">3</text><text class="ri" x="236" y="100">M[3]</text>
-    <rect class="reg2" x="264" y="52" width="40" height="36" rx="5"/><text class="rv" x="284" y="76">2</text><text class="ri" x="284" y="100">M[4]</text>
-    <rect class="reg2" x="312" y="52" width="40" height="36" rx="5"/><text class="rv" x="332" y="76">4</text><text class="ri" x="332" y="100">M[5]</text>
-    <rect class="reg2" x="360" y="52" width="40" height="36" rx="5"/><text class="rv" x="380" y="76">2</text><text class="ri" x="380" y="100">…</text>
-    <rect class="reg2" x="408" y="52" width="40" height="36" rx="5"/><text class="rv" x="428" y="76">3</text><text class="ri" x="428" y="100">M[m-1]</text>
+    <rect class="g2-reg2" x="72"  y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="92"  y="76">2</text><text class="g2-ri" x="92"  y="100">M[0]</text>
+    <rect class="g2-reg2" x="120" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="140" y="76">5</text><text class="g2-ri" x="140" y="100">M[1]</text>
+    <rect class="g2-reg2" x="168" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="188" y="76">1</text><text class="g2-ri" x="188" y="100">M[2]</text>
+    <rect class="g2-reg2" x="216" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="236" y="76">3</text><text class="g2-ri" x="236" y="100">M[3]</text>
+    <rect class="g2-reg2" x="264" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="284" y="76">2</text><text class="g2-ri" x="284" y="100">M[4]</text>
+    <rect class="g2-reg2" x="312" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="332" y="76">4</text><text class="g2-ri" x="332" y="100">M[5]</text>
+    <rect class="g2-reg2" x="360" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="380" y="76">2</text><text class="g2-ri" x="380" y="100">…</text>
+    <rect class="g2-reg2" x="408" y="52" width="40" height="36" rx="5"/><text class="g2-rv" x="428" y="76">3</text><text class="g2-ri" x="428" y="100">M[m-1]</text>
   </g>
-  <path class="flow" d="M456,70 L508,70"/>
-  <rect class="comb" x="510" y="46" width="118" height="48" rx="8"/><text class="rv" x="569" y="66" font-size="12">harmonic</text><text class="rv" x="569" y="82" font-size="12">mean → n̂</text>
-  <text class="cap" x="320" y="150">more registers m  ⇒  less noise · standard error ≈ 1.04 / √m</text>
-  <text class="cap" x="320" y="176">m = 16 384 registers × 6 bits ≈ 12 KB  →  counts billions within ~0.8%</text>
+  <path class="g2-flow" d="M456,70 L508,70"/>
+  <rect class="g2-comb" x="510" y="46" width="118" height="48" rx="8"/><text class="g2-rv" x="569" y="66" font-size="12">harmonic</text><text class="g2-rv" x="569" y="82" font-size="12">mean → n̂</text>
+  <text class="g2-cap" x="320" y="150">more registers m  ⇒  less noise · standard error ≈ 1.04 / √m</text>
+  <text class="g2-cap" x="320" y="176">m = 16 384 registers × 6 bits ≈ 12 KB  →  counts billions within ~0.8%</text>
 </svg>
 <figcaption><b>Figure 2 -</b> Stochastic averaging. The hash sends each item to one of $m$ registers ; each stores only the largest leading-zero count it has seen. Combining them with the harmonic mean $\eqref{eq:hll}$ turns many noisy guesses into one accurate estimate.</figcaption>
 </center></figure>

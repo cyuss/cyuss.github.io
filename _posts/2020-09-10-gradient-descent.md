@@ -40,34 +40,34 @@ Each term has a plain meaning : $\nabla L$ is *which way is uphill*, the minus s
 <figure><center>
 <svg viewBox="0 0 640 300" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .curve{ fill:none; stroke:#4a6da7; stroke-width:2.6; }
-    .axis{ stroke:#bbb; stroke-width:1; }
-    .ball{ fill:#b5651d; }
-    .step{ fill:#b5651d; opacity:.35; }
-    .lab{ font-size:12px; fill:#7a7a7a; } .lz{ font-size:13px; fill:#2b2b2b; }
+    .g1-curve{ fill:none; stroke:#4a6da7; stroke-width:2.6; }
+    .g1-axis{ stroke:#bbb; stroke-width:1; }
+    .g1-ball{ fill:#b5651d; }
+    .g1-step{ fill:#b5651d; opacity:.35; }
+    .g1-lab{ font-size:12px; fill:#7a7a7a; } .g1-lz{ font-size:13px; fill:#2b2b2b; }
   </style>
-  <line class="axis" x1="40" y1="250" x2="600" y2="250"/>
-  <line class="axis" x1="60" y1="30" x2="60" y2="255"/>
-  <text class="lab" x="30" y="140" text-anchor="middle" transform="rotate(-90 30 140)">loss L(θ)</text>
-  <text class="lab" x="330" y="278" text-anchor="middle">parameter θ  →</text>
+  <line class="g1-axis" x1="40" y1="250" x2="600" y2="250"/>
+  <line class="g1-axis" x1="60" y1="30" x2="60" y2="255"/>
+  <text class="g1-lab" x="30" y="140" text-anchor="middle" transform="rotate(-90 30 140)">loss L(θ)</text>
+  <text class="g1-lab" x="330" y="278" text-anchor="middle">parameter θ  →</text>
   <!-- bowl-shaped loss curve: a parabola from (80,60) down to (330,235) up to (600,80) -->
-  <path class="curve" d="M80,60 Q330,360 600,80"/>
+  <path class="g1-curve" d="M80,60 Q330,360 600,80"/>
   <!-- static faded step markers along the descent (right side coming down) -->
-  <circle class="step" cx="560" cy="105" r="6"/>
-  <circle class="step" cx="500" cy="150" r="6"/>
-  <circle class="step" cx="450" cy="185" r="6"/>
-  <circle class="step" cx="410" cy="208" r="6"/>
-  <circle class="step" cx="380" cy="221" r="6"/>
-  <circle class="step" cx="358" cy="229" r="6"/>
+  <circle class="g1-step" cx="560" cy="105" r="6"/>
+  <circle class="g1-step" cx="500" cy="150" r="6"/>
+  <circle class="g1-step" cx="450" cy="185" r="6"/>
+  <circle class="g1-step" cx="410" cy="208" r="6"/>
+  <circle class="g1-step" cx="380" cy="221" r="6"/>
+  <circle class="g1-step" cx="358" cy="229" r="6"/>
   <!-- animated ball following the curve down to the minimum -->
-  <circle class="ball" r="8">
+  <circle class="g1-ball" r="8">
     <animateMotion dur="4s" repeatCount="indefinite"
       keyPoints="0;0.28;0.42;0.52;0.60;0.66;0.70;0.70;0"
       keyTimes="0;0.12;0.24;0.36;0.5;0.64;0.8;0.92;1"
       calcMode="linear"
       path="M80,60 Q330,360 600,80"/>
   </circle>
-  <text class="lz" x="330" y="250" text-anchor="middle">minimum</text>
+  <text class="g1-lz" x="330" y="250" text-anchor="middle">minimum</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Gradient descent on a 1-D loss. The ball repeatedly moves against the slope $\eqref{eq:gd}$, taking large steps where the curve is steep and small steps as it flattens near the minimum.</figcaption>
 </center></figure>
@@ -82,37 +82,37 @@ The step size $\eta$ is deceptively important. Get it wrong and the whole thing 
 <figure><center>
 <svg viewBox="0 0 640 260" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .cv{ fill:none; stroke:#c9cdd6; stroke-width:2.2; }
-    .p1{ fill:none; stroke:#5aa06a; stroke-width:2; marker-end:url(#g); }
-    .p2{ fill:none; stroke:#4a6da7; stroke-width:2; marker-end:url(#b); }
-    .p3{ fill:none; stroke:#b5651d; stroke-width:2; marker-end:url(#o); }
-    .tt{ font-size:12px; } .cap{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-cv{ fill:none; stroke:#c9cdd6; stroke-width:2.2; }
+    .g2-p1{ fill:none; stroke:#5aa06a; stroke-width:2; marker-end:url(#g2-g); }
+    .g2-p2{ fill:none; stroke:#4a6da7; stroke-width:2; marker-end:url(#g2-b); }
+    .g2-p3{ fill:none; stroke:#b5651d; stroke-width:2; marker-end:url(#g2-o); }
+    .g2-tt{ font-size:12px; } .g2-cap{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="g" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#5aa06a"/></marker>
-    <marker id="b" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#4a6da7"/></marker>
-    <marker id="o" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#b5651d"/></marker>
+    <marker id="g2-g" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#5aa06a"/></marker>
+    <marker id="g2-b" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#4a6da7"/></marker>
+    <marker id="g2-o" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#b5651d"/></marker>
   </defs>
   <!-- three small bowls -->
   <g>
-    <path class="cv" d="M20,40 Q100,230 180,40"/>
-    <text class="tt" x="100" y="24" text-anchor="middle" fill="#5aa06a">η too small</text>
+    <path class="g2-cv" d="M20,40 Q100,230 180,40"/>
+    <text class="g2-tt" x="100" y="24" text-anchor="middle" fill="#5aa06a">η too small</text>
     <!-- many tiny steps -->
-    <path class="p1" d="M170,55 L162,72 L155,88 L149,103 L144,116 L140,127 L137,136"/>
-    <text class="cap" x="100" y="250">slow crawl</text>
+    <path class="g2-p1" d="M170,55 L162,72 L155,88 L149,103 L144,116 L140,127 L137,136"/>
+    <text class="g2-cap" x="100" y="250">slow crawl</text>
   </g>
   <g>
-    <path class="cv" d="M230,40 Q310,230 390,40"/>
-    <text class="tt" x="310" y="24" text-anchor="middle" fill="#4a6da7">η just right</text>
-    <path class="p2" d="M378,58 L330,150 L305,175 L312,168"/>
-    <text class="cap" x="310" y="250">few good steps</text>
+    <path class="g2-cv" d="M230,40 Q310,230 390,40"/>
+    <text class="g2-tt" x="310" y="24" text-anchor="middle" fill="#4a6da7">η just right</text>
+    <path class="g2-p2" d="M378,58 L330,150 L305,175 L312,168"/>
+    <text class="g2-cap" x="310" y="250">few good steps</text>
   </g>
   <g>
-    <path class="cv" d="M440,40 Q520,230 600,40"/>
-    <text class="tt" x="520" y="24" text-anchor="middle" fill="#b5651d">η too large</text>
+    <path class="g2-cv" d="M440,40 Q520,230 600,40"/>
+    <text class="g2-tt" x="520" y="24" text-anchor="middle" fill="#b5651d">η too large</text>
     <!-- overshoot zigzag growing -->
-    <path class="p3" d="M585,60 L505,150 L455,95 L560,175 L440,70"/>
-    <text class="cap" x="520" y="250">overshoots / diverges</text>
+    <path class="g2-p3" d="M585,60 L505,150 L455,95 L560,175 L440,70"/>
+    <text class="g2-cap" x="520" y="250">overshoots / diverges</text>
   </g>
 </svg>
 <figcaption><b>Figure 2 -</b> The effect of the learning rate $\eta$. Too small crawls, too large overshoots and can diverge, and a good value converges in a few steps. Tuning $\eta$ is the central practical skill of training.</figcaption>

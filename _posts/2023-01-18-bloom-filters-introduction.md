@@ -31,54 +31,54 @@ The machinery has three ingredients : a bit array $B$ of $m$ bits (all initially
 <figure><center>
 <svg viewBox="0 0 640 240" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .cellb { fill:#fff; stroke:#c9cdd6; stroke-width:1.4; }
-    .idx   { font-size:10.5px; fill:#9a9a9a; }
-    .hpath { stroke:#b5651d; stroke-width:1.8; fill:none; opacity:.8;
+    .g1-cellb { fill:#fff; stroke:#c9cdd6; stroke-width:1.4; }
+    .g1-idx   { font-size:10.5px; fill:#9a9a9a; }
+    .g1-hpath { stroke:#b5651d; stroke-width:1.8; fill:none; opacity:.8;
              stroke-dasharray:4 6; animation:bflow 1.6s linear infinite; }
     @keyframes bflow { to { stroke-dashoffset:-40; } }
-    .setb  { fill:#4a6da7; opacity:0; }
-    .s0 { animation:lite 6s ease-in-out infinite; animation-delay:.3s; }
-    .s1 { animation:lite 6s ease-in-out infinite; animation-delay:1.3s; }
-    .s2 { animation:lite 6s ease-in-out infinite; animation-delay:2.3s; }
+    .g1-setb  { fill:#4a6da7; opacity:0; }
+    .g1-s0 { animation:lite 6s ease-in-out infinite; animation-delay:.3s; }
+    .g1-s1 { animation:lite 6s ease-in-out infinite; animation-delay:1.3s; }
+    .g1-s2 { animation:lite 6s ease-in-out infinite; animation-delay:2.3s; }
     @keyframes lite { 0%{opacity:0} 8%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
-    .elem { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
-    .lbl  { font-size:15px; fill:#2b2b2b; } .it{ font-style:italic; }
-    .htag { font-size:12px; fill:#b5651d; }
+    .g1-elem { fill:#f3faf4; stroke:#5aa06a; stroke-width:1.6; }
+    .g1-lbl  { font-size:15px; fill:#2b2b2b; } .g1-it{ font-style:italic; }
+    .g1-htag { font-size:12px; fill:#b5651d; }
   </style>
   <!-- element -->
-  <rect class="elem" x="250" y="16" rx="16" ry="16" width="140" height="38"/>
-  <text class="lbl it" x="320" y="41" text-anchor="middle">insert("apple")</text>
+  <rect class="g1-elem" x="250" y="16" rx="16" ry="16" width="140" height="38"/>
+  <text class="g1-lbl g1-it" x="320" y="41" text-anchor="middle">insert("apple")</text>
   <!-- hash tags -->
-  <text class="htag" x="150" y="96" text-anchor="middle">h₁</text>
-  <text class="htag" x="320" y="150" text-anchor="middle">h₂</text>
-  <text class="htag" x="470" y="96" text-anchor="middle">h₃</text>
+  <text class="g1-htag" x="150" y="96" text-anchor="middle">h₁</text>
+  <text class="g1-htag" x="320" y="150" text-anchor="middle">h₂</text>
+  <text class="g1-htag" x="470" y="96" text-anchor="middle">h₃</text>
   <!-- hash paths to cells 3, 8, 12 -->
-  <path class="hpath" d="M300,54 C230,90 175,110 140,150"/>
-  <path class="hpath" d="M320,54 C320,120 320,120 320,150"/>
-  <path class="hpath" d="M340,54 C420,90 470,110 500,150"/>
+  <path class="g1-hpath" d="M300,54 C230,90 175,110 140,150"/>
+  <path class="g1-hpath" d="M320,54 C320,120 320,120 320,150"/>
+  <path class="g1-hpath" d="M340,54 C420,90 470,110 500,150"/>
   <!-- bit array of 16 cells, width 32, start x=32, y=150 -->
   <g>
     <!-- generate cells -->
     <g>
-      <rect class="cellb" x="32"  y="150" width="32" height="34"/><text class="idx" x="48"  y="200" text-anchor="middle">0</text>
-      <rect class="cellb" x="64"  y="150" width="32" height="34"/><text class="idx" x="80"  y="200" text-anchor="middle">1</text>
-      <rect class="cellb" x="96"  y="150" width="32" height="34"/><text class="idx" x="112" y="200" text-anchor="middle">2</text>
-      <rect class="cellb" x="128" y="150" width="32" height="34"/><rect class="setb s0" x="128" y="150" width="32" height="34"/><text class="idx" x="144" y="200" text-anchor="middle">3</text>
-      <rect class="cellb" x="160" y="150" width="32" height="34"/><text class="idx" x="176" y="200" text-anchor="middle">4</text>
-      <rect class="cellb" x="192" y="150" width="32" height="34"/><text class="idx" x="208" y="200" text-anchor="middle">5</text>
-      <rect class="cellb" x="224" y="150" width="32" height="34"/><text class="idx" x="240" y="200" text-anchor="middle">6</text>
-      <rect class="cellb" x="256" y="150" width="32" height="34"/><text class="idx" x="272" y="200" text-anchor="middle">7</text>
-      <rect class="cellb" x="288" y="150" width="32" height="34"/><rect class="setb s1" x="288" y="150" width="32" height="34"/><text class="idx" x="304" y="200" text-anchor="middle">8</text>
-      <rect class="cellb" x="320" y="150" width="32" height="34"/><text class="idx" x="336" y="200" text-anchor="middle">9</text>
-      <rect class="cellb" x="352" y="150" width="32" height="34"/><text class="idx" x="368" y="200" text-anchor="middle">10</text>
-      <rect class="cellb" x="384" y="150" width="32" height="34"/><text class="idx" x="400" y="200" text-anchor="middle">11</text>
-      <rect class="cellb" x="416" y="150" width="32" height="34"/><rect class="setb s2" x="416" y="150" width="32" height="34"/><text class="idx" x="432" y="200" text-anchor="middle">12</text>
-      <rect class="cellb" x="448" y="150" width="32" height="34"/><text class="idx" x="464" y="200" text-anchor="middle">13</text>
-      <rect class="cellb" x="480" y="150" width="32" height="34"/><text class="idx" x="496" y="200" text-anchor="middle">14</text>
-      <rect class="cellb" x="512" y="150" width="32" height="34"/><text class="idx" x="528" y="200" text-anchor="middle">15</text>
+      <rect class="g1-cellb" x="32"  y="150" width="32" height="34"/><text class="g1-idx" x="48"  y="200" text-anchor="middle">0</text>
+      <rect class="g1-cellb" x="64"  y="150" width="32" height="34"/><text class="g1-idx" x="80"  y="200" text-anchor="middle">1</text>
+      <rect class="g1-cellb" x="96"  y="150" width="32" height="34"/><text class="g1-idx" x="112" y="200" text-anchor="middle">2</text>
+      <rect class="g1-cellb" x="128" y="150" width="32" height="34"/><rect class="g1-setb g1-s0" x="128" y="150" width="32" height="34"/><text class="g1-idx" x="144" y="200" text-anchor="middle">3</text>
+      <rect class="g1-cellb" x="160" y="150" width="32" height="34"/><text class="g1-idx" x="176" y="200" text-anchor="middle">4</text>
+      <rect class="g1-cellb" x="192" y="150" width="32" height="34"/><text class="g1-idx" x="208" y="200" text-anchor="middle">5</text>
+      <rect class="g1-cellb" x="224" y="150" width="32" height="34"/><text class="g1-idx" x="240" y="200" text-anchor="middle">6</text>
+      <rect class="g1-cellb" x="256" y="150" width="32" height="34"/><text class="g1-idx" x="272" y="200" text-anchor="middle">7</text>
+      <rect class="g1-cellb" x="288" y="150" width="32" height="34"/><rect class="g1-setb g1-s1" x="288" y="150" width="32" height="34"/><text class="g1-idx" x="304" y="200" text-anchor="middle">8</text>
+      <rect class="g1-cellb" x="320" y="150" width="32" height="34"/><text class="g1-idx" x="336" y="200" text-anchor="middle">9</text>
+      <rect class="g1-cellb" x="352" y="150" width="32" height="34"/><text class="g1-idx" x="368" y="200" text-anchor="middle">10</text>
+      <rect class="g1-cellb" x="384" y="150" width="32" height="34"/><text class="g1-idx" x="400" y="200" text-anchor="middle">11</text>
+      <rect class="g1-cellb" x="416" y="150" width="32" height="34"/><rect class="g1-setb g1-s2" x="416" y="150" width="32" height="34"/><text class="g1-idx" x="432" y="200" text-anchor="middle">12</text>
+      <rect class="g1-cellb" x="448" y="150" width="32" height="34"/><text class="g1-idx" x="464" y="200" text-anchor="middle">13</text>
+      <rect class="g1-cellb" x="480" y="150" width="32" height="34"/><text class="g1-idx" x="496" y="200" text-anchor="middle">14</text>
+      <rect class="g1-cellb" x="512" y="150" width="32" height="34"/><text class="g1-idx" x="528" y="200" text-anchor="middle">15</text>
     </g>
   </g>
-  <text class="lbl" x="288" y="228" text-anchor="middle" font-size="13" fill="#7a7a7a">the bit array B  (m = 16 bits, k = 3 hashes)</text>
+  <text class="g1-lbl" x="288" y="228" text-anchor="middle" font-size="13" fill="#7a7a7a">the bit array B  (m = 16 bits, k = 3 hashes)</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Inserting <i>"apple"</i>. The three hash functions select positions $3, 8, 12$, and those bits are switched on (blue). Different elements light up different, possibly overlapping, positions.</figcaption>
 </center></figure>
@@ -88,39 +88,39 @@ The machinery has three ingredients : a bit array $B$ of $m$ bits (all initially
 <figure><center>
 <svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .c0 { fill:#fff; stroke:#c9cdd6; stroke-width:1.3; }
-    .c1 { fill:#4a6da7; stroke:#3c5a8a; stroke-width:1.3; }
-    .bit{ font-size:13px; fill:#fff; font-weight:bold; }
-    .bit0{ font-size:13px; fill:#b9bdc6; }
-    .qlbl{ font-size:14px; fill:#2b2b2b; font-style:italic; }
-    .yes { font-size:14px; fill:#5aa06a; font-weight:bold; }
-    .no  { font-size:14px; fill:#b5651d; font-weight:bold; }
-    .mk  { font-size:11px; fill:#7a7a7a; }
+    .g2-c0 { fill:#fff; stroke:#c9cdd6; stroke-width:1.3; }
+    .g2-c1 { fill:#4a6da7; stroke:#3c5a8a; stroke-width:1.3; }
+    .g2-bit{ font-size:13px; fill:#fff; font-weight:bold; }
+    .g2-bit0{ font-size:13px; fill:#b9bdc6; }
+    .g2-qlbl{ font-size:14px; fill:#2b2b2b; font-style:italic; }
+    .g2-yes { font-size:14px; fill:#5aa06a; font-weight:bold; }
+    .g2-no  { font-size:14px; fill:#b5651d; font-weight:bold; }
+    .g2-mk  { font-size:11px; fill:#7a7a7a; }
   </style>
   <!-- row A: member -->
-  <text class="qlbl" x="14" y="55">contains("apple")</text>
+  <text class="g2-qlbl" x="14" y="55">contains("apple")</text>
   <g transform="translate(190,32)">
-    <rect class="c1" x="0"   y="0" width="34" height="34"/><text class="bit" x="17"  y="22" text-anchor="middle">1</text>
-    <rect class="c1" x="40"  y="0" width="34" height="34"/><text class="bit" x="57"  y="22" text-anchor="middle">1</text>
-    <rect class="c1" x="80"  y="0" width="34" height="34"/><text class="bit" x="97"  y="22" text-anchor="middle">1</text>
-    <text class="mk" x="17" y="52" text-anchor="middle">pos 3</text>
-    <text class="mk" x="57" y="52" text-anchor="middle">pos 8</text>
-    <text class="mk" x="97" y="52" text-anchor="middle">pos 12</text>
+    <rect class="g2-c1" x="0"   y="0" width="34" height="34"/><text class="g2-bit" x="17"  y="22" text-anchor="middle">1</text>
+    <rect class="g2-c1" x="40"  y="0" width="34" height="34"/><text class="g2-bit" x="57"  y="22" text-anchor="middle">1</text>
+    <rect class="g2-c1" x="80"  y="0" width="34" height="34"/><text class="g2-bit" x="97"  y="22" text-anchor="middle">1</text>
+    <text class="g2-mk" x="17" y="52" text-anchor="middle">pos 3</text>
+    <text class="g2-mk" x="57" y="52" text-anchor="middle">pos 8</text>
+    <text class="g2-mk" x="97" y="52" text-anchor="middle">pos 12</text>
   </g>
-  <text class="yes" x="360" y="55">all 1  →  possibly in set ✓</text>
+  <text class="g2-yes" x="360" y="55">all 1  →  possibly in set ✓</text>
   <!-- divider -->
   <line x1="14" y1="120" x2="626" y2="120" stroke="#eee" stroke-width="1"/>
   <!-- row B: non-member -->
-  <text class="qlbl" x="14" y="175">contains("cow")</text>
+  <text class="g2-qlbl" x="14" y="175">contains("cow")</text>
   <g transform="translate(190,152)">
-    <rect class="c1" x="0"   y="0" width="34" height="34"/><text class="bit" x="17"  y="22" text-anchor="middle">1</text>
-    <rect class="c0" x="40"  y="0" width="34" height="34"/><text class="bit0" x="57" y="22" text-anchor="middle">0</text>
-    <rect class="c1" x="80"  y="0" width="34" height="34"/><text class="bit" x="97"  y="22" text-anchor="middle">1</text>
-    <text class="mk" x="17" y="52" text-anchor="middle">pos 5</text>
-    <text class="mk" x="57" y="52" text-anchor="middle">pos 9</text>
-    <text class="mk" x="97" y="52" text-anchor="middle">pos 12</text>
+    <rect class="g2-c1" x="0"   y="0" width="34" height="34"/><text class="g2-bit" x="17"  y="22" text-anchor="middle">1</text>
+    <rect class="g2-c0" x="40"  y="0" width="34" height="34"/><text class="g2-bit0" x="57" y="22" text-anchor="middle">0</text>
+    <rect class="g2-c1" x="80"  y="0" width="34" height="34"/><text class="g2-bit" x="97"  y="22" text-anchor="middle">1</text>
+    <text class="g2-mk" x="17" y="52" text-anchor="middle">pos 5</text>
+    <text class="g2-mk" x="57" y="52" text-anchor="middle">pos 9</text>
+    <text class="g2-mk" x="97" y="52" text-anchor="middle">pos 12</text>
   </g>
-  <text class="no" x="360" y="175">a 0  →  definitely not in set ✗</text>
+  <text class="g2-no" x="360" y="175">a 0  →  definitely not in set ✗</text>
 </svg>
 <figcaption><b>Figure 2 -</b> The asymmetric query logic. A single zero bit is an irrefutable proof of absence ; all-ones is only circumstantial evidence of presence.</figcaption>
 </center></figure>
@@ -191,39 +191,39 @@ $$ \begin{equation} k^{\ast} = \frac{m}{n}\,\ln 2 \;\approx\; 0.693\,\frac{m}{n}
 <figure><center>
 <svg viewBox="0 0 640 350" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .axis{ stroke:#8a8a8a; stroke-width:1.3; }
-    .grid{ stroke:#eee; stroke-width:1; }
-    .curve{ stroke:#4a6da7; stroke-width:2.4; fill:none; }
-    .tick{ font-size:11px; fill:#7a7a7a; }
-    .axl { font-size:13px; fill:#2b2b2b; }
-    .opt { stroke:#b5651d; stroke-width:1.4; stroke-dasharray:4 4; }
-    .optd{ fill:#b5651d; }
-    .optt{ font-size:12px; fill:#b5651d; }
+    .g3-axis{ stroke:#8a8a8a; stroke-width:1.3; }
+    .g3-grid{ stroke:#eee; stroke-width:1; }
+    .g3-curve{ stroke:#4a6da7; stroke-width:2.4; fill:none; }
+    .g3-tick{ font-size:11px; fill:#7a7a7a; }
+    .g3-axl { font-size:13px; fill:#2b2b2b; }
+    .g3-opt { stroke:#b5651d; stroke-width:1.4; stroke-dasharray:4 4; }
+    .g3-optd{ fill:#b5651d; }
+    .g3-optt{ font-size:12px; fill:#b5651d; }
   </style>
   <!-- gridlines -->
-  <line class="grid" x1="70" y1="60"  x2="600" y2="60"/>
-  <line class="grid" x1="70" y1="180" x2="600" y2="180"/>
+  <line class="g3-grid" x1="70" y1="60"  x2="600" y2="60"/>
+  <line class="g3-grid" x1="70" y1="180" x2="600" y2="180"/>
   <!-- axes -->
-  <line class="axis" x1="70" y1="60" x2="70" y2="300"/>
-  <line class="axis" x1="70" y1="300" x2="600" y2="300"/>
+  <line class="g3-axis" x1="70" y1="60" x2="70" y2="300"/>
+  <line class="g3-axis" x1="70" y1="300" x2="600" y2="300"/>
   <!-- y ticks -->
-  <text class="tick" x="62" y="304" text-anchor="end">0</text>
-  <text class="tick" x="62" y="184" text-anchor="end">0.05</text>
-  <text class="tick" x="62" y="64"  text-anchor="end">0.10</text>
-  <text class="axl" x="24" y="185" text-anchor="middle" transform="rotate(-90 24 185)">false-positive rate ε</text>
+  <text class="g3-tick" x="62" y="304" text-anchor="end">0</text>
+  <text class="g3-tick" x="62" y="184" text-anchor="end">0.05</text>
+  <text class="g3-tick" x="62" y="64"  text-anchor="end">0.10</text>
+  <text class="g3-axl" x="24" y="185" text-anchor="middle" transform="rotate(-90 24 185)">false-positive rate ε</text>
   <!-- x ticks (k = 1..14), x = 90 + (k-1)*38.46 -->
-  <text class="tick" x="90"  y="318" text-anchor="middle">1</text>
-  <text class="tick" x="205" y="318" text-anchor="middle">4</text>
-  <text class="tick" x="321" y="318" text-anchor="middle">7</text>
-  <text class="tick" x="436" y="318" text-anchor="middle">10</text>
-  <text class="tick" x="590" y="318" text-anchor="middle">14</text>
-  <text class="axl" x="335" y="340" text-anchor="middle">number of hash functions k   (with m/n = 10)</text>
+  <text class="g3-tick" x="90"  y="318" text-anchor="middle">1</text>
+  <text class="g3-tick" x="205" y="318" text-anchor="middle">4</text>
+  <text class="g3-tick" x="321" y="318" text-anchor="middle">7</text>
+  <text class="g3-tick" x="436" y="318" text-anchor="middle">10</text>
+  <text class="g3-tick" x="590" y="318" text-anchor="middle">14</text>
+  <text class="g3-axl" x="335" y="340" text-anchor="middle">number of hash functions k   (with m/n = 10)</text>
   <!-- curve through computed points of (1 - e^{-k/10})^k -->
-  <path class="curve" d="M90,71 L128,221 L167,258 L205,272 L244,277 L282,280 L321,280 L359,280 L398,278 L436,275 L475,270 L513,261 L551,247 L590,228"/>
+  <path class="g3-curve" d="M90,71 L128,221 L167,258 L205,272 L244,277 L282,280 L321,280 L359,280 L398,278 L436,275 L475,270 L513,261 L551,247 L590,228"/>
   <!-- optimum marker at k*=6.93 -> x ~ 318 -->
-  <line class="opt" x1="318" y1="280" x2="318" y2="60"/>
-  <circle class="optd" cx="321" cy="280" r="4"/>
-  <text class="optt" x="326" y="52">k* = (m/n) ln 2 ≈ 6.9</text>
+  <line class="g3-opt" x1="318" y1="280" x2="318" y2="60"/>
+  <circle class="g3-optd" cx="321" cy="280" r="4"/>
+  <text class="g3-optt" x="326" y="52">k* = (m/n) ln 2 ≈ 6.9</text>
 </svg>
 <figcaption><b>Figure 3 -</b> False-positive rate $\varepsilon$ from $\eqref{eq:fp}$ as a function of $k$, for a filter with ten bits per element ($m/n = 10$). The curve bottoms out near $k^{\ast} \approx 6.9$, matching $\eqref{eq:koptimal}$ ; beyond it, extra hashes only saturate the array and hurt.</figcaption>
 </center></figure>

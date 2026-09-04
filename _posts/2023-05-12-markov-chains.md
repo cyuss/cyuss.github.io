@@ -37,44 +37,44 @@ There is one confusion worth killing immediately, because almost everyone makes 
 <figure><center>
 <svg viewBox="0 0 640 394" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .nd{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.8; }
-    .nt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
-    .ed{ stroke:#8fa5c8; stroke-width:1.7; fill:none; }
-    .pl{ font-size:11px; fill:#b5651d; text-anchor:middle;
+    .g1-nd{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.8; }
+    .g1-nt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .g1-ed{ stroke:#8fa5c8; stroke-width:1.7; fill:none; }
+    .g1-pl{ font-size:11px; fill:#b5651d; text-anchor:middle;
          paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
-    .cap1{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g1-cap1{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g1-ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g1-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
   </defs>
-  <path class="ed" d="M132.2,275.6 C89.0,293.9 121.6,204.4 139.4,242.6" marker-end="url(#ma)"/>
-  <path class="ed" d="M203.1,279.9 Q320.0,306.0 432.0,280.9" marker-end="url(#ma)"/>
-  <path class="ed" d="M198.4,252.7 Q269.6,207.4 302.8,135.2" marker-end="url(#ma)"/>
-  <path class="ed" d="M436.9,264.1 Q320.0,238.0 208.0,263.1" marker-end="url(#ma)"/>
-  <path class="ed" d="M497.1,246.2 C518.4,204.4 551.0,293.9 512.8,276.1" marker-end="url(#ma)"/>
-  <path class="ed" d="M456.9,239.3 Q421.6,162.6 354.6,120.0" marker-end="url(#ma)"/>
-  <path class="ed" d="M289.6,117.3 Q218.4,162.6 185.2,234.8" marker-end="url(#ma)"/>
-  <path class="ed" d="M335.1,130.7 Q370.4,207.4 437.4,250.0" marker-end="url(#ma)"/>
-  <path class="ed" d="M304.3,65.6 C272.4,31.3 367.6,31.3 337.8,61.1" marker-end="url(#ma)"/>
-  <circle class="nd" cx="320" cy="98" r="36"/>
-  <text class="nt" x="320" y="103">sunny</text>
-  <circle class="nd" cx="168" cy="272" r="36"/>
-  <text class="nt" x="168" y="277">cloudy</text>
-  <circle class="nd" cx="472" cy="272" r="36"/>
-  <text class="nt" x="472" y="277">rainy</text>
-  <text class="pl" x="96.6" y="246.0">0.40</text>
-  <text class="pl" x="318.8" y="293.2">0.25</text>
-  <text class="pl" x="260.1" y="200.7">0.35</text>
-  <text class="pl" x="321.2" y="250.8">0.45</text>
-  <text class="pl" x="543.4" y="246.0">0.35</text>
-  <text class="pl" x="413.7" y="171.1">0.20</text>
-  <text class="pl" x="227.9" y="169.3">0.25</text>
-  <text class="pl" x="378.3" y="198.9">0.05</text>
-  <text class="pl" x="320.0" y="22.0">0.70</text>
-  <text class="cap1" x="320" y="382">every arrow is a probability ; every node's arrows add up to 1</text>
+  <path class="g1-ed" d="M132.2,275.6 C89.0,293.9 121.6,204.4 139.4,242.6" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M203.1,279.9 Q320.0,306.0 432.0,280.9" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M198.4,252.7 Q269.6,207.4 302.8,135.2" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M436.9,264.1 Q320.0,238.0 208.0,263.1" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M497.1,246.2 C518.4,204.4 551.0,293.9 512.8,276.1" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M456.9,239.3 Q421.6,162.6 354.6,120.0" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M289.6,117.3 Q218.4,162.6 185.2,234.8" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M335.1,130.7 Q370.4,207.4 437.4,250.0" marker-end="url(#g1-ma)"/>
+  <path class="g1-ed" d="M304.3,65.6 C272.4,31.3 367.6,31.3 337.8,61.1" marker-end="url(#g1-ma)"/>
+  <circle class="g1-nd" cx="320" cy="98" r="36"/>
+  <text class="g1-nt" x="320" y="103">sunny</text>
+  <circle class="g1-nd" cx="168" cy="272" r="36"/>
+  <text class="g1-nt" x="168" y="277">cloudy</text>
+  <circle class="g1-nd" cx="472" cy="272" r="36"/>
+  <text class="g1-nt" x="472" y="277">rainy</text>
+  <text class="g1-pl" x="96.6" y="246.0">0.40</text>
+  <text class="g1-pl" x="318.8" y="293.2">0.25</text>
+  <text class="g1-pl" x="260.1" y="200.7">0.35</text>
+  <text class="g1-pl" x="321.2" y="250.8">0.45</text>
+  <text class="g1-pl" x="543.4" y="246.0">0.35</text>
+  <text class="g1-pl" x="413.7" y="171.1">0.20</text>
+  <text class="g1-pl" x="227.9" y="169.3">0.25</text>
+  <text class="g1-pl" x="378.3" y="198.9">0.05</text>
+  <text class="g1-pl" x="320.0" y="22.0">0.70</text>
+  <text class="g1-cap1" x="320" y="382">every arrow is a probability ; every node's arrows add up to 1</text>
 </svg>
 <figcaption><b>Figure 1 -</b> A three-state weather chain. Each arrow carries the probability of that move, and the arrows leaving any state sum to one — including the loop that means "no change". Nothing in this picture refers to yesterday : that is the Markov assumption, drawn.</figcaption>
 </center></figure>
@@ -108,93 +108,93 @@ So the entire long-run behaviour of the chain is a question about **powers of a 
 <figure><center>
 <svg viewBox="0 0 640 238" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .mt{ font-size:13px; fill:#4a6da7; text-anchor:middle; }
-    .cv{ font-size:10.5px; fill:#2b2b2b; text-anchor:middle; }
-    .rw{ font-size:10.5px; fill:#7a7a7a; text-anchor:end; }
-    .cap2{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
-    .st{ fill:#b5651d; font-size:12px; }
+    .g2-mt{ font-size:13px; fill:#4a6da7; text-anchor:middle; }
+    .g2-cv{ font-size:10.5px; fill:#2b2b2b; text-anchor:middle; }
+    .g2-rw{ font-size:10.5px; fill:#7a7a7a; text-anchor:end; }
+    .g2-cap2{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-st{ fill:#b5651d; font-size:12px; }
   </style>
-  <text class="mt" x="89.0" y="46">P</text>
+  <text class="g2-mt" x="89.0" y="46">P</text>
   <rect x="32.0" y="66" width="38" height="38" fill="#6969f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="51.0" y="89.0">0.70</text>
+  <text class="g2-cv" x="51.0" y="89.0">0.70</text>
   <rect x="70.0" y="66" width="38" height="38" fill="#c9c9f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="89.0" y="89.0">0.25</text>
+  <text class="g2-cv" x="89.0" y="89.0">0.25</text>
   <rect x="108.0" y="66" width="38" height="38" fill="#f4f4f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="127.0" y="89.0">0.05</text>
-  <text class="rw" x="25.0" y="89.0">S</text>
+  <text class="g2-cv" x="127.0" y="89.0">0.05</text>
+  <text class="g2-rw" x="25.0" y="89.0">S</text>
   <rect x="32.0" y="104" width="38" height="38" fill="#b4b4f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="51.0" y="127.0">0.35</text>
+  <text class="g2-cv" x="51.0" y="127.0">0.35</text>
   <rect x="70.0" y="104" width="38" height="38" fill="#a9a9f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="89.0" y="127.0">0.40</text>
+  <text class="g2-cv" x="89.0" y="127.0">0.40</text>
   <rect x="108.0" y="104" width="38" height="38" fill="#c9c9f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="127.0" y="127.0">0.25</text>
-  <text class="rw" x="25.0" y="127.0">C</text>
+  <text class="g2-cv" x="127.0" y="127.0">0.25</text>
+  <text class="g2-rw" x="25.0" y="127.0">C</text>
   <rect x="32.0" y="142" width="38" height="38" fill="#d4d4f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="51.0" y="165.0">0.20</text>
+  <text class="g2-cv" x="51.0" y="165.0">0.20</text>
   <rect x="70.0" y="142" width="38" height="38" fill="#9e9ef2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="89.0" y="165.0">0.45</text>
+  <text class="g2-cv" x="89.0" y="165.0">0.45</text>
   <rect x="108.0" y="142" width="38" height="38" fill="#b4b4f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="127.0" y="165.0">0.35</text>
-  <text class="rw" x="25.0" y="165.0">R</text>
-  <text class="mt" x="235.0" y="46">P²</text>
+  <text class="g2-cv" x="127.0" y="165.0">0.35</text>
+  <text class="g2-rw" x="25.0" y="165.0">R</text>
+  <text class="g2-mt" x="235.0" y="46">P²</text>
   <rect x="178.0" y="66" width="38" height="38" fill="#8181f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="197.0" y="89.0">0.59</text>
+  <text class="g2-cv" x="197.0" y="89.0">0.59</text>
   <rect x="216.0" y="66" width="38" height="38" fill="#bfbff2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="235.0" y="89.0">0.30</text>
+  <text class="g2-cv" x="235.0" y="89.0">0.30</text>
   <rect x="254.0" y="66" width="38" height="38" fill="#e6e6f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="273.0" y="89.0">0.12</text>
+  <text class="g2-cv" x="273.0" y="89.0">0.12</text>
   <rect x="178.0" y="104" width="38" height="38" fill="#a1a1f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="197.0" y="127.0">0.43</text>
+  <text class="g2-cv" x="197.0" y="127.0">0.43</text>
   <rect x="216.0" y="104" width="38" height="38" fill="#b1b1f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="235.0" y="127.0">0.36</text>
+  <text class="g2-cv" x="235.0" y="127.0">0.36</text>
   <rect x="254.0" y="104" width="38" height="38" fill="#d3d3f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="273.0" y="127.0">0.21</text>
+  <text class="g2-cv" x="273.0" y="127.0">0.21</text>
   <rect x="178.0" y="142" width="38" height="38" fill="#b0b0f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="197.0" y="165.0">0.37</text>
+  <text class="g2-cv" x="197.0" y="165.0">0.37</text>
   <rect x="216.0" y="142" width="38" height="38" fill="#ababf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="235.0" y="165.0">0.39</text>
+  <text class="g2-cv" x="235.0" y="165.0">0.39</text>
   <rect x="254.0" y="142" width="38" height="38" fill="#cacaf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="273.0" y="165.0">0.24</text>
-  <text class="mt" x="381.0" y="46">P⁵</text>
+  <text class="g2-cv" x="273.0" y="165.0">0.24</text>
+  <text class="g2-mt" x="381.0" y="46">P⁵</text>
   <rect x="324.0" y="66" width="38" height="38" fill="#9292f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="343.0" y="89.0">0.51</text>
+  <text class="g2-cv" x="343.0" y="89.0">0.51</text>
   <rect x="362.0" y="66" width="38" height="38" fill="#b8b8f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="381.0" y="89.0">0.33</text>
+  <text class="g2-cv" x="381.0" y="89.0">0.33</text>
   <rect x="400.0" y="66" width="38" height="38" fill="#dcdcf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="419.0" y="89.0">0.16</text>
+  <text class="g2-cv" x="419.0" y="89.0">0.16</text>
   <rect x="324.0" y="104" width="38" height="38" fill="#9595f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="343.0" y="127.0">0.49</text>
+  <text class="g2-cv" x="343.0" y="127.0">0.49</text>
   <rect x="362.0" y="104" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="381.0" y="127.0">0.34</text>
+  <text class="g2-cv" x="381.0" y="127.0">0.34</text>
   <rect x="400.0" y="104" width="38" height="38" fill="#dadaf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="419.0" y="127.0">0.17</text>
+  <text class="g2-cv" x="419.0" y="127.0">0.17</text>
   <rect x="324.0" y="142" width="38" height="38" fill="#9696f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="343.0" y="165.0">0.49</text>
+  <text class="g2-cv" x="343.0" y="165.0">0.49</text>
   <rect x="362.0" y="142" width="38" height="38" fill="#b6b6f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="381.0" y="165.0">0.34</text>
+  <text class="g2-cv" x="381.0" y="165.0">0.34</text>
   <rect x="400.0" y="142" width="38" height="38" fill="#d9d9f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="419.0" y="165.0">0.17</text>
-  <text class="mt" x="527.0" y="46">P²⁰</text>
+  <text class="g2-cv" x="419.0" y="165.0">0.17</text>
+  <text class="g2-mt" x="527.0" y="46">P²⁰</text>
   <rect x="470.0" y="66" width="38" height="38" fill="#9393f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="489.0" y="89.0">0.50</text>
+  <text class="g2-cv" x="489.0" y="89.0">0.50</text>
   <rect x="508.0" y="66" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="527.0" y="89.0">0.33</text>
+  <text class="g2-cv" x="527.0" y="89.0">0.33</text>
   <rect x="546.0" y="66" width="38" height="38" fill="#dbdbf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="565.0" y="89.0">0.17</text>
+  <text class="g2-cv" x="565.0" y="89.0">0.17</text>
   <rect x="470.0" y="104" width="38" height="38" fill="#9393f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="489.0" y="127.0">0.50</text>
+  <text class="g2-cv" x="489.0" y="127.0">0.50</text>
   <rect x="508.0" y="104" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="527.0" y="127.0">0.33</text>
+  <text class="g2-cv" x="527.0" y="127.0">0.33</text>
   <rect x="546.0" y="104" width="38" height="38" fill="#dbdbf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="565.0" y="127.0">0.17</text>
+  <text class="g2-cv" x="565.0" y="127.0">0.17</text>
   <rect x="470.0" y="142" width="38" height="38" fill="#9393f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="489.0" y="165.0">0.50</text>
+  <text class="g2-cv" x="489.0" y="165.0">0.50</text>
   <rect x="508.0" y="142" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="527.0" y="165.0">0.33</text>
+  <text class="g2-cv" x="527.0" y="165.0">0.33</text>
   <rect x="546.0" y="142" width="38" height="38" fill="#dbdbf2" stroke="#dfe4ee" stroke-width="1"/>
-  <text class="cv" x="565.0" y="165.0">0.17</text>
-  <text class="cap2" x="320" y="206">the three rows start different — where you are today matters — and end identical</text>
-  <text class="cap2 st" x="320" y="226">that shared row is the stationary distribution π ≈ (0.495, 0.323, 0.182)</text>
+  <text class="g2-cv" x="565.0" y="165.0">0.17</text>
+  <text class="g2-cap2" x="320" y="206">the three rows start different — where you are today matters — and end identical</text>
+  <text class="g2-cap2 g2-st" x="320" y="226">that shared row is the stationary distribution π ≈ (0.495, 0.323, 0.182)</text>
 </svg>
 <figcaption><b>Figure 2 -</b> Powers of the transition matrix. Entry $(i,j)$ of $P^n$ is the chance of being in state $j$ after $n$ steps having started in $i$. After twenty steps every row is the same, which is the chain saying it has completely forgotten where it began.</figcaption>
 </center></figure>
@@ -240,45 +240,45 @@ Here is where most treatments wave their hands, and where the interesting failur
 <figure><center>
 <svg viewBox="0 0 640 300" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .nd{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
-    .nt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
-    .ed{ stroke:#8fa5c8; stroke-width:1.7; fill:none; }
-    .or{ stroke:#dda87a; }
-    .dv{ stroke:#e2e2e2; stroke-width:1.2; }
-    .ht{ font-size:12.5px; text-anchor:middle; font-weight:bold; }
-    .bad{ fill:#b5651d; }
-    .hs{ font-size:10.5px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
-    .cc{ font-size:10.5px; fill:#5a5a5a; text-anchor:middle; }
+    .g3-nd{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .g3-nt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
+    .g3-ed{ stroke:#8fa5c8; stroke-width:1.7; fill:none; }
+    .g3-or{ stroke:#dda87a; }
+    .g3-dv{ stroke:#e2e2e2; stroke-width:1.2; }
+    .g3-ht{ font-size:12.5px; text-anchor:middle; font-weight:bold; }
+    .g3-bad{ fill:#b5651d; }
+    .g3-hs{ font-size:10.5px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .g3-cc{ font-size:10.5px; fill:#5a5a5a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g3-ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g3-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
   </defs>
-  <line class="dv" x1="320" y1="40" x2="320" y2="252"/>
-  <path class="ed" d="M108.8,130.5 Q141.0,148.0 168.8,132.8" marker-end="url(#ma)"/>
-  <path class="ed" d="M173.2,105.5 Q141.0,88.0 113.2,103.2" marker-end="url(#ma)"/>
-  <path class="ed" d="M108.8,228.5 Q141.0,246.0 168.8,230.8" marker-end="url(#ma)"/>
-  <path class="ed" d="M173.2,203.5 Q141.0,186.0 113.2,201.2" marker-end="url(#ma)"/>
-  <circle class="nd" cx="86" cy="118" r="26"/><text class="nt" x="86" y="123">A</text>
-  <circle class="nd" cx="196" cy="118" r="26"/><text class="nt" x="196" y="123">B</text>
-  <circle class="nd" cx="86" cy="216" r="26"/><text class="nt" x="86" y="221">C</text>
-  <circle class="nd" cx="196" cy="216" r="26"/><text class="nt" x="196" y="221">D</text>
-  <text class="ht bad" x="141" y="66">not irreducible</text>
-  <text class="hs" x="141" y="82">two islands, no way across</text>
-  <text class="cc" x="141" y="270">π exists but is <tspan font-style="italic">not unique</tspan> —</text>
-  <text class="cc" x="141" y="286">the answer depends on where you started</text>
-  <path class="ed or" d="M488.7,142.5 Q503.2,183.2 532.4,208.0" marker-end="url(#mo)"/>
-  <path class="ed or" d="M530.7,222.0 Q480.0,210.0 434.2,220.9" marker-end="url(#mo)"/>
-  <path class="ed or" d="M423.8,211.2 Q456.8,183.2 469.6,147.2" marker-end="url(#mo)"/>
-  <circle class="nd" cx="480" cy="118" r="26"/><text class="nt" x="480" y="123">X</text>
-  <circle class="nd" cx="556" cy="228" r="26"/><text class="nt" x="556" y="233">Y</text>
-  <circle class="nd" cx="404" cy="228" r="26"/><text class="nt" x="404" y="233">Z</text>
-  <text class="ht bad" x="480" y="62">not aperiodic</text>
-  <text class="hs" x="480" y="80">every step must advance the cycle</text>
-  <text class="cc" x="480" y="270">π <tspan font-style="italic">is</tspan> unique, but Pⁿ never converges —</text>
-  <text class="cc" x="480" y="286">the distribution cycles with period 3 for ever</text>
+  <line class="g3-dv" x1="320" y1="40" x2="320" y2="252"/>
+  <path class="g3-ed" d="M108.8,130.5 Q141.0,148.0 168.8,132.8" marker-end="url(#g3-ma)"/>
+  <path class="g3-ed" d="M173.2,105.5 Q141.0,88.0 113.2,103.2" marker-end="url(#g3-ma)"/>
+  <path class="g3-ed" d="M108.8,228.5 Q141.0,246.0 168.8,230.8" marker-end="url(#g3-ma)"/>
+  <path class="g3-ed" d="M173.2,203.5 Q141.0,186.0 113.2,201.2" marker-end="url(#g3-ma)"/>
+  <circle class="g3-nd" cx="86" cy="118" r="26"/><text class="g3-nt" x="86" y="123">A</text>
+  <circle class="g3-nd" cx="196" cy="118" r="26"/><text class="g3-nt" x="196" y="123">B</text>
+  <circle class="g3-nd" cx="86" cy="216" r="26"/><text class="g3-nt" x="86" y="221">C</text>
+  <circle class="g3-nd" cx="196" cy="216" r="26"/><text class="g3-nt" x="196" y="221">D</text>
+  <text class="g3-ht g3-bad" x="141" y="66">not irreducible</text>
+  <text class="g3-hs" x="141" y="82">two islands, no way across</text>
+  <text class="g3-cc" x="141" y="270">π exists but is <tspan font-style="italic">not unique</tspan> —</text>
+  <text class="g3-cc" x="141" y="286">the answer depends on where you started</text>
+  <path class="g3-ed g3-or" d="M488.7,142.5 Q503.2,183.2 532.4,208.0" marker-end="url(#g3-mo)"/>
+  <path class="g3-ed g3-or" d="M530.7,222.0 Q480.0,210.0 434.2,220.9" marker-end="url(#g3-mo)"/>
+  <path class="g3-ed g3-or" d="M423.8,211.2 Q456.8,183.2 469.6,147.2" marker-end="url(#g3-mo)"/>
+  <circle class="g3-nd" cx="480" cy="118" r="26"/><text class="g3-nt" x="480" y="123">X</text>
+  <circle class="g3-nd" cx="556" cy="228" r="26"/><text class="g3-nt" x="556" y="233">Y</text>
+  <circle class="g3-nd" cx="404" cy="228" r="26"/><text class="g3-nt" x="404" y="233">Z</text>
+  <text class="g3-ht g3-bad" x="480" y="62">not aperiodic</text>
+  <text class="g3-hs" x="480" y="80">every step must advance the cycle</text>
+  <text class="g3-cc" x="480" y="270">π <tspan font-style="italic">is</tspan> unique, but Pⁿ never converges —</text>
+  <text class="g3-cc" x="480" y="286">the distribution cycles with period 3 for ever</text>
 </svg>
 <figcaption><b>Figure 3 -</b> The two ways the fundamental theorem fails, and they fail differently. On the left the chain cannot cross between the halves, so each half has its own equilibrium and there is no single answer. On the right there is a unique equilibrium, but the chain is locked into a cycle and marches round it for ever without ever settling into it. One self-loop anywhere on the right would fix it.</figcaption>
 </center></figure>
@@ -301,44 +301,44 @@ The quantity $1 - \lvert\lambda_2\rvert$ is the **spectral gap**, and the number
 <figure><center>
 <svg viewBox="0 0 640 274" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .gr{ stroke:#ececec; stroke-width:1; }
-    .ax{ stroke:#bdbdbd; stroke-width:1.3; }
-    .c-fast{ fill:none; stroke:#5aa06a; stroke-width:2.3; }
-    .c-slow{ fill:none; stroke:#b5651d; stroke-width:2.3; }
-    .lb{ font-size:11.5px; stroke:none;
+    .g4-gr{ stroke:#ececec; stroke-width:1; }
+    .g4-ax{ stroke:#bdbdbd; stroke-width:1.3; }
+    .g4-c-fast{ fill:none; stroke:#5aa06a; stroke-width:2.3; }
+    .g4-c-slow{ fill:none; stroke:#b5651d; stroke-width:2.3; }
+    .g4-lb{ font-size:11.5px; stroke:none;
          paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
-    text.c-fast{ fill:#5aa06a; } text.c-slow{ fill:#b5651d; }
-    .tk{ font-size:10.5px; fill:#7a7a7a; text-anchor:end; }
-    .mid{ text-anchor:middle; }
-    .axl{ font-size:11.5px; fill:#5a5a5a; text-anchor:middle; }
+    text.g4-c-fast{ fill:#5aa06a; } text.g4-c-slow{ fill:#b5651d; }
+    .g4-tk{ font-size:10.5px; fill:#7a7a7a; text-anchor:end; }
+    .g4-mid{ text-anchor:middle; }
+    .g4-axl{ font-size:11.5px; fill:#5a5a5a; text-anchor:middle; }
   </style>
-  <line class="gr" x1="92" y1="48.0" x2="596" y2="48.0"/>
-  <text class="tk" x="84" y="52.0">1</text>
-  <line class="gr" x1="92" y1="77.7" x2="596" y2="77.7"/>
-  <text class="tk" x="84" y="81.7">10⁻1</text>
-  <line class="gr" x1="92" y1="107.3" x2="596" y2="107.3"/>
-  <text class="tk" x="84" y="111.3">10⁻2</text>
-  <line class="gr" x1="92" y1="137.0" x2="596" y2="137.0"/>
-  <text class="tk" x="84" y="141.0">10⁻3</text>
-  <line class="gr" x1="92" y1="166.7" x2="596" y2="166.7"/>
-  <text class="tk" x="84" y="170.7">10⁻4</text>
-  <line class="gr" x1="92" y1="196.3" x2="596" y2="196.3"/>
-  <text class="tk" x="84" y="200.3">10⁻5</text>
-  <line class="gr" x1="92" y1="226.0" x2="596" y2="226.0"/>
-  <text class="tk" x="84" y="230.0">10⁻6</text>
-  <text class="tk mid" x="92.0" y="244">0</text>
-  <text class="tk mid" x="218.0" y="244">30</text>
-  <text class="tk mid" x="344.0" y="244">60</text>
-  <text class="tk mid" x="470.0" y="244">90</text>
-  <text class="tk mid" x="596.0" y="244">120</text>
-  <path class="c-fast" d="M92.0,48.0 L96.2,63.5 L100.4,79.0 L104.6,94.5 L108.8,110.0 L113.0,125.6 L117.2,141.1 L121.4,156.6 L125.6,172.1 L129.8,187.6 L134.0,203.1 L138.2,218.6"/>
-  <text class="lb c-fast" x="110.2" y="55.5">well mixed :  |λ₂| = 0.30</text>
-  <path class="c-slow" d="M92.0,48.0 L96.2,48.7 L100.4,49.3 L104.6,50.0 L108.8,50.6 L113.0,51.3 L117.2,52.0 L121.4,52.6 L125.6,53.3 L129.8,53.9 L134.0,54.6 L138.2,55.3 L142.4,55.9 L146.6,56.6 L150.8,57.3 L155.0,57.9 L159.2,58.6 L163.4,59.2 L167.6,59.9 L171.8,60.6 L176.0,61.2 L180.2,61.9 L184.4,62.5 L188.6,63.2 L192.8,63.9 L197.0,64.5 L201.2,65.2 L205.4,65.8 L209.6,66.5 L213.8,67.2 L218.0,67.8 L222.2,68.5 L226.4,69.1 L230.6,69.8 L234.8,70.5 L239.0,71.1 L243.2,71.8 L247.4,72.5 L251.6,73.1 L255.8,73.8 L260.0,74.4 L264.2,75.1 L268.4,75.8 L272.6,76.4 L276.8,77.1 L281.0,77.7 L285.2,78.4 L289.4,79.1 L293.6,79.7 L297.8,80.4 L302.0,81.0 L306.2,81.7 L310.4,82.4 L314.6,83.0 L318.8,83.7 L323.0,84.3 L327.2,85.0 L331.4,85.7 L335.6,86.3 L339.8,87.0 L344.0,87.7 L348.2,88.3 L352.4,89.0 L356.6,89.6 L360.8,90.3 L365.0,91.0 L369.2,91.6 L373.4,92.3 L377.6,92.9 L381.8,93.6 L386.0,94.3 L390.2,94.9 L394.4,95.6 L398.6,96.2 L402.8,96.9 L407.0,97.6 L411.2,98.2 L415.4,98.9 L419.6,99.5 L423.8,100.2 L428.0,100.9 L432.2,101.5 L436.4,102.2 L440.6,102.9 L444.8,103.5 L449.0,104.2 L453.2,104.8 L457.4,105.5 L461.6,106.2 L465.8,106.8 L470.0,107.5 L474.2,108.1 L478.4,108.8 L482.6,109.5 L486.8,110.1 L491.0,110.8 L495.2,111.4 L499.4,112.1 L503.6,112.8 L507.8,113.4 L512.0,114.1 L516.2,114.7 L520.4,115.4 L524.6,116.1 L528.8,116.7 L533.0,117.4 L537.2,118.1 L541.4,118.7 L545.6,119.4 L549.8,120.0 L554.0,120.7 L558.2,121.4 L562.4,122.0 L566.6,122.7 L570.8,123.3 L575.0,124.0 L579.2,124.7 L583.4,125.3 L587.6,126.0 L591.8,126.6 L596.0,127.3"/>
-  <text class="lb c-slow" x="416.8" y="88.9">bottlenecked :  |λ₂| = 0.95</text>
-  <line class="ax" x1="92" y1="226" x2="596" y2="226"/>
-  <line class="ax" x1="92" y1="48" x2="92" y2="226"/>
-  <text class="axl" x="344" y="262">number of steps</text>
-  <text class="axl" x="16" y="137" transform="rotate(-90 16,137)">distance from equilibrium</text>
+  <line class="g4-gr" x1="92" y1="48.0" x2="596" y2="48.0"/>
+  <text class="g4-tk" x="84" y="52.0">1</text>
+  <line class="g4-gr" x1="92" y1="77.7" x2="596" y2="77.7"/>
+  <text class="g4-tk" x="84" y="81.7">10⁻1</text>
+  <line class="g4-gr" x1="92" y1="107.3" x2="596" y2="107.3"/>
+  <text class="g4-tk" x="84" y="111.3">10⁻2</text>
+  <line class="g4-gr" x1="92" y1="137.0" x2="596" y2="137.0"/>
+  <text class="g4-tk" x="84" y="141.0">10⁻3</text>
+  <line class="g4-gr" x1="92" y1="166.7" x2="596" y2="166.7"/>
+  <text class="g4-tk" x="84" y="170.7">10⁻4</text>
+  <line class="g4-gr" x1="92" y1="196.3" x2="596" y2="196.3"/>
+  <text class="g4-tk" x="84" y="200.3">10⁻5</text>
+  <line class="g4-gr" x1="92" y1="226.0" x2="596" y2="226.0"/>
+  <text class="g4-tk" x="84" y="230.0">10⁻6</text>
+  <text class="g4-tk g4-mid" x="92.0" y="244">0</text>
+  <text class="g4-tk g4-mid" x="218.0" y="244">30</text>
+  <text class="g4-tk g4-mid" x="344.0" y="244">60</text>
+  <text class="g4-tk g4-mid" x="470.0" y="244">90</text>
+  <text class="g4-tk g4-mid" x="596.0" y="244">120</text>
+  <path class="g4-c-fast" d="M92.0,48.0 L96.2,63.5 L100.4,79.0 L104.6,94.5 L108.8,110.0 L113.0,125.6 L117.2,141.1 L121.4,156.6 L125.6,172.1 L129.8,187.6 L134.0,203.1 L138.2,218.6"/>
+  <text class="g4-lb g4-c-fast" x="110.2" y="55.5">well mixed :  |λ₂| = 0.30</text>
+  <path class="g4-c-slow" d="M92.0,48.0 L96.2,48.7 L100.4,49.3 L104.6,50.0 L108.8,50.6 L113.0,51.3 L117.2,52.0 L121.4,52.6 L125.6,53.3 L129.8,53.9 L134.0,54.6 L138.2,55.3 L142.4,55.9 L146.6,56.6 L150.8,57.3 L155.0,57.9 L159.2,58.6 L163.4,59.2 L167.6,59.9 L171.8,60.6 L176.0,61.2 L180.2,61.9 L184.4,62.5 L188.6,63.2 L192.8,63.9 L197.0,64.5 L201.2,65.2 L205.4,65.8 L209.6,66.5 L213.8,67.2 L218.0,67.8 L222.2,68.5 L226.4,69.1 L230.6,69.8 L234.8,70.5 L239.0,71.1 L243.2,71.8 L247.4,72.5 L251.6,73.1 L255.8,73.8 L260.0,74.4 L264.2,75.1 L268.4,75.8 L272.6,76.4 L276.8,77.1 L281.0,77.7 L285.2,78.4 L289.4,79.1 L293.6,79.7 L297.8,80.4 L302.0,81.0 L306.2,81.7 L310.4,82.4 L314.6,83.0 L318.8,83.7 L323.0,84.3 L327.2,85.0 L331.4,85.7 L335.6,86.3 L339.8,87.0 L344.0,87.7 L348.2,88.3 L352.4,89.0 L356.6,89.6 L360.8,90.3 L365.0,91.0 L369.2,91.6 L373.4,92.3 L377.6,92.9 L381.8,93.6 L386.0,94.3 L390.2,94.9 L394.4,95.6 L398.6,96.2 L402.8,96.9 L407.0,97.6 L411.2,98.2 L415.4,98.9 L419.6,99.5 L423.8,100.2 L428.0,100.9 L432.2,101.5 L436.4,102.2 L440.6,102.9 L444.8,103.5 L449.0,104.2 L453.2,104.8 L457.4,105.5 L461.6,106.2 L465.8,106.8 L470.0,107.5 L474.2,108.1 L478.4,108.8 L482.6,109.5 L486.8,110.1 L491.0,110.8 L495.2,111.4 L499.4,112.1 L503.6,112.8 L507.8,113.4 L512.0,114.1 L516.2,114.7 L520.4,115.4 L524.6,116.1 L528.8,116.7 L533.0,117.4 L537.2,118.1 L541.4,118.7 L545.6,119.4 L549.8,120.0 L554.0,120.7 L558.2,121.4 L562.4,122.0 L566.6,122.7 L570.8,123.3 L575.0,124.0 L579.2,124.7 L583.4,125.3 L587.6,126.0 L591.8,126.6 L596.0,127.3"/>
+  <text class="g4-lb g4-c-slow" x="416.8" y="88.9">bottlenecked :  |λ₂| = 0.95</text>
+  <line class="g4-ax" x1="92" y1="226" x2="596" y2="226"/>
+  <line class="g4-ax" x1="92" y1="48" x2="92" y2="226"/>
+  <text class="g4-axl" x="344" y="262">number of steps</text>
+  <text class="g4-axl" x="16" y="137" transform="rotate(-90 16,137)">distance from equilibrium</text>
 </svg>
 <figcaption><b>Figure 4 -</b> Two chains with the same equilibrium, converging at wildly different speeds. On this logarithmic scale both are straight lines, and the slope is $\lvert\lambda_2\rvert$. The well-mixed chain is within one part in a million after twelve steps ; the bottlenecked one needs about 270. Same answer, three orders of magnitude apart in cost.</figcaption>
 </center></figure>
@@ -394,53 +394,53 @@ def pagerank(links, n, d=0.85, iters=60):
 <figure><center>
 <svg viewBox="0 0 640 364" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .nd{ stroke-width:1.8; }
-    .small{ fill:#eef1f8; stroke:#8fa5c8; }
-    .big{ fill:#fbeede; stroke:#b5651d; }
-    circle.big{ stroke-width:2.2; }
-    .nt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
-    .rk{ font-size:10.5px; text-anchor:middle; }
-    text.small{ fill:#7a7a7a; } text.big{ fill:#b5651d; font-size:12px; }
-    .ed{ stroke:#a9b8d0; stroke-width:1.7; fill:none; }
-    .hot{ stroke:#dda87a; stroke-width:2.2; }
-    .an{ font-size:11px; fill:#7a7a7a; text-anchor:middle; font-style:italic; stroke:none; }
-    text.hot{ fill:#b5651d; stroke:none; }
-    .cap5{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g5-nd{ stroke-width:1.8; }
+    .g5-small{ fill:#eef1f8; stroke:#8fa5c8; }
+    .g5-big{ fill:#fbeede; stroke:#b5651d; }
+    circle.g5-big{ stroke-width:2.2; }
+    .g5-nt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .g5-rk{ font-size:10.5px; text-anchor:middle; }
+    text.g5-small{ fill:#7a7a7a; } text.g5-big{ fill:#b5651d; font-size:12px; }
+    .g5-ed{ stroke:#a9b8d0; stroke-width:1.7; fill:none; }
+    .g5-hot{ stroke:#dda87a; stroke-width:2.2; }
+    .g5-an{ font-size:11px; fill:#7a7a7a; text-anchor:middle; font-style:italic; stroke:none; }
+    text.g5-hot{ fill:#b5651d; stroke:none; }
+    .g5-cap5{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g5-ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g5-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
   </defs>
-  <path class="ed" d="M90.5,69.7 Q175.0,122.0 228.6,155.2" marker-end="url(#ma)"/>
-  <path class="ed" d="M92.4,145.0 Q175.0,162.0 222.1,171.7" marker-end="url(#ma)"/>
-  <path class="ed" d="M92.4,219.0 Q175.0,202.0 222.1,192.3" marker-end="url(#ma)"/>
-  <path class="ed" d="M90.5,294.3 Q175.0,242.0 228.6,208.8" marker-end="url(#ma)"/>
-  <path class="ed hot" d="M314.5,199.5 Q379.0,226.0 440.5,200.7" marker-end="url(#mo)"/>
-  <path class="ed hot" d="M445.1,165.2 Q379.0,138.0 319.2,162.6" marker-end="url(#mo)"/>
-  <circle class="nd small" cx="78" cy="62" r="14.7"/>
-  <text class="nt" x="78" y="67">A</text>
-  <text class="rk small" x="78" y="91.7">0.025</text>
-  <circle class="nd small" cx="78" cy="142" r="14.7"/>
-  <text class="nt" x="78" y="147">B</text>
-  <text class="rk small" x="78" y="171.7">0.025</text>
-  <circle class="nd small" cx="78" cy="222" r="14.7"/>
-  <text class="nt" x="78" y="227">C</text>
-  <text class="rk small" x="78" y="251.7">0.025</text>
-  <circle class="nd small" cx="78" cy="302" r="14.7"/>
-  <text class="nt" x="78" y="307">D</text>
-  <text class="rk small" x="78" y="331.7">0.025</text>
-  <circle class="nd big" cx="272" cy="182" r="46.0"/>
-  <text class="nt" x="272" y="187">H</text>
-  <text class="rk big" x="272" y="243.0">0.473</text>
-  <circle class="nd big" cx="486" cy="182" r="44.2"/>
-  <text class="nt" x="486" y="187">P</text>
-  <text class="rk big" x="486" y="241.2">0.427</text>
-  <text class="an" x="78" y="24">four unremarkable pages …</text>
-  <text class="an hot" x="272" y="90">… all point here</text>
-  <text class="an hot" x="486" y="90">one link in, nearly the same rank</text>
-  <text class="cap5" x="320" y="352">a link is a vote, and votes are weighted by the voter's own rank</text>
+  <path class="g5-ed" d="M90.5,69.7 Q175.0,122.0 228.6,155.2" marker-end="url(#g5-ma)"/>
+  <path class="g5-ed" d="M92.4,145.0 Q175.0,162.0 222.1,171.7" marker-end="url(#g5-ma)"/>
+  <path class="g5-ed" d="M92.4,219.0 Q175.0,202.0 222.1,192.3" marker-end="url(#g5-ma)"/>
+  <path class="g5-ed" d="M90.5,294.3 Q175.0,242.0 228.6,208.8" marker-end="url(#g5-ma)"/>
+  <path class="g5-ed g5-hot" d="M314.5,199.5 Q379.0,226.0 440.5,200.7" marker-end="url(#g5-mo)"/>
+  <path class="g5-ed g5-hot" d="M445.1,165.2 Q379.0,138.0 319.2,162.6" marker-end="url(#g5-mo)"/>
+  <circle class="g5-nd g5-small" cx="78" cy="62" r="14.7"/>
+  <text class="g5-nt" x="78" y="67">A</text>
+  <text class="g5-rk g5-small" x="78" y="91.7">0.025</text>
+  <circle class="g5-nd g5-small" cx="78" cy="142" r="14.7"/>
+  <text class="g5-nt" x="78" y="147">B</text>
+  <text class="g5-rk g5-small" x="78" y="171.7">0.025</text>
+  <circle class="g5-nd g5-small" cx="78" cy="222" r="14.7"/>
+  <text class="g5-nt" x="78" y="227">C</text>
+  <text class="g5-rk g5-small" x="78" y="251.7">0.025</text>
+  <circle class="g5-nd g5-small" cx="78" cy="302" r="14.7"/>
+  <text class="g5-nt" x="78" y="307">D</text>
+  <text class="g5-rk g5-small" x="78" y="331.7">0.025</text>
+  <circle class="g5-nd g5-big" cx="272" cy="182" r="46.0"/>
+  <text class="g5-nt" x="272" y="187">H</text>
+  <text class="g5-rk g5-big" x="272" y="243.0">0.473</text>
+  <circle class="g5-nd g5-big" cx="486" cy="182" r="44.2"/>
+  <text class="g5-nt" x="486" y="187">P</text>
+  <text class="g5-rk g5-big" x="486" y="241.2">0.427</text>
+  <text class="g5-an" x="78" y="24">four unremarkable pages …</text>
+  <text class="g5-an g5-hot" x="272" y="90">… all point here</text>
+  <text class="g5-an g5-hot" x="486" y="90">one link in, nearly the same rank</text>
+  <text class="g5-cap5" x="320" y="352">a link is a vote, and votes are weighted by the voter's own rank</text>
 </svg>
 <figcaption><b>Figure 5 -</b> PageRank on six pages, with each circle sized by its score. A, B, C and D have nothing pointing at them, so they sit at the floor value $(1-d)/N$. They all point at H, which collects their weight. H then points at a single page, P — and P, with exactly one incoming link, scores almost as highly as H with its five. The recursion is the point : it is not how many links you get, it is whose.</figcaption>
 </center></figure>

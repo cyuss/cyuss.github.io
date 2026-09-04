@@ -35,63 +35,63 @@ The other fix is embarrassingly simple : **do not make the model remember, let i
 <figure><center>
 <svg viewBox="0 0 640 302" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
-    .ix{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.8; }
-    .bt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
-    .bs{ font-size:9.5px; fill:#7a7a7a; text-anchor:middle; }
-    .ln{ stroke:#4a6da7; stroke-width:1.8; fill:none; }
-    .rt{ stroke:#5aa06a; stroke-linejoin:round; }
-    .sw{ fill:#b5651d; fill-opacity:.10; stroke:#b5651d; stroke-width:2.2; }
-    .lane{ font-size:11.5px; fill:#7a7a7a; font-style:italic; }
-    .on{ fill:#b5651d; }
+    .g1-bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .g1-ix{ fill:#f3faf4; stroke:#5aa06a; stroke-width:1.8; }
+    .g1-bt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .g1-bs{ font-size:9.5px; fill:#7a7a7a; text-anchor:middle; }
+    .g1-ln{ stroke:#4a6da7; stroke-width:1.8; fill:none; }
+    .g1-rt{ stroke:#5aa06a; stroke-linejoin:round; }
+    .g1-sw{ fill:#b5651d; fill-opacity:.10; stroke:#b5651d; stroke-width:2.2; }
+    .g1-lane{ font-size:11.5px; fill:#7a7a7a; font-style:italic; }
+    .g1-on{ fill:#b5651d; }
   </style>
   <defs>
-    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g1-am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g1-ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
-    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g1-ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#5aa06a"/></marker>
   </defs>
-  <path class="ln" d="M148.0,63.0 L169.0,63.0" marker-end="url(#am)"/>
-  <path class="ln" d="M272.0,63.0 L293.0,63.0" marker-end="url(#am)"/>
-  <path class="ln" d="M396.0,63.0 L417.0,63.0" marker-end="url(#am)"/>
-  <path class="ln" d="M120.0,246.0 L137.0,246.0" marker-end="url(#am)"/>
-  <path class="ln" d="M232.0,246.0 L249.0,246.0" marker-end="url(#am)"/>
-  <path class="ln" d="M360.0,246.0 L377.0,246.0" marker-end="url(#am)"/>
-  <path class="ln" d="M488.0,246.0 L505.0,246.0" marker-end="url(#am)"/>
-  <path class="ln rt" d="M499,90 L499,158 L308,158 L308,217" marker-end="url(#ag)"/>
-  <rect class="bx" x="36" y="42" width="112" height="42" rx="5"/>
-  <text class="bt" x="92" y="62.0">documents</text>
-  <text class="bs" x="92" y="76.0">your corpus</text>
-  <rect class="bx" x="176" y="42" width="96" height="42" rx="5"/>
-  <text class="bt" x="224" y="62.0">chunks</text>
-  <text class="bs" x="224" y="76.0">split + overlap</text>
-  <rect class="bx" x="300" y="42" width="96" height="42" rx="5"/>
-  <text class="bt" x="348" y="62.0">embed</text>
-  <text class="bs" x="348" y="76.0">→ vectors</text>
-  <rect class="bx ix" x="424" y="36" width="150" height="54" rx="5"/>
-  <text class="bt" x="499" y="62.0">vector index</text>
-  <text class="bs" x="499" y="76.0">ANN structure</text>
-  <rect class="bx" x="16" y="224" width="104" height="44" rx="5"/>
-  <text class="bt" x="68" y="245.0">question</text>
-  <text class="bs" x="68" y="259.0">the user asks</text>
-  <rect class="bx" x="144" y="224" width="88" height="44" rx="5"/>
-  <text class="bt" x="188" y="245.0">embed</text>
-  <text class="bs" x="188" y="259.0">→ vector q</text>
-  <rect class="bx" x="256" y="224" width="104" height="44" rx="5"/>
-  <text class="bt" x="308" y="245.0">retrieve</text>
-  <text class="bs" x="308" y="259.0">top-k by cosine</text>
-  <rect class="bx" x="384" y="224" width="104" height="44" rx="5"/>
-  <text class="bt" x="436" y="245.0">prompt</text>
-  <text class="bs" x="436" y="259.0">context + question</text>
-  <rect class="bx" x="512" y="224" width="112" height="44" rx="5"/>
-  <text class="bt" x="568" y="245.0">answer</text>
-  <text class="bs" x="568" y="259.0">grounded + cited</text>
-  <rect class="sw" x="16" y="224" width="104" height="44" rx="5"><animate attributeName="x" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="16;144;256;384;512"/><animate attributeName="width" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="104;88;104;104;112"/></rect>
-  <rect class="sw" x="424" y="36" width="150" height="54" rx="5" opacity="0"><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.333;0.5" values="0;1;0"/></rect>
-  <text class="lane" x="36" y="24">offline · indexing, runs once per document</text>
-  <text class="lane on" x="16" y="292">online · retrieval + generation, runs on every question</text>
+  <path class="g1-ln" d="M148.0,63.0 L169.0,63.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln" d="M272.0,63.0 L293.0,63.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln" d="M396.0,63.0 L417.0,63.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln" d="M120.0,246.0 L137.0,246.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln" d="M232.0,246.0 L249.0,246.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln" d="M360.0,246.0 L377.0,246.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln" d="M488.0,246.0 L505.0,246.0" marker-end="url(#g1-am)"/>
+  <path class="g1-ln g1-rt" d="M499,90 L499,158 L308,158 L308,217" marker-end="url(#g1-ag)"/>
+  <rect class="g1-bx" x="36" y="42" width="112" height="42" rx="5"/>
+  <text class="g1-bt" x="92" y="62.0">documents</text>
+  <text class="g1-bs" x="92" y="76.0">your corpus</text>
+  <rect class="g1-bx" x="176" y="42" width="96" height="42" rx="5"/>
+  <text class="g1-bt" x="224" y="62.0">chunks</text>
+  <text class="g1-bs" x="224" y="76.0">split + overlap</text>
+  <rect class="g1-bx" x="300" y="42" width="96" height="42" rx="5"/>
+  <text class="g1-bt" x="348" y="62.0">embed</text>
+  <text class="g1-bs" x="348" y="76.0">→ vectors</text>
+  <rect class="g1-bx g1-ix" x="424" y="36" width="150" height="54" rx="5"/>
+  <text class="g1-bt" x="499" y="62.0">vector index</text>
+  <text class="g1-bs" x="499" y="76.0">ANN structure</text>
+  <rect class="g1-bx" x="16" y="224" width="104" height="44" rx="5"/>
+  <text class="g1-bt" x="68" y="245.0">question</text>
+  <text class="g1-bs" x="68" y="259.0">the user asks</text>
+  <rect class="g1-bx" x="144" y="224" width="88" height="44" rx="5"/>
+  <text class="g1-bt" x="188" y="245.0">embed</text>
+  <text class="g1-bs" x="188" y="259.0">→ vector q</text>
+  <rect class="g1-bx" x="256" y="224" width="104" height="44" rx="5"/>
+  <text class="g1-bt" x="308" y="245.0">retrieve</text>
+  <text class="g1-bs" x="308" y="259.0">top-k by cosine</text>
+  <rect class="g1-bx" x="384" y="224" width="104" height="44" rx="5"/>
+  <text class="g1-bt" x="436" y="245.0">prompt</text>
+  <text class="g1-bs" x="436" y="259.0">context + question</text>
+  <rect class="g1-bx" x="512" y="224" width="112" height="44" rx="5"/>
+  <text class="g1-bt" x="568" y="245.0">answer</text>
+  <text class="g1-bs" x="568" y="259.0">grounded + cited</text>
+  <rect class="g1-sw" x="16" y="224" width="104" height="44" rx="5"><animate attributeName="x" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="16;144;256;384;512"/><animate attributeName="width" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="104;88;104;104;112"/></rect>
+  <rect class="g1-sw" x="424" y="36" width="150" height="54" rx="5" opacity="0"><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.333;0.5" values="0;1;0"/></rect>
+  <text class="g1-lane" x="36" y="24">offline · indexing, runs once per document</text>
+  <text class="g1-lane g1-on" x="16" y="292">online · retrieval + generation, runs on every question</text>
 </svg>
 <figcaption><b>Figure 1 -</b> The two halves of a RAG system. The top lane is paid once : documents are split, embedded and stored in an index. The bottom lane runs on every question, and touches only $k$ passages. The green route is the one link between them — the query embedding is compared against the index built above.</figcaption>
 </center></figure>
@@ -116,70 +116,70 @@ Why the angle and not the raw distance ? Because **length is noise here**. A lon
 <figure><center>
 <svg viewBox="0 0 640 312" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .ax{ stroke:#d8d8d8; stroke-width:1.2; fill:none; }
-    .dv{ stroke:#8fa5c8; stroke-width:1.6; fill:none; }
-    .qv{ stroke:#b5651d; stroke-width:2.6; fill:none; }
-    .dl{ font-size:11.5px; fill:#4a6da7; text-anchor:middle;
+    .g2-ax{ stroke:#d8d8d8; stroke-width:1.2; fill:none; }
+    .g2-dv{ stroke:#8fa5c8; stroke-width:1.6; fill:none; }
+    .g2-qv{ stroke:#b5651d; stroke-width:2.6; fill:none; }
+    .g2-dl{ font-size:11.5px; fill:#4a6da7; text-anchor:middle;
          paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
-    .ql{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold;
+    .g2-ql{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold;
          paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
-    .arc{ stroke:#b5651d; stroke-width:1.3; fill:none; opacity:.8; }
-    .th{ font-size:13px; fill:#b5651d; text-anchor:middle; font-style:italic; }
-    .bar{ fill:#8fa5c8; }
-    .top{ fill:#e0a878; }
-    .rl{ font-size:12px; fill:#4a6da7; text-anchor:end; }
-    .bv{ font-size:11px; fill:#5a5a5a; text-anchor:start; }
-    .hd2{ font-size:12px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
-    .mk2{ fill:none; stroke:#b5651d; stroke-width:2; }
-    .cap2{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-arc{ stroke:#b5651d; stroke-width:1.3; fill:none; opacity:.8; }
+    .g2-th{ font-size:13px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .g2-bar{ fill:#8fa5c8; }
+    .g2-top{ fill:#e0a878; }
+    .g2-rl{ font-size:12px; fill:#4a6da7; text-anchor:end; }
+    .g2-bv{ font-size:11px; fill:#5a5a5a; text-anchor:start; }
+    .g2-hd2{ font-size:12px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .g2-mk2{ fill:none; stroke:#b5651d; stroke-width:2; }
+    .g2-cap2{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g2-am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g2-ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
-    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g2-ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#5aa06a"/></marker>
   </defs>
-  <path class="ax" d="M58,268 L306,268 M58,268 L58,44"/>
-  <path class="dv" d="M58,268 L167.6,127.7" marker-end="url(#am)"/>
-  <path class="dv" d="M58,268 L226.9,170.5" marker-end="url(#am)"/>
-  <path class="dv" d="M58,268 L119.8,115.0" marker-end="url(#am)"/>
-  <path class="dv" d="M58,268 L209.6,235.8" marker-end="url(#am)"/>
-  <path class="dv" d="M58,268 L70.6,123.6" marker-end="url(#am)"/>
-  <path class="dv" d="M58,268 L182.8,261.5" marker-end="url(#am)"/>
-  <path class="qv" d="M58,268 L199.4,126.6" marker-end="url(#ao)"/>
-  <text class="dl" x="178.1" y="114.3">d1</text>
-  <text class="dl" x="241.6" y="162.0">d2</text>
-  <text class="dl" x="126.2" y="99.3">d3</text>
-  <text class="dl" x="226.2" y="232.2">d4</text>
-  <text class="dl" x="72.1" y="106.6">d5</text>
-  <text class="dl" x="199.8" y="260.6">d6</text>
-  <text class="ql" x="211.4" y="114.6">query</text>
-  <path class="arc" d="M128.7,197.3 A100,100 0 0 0 95.5,175.3"/>
-  <text class="th" x="122.6" y="170.4">θ</text>
-  <text class="cap2" x="150" y="300">length is meaning-free : only the angle to the query counts</text>
-  <text class="hd2" x="477" y="66">cosine with the query</text>
-  <text class="rl" x="362" y="107">d1</text>
-  <rect class="bar top" x="372" y="92" width="208.4" height="20" rx="3"/>
-  <text class="bv" x="596" y="107">0.993</text>
-  <text class="rl" x="362" y="139">d2</text>
-  <rect class="bar top" x="372" y="124" width="202.8" height="20" rx="3"/>
-  <text class="bv" x="596" y="139">0.966</text>
-  <text class="rl" x="362" y="171">d3</text>
-  <rect class="bar top" x="372" y="156" width="193.3" height="20" rx="3"/>
-  <text class="bv" x="596" y="171">0.921</text>
-  <text class="rl" x="362" y="203">d4</text>
-  <rect class="bar" x="372" y="188" width="176.1" height="20" rx="3"/>
-  <text class="bv" x="596" y="203">0.839</text>
-  <text class="rl" x="362" y="235">d5</text>
-  <rect class="bar" x="372" y="220" width="160.9" height="20" rx="3"/>
-  <text class="bv" x="596" y="235">0.766</text>
-  <text class="rl" x="362" y="267">d6</text>
-  <rect class="bar" x="372" y="252" width="156.1" height="20" rx="3"/>
-  <text class="bv" x="596" y="267">0.743</text>
-  <rect class="mk2" x="367" y="92" width="220" height="20" rx="3"><animate attributeName="y" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.333;0.666" values="92;124;156"/></rect>
-  <text class="cap2" x="477" y="300">the top three are what the retriever returns</text>
+  <path class="g2-ax" d="M58,268 L306,268 M58,268 L58,44"/>
+  <path class="g2-dv" d="M58,268 L167.6,127.7" marker-end="url(#g2-am)"/>
+  <path class="g2-dv" d="M58,268 L226.9,170.5" marker-end="url(#g2-am)"/>
+  <path class="g2-dv" d="M58,268 L119.8,115.0" marker-end="url(#g2-am)"/>
+  <path class="g2-dv" d="M58,268 L209.6,235.8" marker-end="url(#g2-am)"/>
+  <path class="g2-dv" d="M58,268 L70.6,123.6" marker-end="url(#g2-am)"/>
+  <path class="g2-dv" d="M58,268 L182.8,261.5" marker-end="url(#g2-am)"/>
+  <path class="g2-qv" d="M58,268 L199.4,126.6" marker-end="url(#g2-ao)"/>
+  <text class="g2-dl" x="178.1" y="114.3">d1</text>
+  <text class="g2-dl" x="241.6" y="162.0">d2</text>
+  <text class="g2-dl" x="126.2" y="99.3">d3</text>
+  <text class="g2-dl" x="226.2" y="232.2">d4</text>
+  <text class="g2-dl" x="72.1" y="106.6">d5</text>
+  <text class="g2-dl" x="199.8" y="260.6">d6</text>
+  <text class="g2-ql" x="211.4" y="114.6">query</text>
+  <path class="g2-arc" d="M128.7,197.3 A100,100 0 0 0 95.5,175.3"/>
+  <text class="g2-th" x="122.6" y="170.4">θ</text>
+  <text class="g2-cap2" x="150" y="300">length is meaning-free : only the angle to the query counts</text>
+  <text class="g2-hd2" x="477" y="66">cosine with the query</text>
+  <text class="g2-rl" x="362" y="107">d1</text>
+  <rect class="g2-bar g2-top" x="372" y="92" width="208.4" height="20" rx="3"/>
+  <text class="g2-bv" x="596" y="107">0.993</text>
+  <text class="g2-rl" x="362" y="139">d2</text>
+  <rect class="g2-bar g2-top" x="372" y="124" width="202.8" height="20" rx="3"/>
+  <text class="g2-bv" x="596" y="139">0.966</text>
+  <text class="g2-rl" x="362" y="171">d3</text>
+  <rect class="g2-bar g2-top" x="372" y="156" width="193.3" height="20" rx="3"/>
+  <text class="g2-bv" x="596" y="171">0.921</text>
+  <text class="g2-rl" x="362" y="203">d4</text>
+  <rect class="g2-bar" x="372" y="188" width="176.1" height="20" rx="3"/>
+  <text class="g2-bv" x="596" y="203">0.839</text>
+  <text class="g2-rl" x="362" y="235">d5</text>
+  <rect class="g2-bar" x="372" y="220" width="160.9" height="20" rx="3"/>
+  <text class="g2-bv" x="596" y="235">0.766</text>
+  <text class="g2-rl" x="362" y="267">d6</text>
+  <rect class="g2-bar" x="372" y="252" width="156.1" height="20" rx="3"/>
+  <text class="g2-bv" x="596" y="267">0.743</text>
+  <rect class="g2-mk2" x="367" y="92" width="220" height="20" rx="3"><animate attributeName="y" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.333;0.666" values="92;124;156"/></rect>
+  <text class="g2-cap2" x="477" y="300">the top three are what the retriever returns</text>
 </svg>
 <figcaption><b>Figure 2 -</b> Retrieval as geometry. Each document is a direction in embedding space ; the query is another, and $\theta$ (drawn here between the query and $d_3$) is the angle between them. Ranking by $\cos\theta$ ignores the vectors' lengths entirely, so a short passage and a long one that mean the same thing score alike. The bars on the right are the same six documents, sorted by that cosine.</figcaption>
 </center></figure>
@@ -235,73 +235,73 @@ The dominant method is **HNSW**, *Hierarchical Navigable Small World* graphs {% 
 <figure><center>
 <svg viewBox="0 0 640 340" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .eg{ stroke:#c2ccdc; stroke-width:1.6; fill:none; }
-    .drop{ stroke:#c2ccdc; stroke-width:1.3; fill:none; stroke-dasharray:3 4; }
-    .hi{ stroke:#b5651d; stroke-width:2.6; }
-    .nd{ stroke:#4a6da7; stroke-width:1.5; }
-    .ent{ fill:none; stroke:#5aa06a; stroke-width:1.8; stroke-dasharray:4 3; }
-    .tag{ font-size:11px; fill:#5aa06a; text-anchor:middle; }
-    .hit{ fill:#b5651d; }
-    .ly{ font-size:12px; fill:#4a6da7; text-anchor:start; }
-    .lyr{ font-size:11px; fill:#7a7a7a; text-anchor:end; font-style:italic; }
+    .g3-eg{ stroke:#c2ccdc; stroke-width:1.6; fill:none; }
+    .g3-drop{ stroke:#c2ccdc; stroke-width:1.3; fill:none; stroke-dasharray:3 4; }
+    .g3-hi{ stroke:#b5651d; stroke-width:2.6; }
+    .g3-nd{ stroke:#4a6da7; stroke-width:1.5; }
+    .g3-ent{ fill:none; stroke:#5aa06a; stroke-width:1.8; stroke-dasharray:4 3; }
+    .g3-tag{ font-size:11px; fill:#5aa06a; text-anchor:middle; }
+    .g3-hit{ fill:#b5651d; }
+    .g3-ly{ font-size:12px; fill:#4a6da7; text-anchor:start; }
+    .g3-lyr{ font-size:11px; fill:#7a7a7a; text-anchor:end; font-style:italic; }
   </style>
-  <path class="drop" d="M145.0,74.0 L145.0,168.0"/>
-  <path class="drop hi" d="M365.0,74.0 L365.0,168.0"/>
-  <path class="drop" d="M520.0,74.0 L520.0,168.0"/>
-  <path class="drop" d="M90.0,188.0 L90.0,282.0"/>
-  <path class="drop" d="M145.0,188.0 L145.0,282.0"/>
-  <path class="drop" d="M255.0,188.0 L255.0,282.0"/>
-  <path class="drop" d="M365.0,188.0 L365.0,282.0"/>
-  <path class="drop hi" d="M470.0,188.0 L470.0,282.0"/>
-  <path class="drop" d="M520.0,188.0 L520.0,282.0"/>
-  <path class="eg hi" d="M155.0,64.0 L355.0,64.0"/>
-  <path class="eg" d="M375.0,64.0 L510.0,64.0"/>
-  <path class="eg" d="M100.0,178.0 L135.0,178.0"/>
-  <path class="eg" d="M155.0,178.0 L245.0,178.0"/>
-  <path class="eg" d="M265.0,178.0 L355.0,178.0"/>
-  <path class="eg hi" d="M375.0,178.0 L460.0,178.0"/>
-  <path class="eg" d="M480.0,178.0 L510.0,178.0"/>
-  <path class="eg" d="M50.0,292.0 L80.0,292.0"/>
-  <path class="eg" d="M100.0,292.0 L135.0,292.0"/>
-  <path class="eg" d="M155.0,292.0 L190.0,292.0"/>
-  <path class="eg" d="M210.0,292.0 L245.0,292.0"/>
-  <path class="eg" d="M265.0,292.0 L300.0,292.0"/>
-  <path class="eg" d="M320.0,292.0 L355.0,292.0"/>
-  <path class="eg" d="M375.0,292.0 L410.0,292.0"/>
-  <path class="eg" d="M430.0,292.0 L460.0,292.0"/>
-  <path class="eg hi" d="M480.0,292.0 L510.0,292.0"/>
-  <path class="eg" d="M530.0,292.0 L560.0,292.0"/>
-  <path class="eg" d="M580.0,292.0 L605.0,292.0"/>
-  <circle class="nd" cx="145" cy="64" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a"/></circle>
-  <circle class="nd" cx="365" cy="64" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a"/></circle>
-  <circle class="nd" cx="520" cy="64" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="90" cy="178" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="145" cy="178" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="255" cy="178" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="365" cy="178" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#e8b48a;#e8b48a;#e8b48a;#e8b48a"/></circle>
-  <circle class="nd" cx="470" cy="178" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#e8b48a;#e8b48a"/></circle>
-  <circle class="nd" cx="520" cy="178" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="40" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="90" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="145" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="200" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="255" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="310" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="365" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="420" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="470" cy="292" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#e8b48a"/></circle>
-  <circle class="nd" cx="520" cy="292" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle>
-  <circle class="nd" cx="570" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="nd" cx="615" cy="292" r="9" fill="#f0f2f7"/>
-  <circle class="ent" cx="145" cy="64" r="15"/>
-  <text class="tag" x="145" y="38">entry</text>
-  <text class="tag hit" x="520" y="322">target</text>
-  <text class="ly" x="18" y="40">layer 2</text>
-  <text class="lyr" x="628" y="40">3 nodes · very long hops</text>
-  <text class="ly" x="18" y="154">layer 1</text>
-  <text class="lyr" x="628" y="154">6 nodes · medium hops</text>
-  <text class="ly" x="18" y="268">layer 0</text>
-  <text class="lyr" x="628" y="268">every node · short hops</text>
+  <path class="g3-drop" d="M145.0,74.0 L145.0,168.0"/>
+  <path class="g3-drop g3-hi" d="M365.0,74.0 L365.0,168.0"/>
+  <path class="g3-drop" d="M520.0,74.0 L520.0,168.0"/>
+  <path class="g3-drop" d="M90.0,188.0 L90.0,282.0"/>
+  <path class="g3-drop" d="M145.0,188.0 L145.0,282.0"/>
+  <path class="g3-drop" d="M255.0,188.0 L255.0,282.0"/>
+  <path class="g3-drop" d="M365.0,188.0 L365.0,282.0"/>
+  <path class="g3-drop g3-hi" d="M470.0,188.0 L470.0,282.0"/>
+  <path class="g3-drop" d="M520.0,188.0 L520.0,282.0"/>
+  <path class="g3-eg g3-hi" d="M155.0,64.0 L355.0,64.0"/>
+  <path class="g3-eg" d="M375.0,64.0 L510.0,64.0"/>
+  <path class="g3-eg" d="M100.0,178.0 L135.0,178.0"/>
+  <path class="g3-eg" d="M155.0,178.0 L245.0,178.0"/>
+  <path class="g3-eg" d="M265.0,178.0 L355.0,178.0"/>
+  <path class="g3-eg g3-hi" d="M375.0,178.0 L460.0,178.0"/>
+  <path class="g3-eg" d="M480.0,178.0 L510.0,178.0"/>
+  <path class="g3-eg" d="M50.0,292.0 L80.0,292.0"/>
+  <path class="g3-eg" d="M100.0,292.0 L135.0,292.0"/>
+  <path class="g3-eg" d="M155.0,292.0 L190.0,292.0"/>
+  <path class="g3-eg" d="M210.0,292.0 L245.0,292.0"/>
+  <path class="g3-eg" d="M265.0,292.0 L300.0,292.0"/>
+  <path class="g3-eg" d="M320.0,292.0 L355.0,292.0"/>
+  <path class="g3-eg" d="M375.0,292.0 L410.0,292.0"/>
+  <path class="g3-eg" d="M430.0,292.0 L460.0,292.0"/>
+  <path class="g3-eg g3-hi" d="M480.0,292.0 L510.0,292.0"/>
+  <path class="g3-eg" d="M530.0,292.0 L560.0,292.0"/>
+  <path class="g3-eg" d="M580.0,292.0 L605.0,292.0"/>
+  <circle class="g3-nd" cx="145" cy="64" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a"/></circle>
+  <circle class="g3-nd" cx="365" cy="64" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#e8b48a;#e8b48a;#e8b48a;#e8b48a;#e8b48a"/></circle>
+  <circle class="g3-nd" cx="520" cy="64" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="90" cy="178" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="145" cy="178" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="255" cy="178" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="365" cy="178" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#e8b48a;#e8b48a;#e8b48a;#e8b48a"/></circle>
+  <circle class="g3-nd" cx="470" cy="178" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#e8b48a;#e8b48a"/></circle>
+  <circle class="g3-nd" cx="520" cy="178" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="40" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="90" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="145" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="200" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="255" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="310" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="365" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="420" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="470" cy="292" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#e8b48a"/></circle>
+  <circle class="g3-nd" cx="520" cy="292" r="9" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1429;0.2857;0.4286;0.5714;0.7143" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle>
+  <circle class="g3-nd" cx="570" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-nd" cx="615" cy="292" r="9" fill="#f0f2f7"/>
+  <circle class="g3-ent" cx="145" cy="64" r="15"/>
+  <text class="g3-tag" x="145" y="38">entry</text>
+  <text class="g3-tag g3-hit" x="520" y="322">target</text>
+  <text class="g3-ly" x="18" y="40">layer 2</text>
+  <text class="g3-lyr" x="628" y="40">3 nodes · very long hops</text>
+  <text class="g3-ly" x="18" y="154">layer 1</text>
+  <text class="g3-lyr" x="628" y="154">6 nodes · medium hops</text>
+  <text class="g3-ly" x="18" y="268">layer 0</text>
+  <text class="g3-lyr" x="628" y="268">every node · short hops</text>
 </svg>
 <figcaption><b>Figure 3 -</b> An HNSW index. A node appears in a layer with geometrically decaying probability, so the top layer is sparse and its links span the whole space. The search enters at the top, walks greedily to the closest node it can reach, drops one layer (dashed link, same node) and repeats. The orange trail is one query : two hops at the top replace hundreds at the bottom.</figcaption>
 </center></figure>
@@ -358,66 +358,66 @@ A **cross-encoder** does the opposite : it feeds the pair $(q, c)$ through a Tra
 <figure><center>
 <svg viewBox="0 0 640 234" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
-    .cs{ fill:#f3faf4; stroke:#5aa06a; }
-    .cx{ fill:#fbeede; stroke:#b5651d; stroke-width:1.8; }
-    .bt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
-    .bs{ font-size:9.5px; fill:#7a7a7a; text-anchor:middle; }
-    .ln{ stroke:#4a6da7; stroke-width:1.7; fill:none; }
-    .lo{ stroke:#b5651d; stroke-width:1.7; fill:none; }
-    .div{ stroke:#dcdcdc; stroke-width:1.2; }
-    .vec{ fill:#eef1f8; stroke:#4a6da7; stroke-width:1.5; }
-    .sc{ fill:#fbeede; stroke:#b5651d; stroke-width:1.8; }
-    .vt{ font-size:11.5px; fill:#2b2b2b; text-anchor:middle; font-style:italic; }
-    .ttl{ font-size:12.5px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
-    .or{ fill:#b5651d; }
-    .nt{ font-size:11px; fill:#5a5a5a; text-anchor:middle; }
-    .st{ fill:#7a7a7a; }
+    .g4-bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.5; }
+    .g4-cs{ fill:#f3faf4; stroke:#5aa06a; }
+    .g4-cx{ fill:#fbeede; stroke:#b5651d; stroke-width:1.8; }
+    .g4-bt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
+    .g4-bs{ font-size:9.5px; fill:#7a7a7a; text-anchor:middle; }
+    .g4-ln{ stroke:#4a6da7; stroke-width:1.7; fill:none; }
+    .g4-lo{ stroke:#b5651d; stroke-width:1.7; fill:none; }
+    .g4-div{ stroke:#dcdcdc; stroke-width:1.2; }
+    .g4-vec{ fill:#eef1f8; stroke:#4a6da7; stroke-width:1.5; }
+    .g4-sc{ fill:#fbeede; stroke:#b5651d; stroke-width:1.8; }
+    .g4-vt{ font-size:11.5px; fill:#2b2b2b; text-anchor:middle; font-style:italic; }
+    .g4-ttl{ font-size:12.5px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .g4-or{ fill:#b5651d; }
+    .g4-nt{ font-size:11px; fill:#5a5a5a; text-anchor:middle; }
+    .g4-st{ fill:#7a7a7a; }
   </style>
   <defs>
-    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g4-am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g4-ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
-    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g4-ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#5aa06a"/></marker>
   </defs>
-  <path class="div" d="M318,32 L318,224"/>
-  <text class="ttl" x="160" y="24">bi-encoder — builds the index</text>
-  <text class="ttl or" x="480" y="24">cross-encoder — reranks the shortlist</text>
-  <rect class="bx" x="20" y="56" width="68" height="30" rx="5"/>
-  <text class="bt" x="54" y="75.0">query</text>
-  <rect class="bx" x="20" y="140" width="68" height="30" rx="5"/>
-  <text class="bt" x="54" y="159.0">chunk</text>
-  <rect class="bx" x="108" y="56" width="74" height="30" rx="5"/>
-  <text class="bt" x="145" y="75.0">encoder</text>
-  <rect class="bx" x="108" y="140" width="74" height="30" rx="5"/>
-  <text class="bt" x="145" y="159.0">encoder</text>
-  <path class="ln" d="M88.0,71.0 L101.0,71.0" marker-end="url(#am)"/>
-  <path class="ln" d="M88.0,155.0 L101.0,155.0" marker-end="url(#am)"/>
-  <path class="ln" d="M182.0,71.0 L195.0,71.0" marker-end="url(#am)"/>
-  <path class="ln" d="M182.0,155.0 L195.0,155.0" marker-end="url(#am)"/>
-  <circle class="vec" cx="208" cy="71" r="13"/><text class="vt" x="208" y="76">q</text>
-  <circle class="vec" cx="208" cy="155" r="13"/><text class="vt" x="208" y="160">c</text>
-  <rect class="bx cs" x="240" y="98" width="66" height="30" rx="5"/>
-  <text class="bt" x="273" y="117.0">cos</text>
-  <path class="ln" d="M221,79 L237,100" marker-end="url(#am)"/>
-  <path class="ln" d="M221,147 L237,126" marker-end="url(#am)"/>
-  <text class="nt" x="160" y="204">the chunk tower runs offline, once per chunk :</text>
-  <text class="nt st" x="160" y="219">a query costs one encode + one index lookup</text>
-  <rect class="bx" x="340" y="56" width="68" height="30" rx="5"/>
-  <text class="bt" x="374" y="75.0">query</text>
-  <rect class="bx" x="340" y="140" width="68" height="30" rx="5"/>
-  <text class="bt" x="374" y="159.0">chunk</text>
-  <rect class="bx cx" x="438" y="84" width="90" height="58" rx="5"/>
-  <text class="bt" x="483" y="112.0">encoder</text>
-  <text class="bs" x="483" y="126.0">both at once</text>
-  <path class="lo" d="M408,71 L434,98" marker-end="url(#ao)"/>
-  <path class="lo" d="M408,155 L434,128" marker-end="url(#ao)"/>
-  <path class="lo" d="M528,113 L545,113" marker-end="url(#ao)"/>
-  <circle class="sc" cx="570" cy="113" r="19"/><text class="vt" x="570" y="117">score</text>
-  <text class="nt or" x="480" y="204">nothing can be precomputed :</text>
-  <text class="nt or st" x="480" y="219">one full pass per (query, chunk) pair</text>
+  <path class="g4-div" d="M318,32 L318,224"/>
+  <text class="g4-ttl" x="160" y="24">bi-encoder — builds the index</text>
+  <text class="g4-ttl g4-or" x="480" y="24">cross-encoder — reranks the shortlist</text>
+  <rect class="g4-bx" x="20" y="56" width="68" height="30" rx="5"/>
+  <text class="g4-bt" x="54" y="75.0">query</text>
+  <rect class="g4-bx" x="20" y="140" width="68" height="30" rx="5"/>
+  <text class="g4-bt" x="54" y="159.0">chunk</text>
+  <rect class="g4-bx" x="108" y="56" width="74" height="30" rx="5"/>
+  <text class="g4-bt" x="145" y="75.0">encoder</text>
+  <rect class="g4-bx" x="108" y="140" width="74" height="30" rx="5"/>
+  <text class="g4-bt" x="145" y="159.0">encoder</text>
+  <path class="g4-ln" d="M88.0,71.0 L101.0,71.0" marker-end="url(#g4-am)"/>
+  <path class="g4-ln" d="M88.0,155.0 L101.0,155.0" marker-end="url(#g4-am)"/>
+  <path class="g4-ln" d="M182.0,71.0 L195.0,71.0" marker-end="url(#g4-am)"/>
+  <path class="g4-ln" d="M182.0,155.0 L195.0,155.0" marker-end="url(#g4-am)"/>
+  <circle class="g4-vec" cx="208" cy="71" r="13"/><text class="g4-vt" x="208" y="76">q</text>
+  <circle class="g4-vec" cx="208" cy="155" r="13"/><text class="g4-vt" x="208" y="160">c</text>
+  <rect class="g4-bx g4-cs" x="240" y="98" width="66" height="30" rx="5"/>
+  <text class="g4-bt" x="273" y="117.0">cos</text>
+  <path class="g4-ln" d="M221,79 L237,100" marker-end="url(#g4-am)"/>
+  <path class="g4-ln" d="M221,147 L237,126" marker-end="url(#g4-am)"/>
+  <text class="g4-nt" x="160" y="204">the chunk tower runs offline, once per chunk :</text>
+  <text class="g4-nt g4-st" x="160" y="219">a query costs one encode + one index lookup</text>
+  <rect class="g4-bx" x="340" y="56" width="68" height="30" rx="5"/>
+  <text class="g4-bt" x="374" y="75.0">query</text>
+  <rect class="g4-bx" x="340" y="140" width="68" height="30" rx="5"/>
+  <text class="g4-bt" x="374" y="159.0">chunk</text>
+  <rect class="g4-bx g4-cx" x="438" y="84" width="90" height="58" rx="5"/>
+  <text class="g4-bt" x="483" y="112.0">encoder</text>
+  <text class="g4-bs" x="483" y="126.0">both at once</text>
+  <path class="g4-lo" d="M408,71 L434,98" marker-end="url(#g4-ao)"/>
+  <path class="g4-lo" d="M408,155 L434,128" marker-end="url(#g4-ao)"/>
+  <path class="g4-lo" d="M528,113 L545,113" marker-end="url(#g4-ao)"/>
+  <circle class="g4-sc" cx="570" cy="113" r="19"/><text class="g4-vt" x="570" y="117">score</text>
+  <text class="g4-nt g4-or" x="480" y="204">nothing can be precomputed :</text>
+  <text class="g4-nt g4-or g4-st" x="480" y="219">one full pass per (query, chunk) pair</text>
 </svg>
 <figcaption><b>Figure 4 -</b> The two ways to score a (query, chunk) pair. The bi-encoder keeps them apart, which loses information but lets every chunk vector be computed once and stored — that is what an index <i>is</i>. The cross-encoder lets the two texts attend to each other, which is far more accurate and impossible to precompute. Retrieval uses the first, reranking the second.</figcaption>
 </center></figure>

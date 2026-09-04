@@ -39,39 +39,39 @@ p_{\text{cat}} &= \tfrac{7.389}{11.212} = 0.659, & p_{\text{dog}} &= \tfrac{2.71
 <figure><center>
 <svg viewBox="0 0 640 240" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .lb{ fill:#8fa5c8; stroke:#4a6da7; stroke-width:1.2; }
-    .pb{ fill:#e0a878; stroke:#b5651d; stroke-width:1.2; }
-    .ax{ stroke:#bdbdbd; stroke-width:1.2; }
-    .cl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
-    .vl{ font-size:12px; fill:#2b2b2b; text-anchor:middle; }
-    .hd{ font-size:13px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
-    .hd2{ font-size:13px; fill:#b5651d; text-anchor:middle; font-style:italic; }
-    .arw{ stroke:#7a7a7a; stroke-width:1.6; fill:none; }
-    .op{ font-size:13px; fill:#5a5a5a; text-anchor:middle; }
-    .fl{ fill:#5aa06a; }
+    .g1-lb{ fill:#8fa5c8; stroke:#4a6da7; stroke-width:1.2; }
+    .g1-pb{ fill:#e0a878; stroke:#b5651d; stroke-width:1.2; }
+    .g1-ax{ stroke:#bdbdbd; stroke-width:1.2; }
+    .g1-cl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
+    .g1-vl{ font-size:12px; fill:#2b2b2b; text-anchor:middle; }
+    .g1-hd{ font-size:13px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .g1-hd2{ font-size:13px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .g1-arw{ stroke:#7a7a7a; stroke-width:1.6; fill:none; }
+    .g1-op{ font-size:13px; fill:#5a5a5a; text-anchor:middle; }
+    .g1-fl{ fill:#5aa06a; }
   </style>
   <!-- left panel : logits -->
-  <text class="hd" x="115" y="26">logits z (raw scores)</text>
-  <line class="ax" x1="35" y1="190" x2="200" y2="190"/>
-  <rect class="lb" x="52"  y="130" width="34" height="60"/><text class="vl" x="69"  y="122">2.0</text><text class="cl" x="69"  y="206">cat</text>
-  <rect class="lb" x="100" y="160" width="34" height="30"/><text class="vl" x="117" y="152">1.0</text><text class="cl" x="117" y="206">dog</text>
-  <rect class="lb" x="148" y="187" width="34" height="3"/> <text class="vl" x="165" y="179">0.1</text><text class="cl" x="165" y="206">bird</text>
+  <text class="g1-hd" x="115" y="26">logits z (raw scores)</text>
+  <line class="g1-ax" x1="35" y1="190" x2="200" y2="190"/>
+  <rect class="g1-lb" x="52"  y="130" width="34" height="60"/><text class="g1-vl" x="69"  y="122">2.0</text><text class="g1-cl" x="69"  y="206">cat</text>
+  <rect class="g1-lb" x="100" y="160" width="34" height="30"/><text class="g1-vl" x="117" y="152">1.0</text><text class="g1-cl" x="117" y="206">dog</text>
+  <rect class="g1-lb" x="148" y="187" width="34" height="3"/> <text class="g1-vl" x="165" y="179">0.1</text><text class="g1-cl" x="165" y="206">bird</text>
   <!-- middle : the two operations -->
-  <path class="arw" d="M215,150 L300,150"/><path class="arw" d="M300,150 l-8,-5 M300,150 l-8,5"/>
-  <text class="op" x="257" y="140">e ᶻ</text>
-  <text class="op" x="257" y="172" font-size="11">7.389 · 2.718 · 1.105</text>
-  <path class="arw" d="M320,150 L405,150"/><path class="arw" d="M405,150 l-8,-5 M405,150 l-8,5"/>
-  <text class="op" x="362" y="140">÷ 11.212</text>
-  <text class="op" x="362" y="172" font-size="11">(the total)</text>
+  <path class="g1-arw" d="M215,150 L300,150"/><path class="g1-arw" d="M300,150 l-8,-5 M300,150 l-8,5"/>
+  <text class="g1-op" x="257" y="140">e ᶻ</text>
+  <text class="g1-op" x="257" y="172" font-size="11">7.389 · 2.718 · 1.105</text>
+  <path class="g1-arw" d="M320,150 L405,150"/><path class="g1-arw" d="M405,150 l-8,-5 M405,150 l-8,5"/>
+  <text class="g1-op" x="362" y="140">÷ 11.212</text>
+  <text class="g1-op" x="362" y="172" font-size="11">(the total)</text>
   <!-- travelling dot -->
-  <circle class="fl" r="5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M215,150 L405,150"/></circle>
+  <circle class="g1-fl" r="5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M215,150 L405,150"/></circle>
   <!-- right panel : probabilities -->
-  <text class="hd2" x="520" y="26">probabilities p (sum = 1)</text>
-  <line class="ax" x1="425" y1="190" x2="615" y2="190"/>
-  <rect class="pb" x="446" y="104" width="34" height="86"/><text class="vl" x="463" y="96"  fill="#b5651d">0.659</text><text class="cl" x="463" y="206">cat</text>
-  <rect class="pb" x="500" y="158" width="34" height="32"/><text class="vl" x="517" y="150" fill="#b5651d">0.242</text><text class="cl" x="517" y="206">dog</text>
-  <rect class="pb" x="554" y="177" width="34" height="13"/><text class="vl" x="571" y="169" fill="#b5651d">0.099</text><text class="cl" x="571" y="206">bird</text>
-  <text class="cl" x="320" y="230" fill="#7a7a7a">softmax : exponentiate to make everything positive, then normalise to make it a distribution</text>
+  <text class="g1-hd2" x="520" y="26">probabilities p (sum = 1)</text>
+  <line class="g1-ax" x1="425" y1="190" x2="615" y2="190"/>
+  <rect class="g1-pb" x="446" y="104" width="34" height="86"/><text class="g1-vl" x="463" y="96"  fill="#b5651d">0.659</text><text class="g1-cl" x="463" y="206">cat</text>
+  <rect class="g1-pb" x="500" y="158" width="34" height="32"/><text class="g1-vl" x="517" y="150" fill="#b5651d">0.242</text><text class="g1-cl" x="517" y="206">dog</text>
+  <rect class="g1-pb" x="554" y="177" width="34" height="13"/><text class="g1-vl" x="571" y="169" fill="#b5651d">0.099</text><text class="g1-cl" x="571" y="206">bird</text>
+  <text class="g1-cl" x="320" y="230" fill="#7a7a7a">softmax : exponentiate to make everything positive, then normalise to make it a distribution</text>
 </svg>
 <figcaption><b>Figure 1 -</b> Softmax in two moves. The exponential turns arbitrary scores into positive "ticket counts", the division by their sum turns those counts into shares. The order of the classes is untouched.</figcaption>
 </center></figure>
@@ -94,32 +94,32 @@ Information theory gives the natural measure. Shannon {% cite Shannon1948 %} def
 <figure><center>
 <svg viewBox="0 0 640 250" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .axis{ stroke:#9a9a9a; stroke-width:1.3; }
-    .grid{ stroke:#e6e6e6; stroke-width:1; }
-    .crv{ stroke:#b5651d; stroke-width:2.4; fill:none; }
-    .tk{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
-    .tky{ font-size:11px; fill:#7a7a7a; text-anchor:end; }
-    .lbl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; font-style:italic; }
-    .mk{ fill:#4a6da7; } .mklb{ font-size:11px; fill:#4a6da7; text-anchor:middle; }
-    .dsh{ stroke:#4a6da7; stroke-width:1; stroke-dasharray:3 3; }
+    .g2-axis{ stroke:#9a9a9a; stroke-width:1.3; }
+    .g2-grid{ stroke:#e6e6e6; stroke-width:1; }
+    .g2-crv{ stroke:#b5651d; stroke-width:2.4; fill:none; }
+    .g2-tk{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-tky{ font-size:11px; fill:#7a7a7a; text-anchor:end; }
+    .g2-lbl{ font-size:12px; fill:#5a5a5a; text-anchor:middle; font-style:italic; }
+    .g2-mk{ fill:#4a6da7; } .g2-mklb{ font-size:11px; fill:#4a6da7; text-anchor:middle; }
+    .g2-dsh{ stroke:#4a6da7; stroke-width:1; stroke-dasharray:3 3; }
   </style>
-  <line class="grid" x1="70" y1="164" x2="600" y2="164"/>
-  <line class="grid" x1="70" y1="128" x2="600" y2="128"/>
-  <line class="grid" x1="70" y1="92"  x2="600" y2="92"/>
-  <line class="grid" x1="70" y1="56"  x2="600" y2="56"/>
-  <line class="axis" x1="70" y1="200" x2="610" y2="200"/>
-  <line class="axis" x1="70" y1="200" x2="70"  y2="26"/>
-  <text class="tky" x="63" y="204">0</text><text class="tky" x="63" y="168">1</text><text class="tky" x="63" y="132">2</text><text class="tky" x="63" y="96">3</text><text class="tky" x="63" y="60">4</text>
-  <text class="tk" x="70" y="218">0</text><text class="tk" x="330" y="218">0.5</text><text class="tk" x="590" y="218">1</text>
-  <text class="lbl" x="340" y="238">probability the model gave to the correct class</text>
-  <text class="lbl" x="18" y="112" transform="rotate(-90 18,112)">loss  −ln p</text>
-  <path class="crv" d="M75,34 L80,59 L96,92 L122,117 L174,142 L226,157 L278,167 L330,175 L382,182 L434,187 L486,192 L538,196 L590,200"/>
+  <line class="g2-grid" x1="70" y1="164" x2="600" y2="164"/>
+  <line class="g2-grid" x1="70" y1="128" x2="600" y2="128"/>
+  <line class="g2-grid" x1="70" y1="92"  x2="600" y2="92"/>
+  <line class="g2-grid" x1="70" y1="56"  x2="600" y2="56"/>
+  <line class="g2-axis" x1="70" y1="200" x2="610" y2="200"/>
+  <line class="g2-axis" x1="70" y1="200" x2="70"  y2="26"/>
+  <text class="g2-tky" x="63" y="204">0</text><text class="g2-tky" x="63" y="168">1</text><text class="g2-tky" x="63" y="132">2</text><text class="g2-tky" x="63" y="96">3</text><text class="g2-tky" x="63" y="60">4</text>
+  <text class="g2-tk" x="70" y="218">0</text><text class="g2-tk" x="330" y="218">0.5</text><text class="g2-tk" x="590" y="218">1</text>
+  <text class="g2-lbl" x="340" y="238">probability the model gave to the correct class</text>
+  <text class="g2-lbl" x="18" y="112" transform="rotate(-90 18,112)">loss  −ln p</text>
+  <path class="g2-crv" d="M75,34 L80,59 L96,92 L122,117 L174,142 L226,157 L278,167 L330,175 L382,182 L434,187 L486,192 L538,196 L590,200"/>
   <!-- marker at p = 0.242 -->
-  <line class="dsh" x1="196" y1="200" x2="196" y2="149"/>
-  <line class="dsh" x1="70"  y1="149" x2="196" y2="149"/>
-  <circle class="mk" cx="196" cy="149" r="4.5"/>
-  <text class="mklb" x="238" y="140">our dog : 1.417</text>
-  <text class="tk" x="196" y="218" fill="#4a6da7">0.242</text>
+  <line class="g2-dsh" x1="196" y1="200" x2="196" y2="149"/>
+  <line class="g2-dsh" x1="70"  y1="149" x2="196" y2="149"/>
+  <circle class="g2-mk" cx="196" cy="149" r="4.5"/>
+  <text class="g2-mklb" x="238" y="140">our dog : 1.417</text>
+  <text class="g2-tk" x="196" y="218" fill="#4a6da7">0.242</text>
 </svg>
 <figcaption><b>Figure 2 -</b> The loss $-\ln p$ as a function of the probability given to the <i>correct</i> class. It is gentle when you were nearly right and explodes as your confidence in the truth approaches zero, which is exactly the asymmetry we wanted.</figcaption>
 </center></figure>
@@ -172,30 +172,30 @@ A small $T$ magnifies the gaps and makes the model decisive ; a large $T$ shrink
 <figure><center>
 <svg viewBox="0 0 640 240" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .tb{ fill:#e0a878; stroke:#b5651d; stroke-width:1.2; }
-    .ax2{ stroke:#bdbdbd; stroke-width:1.2; }
-    .cl2{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
-    .tt{ font-size:16px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
-    .cp{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g3-tb{ fill:#e0a878; stroke:#b5651d; stroke-width:1.2; }
+    .g3-ax2{ stroke:#bdbdbd; stroke-width:1.2; }
+    .g3-cl2{ font-size:12px; fill:#5a5a5a; text-anchor:middle; }
+    .g3-tt{ font-size:16px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .g3-cp{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
   </style>
-  <line class="ax2" x1="180" y1="180" x2="460" y2="180"/>
-  <rect class="tb" x="205" y="94" width="46" height="86">
+  <line class="g3-ax2" x1="180" y1="180" x2="460" y2="180"/>
+  <rect class="g3-tb" x="205" y="94" width="46" height="86">
     <animate attributeName="height" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="112;86;65;86;112"/>
     <animate attributeName="y"      dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="68;94;115;94;68"/>
   </rect>
-  <rect class="tb" x="297" y="148" width="46" height="32">
+  <rect class="g3-tb" x="297" y="148" width="46" height="32">
     <animate attributeName="height" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="15;31.5;39.5;31.5;15"/>
     <animate attributeName="y"      dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="165;148.5;140.5;148.5;165"/>
   </rect>
-  <rect class="tb" x="389" y="167" width="46" height="13">
+  <rect class="g3-tb" x="389" y="167" width="46" height="13">
     <animate attributeName="height" dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="2.5;12.8;25.2;12.8;2.5"/>
     <animate attributeName="y"      dur="6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1" values="177.5;167.2;154.8;167.2;177.5"/>
   </rect>
-  <text class="cl2" x="228" y="196">cat</text><text class="cl2" x="320" y="196">dog</text><text class="cl2" x="412" y="196">bird</text>
-  <text class="tt" x="320" y="42">T = 0.5  (decisive)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.2;0.25;0.75;0.8;1" values="1;1;0;0;1;1"/></text>
-  <text class="tt" x="320" y="42">T = 1  (as trained)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.2;0.3;0.45;0.55;0.7;0.8;1" values="0;0;1;1;0;0;1;0"/></text>
-  <text class="tt" x="320" y="42">T = 2  (hesitant)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.45;0.5;0.55;1" values="0;0;1;0;0"/></text>
-  <text class="cp" x="320" y="224">same logits (2.0, 1.0, 0.1), different temperature</text>
+  <text class="g3-cl2" x="228" y="196">cat</text><text class="g3-cl2" x="320" y="196">dog</text><text class="g3-cl2" x="412" y="196">bird</text>
+  <text class="g3-tt" x="320" y="42">T = 0.5  (decisive)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.2;0.25;0.75;0.8;1" values="1;1;0;0;1;1"/></text>
+  <text class="g3-tt" x="320" y="42">T = 1  (as trained)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.2;0.3;0.45;0.55;0.7;0.8;1" values="0;0;1;1;0;0;1;0"/></text>
+  <text class="g3-tt" x="320" y="42">T = 2  (hesitant)<animate attributeName="opacity" dur="6s" repeatCount="indefinite" keyTimes="0;0.45;0.5;0.55;1" values="0;0;1;0;0"/></text>
+  <text class="g3-cp" x="320" y="224">same logits (2.0, 1.0, 0.1), different temperature</text>
 </svg>
 <figcaption><b>Figure 3 -</b> Temperature reshapes the same three scores. Cooling sharpens the distribution towards the winner, heating flattens it towards uniform. Nothing about the model changed, only how boldly we read it.</figcaption>
 </center></figure>

@@ -34,44 +34,44 @@ Since $F(n) \sim \varphi^{n}/\sqrt{5}$ with $\varphi = \frac{1+\sqrt 5}{2} \appr
 <figure><center>
 <svg viewBox="0 0 640 360" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .e{ stroke:#c2ccdc; stroke-width:1.6; fill:none; stroke-linecap:round; }
-    .n{ stroke:#4a6da7; stroke-width:1.5; }
-    .t{ font-size:12px; fill:#2b2b2b; text-anchor:middle; }
-    .cap{ font-size:13.5px; fill:#b5651d; text-anchor:middle; font-style:italic; }
+    .g1-e{ stroke:#c2ccdc; stroke-width:1.6; fill:none; stroke-linecap:round; }
+    .g1-n{ stroke:#4a6da7; stroke-width:1.5; }
+    .g1-t{ font-size:12px; fill:#2b2b2b; text-anchor:middle; }
+    .g1-cap{ font-size:13.5px; fill:#b5651d; text-anchor:middle; font-style:italic; }
   </style>
-  <path class="e" d="M304.9,41.8 L200.1,96.2"/>
-  <path class="e" d="M335.4,41.2 L454.6,96.8"/>
-  <path class="e" d="M171.9,114.8 L113.1,163.2"/>
-  <path class="e" d="M197.6,115.4 L249.4,162.6"/>
-  <path class="e" d="M458.4,116.5 L416.6,161.5"/>
-  <path class="e" d="M482.7,115.4 L535.3,162.6"/>
-  <path class="e" d="M91.3,188.6 L66.7,229.4"/>
-  <path class="e" d="M109.9,187.8 L140.1,230.2"/>
-  <path class="e" d="M254.6,189.3 L235.4,228.7"/>
-  <path class="e" d="M270.1,188.9 L291.9,229.1"/>
-  <path class="e" d="M397.4,189.2 L377.6,228.8"/>
-  <path class="e" d="M412.9,189.0 L434.1,229.0"/>
-  <path class="e" d="M52.3,260.0 L41.7,290.0"/>
-  <path class="e" d="M66.2,258.9 L83.8,291.1"/>
-  <circle class="n" cx="320" cy="34" r="16" fill="#f0f2f7"></circle><text class="t" x="320" y="39">F5</text>
-  <circle class="n" cx="185" cy="104" r="16" fill="#f0f2f7"></circle><text class="t" x="185" y="109">F4</text>
-  <circle class="n" cx="470" cy="104" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="t" x="470" y="109">F3</text>
-  <circle class="n" cx="100" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="t" x="100" y="179">F3</text>
-  <circle class="n" cx="262" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="t" x="262" y="179">F2</text>
-  <circle class="n" cx="405" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="t" x="405" y="179">F2</text>
-  <circle class="n" cx="548" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="t" x="548" y="179">F1</text>
-  <circle class="n" cx="58" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="t" x="58" y="249">F2</text>
-  <circle class="n" cx="150" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="t" x="150" y="249">F1</text>
-  <circle class="n" cx="228" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="t" x="228" y="249">F1</text>
-  <circle class="n" cx="300" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="t" x="300" y="249">F0</text>
-  <circle class="n" cx="370" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="t" x="370" y="249">F1</text>
-  <circle class="n" cx="442" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="t" x="442" y="249">F0</text>
-  <circle class="n" cx="36" cy="306" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="t" x="36" y="311">F1</text>
-  <circle class="n" cx="92" cy="306" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="t" x="92" y="311">F0</text>
-  <text class="cap" x="320" y="345" opacity="1">F(3) is recomputed 2 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="1;0;0;0"/></text>
-  <text class="cap" x="320" y="345" opacity="0">F(2) is recomputed 3 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;1;0;0"/></text>
-  <text class="cap" x="320" y="345" opacity="0">F(1) is recomputed 5 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;0;1;0"/></text>
-  <text class="cap" x="320" y="345" opacity="0">F(0) is recomputed 3 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;0;0;1"/></text>
+  <path class="g1-e" d="M304.9,41.8 L200.1,96.2"/>
+  <path class="g1-e" d="M335.4,41.2 L454.6,96.8"/>
+  <path class="g1-e" d="M171.9,114.8 L113.1,163.2"/>
+  <path class="g1-e" d="M197.6,115.4 L249.4,162.6"/>
+  <path class="g1-e" d="M458.4,116.5 L416.6,161.5"/>
+  <path class="g1-e" d="M482.7,115.4 L535.3,162.6"/>
+  <path class="g1-e" d="M91.3,188.6 L66.7,229.4"/>
+  <path class="g1-e" d="M109.9,187.8 L140.1,230.2"/>
+  <path class="g1-e" d="M254.6,189.3 L235.4,228.7"/>
+  <path class="g1-e" d="M270.1,188.9 L291.9,229.1"/>
+  <path class="g1-e" d="M397.4,189.2 L377.6,228.8"/>
+  <path class="g1-e" d="M412.9,189.0 L434.1,229.0"/>
+  <path class="g1-e" d="M52.3,260.0 L41.7,290.0"/>
+  <path class="g1-e" d="M66.2,258.9 L83.8,291.1"/>
+  <circle class="g1-n" cx="320" cy="34" r="16" fill="#f0f2f7"></circle><text class="g1-t" x="320" y="39">F5</text>
+  <circle class="g1-n" cx="185" cy="104" r="16" fill="#f0f2f7"></circle><text class="g1-t" x="185" y="109">F4</text>
+  <circle class="g1-n" cx="470" cy="104" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="g1-t" x="470" y="109">F3</text>
+  <circle class="g1-n" cx="100" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="g1-t" x="100" y="179">F3</text>
+  <circle class="g1-n" cx="262" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="g1-t" x="262" y="179">F2</text>
+  <circle class="g1-n" cx="405" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="g1-t" x="405" y="179">F2</text>
+  <circle class="g1-n" cx="548" cy="174" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="g1-t" x="548" y="179">F1</text>
+  <circle class="g1-n" cx="58" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="g1-t" x="58" y="249">F2</text>
+  <circle class="g1-n" cx="150" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="g1-t" x="150" y="249">F1</text>
+  <circle class="g1-n" cx="228" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="g1-t" x="228" y="249">F1</text>
+  <circle class="g1-n" cx="300" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="g1-t" x="300" y="249">F0</text>
+  <circle class="g1-n" cx="370" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="g1-t" x="370" y="249">F1</text>
+  <circle class="g1-n" cx="442" cy="244" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="g1-t" x="442" y="249">F0</text>
+  <circle class="g1-n" cx="36" cy="306" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="g1-t" x="36" y="311">F1</text>
+  <circle class="g1-n" cx="92" cy="306" r="16" fill="#f0f2f7"><animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="g1-t" x="92" y="311">F0</text>
+  <text class="g1-cap" x="320" y="345" opacity="1">F(3) is recomputed 2 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="1;0;0;0"/></text>
+  <text class="g1-cap" x="320" y="345" opacity="0">F(2) is recomputed 3 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;1;0;0"/></text>
+  <text class="g1-cap" x="320" y="345" opacity="0">F(1) is recomputed 5 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;0;1;0"/></text>
+  <text class="g1-cap" x="320" y="345" opacity="0">F(0) is recomputed 3 times<animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="0;0;0;1"/></text>
 </svg>
 <figcaption><b>Figure 1 -</b> The call tree of $F(5)$ : 15 calls for only 6 distinct values. Watch each value light up everywhere it is recomputed. There are just <b>six</b> different questions in this whole tree, and the recursion asks them fifteen times.</figcaption>
 </center></figure>
@@ -84,35 +84,35 @@ Glue the identical nodes together and the tree collapses into a **directed acycl
 <figure><center>
 <svg viewBox="0 0 640 212" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .ea{ stroke:#4a6da7; stroke-width:1.9; fill:none; }
-    .eb{ stroke:#b5651d; stroke-width:1.7; fill:none; opacity:.85; }
-    .nd{ stroke:#4a6da7; stroke-width:1.7; }
-    .tt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
-    .vv{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold; }
-    .lg{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g2-ea{ stroke:#4a6da7; stroke-width:1.9; fill:none; }
+    .g2-eb{ stroke:#b5651d; stroke-width:1.7; fill:none; opacity:.85; }
+    .g2-nd{ stroke:#4a6da7; stroke-width:1.7; }
+    .g2-tt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
+    .g2-vv{ font-size:12px; fill:#b5651d; text-anchor:middle; font-weight:bold; }
+    .g2-lg{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7"/></marker>
-    <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+    <marker id="g2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
   </defs>
-  <path class="ea" d="M96.0,100.0 L136.0,100.0" marker-end="url(#ah1)"/>
-  <path class="ea" d="M196.0,100.0 L236.0,100.0" marker-end="url(#ah1)"/>
-  <path class="ea" d="M296.0,100.0 L336.0,100.0" marker-end="url(#ah1)"/>
-  <path class="ea" d="M396.0,100.0 L436.0,100.0" marker-end="url(#ah1)"/>
-  <path class="ea" d="M496.0,100.0 L536.0,100.0" marker-end="url(#ah1)"/>
-  <path class="eb" d="M84.3,82.1 Q170.0,7.9 254.4,82.1" marker-end="url(#ah2)"/>
-  <path class="eb" d="M184.3,117.9 Q270.0,192.1 354.4,117.9" marker-end="url(#ah2)"/>
-  <path class="eb" d="M284.3,82.1 Q370.0,7.9 454.4,82.1" marker-end="url(#ah2)"/>
-  <path class="eb" d="M384.3,117.9 Q470.0,192.1 554.4,117.9" marker-end="url(#ah2)"/>
-  <circle class="nd" cx="70" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="tt" x="70" y="99">F0</text><text class="vv" x="70" y="114">0</text>
-  <circle class="nd" cx="170" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="tt" x="170" y="99">F1</text><text class="vv" x="170" y="114">1</text>
-  <circle class="nd" cx="270" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="tt" x="270" y="99">F2</text><text class="vv" x="270" y="114">1</text>
-  <circle class="nd" cx="370" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="tt" x="370" y="99">F3</text><text class="vv" x="370" y="114">2</text>
-  <circle class="nd" cx="470" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="tt" x="470" y="99">F4</text><text class="vv" x="470" y="114">3</text>
-  <circle class="nd" cx="570" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="tt" x="570" y="99">F5</text><text class="vv" x="570" y="114">5</text>
-  <text class="lg" x="320" y="204">each node holds its value ; the highlight sweeps them in topological order</text>
+  <path class="g2-ea" d="M96.0,100.0 L136.0,100.0" marker-end="url(#g2-ah1)"/>
+  <path class="g2-ea" d="M196.0,100.0 L236.0,100.0" marker-end="url(#g2-ah1)"/>
+  <path class="g2-ea" d="M296.0,100.0 L336.0,100.0" marker-end="url(#g2-ah1)"/>
+  <path class="g2-ea" d="M396.0,100.0 L436.0,100.0" marker-end="url(#g2-ah1)"/>
+  <path class="g2-ea" d="M496.0,100.0 L536.0,100.0" marker-end="url(#g2-ah1)"/>
+  <path class="g2-eb" d="M84.3,82.1 Q170.0,7.9 254.4,82.1" marker-end="url(#g2-ah2)"/>
+  <path class="g2-eb" d="M184.3,117.9 Q270.0,192.1 354.4,117.9" marker-end="url(#g2-ah2)"/>
+  <path class="g2-eb" d="M284.3,82.1 Q370.0,7.9 454.4,82.1" marker-end="url(#g2-ah2)"/>
+  <path class="g2-eb" d="M384.3,117.9 Q470.0,192.1 554.4,117.9" marker-end="url(#g2-ah2)"/>
+  <circle class="g2-nd" cx="70" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="g2-tt" x="70" y="99">F0</text><text class="g2-vv" x="70" y="114">0</text>
+  <circle class="g2-nd" cx="170" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="g2-tt" x="170" y="99">F1</text><text class="g2-vv" x="170" y="114">1</text>
+  <circle class="g2-nd" cx="270" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7;#f0f2f7"/></circle><text class="g2-tt" x="270" y="99">F2</text><text class="g2-vv" x="270" y="114">1</text>
+  <circle class="g2-nd" cx="370" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7;#f0f2f7"/></circle><text class="g2-tt" x="370" y="99">F3</text><text class="g2-vv" x="370" y="114">2</text>
+  <circle class="g2-nd" cx="470" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a;#f0f2f7"/></circle><text class="g2-tt" x="470" y="99">F4</text><text class="g2-vv" x="470" y="114">3</text>
+  <circle class="g2-nd" cx="570" cy="100" r="23" fill="#f0f2f7"><animate attributeName="fill" dur="7.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.167;0.333;0.5;0.667;0.833" values="#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#f0f2f7;#e8b48a"/></circle><text class="g2-tt" x="570" y="99">F5</text><text class="g2-vv" x="570" y="114">5</text>
+  <text class="g2-lg" x="320" y="204">each node holds its value ; the highlight sweeps them in topological order</text>
 </svg>
 <figcaption><b>Figure 2 -</b> The same computation as a DAG. Every distinct subproblem is one node, and every arrow points from a value towards the value that needs it : blue for the $n-1$ dependency, orange for the $n-2$ one. The orange links alternate above and below the row so that they vault cleanly over the node in between. Fifteen calls became six.</figcaption>
 </center></figure>
@@ -185,36 +185,36 @@ Now the recurrence is licensed, we can fill the table $C(0), C(1), \dots, C(6)$ 
 <figure><center>
 <svg viewBox="0 0 640 248" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .cell{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
-    .win{ fill:#fbeede; stroke:#b5651d; stroke-width:2.2; }
-    .sweep{ fill:#5aa06a; fill-opacity:.16; stroke:#5aa06a; stroke-width:2.4; }
-    .idx{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
-    .val{ font-size:19px; fill:#2b2b2b; text-anchor:middle; }
-    .dep{ stroke:#b5651d; stroke-width:1.5; fill:none; opacity:.8; }
-    .dlb{ font-size:11.5px; fill:#b5651d; text-anchor:middle;
+    .g3-cell{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
+    .g3-win{ fill:#fbeede; stroke:#b5651d; stroke-width:2.2; }
+    .g3-sweep{ fill:#5aa06a; fill-opacity:.16; stroke:#5aa06a; stroke-width:2.4; }
+    .g3-idx{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g3-val{ font-size:19px; fill:#2b2b2b; text-anchor:middle; }
+    .g3-dep{ stroke:#b5651d; stroke-width:1.5; fill:none; opacity:.8; }
+    .g3-dlb{ font-size:11.5px; fill:#b5651d; text-anchor:middle;
           paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
-    .ttl{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g3-ttl{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
   </style>
   <defs>
-    <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <marker id="g3-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="#b5651d"/></marker>
   </defs>
-  <text class="ttl" x="52" y="62">amount n</text>
-  <text class="ttl" x="52" y="109">C(n)</text>
-  <rect class="cell" x="100" y="74" width="62" height="52"/><text class="idx" x="131" y="62">0</text><text class="val" x="131" y="109">0</text>
-  <rect class="cell" x="162" y="74" width="62" height="52"/><text class="idx" x="193" y="62">1</text><text class="val" x="193" y="109">1</text>
-  <rect class="cell" x="224" y="74" width="62" height="52"/><text class="idx" x="255" y="62">2</text><text class="val" x="255" y="109">2</text>
-  <rect class="cell win" x="286" y="74" width="62" height="52"/><text class="idx" x="317" y="62">3</text><text class="val" x="317" y="109">1</text>
-  <rect class="cell" x="348" y="74" width="62" height="52"/><text class="idx" x="379" y="62">4</text><text class="val" x="379" y="109">1</text>
-  <rect class="cell" x="410" y="74" width="62" height="52"/><text class="idx" x="441" y="62">5</text><text class="val" x="441" y="109">2</text>
-  <rect class="cell win" x="472" y="74" width="62" height="52"/><text class="idx" x="503" y="62">6</text><text class="val" x="503" y="109">2</text>
-  <rect class="sweep" x="100" y="74" width="62" height="52"><animate attributeName="x" dur="7s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1250;0.2500;0.3750;0.5000;0.6250;0.7500" values="100;162;224;286;348;410;472"/></rect>
-  <path class="dep" d="M481,130 Q461.0,174.0 441,130" marker-end="url(#ah3)"/>
-  <path class="dep" d="M500,130 Q408.5,230.0 317,130" marker-end="url(#ah3)"/>
-  <path class="dep" d="M519,130 Q387.0,290.0 255,130" marker-end="url(#ah3)"/>
-  <text class="dlb" x="415.0" y="146.0">coin 1</text>
-  <text class="dlb" x="408.5" y="197.0">coin 3</text>
-  <text class="dlb" x="387.0" y="227.0">coin 4</text>
+  <text class="g3-ttl" x="52" y="62">amount n</text>
+  <text class="g3-ttl" x="52" y="109">C(n)</text>
+  <rect class="g3-cell" x="100" y="74" width="62" height="52"/><text class="g3-idx" x="131" y="62">0</text><text class="g3-val" x="131" y="109">0</text>
+  <rect class="g3-cell" x="162" y="74" width="62" height="52"/><text class="g3-idx" x="193" y="62">1</text><text class="g3-val" x="193" y="109">1</text>
+  <rect class="g3-cell" x="224" y="74" width="62" height="52"/><text class="g3-idx" x="255" y="62">2</text><text class="g3-val" x="255" y="109">2</text>
+  <rect class="g3-cell g3-win" x="286" y="74" width="62" height="52"/><text class="g3-idx" x="317" y="62">3</text><text class="g3-val" x="317" y="109">1</text>
+  <rect class="g3-cell" x="348" y="74" width="62" height="52"/><text class="g3-idx" x="379" y="62">4</text><text class="g3-val" x="379" y="109">1</text>
+  <rect class="g3-cell" x="410" y="74" width="62" height="52"/><text class="g3-idx" x="441" y="62">5</text><text class="g3-val" x="441" y="109">2</text>
+  <rect class="g3-cell g3-win" x="472" y="74" width="62" height="52"/><text class="g3-idx" x="503" y="62">6</text><text class="g3-val" x="503" y="109">2</text>
+  <rect class="g3-sweep" x="100" y="74" width="62" height="52"><animate attributeName="x" dur="7s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1250;0.2500;0.3750;0.5000;0.6250;0.7500" values="100;162;224;286;348;410;472"/></rect>
+  <path class="g3-dep" d="M481,130 Q461.0,174.0 441,130" marker-end="url(#g3-ah3)"/>
+  <path class="g3-dep" d="M500,130 Q408.5,230.0 317,130" marker-end="url(#g3-ah3)"/>
+  <path class="g3-dep" d="M519,130 Q387.0,290.0 255,130" marker-end="url(#g3-ah3)"/>
+  <text class="g3-dlb" x="415.0" y="146.0">coin 1</text>
+  <text class="g3-dlb" x="408.5" y="197.0">coin 3</text>
+  <text class="g3-dlb" x="387.0" y="227.0">coin 4</text>
 </svg>
 <figcaption><b>Figure 3 -</b> The coin-change table for $S=\lbrace 1,3,4 \rbrace$, filled left to right ; the green frame marks the cell being written, and it never comes back. The three arcs below are the only cells $C(6)$ consults, one per coin — they nest instead of crossing. The shaded pair is the winning branch : $C(6) = 1 + C(3) = 2$.</figcaption>
 </center></figure>
@@ -260,75 +260,75 @@ $$ \begin{equation} K(i, c) = \max \underbrace{\big\{\, K(i-1,\, c)}_{\text{leav
 <figure><center>
 <svg viewBox="0 0 640 262" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
-    .cell2{ fill:#f6f7fb; stroke:#c2ccdc; stroke-width:1.1; }
-    .val2{ font-size:14px; fill:#2b2b2b; text-anchor:middle; }
-    .hdr{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
-    .rhd{ font-size:12.5px; fill:#4a6da7; text-anchor:end; }
-    .sweep2{ fill:#5aa06a; fill-opacity:.13; stroke:#5aa06a; stroke-width:2.2; }
-    .mark{ fill:none; stroke:#b5651d; stroke-width:2.2; }
-    .ord{ fill:#b5651d; }
-    .ordt{ font-size:10px; fill:#fff; text-anchor:middle; font-weight:bold; }
-    .cp{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g4-cell2{ fill:#f6f7fb; stroke:#c2ccdc; stroke-width:1.1; }
+    .g4-val2{ font-size:14px; fill:#2b2b2b; text-anchor:middle; }
+    .g4-hdr{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
+    .g4-rhd{ font-size:12.5px; fill:#4a6da7; text-anchor:end; }
+    .g4-sweep2{ fill:#5aa06a; fill-opacity:.13; stroke:#5aa06a; stroke-width:2.2; }
+    .g4-mark{ fill:none; stroke:#b5651d; stroke-width:2.2; }
+    .g4-ord{ fill:#b5651d; }
+    .g4-ordt{ font-size:10px; fill:#fff; text-anchor:middle; font-weight:bold; }
+    .g4-cp{ font-size:12px; fill:#7a7a7a; text-anchor:middle; }
   </style>
-  <text class="hdr" x="320" y="22">capacity c</text>
-  <text class="hdr" x="182" y="48">0</text>
-  <text class="hdr" x="234" y="48">1</text>
-  <text class="hdr" x="286" y="48">2</text>
-  <text class="hdr" x="338" y="48">3</text>
-  <text class="hdr" x="390" y="48">4</text>
-  <text class="hdr" x="442" y="48">5</text>
-  <text class="hdr" x="494" y="48">6</text>
-  <text class="hdr" x="546" y="48">7</text>
-  <text class="rhd" x="144" y="80">no item</text>
-  <rect class="cell2" x="156" y="58" width="52" height="34"/><text class="val2" x="182" y="80">0</text>
-  <rect class="cell2" x="208" y="58" width="52" height="34"/><text class="val2" x="234" y="80">0</text>
-  <rect class="cell2" x="260" y="58" width="52" height="34"/><text class="val2" x="286" y="80">0</text>
-  <rect class="cell2" x="312" y="58" width="52" height="34"/><text class="val2" x="338" y="80">0</text>
-  <rect class="cell2" x="364" y="58" width="52" height="34"/><text class="val2" x="390" y="80">0</text>
-  <rect class="cell2" x="416" y="58" width="52" height="34"/><text class="val2" x="442" y="80">0</text>
-  <rect class="cell2" x="468" y="58" width="52" height="34"/><text class="val2" x="494" y="80">0</text>
-  <rect class="cell2" x="520" y="58" width="52" height="34"/><text class="val2" x="546" y="80">0</text>
-  <text class="rhd" x="144" y="114">+ (1, 1)</text>
-  <rect class="cell2" x="156" y="92" width="52" height="34"/><text class="val2" x="182" y="114">0</text>
-  <rect class="cell2" x="208" y="92" width="52" height="34"/><text class="val2" x="234" y="114">1</text>
-  <rect class="cell2" x="260" y="92" width="52" height="34"/><text class="val2" x="286" y="114">1</text>
-  <rect class="cell2" x="312" y="92" width="52" height="34"/><text class="val2" x="338" y="114">1</text>
-  <rect class="cell2" x="364" y="92" width="52" height="34"/><text class="val2" x="390" y="114">1</text>
-  <rect class="cell2" x="416" y="92" width="52" height="34"/><text class="val2" x="442" y="114">1</text>
-  <rect class="cell2" x="468" y="92" width="52" height="34"/><text class="val2" x="494" y="114">1</text>
-  <rect class="cell2" x="520" y="92" width="52" height="34"/><text class="val2" x="546" y="114">1</text>
-  <text class="rhd" x="144" y="148">+ (3, 4)</text>
-  <rect class="cell2" x="156" y="126" width="52" height="34"/><text class="val2" x="182" y="148">0</text>
-  <rect class="cell2" x="208" y="126" width="52" height="34"/><text class="val2" x="234" y="148">1</text>
-  <rect class="cell2" x="260" y="126" width="52" height="34"/><text class="val2" x="286" y="148">1</text>
-  <rect class="cell2" x="312" y="126" width="52" height="34"/><text class="val2" x="345" y="148">4</text>
-  <rect class="cell2" x="364" y="126" width="52" height="34"/><text class="val2" x="390" y="148">5</text>
-  <rect class="cell2" x="416" y="126" width="52" height="34"/><text class="val2" x="442" y="148">5</text>
-  <rect class="cell2" x="468" y="126" width="52" height="34"/><text class="val2" x="494" y="148">5</text>
-  <rect class="cell2" x="520" y="126" width="52" height="34"/><text class="val2" x="546" y="148">5</text>
-  <text class="rhd" x="144" y="182">+ (4, 5)</text>
-  <rect class="cell2" x="156" y="160" width="52" height="34"/><text class="val2" x="182" y="182">0</text>
-  <rect class="cell2" x="208" y="160" width="52" height="34"/><text class="val2" x="234" y="182">1</text>
-  <rect class="cell2" x="260" y="160" width="52" height="34"/><text class="val2" x="286" y="182">1</text>
-  <rect class="cell2" x="312" y="160" width="52" height="34"/><text class="val2" x="338" y="182">4</text>
-  <rect class="cell2" x="364" y="160" width="52" height="34"/><text class="val2" x="390" y="182">5</text>
-  <rect class="cell2" x="416" y="160" width="52" height="34"/><text class="val2" x="442" y="182">6</text>
-  <rect class="cell2" x="468" y="160" width="52" height="34"/><text class="val2" x="494" y="182">6</text>
-  <rect class="cell2" x="520" y="160" width="52" height="34"/><text class="val2" x="553" y="182">9</text>
-  <text class="rhd" x="144" y="216">+ (5, 7)</text>
-  <rect class="cell2" x="156" y="194" width="52" height="34"/><text class="val2" x="182" y="216">0</text>
-  <rect class="cell2" x="208" y="194" width="52" height="34"/><text class="val2" x="234" y="216">1</text>
-  <rect class="cell2" x="260" y="194" width="52" height="34"/><text class="val2" x="286" y="216">1</text>
-  <rect class="cell2" x="312" y="194" width="52" height="34"/><text class="val2" x="338" y="216">4</text>
-  <rect class="cell2" x="364" y="194" width="52" height="34"/><text class="val2" x="390" y="216">5</text>
-  <rect class="cell2" x="416" y="194" width="52" height="34"/><text class="val2" x="442" y="216">7</text>
-  <rect class="cell2" x="468" y="194" width="52" height="34"/><text class="val2" x="494" y="216">8</text>
-  <rect class="cell2" x="520" y="194" width="52" height="34"/><text class="val2" x="553" y="216">9</text>
-  <rect class="sweep2" x="156" y="58" width="416" height="34"><animate attributeName="y" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="58;92;126;160;194"/></rect>
-  <rect class="mark" x="314.5" y="128.5" width="47.0" height="29.0" rx="4"/><circle class="ord" cx="325.0" cy="138.0" r="7.5"/><text class="ordt" x="325.0" y="141.5">1</text>
-  <rect class="mark" x="522.5" y="162.5" width="47.0" height="29.0" rx="4"/><circle class="ord" cx="533.0" cy="172.0" r="7.5"/><text class="ordt" x="533.0" y="175.5">2</text>
-  <rect class="mark" x="522.5" y="196.5" width="47.0" height="29.0" rx="4"/><circle class="ord" cx="533.0" cy="206.0" r="7.5"/><text class="ordt" x="533.0" y="209.5">3</text>
-  <text class="cp" x="320" y="250">the sweep goes down one item at a time ; each row reads only the row above it</text>
+  <text class="g4-hdr" x="320" y="22">capacity c</text>
+  <text class="g4-hdr" x="182" y="48">0</text>
+  <text class="g4-hdr" x="234" y="48">1</text>
+  <text class="g4-hdr" x="286" y="48">2</text>
+  <text class="g4-hdr" x="338" y="48">3</text>
+  <text class="g4-hdr" x="390" y="48">4</text>
+  <text class="g4-hdr" x="442" y="48">5</text>
+  <text class="g4-hdr" x="494" y="48">6</text>
+  <text class="g4-hdr" x="546" y="48">7</text>
+  <text class="g4-rhd" x="144" y="80">no item</text>
+  <rect class="g4-cell2" x="156" y="58" width="52" height="34"/><text class="g4-val2" x="182" y="80">0</text>
+  <rect class="g4-cell2" x="208" y="58" width="52" height="34"/><text class="g4-val2" x="234" y="80">0</text>
+  <rect class="g4-cell2" x="260" y="58" width="52" height="34"/><text class="g4-val2" x="286" y="80">0</text>
+  <rect class="g4-cell2" x="312" y="58" width="52" height="34"/><text class="g4-val2" x="338" y="80">0</text>
+  <rect class="g4-cell2" x="364" y="58" width="52" height="34"/><text class="g4-val2" x="390" y="80">0</text>
+  <rect class="g4-cell2" x="416" y="58" width="52" height="34"/><text class="g4-val2" x="442" y="80">0</text>
+  <rect class="g4-cell2" x="468" y="58" width="52" height="34"/><text class="g4-val2" x="494" y="80">0</text>
+  <rect class="g4-cell2" x="520" y="58" width="52" height="34"/><text class="g4-val2" x="546" y="80">0</text>
+  <text class="g4-rhd" x="144" y="114">+ (1, 1)</text>
+  <rect class="g4-cell2" x="156" y="92" width="52" height="34"/><text class="g4-val2" x="182" y="114">0</text>
+  <rect class="g4-cell2" x="208" y="92" width="52" height="34"/><text class="g4-val2" x="234" y="114">1</text>
+  <rect class="g4-cell2" x="260" y="92" width="52" height="34"/><text class="g4-val2" x="286" y="114">1</text>
+  <rect class="g4-cell2" x="312" y="92" width="52" height="34"/><text class="g4-val2" x="338" y="114">1</text>
+  <rect class="g4-cell2" x="364" y="92" width="52" height="34"/><text class="g4-val2" x="390" y="114">1</text>
+  <rect class="g4-cell2" x="416" y="92" width="52" height="34"/><text class="g4-val2" x="442" y="114">1</text>
+  <rect class="g4-cell2" x="468" y="92" width="52" height="34"/><text class="g4-val2" x="494" y="114">1</text>
+  <rect class="g4-cell2" x="520" y="92" width="52" height="34"/><text class="g4-val2" x="546" y="114">1</text>
+  <text class="g4-rhd" x="144" y="148">+ (3, 4)</text>
+  <rect class="g4-cell2" x="156" y="126" width="52" height="34"/><text class="g4-val2" x="182" y="148">0</text>
+  <rect class="g4-cell2" x="208" y="126" width="52" height="34"/><text class="g4-val2" x="234" y="148">1</text>
+  <rect class="g4-cell2" x="260" y="126" width="52" height="34"/><text class="g4-val2" x="286" y="148">1</text>
+  <rect class="g4-cell2" x="312" y="126" width="52" height="34"/><text class="g4-val2" x="345" y="148">4</text>
+  <rect class="g4-cell2" x="364" y="126" width="52" height="34"/><text class="g4-val2" x="390" y="148">5</text>
+  <rect class="g4-cell2" x="416" y="126" width="52" height="34"/><text class="g4-val2" x="442" y="148">5</text>
+  <rect class="g4-cell2" x="468" y="126" width="52" height="34"/><text class="g4-val2" x="494" y="148">5</text>
+  <rect class="g4-cell2" x="520" y="126" width="52" height="34"/><text class="g4-val2" x="546" y="148">5</text>
+  <text class="g4-rhd" x="144" y="182">+ (4, 5)</text>
+  <rect class="g4-cell2" x="156" y="160" width="52" height="34"/><text class="g4-val2" x="182" y="182">0</text>
+  <rect class="g4-cell2" x="208" y="160" width="52" height="34"/><text class="g4-val2" x="234" y="182">1</text>
+  <rect class="g4-cell2" x="260" y="160" width="52" height="34"/><text class="g4-val2" x="286" y="182">1</text>
+  <rect class="g4-cell2" x="312" y="160" width="52" height="34"/><text class="g4-val2" x="338" y="182">4</text>
+  <rect class="g4-cell2" x="364" y="160" width="52" height="34"/><text class="g4-val2" x="390" y="182">5</text>
+  <rect class="g4-cell2" x="416" y="160" width="52" height="34"/><text class="g4-val2" x="442" y="182">6</text>
+  <rect class="g4-cell2" x="468" y="160" width="52" height="34"/><text class="g4-val2" x="494" y="182">6</text>
+  <rect class="g4-cell2" x="520" y="160" width="52" height="34"/><text class="g4-val2" x="553" y="182">9</text>
+  <text class="g4-rhd" x="144" y="216">+ (5, 7)</text>
+  <rect class="g4-cell2" x="156" y="194" width="52" height="34"/><text class="g4-val2" x="182" y="216">0</text>
+  <rect class="g4-cell2" x="208" y="194" width="52" height="34"/><text class="g4-val2" x="234" y="216">1</text>
+  <rect class="g4-cell2" x="260" y="194" width="52" height="34"/><text class="g4-val2" x="286" y="216">1</text>
+  <rect class="g4-cell2" x="312" y="194" width="52" height="34"/><text class="g4-val2" x="338" y="216">4</text>
+  <rect class="g4-cell2" x="364" y="194" width="52" height="34"/><text class="g4-val2" x="390" y="216">5</text>
+  <rect class="g4-cell2" x="416" y="194" width="52" height="34"/><text class="g4-val2" x="442" y="216">7</text>
+  <rect class="g4-cell2" x="468" y="194" width="52" height="34"/><text class="g4-val2" x="494" y="216">8</text>
+  <rect class="g4-cell2" x="520" y="194" width="52" height="34"/><text class="g4-val2" x="553" y="216">9</text>
+  <rect class="g4-sweep2" x="156" y="58" width="416" height="34"><animate attributeName="y" dur="8s" repeatCount="indefinite" calcMode="discrete" keyTimes="0.0000;0.1667;0.3333;0.5000;0.6667" values="58;92;126;160;194"/></rect>
+  <rect class="g4-mark" x="314.5" y="128.5" width="47.0" height="29.0" rx="4"/><circle class="g4-ord" cx="325.0" cy="138.0" r="7.5"/><text class="g4-ordt" x="325.0" y="141.5">1</text>
+  <rect class="g4-mark" x="522.5" y="162.5" width="47.0" height="29.0" rx="4"/><circle class="g4-ord" cx="533.0" cy="172.0" r="7.5"/><text class="g4-ordt" x="533.0" y="175.5">2</text>
+  <rect class="g4-mark" x="522.5" y="196.5" width="47.0" height="29.0" rx="4"/><circle class="g4-ord" cx="533.0" cy="206.0" r="7.5"/><text class="g4-ordt" x="533.0" y="209.5">3</text>
+  <text class="g4-cp" x="320" y="250">the sweep goes down one item at a time ; each row reads only the row above it</text>
 </svg>
 <figcaption><b>Figure 4 -</b> The knapsack table $K(i,c)$ for items $(1,1), (3,4), (4,5), (5,7)$ and capacity $W=7$. Each row consults only the row directly above, so the grid fills in a single downward sweep. The circled cells are the three decisions that build the optimum $9$, numbered in the order you meet them when walking back from the bottom-right corner.</figcaption>
 </center></figure>
