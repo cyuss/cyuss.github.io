@@ -312,6 +312,10 @@ That property is the sharpest modelling test in this whole post, because it is e
 
 If you want the wait until the **$k$-th** event rather than the first, you are summing $k$ independent exponentials, and the result is the **Gamma** distribution with shape $k$ and rate $\lambda$. Same process, third question.
 
+**Where it shows up.** The time until a given radioactive atom decays. The gap between customers arriving at a till, between requests hitting a server, between packets on a network link — the standard model for any queue. The interval between earthquakes above a chosen magnitude. The lifetime of an electronic component during its long middle age, after infant mortality and before wear-out, which is exactly the stretch where the hazard rate is flat. The time until the next goal in a football match. And the wait for a bus that is not running to a timetable — which is why, infuriatingly, the expected remaining wait is the same however long you have already stood there.
+
+**And the Gamma, one question further along.** The time until the tenth customer arrives rather than the first. The total rainfall accumulated over a season, as a sum of many small independent contributions that cannot go negative. The size of insurance claims. The duration of a job made of several sequential stages, each of them exponential — which is why service times in queueing models are so often Gamma rather than exponential.
+
 <figure><center>
 <svg viewBox="0 0 640 322" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
@@ -574,6 +578,8 @@ Many measured exponents in the wild fall between $1$ and $3$, squarely in the da
 ##1. The uniform, and the trick that makes all the others
 The **uniform** distribution on $[0, 1]$ spreads the budget perfectly evenly : $f(x) = 1$ on the interval and $0$ outside. It is what you use when every value in a range is equally plausible and you know nothing more.
 
+**Where it shows up.** Less often in nature than people assume, and constantly in machinery. The output of a random number generator, by construction. The rounding error left over when you truncate a measurement — the discarded fractional part is uniform, which is why rounding errors accumulate the way they do. The angle at which a spun pointer comes to rest. Hash values spread across buckets, which is the design goal that makes [Bloom filters]({{ site.baseurl }}/blog/algorithmic/bloom-filters) and [HyperLogLog]({{ site.baseurl }}/blog/algorithmic/hyperloglog) work. And one genuinely surprising case : in a Poisson process, once you know how many events fell in a window, their individual arrival times are uniformly scattered across it.
+
 It is also the raw material for everything else, through a result that is short, exact, and quietly powerful.
 
 <div class="theorem" text="inverse transform sampling">
@@ -710,6 +716,28 @@ Read it as a set of questions to ask about the mechanism, not about the histogra
 - **Does the process reward size, or look the same at every scale ?** Power law. Expect averages to misbehave.
 - **Is it a proportion, living strictly between 0 and 1 ?** Beta, which is flexible enough to be a U, a bell or a ramp on $[0,1]$ and is the natural partner of the binomial.
 - **Do you genuinely know nothing except the range ?** Uniform.
+
+And the same list read the other way round — starting from something you might actually be holding. Every entry below is a case where the mechanism of Part II genuinely applies, not merely a shape that happens to fit.
+
+| distribution | where you actually meet it |
+|---|---|
+| **Binomial** | conversions among 1000 visitors ; defective units in a batch ; heads in 20 tosses ; how many of $n$ offspring inherit an allele ; packets lost out of $n$ sent ; "yes" answers in a poll of fixed size |
+| **Poisson** | radioactive decays per second ; photons landing on a camera pixel in one exposure, which is what photographic *shot noise* is ; calls per minute at a switchboard ; mutations per genome per generation ; typos per page ; flaws per metre of optical fibre ; goals in a match ; cars past a point on a quiet road |
+| **Geometric** | tosses until the first head ; sales calls until the first sale ; retransmissions until a packet gets through ; and the count of leading zeros in a hash, which is the entire basis of [HyperLogLog]({{ site.baseurl }}/blog/algorithmic/hyperloglog) |
+| **Exponential** | time until an atom decays ; gaps between arrivals at a queue, a server or a network link ; intervals between earthquakes above a magnitude ; component lifetimes during their flat-hazard middle age ; the wait for a bus with no timetable |
+| **Gamma** | the wait until the tenth arrival, not the first ; seasonal rainfall totals ; insurance claim sizes ; service times for jobs made of several sequential stages |
+| **Normal** | adult height within one sex ; instrument and measurement error ; machined dimensions within tolerance ; birth weight ; blood pressure ; thermal (Johnson) noise in a circuit ; the displacement of a pollen grain in Brownian motion ; and above all **any average of enough observations**, whatever the raw data looks like |
+| **Log-normal** | income and wealth through the body of the range ; share prices, whose returns compound ; particle sizes after repeated grinding or fragmentation ; concentrations of substances in blood or soil ; file sizes ; length of hospital stays ; how long software tasks actually take ; the incubation period of an infectious disease |
+| **Power law** | city populations and word frequencies ; wealth in the far tail ; earthquake energies ; links pointing at a web page and degrees in a social network ; citations per paper ; sizes of forest fires, blackouts and wars ; sales per book or song, the "long tail" |
+| **Weibull** | time to failure of bearings, turbine blades and other things that wear out ; the breaking strength of brittle materials, which is what Weibull invented it for ; and wind speed at a site, which is the industry standard for sizing a wind farm |
+| **Beta** | any uncertain proportion : a conversion rate, a click-through rate, an allele frequency ; the natural Bayesian companion to the binomial ; and the fraction of a project believed complete |
+| **Chi-square** | the distribution of a sample variance ; goodness-of-fit and contingency-table test statistics — it is a sum of squared normals, so it turns up wherever squared errors are added |
+| **Student's $t$** | the test statistic for a small-sample mean, as in the [statistical inference]({{ site.baseurl }}/blog/mathematics/statistical-inference) post ; and, empirically, daily financial returns, which have tails far too heavy for a normal |
+| **Cauchy** | the ratio of two independent normals ; the spot where a beam from a randomly-aimed rotating searchlight strikes a wall ; resonance line shapes in spectroscopy, where physicists call it a Lorentzian |
+
+<div class="note">
+	Two entries above deserve a second look, because they are the ones people get wrong. <b>Income</b> is log-normal through the bulk and a power law only in the far tail — which is why the "average salary" is a poor summary but not a meaningless one, while the "average wealth of the richest thousand people" is genuinely meaningless. And <b>wind speed</b> is Weibull rather than normal, which matters commercially : a wind turbine's output goes as the cube of the speed, so the rare windy hours dominate the annual yield and a symmetric model would badly misprice a site.
+</div>
 
 ##1. They are all related
 The distributions above are not a list of unrelated formulas. They are one connected family, and knowing the connections saves a great deal of memorising.
