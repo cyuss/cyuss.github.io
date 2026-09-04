@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="theme-color" content="hsl(35, 36%, 95%)">
+  <title>Markov Chains and PageRank</title>
+
+  
+  <meta name="description" content="
+  
+    
+        
+              
+            Markov Chains and PageRank
+             12 May 2023 
+             34 minutes read
+            
+       ..." />
+
+  
+  <meta name="keywords" content="" />
+
+  <link rel="canonical" href="www.ohmykode.com/blog/mathematics/markov-chains">
+  <link rel="alternate" type="application/rss+xml" title="Oh My Kode" href="www.ohmykode.com/feed.xml" />
+  <span itemprop='author'><meta name="author" content="Maâmra Youcef"><span itemprop='author'></span>
+
+      <link href="/favicon.png" rel="icon" type="image/png" sizes="64x64">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link rel="stylesheet" href="//brick.a.ssl.fastly.net/PT+Serif:400,400i,700,700i:f/Source+Code+Pro:400,600:f">
+      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript">
+       window.MathJax = {
+           tex2jax: {
+               inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+               displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+               processEscapes: true
+           },
+
+           TeX: {
+               equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"]
+           },
+
+           CommonHTML: {
+               scale: 90
+           }
+       };
+      </script>
+  <script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-128046758-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Markov Chains and PageRank | Oh My Kode</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Markov Chains and PageRank" />
+<meta name="author" content="Maâmra Youcef" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In 1913, Andrei Markov took the first 20,000 letters of Pushkin’s Eugene Onegin, classified each as a vowel or a consonant, and counted how often each followed the other. He was not doing literary criticism. He was making a point in a mathematical argument : that the law of large numbers survives even when observations are not independent, provided each one depends only on the one immediately before it (Markov, 1913). 1 That single restriction — the future depends on where you are, not on how you got there — turned out to describe an enormous amount of the world,…" />
+<meta name="twitter:description" property="og:description" content="In 1913, Andrei Markov took the first 20,000 letters of Pushkin’s Eugene Onegin, classified each as a vowel or a consonant, and counted how often each followed the other. He was not doing literary criticism. He was making a point in a mathematical argument : that the law of large numbers survives even when observations are not independent, provided each one depends only on the one immediately before it (Markov, 1913). 1 That single restriction — the future depends on where you are, not on how you got there — turned out to describe an enormous amount of the world,…" />
+<link rel="canonical" href="www.ohmykode.com/blog/mathematics/markov-chains" />
+<meta property="og:url" content="www.ohmykode.com/blog/mathematics/markov-chains" />
+<meta property="og:site_name" content="Oh My Kode" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-12T12:00:00+02:00" />
+<meta property="article:modified_time" content="2023-05-12T12:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Markov Chains and PageRank" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2023-05-12T12:00:00+02:00","datePublished":"2023-05-12T12:00:00+02:00","description":"In 1913, Andrei Markov took the first 20,000 letters of Pushkin’s Eugene Onegin, classified each as a vowel or a consonant, and counted how often each followed the other. He was not doing literary criticism. He was making a point in a mathematical argument : that the law of large numbers survives even when observations are not independent, provided each one depends only on the one immediately before it (Markov, 1913). 1 That single restriction — the future depends on where you are, not on how you got there — turned out to describe an enormous amount of the world,…","headline":"Markov Chains and PageRank","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/markov-chains"},"url":"www.ohmykode.com/blog/mathematics/markov-chains"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <body>
+    <div class="post">
+  <div class="container main">
+    <div class="row">
+        <header>
+            <center>  <a class="fa fa-home home_button" href="/"></a></center>
+            <center><span itemprop="name"><h1>Markov Chains and PageRank</h1></span></center>
+            <center><p> 12 May 2023 </p></center>
+            <center><p class="fa fa-clock-o"> 34 minutes read</p></center>
+            <!--<center><p class="fa fa-clock-o"> 
+                        
+                          
+                            45 minutes read
+                        </p></center>-->
+        <center><span class="small-ornament"><svg viewBox="0 0 290 320">
+          <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
+        </svg></span></center>
+      </header>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8 offset-md-1">
+        <article lang="en">
+          
+          <blockquote>
+  <p>In 1913, Andrei Markov took the first 20,000 letters of Pushkin’s <em>Eugene Onegin</em>, classified each as a vowel or a consonant, and counted how often each followed the other. He was not doing literary criticism. He was making a point in a mathematical argument : that the law of large numbers survives even when observations are <strong>not independent</strong>, provided each one depends only on the one immediately before it <a class="citation" href="#Markov1913">(Markov, 1913)</a>. <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> That single restriction — <em>the future depends on where you are, not on how you got there</em> — turned out to describe an enormous amount of the world, and ninety years later it was worth roughly the market capitalisation of Google. This post builds Markov chains from that assumption, works out where they settle down and how fast, and then shows how PageRank is nothing more than one very large chain’s stationary distribution.</p>
+</blockquote>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART I — THE MACHINERY</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">one assumption, and the matrix that encodes it</span>
+</div>
+
+<h2 id="1-the-memoryless-assumption">1. The memoryless assumption</h2>
+<p>Imagine a system that moves between a finite set of <strong>states</strong> — sunny, cloudy, rainy ; a page you are reading ; a square on a board. At each step it jumps somewhere according to some probabilities. The Markov assumption says those probabilities depend on <strong>exactly one thing</strong> : where you are right now.</p>
+
+<div class="definition">
+	A sequence of random states $X_0, X_1, X_2, \dots$ is a <b>Markov chain</b> if
+	$$ \mathbb{P}\big(X_{n+1} = j \;\mid\; X_n = i,\; X_{n-1}, \dots, X_0\big) = \mathbb{P}\big(X_{n+1} = j \;\mid\; X_n = i\big) = p_{ij}. $$
+	The entire history before the present moment is irrelevant once you know the present.
+</div>
+
+<p><em>In plain words : the chain has no memory. It does not know how it arrived, how long it has been wandering, or where it started. It only knows where it is standing, and that is enough to decide where it goes next.</em></p>
+
+<p>There is one confusion worth killing immediately, because almost everyone makes it once. <strong>Memoryless does not mean independent.</strong> Tomorrow’s weather is strongly dependent on today’s — that is the whole point. What the assumption rules out is a dependence on <em>yesterday’s</em> weather given that you already know today’s.</p>
+
+<div class="note">
+	You have met this property before in a continuous setting. The <a href="/blog/mathematics/probability-distributions">exponential distribution</a> is memoryless in exactly the same sense : having waited twenty minutes tells you nothing about how much longer you will wait. A Markov chain is the discrete-state version of the same idea, and the geometric distribution — how many steps until a chain first leaves a state — is what you get when you ask the waiting-time question here.
+</div>
+
+<figure><center>
+<svg viewBox="0 0 640 394" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .nd{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.8; }
+    .nt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .ed{ stroke:#8fa5c8; stroke-width:1.7; fill:none; }
+    .pl{ font-size:11px; fill:#b5651d; text-anchor:middle;
+         paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
+    .cap1{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+  </defs>
+  <path class="ed" d="M132.2,275.6 C89.0,293.9 121.6,204.4 139.4,242.6" marker-end="url(#ma)" />
+  <path class="ed" d="M203.1,279.9 Q320.0,306.0 432.0,280.9" marker-end="url(#ma)" />
+  <path class="ed" d="M198.4,252.7 Q269.6,207.4 302.8,135.2" marker-end="url(#ma)" />
+  <path class="ed" d="M436.9,264.1 Q320.0,238.0 208.0,263.1" marker-end="url(#ma)" />
+  <path class="ed" d="M497.1,246.2 C518.4,204.4 551.0,293.9 512.8,276.1" marker-end="url(#ma)" />
+  <path class="ed" d="M456.9,239.3 Q421.6,162.6 354.6,120.0" marker-end="url(#ma)" />
+  <path class="ed" d="M289.6,117.3 Q218.4,162.6 185.2,234.8" marker-end="url(#ma)" />
+  <path class="ed" d="M335.1,130.7 Q370.4,207.4 437.4,250.0" marker-end="url(#ma)" />
+  <path class="ed" d="M304.3,65.6 C272.4,31.3 367.6,31.3 337.8,61.1" marker-end="url(#ma)" />
+  <circle class="nd" cx="320" cy="98" r="36" />
+  <text class="nt" x="320" y="103">sunny</text>
+  <circle class="nd" cx="168" cy="272" r="36" />
+  <text class="nt" x="168" y="277">cloudy</text>
+  <circle class="nd" cx="472" cy="272" r="36" />
+  <text class="nt" x="472" y="277">rainy</text>
+  <text class="pl" x="96.6" y="246.0">0.40</text>
+  <text class="pl" x="318.8" y="293.2">0.25</text>
+  <text class="pl" x="260.1" y="200.7">0.35</text>
+  <text class="pl" x="321.2" y="250.8">0.45</text>
+  <text class="pl" x="543.4" y="246.0">0.35</text>
+  <text class="pl" x="413.7" y="171.1">0.20</text>
+  <text class="pl" x="227.9" y="169.3">0.25</text>
+  <text class="pl" x="378.3" y="198.9">0.05</text>
+  <text class="pl" x="320.0" y="22.0">0.70</text>
+  <text class="cap1" x="320" y="382">every arrow is a probability ; every node's arrows add up to 1</text>
+</svg>
+<figcaption><b>Figure 1 -</b> A three-state weather chain. Each arrow carries the probability of that move, and the arrows leaving any state sum to one — including the loop that means "no change". Nothing in this picture refers to yesterday : that is the Markov assumption, drawn.</figcaption>
+</center></figure>
+
+<h2 id="2-the-transition-matrix">2. The transition matrix</h2>
+<p>Collect all the one-step probabilities $p_{ij}$ into a matrix $P$. Row $i$ holds everything that can happen when you are in state $i$, so <strong>every row sums to one</strong> — a matrix with that property is called <em>row-stochastic</em>.</p>
+
+<p>For the weather chain in figure 1, ordering the states as (sunny, cloudy, rainy) :</p>
+
+\[\begin{equation} P = \begin{pmatrix} 0.70 &amp; 0.25 &amp; 0.05 \\ 0.35 &amp; 0.40 &amp; 0.25 \\ 0.20 &amp; 0.45 &amp; 0.35 \end{pmatrix}. \label{eq:P} \end{equation}\]
+
+<p>Now write the current belief about where you are as a <strong>row vector</strong> $\pi = (\pi_S, \pi_C, \pi_R)$ summing to one. One step forward is a single matrix multiplication :</p>
+
+\[\begin{equation} \pi_{n+1} = \pi_n P, \qquad\text{and therefore}\qquad \pi_n = \pi_0 P^{\,n}. \label{eq:step} \end{equation}\]
+
+<p><em>Check the first one by hand on a single entry. The chance of being cloudy tomorrow is “the chance it is sunny today times the chance sunny leads to cloudy”, plus the same for cloudy and for rainy — which is precisely the second component of the product $\pi P$. Matrix multiplication is doing the law of total probability for you, all three states at once.</em></p>
+
+<p>The second half of $\eqref{eq:step}$ is more than notation. It says that $n$ steps of a Markov chain is the $n$-th power of a matrix, and it comes with a clean interpretation.</p>
+
+<div class="theorem" text="Chapman–Kolmogorov">
+	The entry $(P^{\,n})_{ij}$ is exactly the probability of being in state $j$ after $n$ steps, given that you started in state $i$.
+	<br /><br />
+	<i>Proof.&nbsp;&nbsp;</i> By induction. It holds for $n = 1$ by definition. Suppose it holds for $n$. To get from $i$ to $j$ in $n+1$ steps you must pass through some state $k$ at step $n$, and those routes are disjoint, so by the law of total probability
+	$$ \mathbb{P}(X_{n+1}=j \mid X_0 = i) = \sum_k \mathbb{P}(X_n = k \mid X_0 = i)\; p_{kj} = \sum_k (P^{\,n})_{ik}\, p_{kj} = (P^{\,n+1})_{ij}, $$
+	where the middle step used the Markov property to drop the history before step $n$.
+	<p align="right">$\square$</p>
+</div>
+
+<p>So the entire long-run behaviour of the chain is a question about <strong>powers of a matrix</strong>, which is a question about its eigenvalues. That is the bridge from probability to linear algebra, and everything in Part II crosses it.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 238" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .mt{ font-size:13px; fill:#4a6da7; text-anchor:middle; }
+    .cv{ font-size:10.5px; fill:#2b2b2b; text-anchor:middle; }
+    .rw{ font-size:10.5px; fill:#7a7a7a; text-anchor:end; }
+    .cap2{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .st{ fill:#b5651d; font-size:12px; }
+  </style>
+  <text class="mt" x="89.0" y="46">P</text>
+  <rect x="32.0" y="66" width="38" height="38" fill="#6969f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="51.0" y="89.0">0.70</text>
+  <rect x="70.0" y="66" width="38" height="38" fill="#c9c9f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="89.0" y="89.0">0.25</text>
+  <rect x="108.0" y="66" width="38" height="38" fill="#f4f4f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="127.0" y="89.0">0.05</text>
+  <text class="rw" x="25.0" y="89.0">S</text>
+  <rect x="32.0" y="104" width="38" height="38" fill="#b4b4f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="51.0" y="127.0">0.35</text>
+  <rect x="70.0" y="104" width="38" height="38" fill="#a9a9f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="89.0" y="127.0">0.40</text>
+  <rect x="108.0" y="104" width="38" height="38" fill="#c9c9f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="127.0" y="127.0">0.25</text>
+  <text class="rw" x="25.0" y="127.0">C</text>
+  <rect x="32.0" y="142" width="38" height="38" fill="#d4d4f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="51.0" y="165.0">0.20</text>
+  <rect x="70.0" y="142" width="38" height="38" fill="#9e9ef2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="89.0" y="165.0">0.45</text>
+  <rect x="108.0" y="142" width="38" height="38" fill="#b4b4f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="127.0" y="165.0">0.35</text>
+  <text class="rw" x="25.0" y="165.0">R</text>
+  <text class="mt" x="235.0" y="46">P²</text>
+  <rect x="178.0" y="66" width="38" height="38" fill="#8181f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="197.0" y="89.0">0.59</text>
+  <rect x="216.0" y="66" width="38" height="38" fill="#bfbff2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="235.0" y="89.0">0.30</text>
+  <rect x="254.0" y="66" width="38" height="38" fill="#e6e6f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="273.0" y="89.0">0.12</text>
+  <rect x="178.0" y="104" width="38" height="38" fill="#a1a1f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="197.0" y="127.0">0.43</text>
+  <rect x="216.0" y="104" width="38" height="38" fill="#b1b1f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="235.0" y="127.0">0.36</text>
+  <rect x="254.0" y="104" width="38" height="38" fill="#d3d3f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="273.0" y="127.0">0.21</text>
+  <rect x="178.0" y="142" width="38" height="38" fill="#b0b0f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="197.0" y="165.0">0.37</text>
+  <rect x="216.0" y="142" width="38" height="38" fill="#ababf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="235.0" y="165.0">0.39</text>
+  <rect x="254.0" y="142" width="38" height="38" fill="#cacaf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="273.0" y="165.0">0.24</text>
+  <text class="mt" x="381.0" y="46">P⁵</text>
+  <rect x="324.0" y="66" width="38" height="38" fill="#9292f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="343.0" y="89.0">0.51</text>
+  <rect x="362.0" y="66" width="38" height="38" fill="#b8b8f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="381.0" y="89.0">0.33</text>
+  <rect x="400.0" y="66" width="38" height="38" fill="#dcdcf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="419.0" y="89.0">0.16</text>
+  <rect x="324.0" y="104" width="38" height="38" fill="#9595f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="343.0" y="127.0">0.49</text>
+  <rect x="362.0" y="104" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="381.0" y="127.0">0.34</text>
+  <rect x="400.0" y="104" width="38" height="38" fill="#dadaf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="419.0" y="127.0">0.17</text>
+  <rect x="324.0" y="142" width="38" height="38" fill="#9696f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="343.0" y="165.0">0.49</text>
+  <rect x="362.0" y="142" width="38" height="38" fill="#b6b6f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="381.0" y="165.0">0.34</text>
+  <rect x="400.0" y="142" width="38" height="38" fill="#d9d9f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="419.0" y="165.0">0.17</text>
+  <text class="mt" x="527.0" y="46">P²⁰</text>
+  <rect x="470.0" y="66" width="38" height="38" fill="#9393f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="489.0" y="89.0">0.50</text>
+  <rect x="508.0" y="66" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="527.0" y="89.0">0.33</text>
+  <rect x="546.0" y="66" width="38" height="38" fill="#dbdbf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="565.0" y="89.0">0.17</text>
+  <rect x="470.0" y="104" width="38" height="38" fill="#9393f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="489.0" y="127.0">0.50</text>
+  <rect x="508.0" y="104" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="527.0" y="127.0">0.33</text>
+  <rect x="546.0" y="104" width="38" height="38" fill="#dbdbf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="565.0" y="127.0">0.17</text>
+  <rect x="470.0" y="142" width="38" height="38" fill="#9393f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="489.0" y="165.0">0.50</text>
+  <rect x="508.0" y="142" width="38" height="38" fill="#b7b7f2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="527.0" y="165.0">0.33</text>
+  <rect x="546.0" y="142" width="38" height="38" fill="#dbdbf2" stroke="#dfe4ee" stroke-width="1" />
+  <text class="cv" x="565.0" y="165.0">0.17</text>
+  <text class="cap2" x="320" y="206">the three rows start different — where you are today matters — and end identical</text>
+  <text class="cap2 st" x="320" y="226">that shared row is the stationary distribution π ≈ (0.495, 0.323, 0.182)</text>
+</svg>
+<figcaption><b>Figure 2 -</b> Powers of the transition matrix. Entry $(i,j)$ of $P^n$ is the chance of being in state $j$ after $n$ steps having started in $i$. After twenty steps every row is the same, which is the chain saying it has completely forgotten where it began.</figcaption>
+</center></figure>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART II — THE LONG RUN</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">where it settles, whether that is unique, and how fast it gets there</span>
+</div>
+
+<h2 id="3-the-stationary-distribution">3. The stationary distribution</h2>
+<p>Figure 2 shows something remarkable : as you raise $P$ to higher powers, the rows become identical. That means the chain forgets its starting point entirely. Whatever the weather today, the probability that it is raining a month from now is the same number.</p>
+
+<div class="definition">
+	A distribution $\pi$ is <b>stationary</b> if running one more step changes nothing :
+	$$ \pi = \pi P, \qquad \sum_i \pi_i = 1, \qquad \pi_i \ge 0. $$
+</div>
+
+<p>Read that equation again with linear-algebra eyes. It says $\pi$ is a <strong>left eigenvector of $P$ with eigenvalue 1</strong> — and $1$ is always an eigenvalue of a row-stochastic matrix, because the all-ones column vector satisfies $P\mathbf{1} = \mathbf{1}$ (each row sums to one). So a stationary distribution always exists for a finite chain.</p>
+
+<p><em>In plain words : the stationary distribution is the mixture that reproduces itself. Put 60 % of your probability on sunny and the rest split appropriately, run one day forward, and you get the identical mixture back. It is the equilibrium the system relaxes into.</em></p>
+
+<p>For the weather chain, solving $\pi = \pi P$ together with $\sum \pi_i = 1$ gives</p>
+
+\[\pi \;\approx\; (0.4949,\; 0.3232,\; 0.1818),\]
+
+<p>so in the long run it is sunny about half the time, cloudy a third, rainy a sixth — regardless of what it is doing today. There is a second, very useful reading of the same numbers : $\pi_i$ is the <strong>fraction of time</strong> the chain spends in state $i$ over a long run, and $1/\pi_i$ is the average number of steps between successive visits to it.</p>
+
+<h2 id="4-when-does-it-actually-converge-">4. When does it actually converge ?</h2>
+<p>Here is where most treatments wave their hands, and where the interesting failures live. Existence of $\pi$ is free. <strong>Uniqueness</strong> and <strong>convergence</strong> are not, and each needs its own condition.</p>
+
+<div class="definition">
+	A chain is <b>irreducible</b> if you can get from any state to any other state in some number of steps — the graph is one connected piece.
+	<br /><br />
+	A chain is <b>aperiodic</b> if it is not locked into a cycle : formally, the greatest common divisor of the possible return times to a state is 1.
+</div>
+
+<div class="theorem" text="the fundamental theorem for finite chains">
+	A finite Markov chain that is <b>irreducible</b> and <b>aperiodic</b> has a <b>unique</b> stationary distribution $\pi$, and from <i>any</i> starting distribution
+	$$ \pi_0 P^{\,n} \;\longrightarrow\; \pi \qquad\text{as } n \to \infty. $$
+	Drop either condition and the conclusion fails, in two quite different ways.
+</div>
+
+<figure><center>
+<svg viewBox="0 0 640 300" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .nd{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .nt{ font-size:12.5px; fill:#2b2b2b; text-anchor:middle; }
+    .ed{ stroke:#8fa5c8; stroke-width:1.7; fill:none; }
+    .or{ stroke:#dda87a; }
+    .dv{ stroke:#e2e2e2; stroke-width:1.2; }
+    .ht{ font-size:12.5px; text-anchor:middle; font-weight:bold; }
+    .bad{ fill:#b5651d; }
+    .hs{ font-size:10.5px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .cc{ font-size:10.5px; fill:#5a5a5a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+  </defs>
+  <line class="dv" x1="320" y1="40" x2="320" y2="252" />
+  <path class="ed" d="M108.8,130.5 Q141.0,148.0 168.8,132.8" marker-end="url(#ma)" />
+  <path class="ed" d="M173.2,105.5 Q141.0,88.0 113.2,103.2" marker-end="url(#ma)" />
+  <path class="ed" d="M108.8,228.5 Q141.0,246.0 168.8,230.8" marker-end="url(#ma)" />
+  <path class="ed" d="M173.2,203.5 Q141.0,186.0 113.2,201.2" marker-end="url(#ma)" />
+  <circle class="nd" cx="86" cy="118" r="26" /><text class="nt" x="86" y="123">A</text>
+  <circle class="nd" cx="196" cy="118" r="26" /><text class="nt" x="196" y="123">B</text>
+  <circle class="nd" cx="86" cy="216" r="26" /><text class="nt" x="86" y="221">C</text>
+  <circle class="nd" cx="196" cy="216" r="26" /><text class="nt" x="196" y="221">D</text>
+  <text class="ht bad" x="141" y="66">not irreducible</text>
+  <text class="hs" x="141" y="82">two islands, no way across</text>
+  <text class="cc" x="141" y="270">π exists but is <tspan font-style="italic">not unique</tspan> —</text>
+  <text class="cc" x="141" y="286">the answer depends on where you started</text>
+  <path class="ed or" d="M488.7,142.5 Q503.2,183.2 532.4,208.0" marker-end="url(#mo)" />
+  <path class="ed or" d="M530.7,222.0 Q480.0,210.0 434.2,220.9" marker-end="url(#mo)" />
+  <path class="ed or" d="M423.8,211.2 Q456.8,183.2 469.6,147.2" marker-end="url(#mo)" />
+  <circle class="nd" cx="480" cy="118" r="26" /><text class="nt" x="480" y="123">X</text>
+  <circle class="nd" cx="556" cy="228" r="26" /><text class="nt" x="556" y="233">Y</text>
+  <circle class="nd" cx="404" cy="228" r="26" /><text class="nt" x="404" y="233">Z</text>
+  <text class="ht bad" x="480" y="62">not aperiodic</text>
+  <text class="hs" x="480" y="80">every step must advance the cycle</text>
+  <text class="cc" x="480" y="270">π <tspan font-style="italic">is</tspan> unique, but Pⁿ never converges —</text>
+  <text class="cc" x="480" y="286">the distribution cycles with period 3 for ever</text>
+</svg>
+<figcaption><b>Figure 3 -</b> The two ways the fundamental theorem fails, and they fail differently. On the left the chain cannot cross between the halves, so each half has its own equilibrium and there is no single answer. On the right there is a unique equilibrium, but the chain is locked into a cycle and marches round it for ever without ever settling into it. One self-loop anywhere on the right would fix it.</figcaption>
+</center></figure>
+
+<p><strong>Lose irreducibility and uniqueness goes.</strong> If the graph splits into two pieces that cannot reach each other, each piece has its own equilibrium, and any blend of the two is also stationary. There is no single answer to “where does it end up” because the answer depends on which half you started in. This is not an exotic corner case — it is exactly what the web looks like, and section 6 is about the trick that repairs it.</p>
+
+<p><strong>Lose aperiodicity and convergence goes, even though $\pi$ is still unique.</strong> Take a chain that must move $A \to B \to C \to A$ every step. Start at $A$ and after $n$ steps you are at $A$, $B$ or $C$ depending only on $n \bmod 3$ — the distribution oscillates forever and never settles. The stationary distribution $(1/3, 1/3, 1/3)$ is perfectly well defined and describes the long-run <em>time average</em>, but $P^n$ does not converge to anything. Adding a single self-loop anywhere breaks the cycle and fixes it.</p>
+
+<h2 id="5-how-fast--the-second-eigenvalue">5. How fast ? The second eigenvalue</h2>
+<p>Convergence is guaranteed, but a guarantee with no rate is useless in practice. The rate is controlled by one number.</p>
+
+<p>For an irreducible aperiodic chain the eigenvalues satisfy $\lambda_1 = 1 &gt; \lvert\lambda_2\rvert \ge \lvert\lambda_3\rvert \ge \cdots$, and the distance to equilibrium decays like the second-largest one :</p>
+
+\[\begin{equation} \big\lVert \pi_0 P^{\,n} - \pi \big\rVert \;\le\; C\,\lvert\lambda_2\rvert^{\,n}. \label{eq:gap} \end{equation}\]
+
+<p>The quantity $1 - \lvert\lambda_2\rvert$ is the <strong>spectral gap</strong>, and the number of steps needed to get close to equilibrium — the <strong>mixing time</strong> — scales roughly as $1/(1 - \lvert\lambda_2\rvert)$ <a class="citation" href="#Levin2017">(Levin &amp; Peres, 2017)</a>.</p>
+
+<p><em>In plain words : $\lambda_2$ measures how bottlenecked the chain is. If the state space has two well-connected regions joined by one narrow bridge, the chain will equilibrate quickly inside each region and then take a very long time to balance across the bridge. That slow crossing is $\lambda_2$, and it is close to 1. A chain that mixes everything freely has a small $\lvert\lambda_2\rvert$ and forgets its start almost immediately.</em></p>
+
+<figure><center>
+<svg viewBox="0 0 640 274" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .gr{ stroke:#ececec; stroke-width:1; }
+    .ax{ stroke:#bdbdbd; stroke-width:1.3; }
+    .c-fast{ fill:none; stroke:#5aa06a; stroke-width:2.3; }
+    .c-slow{ fill:none; stroke:#b5651d; stroke-width:2.3; }
+    .lb{ font-size:11.5px; stroke:none;
+         paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
+    text.c-fast{ fill:#5aa06a; } text.c-slow{ fill:#b5651d; }
+    .tk{ font-size:10.5px; fill:#7a7a7a; text-anchor:end; }
+    .mid{ text-anchor:middle; }
+    .axl{ font-size:11.5px; fill:#5a5a5a; text-anchor:middle; }
+  </style>
+  <line class="gr" x1="92" y1="48.0" x2="596" y2="48.0" />
+  <text class="tk" x="84" y="52.0">1</text>
+  <line class="gr" x1="92" y1="77.7" x2="596" y2="77.7" />
+  <text class="tk" x="84" y="81.7">10⁻1</text>
+  <line class="gr" x1="92" y1="107.3" x2="596" y2="107.3" />
+  <text class="tk" x="84" y="111.3">10⁻2</text>
+  <line class="gr" x1="92" y1="137.0" x2="596" y2="137.0" />
+  <text class="tk" x="84" y="141.0">10⁻3</text>
+  <line class="gr" x1="92" y1="166.7" x2="596" y2="166.7" />
+  <text class="tk" x="84" y="170.7">10⁻4</text>
+  <line class="gr" x1="92" y1="196.3" x2="596" y2="196.3" />
+  <text class="tk" x="84" y="200.3">10⁻5</text>
+  <line class="gr" x1="92" y1="226.0" x2="596" y2="226.0" />
+  <text class="tk" x="84" y="230.0">10⁻6</text>
+  <text class="tk mid" x="92.0" y="244">0</text>
+  <text class="tk mid" x="218.0" y="244">30</text>
+  <text class="tk mid" x="344.0" y="244">60</text>
+  <text class="tk mid" x="470.0" y="244">90</text>
+  <text class="tk mid" x="596.0" y="244">120</text>
+  <path class="c-fast" d="M92.0,48.0 L96.2,63.5 L100.4,79.0 L104.6,94.5 L108.8,110.0 L113.0,125.6 L117.2,141.1 L121.4,156.6 L125.6,172.1 L129.8,187.6 L134.0,203.1 L138.2,218.6" />
+  <text class="lb c-fast" x="110.2" y="55.5">well mixed :  |λ₂| = 0.30</text>
+  <path class="c-slow" d="M92.0,48.0 L96.2,48.7 L100.4,49.3 L104.6,50.0 L108.8,50.6 L113.0,51.3 L117.2,52.0 L121.4,52.6 L125.6,53.3 L129.8,53.9 L134.0,54.6 L138.2,55.3 L142.4,55.9 L146.6,56.6 L150.8,57.3 L155.0,57.9 L159.2,58.6 L163.4,59.2 L167.6,59.9 L171.8,60.6 L176.0,61.2 L180.2,61.9 L184.4,62.5 L188.6,63.2 L192.8,63.9 L197.0,64.5 L201.2,65.2 L205.4,65.8 L209.6,66.5 L213.8,67.2 L218.0,67.8 L222.2,68.5 L226.4,69.1 L230.6,69.8 L234.8,70.5 L239.0,71.1 L243.2,71.8 L247.4,72.5 L251.6,73.1 L255.8,73.8 L260.0,74.4 L264.2,75.1 L268.4,75.8 L272.6,76.4 L276.8,77.1 L281.0,77.7 L285.2,78.4 L289.4,79.1 L293.6,79.7 L297.8,80.4 L302.0,81.0 L306.2,81.7 L310.4,82.4 L314.6,83.0 L318.8,83.7 L323.0,84.3 L327.2,85.0 L331.4,85.7 L335.6,86.3 L339.8,87.0 L344.0,87.7 L348.2,88.3 L352.4,89.0 L356.6,89.6 L360.8,90.3 L365.0,91.0 L369.2,91.6 L373.4,92.3 L377.6,92.9 L381.8,93.6 L386.0,94.3 L390.2,94.9 L394.4,95.6 L398.6,96.2 L402.8,96.9 L407.0,97.6 L411.2,98.2 L415.4,98.9 L419.6,99.5 L423.8,100.2 L428.0,100.9 L432.2,101.5 L436.4,102.2 L440.6,102.9 L444.8,103.5 L449.0,104.2 L453.2,104.8 L457.4,105.5 L461.6,106.2 L465.8,106.8 L470.0,107.5 L474.2,108.1 L478.4,108.8 L482.6,109.5 L486.8,110.1 L491.0,110.8 L495.2,111.4 L499.4,112.1 L503.6,112.8 L507.8,113.4 L512.0,114.1 L516.2,114.7 L520.4,115.4 L524.6,116.1 L528.8,116.7 L533.0,117.4 L537.2,118.1 L541.4,118.7 L545.6,119.4 L549.8,120.0 L554.0,120.7 L558.2,121.4 L562.4,122.0 L566.6,122.7 L570.8,123.3 L575.0,124.0 L579.2,124.7 L583.4,125.3 L587.6,126.0 L591.8,126.6 L596.0,127.3" />
+  <text class="lb c-slow" x="416.8" y="88.9">bottlenecked :  |λ₂| = 0.95</text>
+  <line class="ax" x1="92" y1="226" x2="596" y2="226" />
+  <line class="ax" x1="92" y1="48" x2="92" y2="226" />
+  <text class="axl" x="344" y="262">number of steps</text>
+  <text class="axl" x="16" y="137" transform="rotate(-90 16,137)">distance from equilibrium</text>
+</svg>
+<figcaption><b>Figure 4 -</b> Two chains with the same equilibrium, converging at wildly different speeds. On this logarithmic scale both are straight lines, and the slope is $\lvert\lambda_2\rvert$. The well-mixed chain is within one part in a million after twelve steps ; the bottlenecked one needs about 270. Same answer, three orders of magnitude apart in cost.</figcaption>
+</center></figure>
+
+<p>This is not an abstract concern. It is the single most important practical question about any chain you build : in section 8, it decides whether your Bayesian sampler gives you an answer in an hour or in a geological age.</p>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART III — WHAT IT IS FOR</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">ranking the web, hidden states, and turning the whole thing around</span>
+</div>
+
+<h2 id="6-pagerank--a-chain-the-size-of-the-web">6. PageRank : a chain the size of the web</h2>
+<p>Here is the idea that made Part II worth a fortune. Model the web as a graph : pages are states, links are transitions. Now imagine a <strong>random surfer</strong> who starts anywhere and repeatedly clicks a link chosen uniformly at random from the current page <a class="citation" href="#Brin1998">(Brin &amp; Page, 1998)</a><a class="citation" href="#Page1999">(Page et al., 1999)</a>.</p>
+
+<p>Where does this surfer spend their time ? That is exactly the stationary distribution question from section 3 — and its answer is a ranking. A page is important if the surfer is often on it, which happens when many pages link to it, and especially when <em>important</em> pages link to it. The definition is recursive, which sounds circular and is in fact just an eigenvector equation.</p>
+
+<p>There are two problems, and both are failures of the conditions in section 4.</p>
+
+<ul>
+  <li><strong>Dangling pages.</strong> A page with no outgoing links is a dead end : the surfer arrives and the probability leaks out of the system. The row of $P$ is all zeros and it is not a stochastic matrix any more.</li>
+  <li><strong>The web is not irreducible.</strong> It is full of pieces that link inward but never back out, so by section 4 there is no unique answer.</li>
+</ul>
+
+<p>The fix is one line, and it repairs both at once. With probability $d \approx 0.85$ the surfer follows a link ; with probability $1-d$ they get bored and <strong>teleport</strong> to a page chosen uniformly at random :</p>
+
+\[\begin{equation} G \;=\; d\,P \;+\; \frac{1-d}{N}\,J, \qquad J = \text{the all-ones matrix.} \label{eq:google} \end{equation}\]
+
+<div class="theorem" text="why damping works">
+	Every entry of $G$ is at least $(1-d)/N &gt; 0$. A matrix with all entries strictly positive describes a chain that can reach any state from any state in one step, so $G$ is <b>irreducible</b>, and it has self-loops, so it is <b>aperiodic</b>. By the theorem of section 4 its stationary distribution exists, is unique, and is reached from any starting point. Moreover $\lvert\lambda_2(G)\rvert \le d$, so convergence is geometric at rate $0.85$ — about 50 to 100 iterations for web-scale accuracy, whatever the size of the web.
+</div>
+
+<p><em>In plain words : the teleport is not a hack bolted on to fix bad data. It is the thing that makes the question well posed at all, and the damping factor is simultaneously the knob that guarantees the answer is unique and the knob that controls how fast you can compute it.</em> This is a genuinely satisfying case of Perron–Frobenius theory <a class="citation" href="#Frobenius1912">(Frobenius, 1912)</a> paying rent.</p>
+
+<p>Computing it needs no eigenvalue solver. Just apply $\eqref{eq:step}$ repeatedly — <strong>power iteration</strong> — and $\eqref{eq:gap}$ guarantees you converge.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pagerank</span><span class="p">(</span><span class="n">links</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="s">"""links[i] = list of pages that page i points to."""</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">leak</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">leak</span> <span class="o">+=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span>      <span class="c1"># dangling page
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">share</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">links</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">new</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">share</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="n">leak</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">new</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">rank</span>
+</code></pre></div></div>
+
+<figure><center>
+<svg viewBox="0 0 640 364" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .nd{ stroke-width:1.8; }
+    .small{ fill:#eef1f8; stroke:#8fa5c8; }
+    .big{ fill:#fbeede; stroke:#b5651d; }
+    circle.big{ stroke-width:2.2; }
+    .nt{ font-size:13px; fill:#2b2b2b; text-anchor:middle; }
+    .rk{ font-size:10.5px; text-anchor:middle; }
+    text.small{ fill:#7a7a7a; } text.big{ fill:#b5651d; font-size:12px; }
+    .ed{ stroke:#a9b8d0; stroke-width:1.7; fill:none; }
+    .hot{ stroke:#dda87a; stroke-width:2.2; }
+    .an{ font-size:11px; fill:#7a7a7a; text-anchor:middle; font-style:italic; stroke:none; }
+    text.hot{ fill:#b5651d; stroke:none; }
+    .cap5{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+  </defs>
+  <path class="ed" d="M90.5,69.7 Q175.0,122.0 228.6,155.2" marker-end="url(#ma)" />
+  <path class="ed" d="M92.4,145.0 Q175.0,162.0 222.1,171.7" marker-end="url(#ma)" />
+  <path class="ed" d="M92.4,219.0 Q175.0,202.0 222.1,192.3" marker-end="url(#ma)" />
+  <path class="ed" d="M90.5,294.3 Q175.0,242.0 228.6,208.8" marker-end="url(#ma)" />
+  <path class="ed hot" d="M314.5,199.5 Q379.0,226.0 440.5,200.7" marker-end="url(#mo)" />
+  <path class="ed hot" d="M445.1,165.2 Q379.0,138.0 319.2,162.6" marker-end="url(#mo)" />
+  <circle class="nd small" cx="78" cy="62" r="14.7" />
+  <text class="nt" x="78" y="67">A</text>
+  <text class="rk small" x="78" y="91.7">0.025</text>
+  <circle class="nd small" cx="78" cy="142" r="14.7" />
+  <text class="nt" x="78" y="147">B</text>
+  <text class="rk small" x="78" y="171.7">0.025</text>
+  <circle class="nd small" cx="78" cy="222" r="14.7" />
+  <text class="nt" x="78" y="227">C</text>
+  <text class="rk small" x="78" y="251.7">0.025</text>
+  <circle class="nd small" cx="78" cy="302" r="14.7" />
+  <text class="nt" x="78" y="307">D</text>
+  <text class="rk small" x="78" y="331.7">0.025</text>
+  <circle class="nd big" cx="272" cy="182" r="46.0" />
+  <text class="nt" x="272" y="187">H</text>
+  <text class="rk big" x="272" y="243.0">0.473</text>
+  <circle class="nd big" cx="486" cy="182" r="44.2" />
+  <text class="nt" x="486" y="187">P</text>
+  <text class="rk big" x="486" y="241.2">0.427</text>
+  <text class="an" x="78" y="24">four unremarkable pages …</text>
+  <text class="an hot" x="272" y="90">… all point here</text>
+  <text class="an hot" x="486" y="90">one link in, nearly the same rank</text>
+  <text class="cap5" x="320" y="352">a link is a vote, and votes are weighted by the voter's own rank</text>
+</svg>
+<figcaption><b>Figure 5 -</b> PageRank on six pages, with each circle sized by its score. A, B, C and D have nothing pointing at them, so they sit at the floor value $(1-d)/N$. They all point at H, which collects their weight. H then points at a single page, P — and P, with exactly one incoming link, scores almost as highly as H with its five. The recursion is the point : it is not how many links you get, it is whose.</figcaption>
+</center></figure>
+
+<p>Figure 5 makes the recursive definition concrete. Four unremarkable pages point at the hub, so the hub accumulates their weight. The hub then points at a single page — and that page, with <strong>one</strong> incoming link, ends up ranked almost as highly as the hub with its five. That is the whole insight : links are votes, but votes are weighted by the voter’s own standing.</p>
+
+<div class="note">
+	At web scale this is a matrix with billions of rows, and each iteration is a sparse matrix–vector product — a sum over all links, grouped by destination. That shape is precisely a <a href="/blog/algorithmic/mapreduce">MapReduce</a> job : map each link to a contribution keyed by the target page, reduce by summing. PageRank was for years the canonical example in every MapReduce tutorial, for exactly this reason.
+</div>
+
+<h2 id="7-when-you-cannot-see-the-state">7. When you cannot see the state</h2>
+<p>Often the chain is real but invisible. You do not observe the states, only noisy consequences of them : you hear sounds, not phonemes ; you read words, not grammatical categories ; you sequence DNA, not the genes’ functional regions. A <strong>hidden Markov model</strong> adds a second layer — a Markov chain over hidden states, plus an emission distribution giving what you observe from each <a class="citation" href="#Rabiner1989">(Rabiner, 1989)</a>.</p>
+
+<p>Three questions follow, and each has a clean algorithm. How likely is this observation sequence ? (the forward algorithm.) What is the most probable hidden path that produced it ? (the <strong>Viterbi</strong> algorithm <a class="citation" href="#Viterbi1967">(Viterbi, 1967)</a>.) And how do I learn the parameters from data alone ? (Baum–Welch.)</p>
+
+<div class="note">
+	Viterbi is <a href="/blog/algorithmic/dynamic-programming">dynamic programming</a>, exactly as that post describes it. The state is "the best path ending in hidden state $j$ at time $t$", the recurrence maximises over the previous state, and the optimal-substructure argument is the standard cut-and-paste : if the best path to $j$ at time $t$ did not use the best path to some $k$ at time $t-1$, you could swap it in and do better. Naively there are exponentially many paths ; the table has $T \times S$ cells.
+</div>
+
+<h2 id="8-turning-the-whole-thing-around--mcmc">8. Turning the whole thing around : MCMC</h2>
+<p>Everything so far asked : <em>given a chain, what does it converge to ?</em> One of the best ideas in computational statistics is to run that question backwards. <strong>Given a distribution you want to sample from, design a chain that converges to it.</strong></p>
+
+<p>This matters because in Bayesian <a href="/blog/mathematics/statistical-inference">inference</a> you routinely end up with a posterior you can evaluate up to an unknown constant but cannot integrate, sample, or even normalise. Metropolis and colleagues <a class="citation" href="#Metropolis1953">(Metropolis et al., 1953)</a>, later generalised by Hastings <a class="citation" href="#Hastings1970">(Hastings, 1970)</a>, found a chain whose stationary distribution is any target $p$ you like :</p>
+
+<ol>
+  <li>From the current point $x$, propose a nearby $x’$.</li>
+  <li>Accept it with probability $\min!\big(1,\; p(x’)/p(x)\big)$ ; otherwise stay at $x$.</li>
+</ol>
+
+<p>The unknown normalising constant cancels in the ratio, which is the trick. The chain provably has $p$ as its stationary distribution, so after enough steps its visits are draws from $p$ — and “enough steps” is the mixing time of section 5. A badly designed proposal makes $\lvert\lambda_2\rvert$ close to 1, the chain crawls, and you get thousands of samples that are all essentially the same point. Every practical difficulty with MCMC is a spectral gap problem in disguise.</p>
+
+<h2 id="9-where-the-assumption-breaks">9. Where the assumption breaks</h2>
+<p>Real sequences have memory. Language certainly does : the word after <em>“the capital of France is”</em> depends on all six words, not just on <em>“is”</em>.</p>
+
+<p>The standard repair is to <strong>enlarge the state</strong> until the assumption becomes true. Make the state the last $k$ words rather than the last one, and you have an $n$-gram model, which is genuinely Markov again. The cost is brutal : with a vocabulary of $V$ words the state space is $V^{k}$, so it explodes exponentially and you never have enough data to estimate the transitions. This is why $n$-gram language models stalled at $k = 5$ or so for decades.</p>
+
+<div class="note">
+	This is precisely the limitation that <a href="/blog/machine-learning/transformers">Transformers</a> escape. <a href="/blog/machine-learning/attention-mechanism">Attention</a> lets every position look directly at every earlier position, so the model conditions on the whole history <i>without</i> having to encode that history into a state whose size explodes. Seen this way, the move from $n$-grams to attention is the move from "make the state big enough to be Markov" to "stop being Markov".
+</div>
+
+<p>Two other honest limitations. Real chains are often <strong>non-stationary</strong> — the transition probabilities themselves drift over time, and a model fitted last year quietly stops applying. And the discrete-state picture forces you to bin continuous quantities, which is a modelling choice that can matter more than the chain itself.</p>
+
+<h2 id="10-conclusion">10. Conclusion</h2>
+<p>A Markov chain is one assumption — <em>the future depends only on the present</em> — and everything else is consequence.</p>
+
+<p>Encode the assumption as a matrix and $n$ steps become the $n$-th power, which turns a probabilistic question into a question about eigenvalues. The eigenvalue $1$ gives the equilibrium the chain relaxes into ; irreducibility makes that equilibrium unique ; aperiodicity makes the chain actually reach it ; and the second eigenvalue says how long you will be waiting. Those four facts are the whole theory, and they are enough to explain why adding a 15 % chance of teleporting to a random page is what makes ranking the entire web both well defined and computable in fifty iterations.</p>
+
+<p>The assumption is also a design choice, not a law of nature. When it is false, you can enlarge the state until it becomes true and pay in exponential blow-up — or you can abandon it, which is the road that led to attention. Knowing which of those you are doing, and why, is most of the value in understanding the chain in the first place.</p>
+
+<h2 id="references">References</h2>
+<ol class="bibliography"><li><span id="Brin1998">Brin, S., &amp; Page, L. (1998). The Anatomy of a Large-Scale Hypertextual Web Search Engine. <i>Computer Networks and ISDN Systems</i>, <i>30</i>(1–7), 107–117.</span>
+
+<div id="Brin1998-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Brin1998-bibtex" class="pre pre-scrollable collapse">@article{Brin1998,
+  author = {Brin, Sergey and Page, Lawrence},
+  title = {The Anatomy of a Large-Scale Hypertextual Web Search Engine},
+  journal = {Computer Networks and ISDN Systems},
+  volume = {30},
+  number = {1--7},
+  pages = {107--117},
+  year = {1998}
+}
+</pre>
+
+</div></li>
+<li><span id="Frobenius1912">Frobenius, G. (1912). Über Matrizen aus nicht negativen Elementen. <i>Sitzungsberichte Der Königlich Preussischen Akademie Der Wissenschaften</i>, 456–477.</span>
+
+<div id="Frobenius1912-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Frobenius1912-bibtex" class="pre pre-scrollable collapse">@article{Frobenius1912,
+  author = {Frobenius, Georg},
+  title = {{\"U}ber Matrizen aus nicht negativen Elementen},
+  journal = {Sitzungsberichte der K{\"o}niglich Preussischen Akademie der Wissenschaften},
+  pages = {456--477},
+  year = {1912}
+}
+</pre>
+
+</div></li>
+<li><span id="Hastings1970">Hastings, W. K. (1970). Monte Carlo Sampling Methods Using Markov Chains and Their Applications. <i>Biometrika</i>, <i>57</i>(1), 97–109.</span>
+
+<div id="Hastings1970-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Hastings1970-bibtex" class="pre pre-scrollable collapse">@article{Hastings1970,
+  author = {Hastings, W. Keith},
+  title = {Monte Carlo Sampling Methods Using Markov Chains and Their Applications},
+  journal = {Biometrika},
+  volume = {57},
+  number = {1},
+  pages = {97--109},
+  year = {1970}
+}
+</pre>
+
+</div></li>
+<li><span id="Levin2017">Levin, D. A., &amp; Peres, Y. (2017). <i>Markov Chains and Mixing Times</i> (2nd ed.). American Mathematical Society.</span>
+
+<div id="Levin2017-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Levin2017-bibtex" class="pre pre-scrollable collapse">@book{Levin2017,
+  author = {Levin, David A. and Peres, Yuval},
+  title = {Markov Chains and Mixing Times},
+  edition = {2nd},
+  year = {2017},
+  publisher = {American Mathematical Society}
+}
+</pre>
+
+</div></li>
+<li><span id="Markov1913">Markov, A. A. (1913). An Example of Statistical Investigation of the Text Eugene Onegin Concerning the Connection of Samples in Chains. <i>Science in Context (English Translation, 2006)</i>, <i>19</i>(4), 591–600.</span>
+
+<div id="Markov1913-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Markov1913-bibtex" class="pre pre-scrollable collapse">@article{Markov1913,
+  author = {Markov, Andrei A.},
+  title = {An Example of Statistical Investigation of the Text {Eugene Onegin} Concerning the Connection of Samples in Chains},
+  journal = {Science in Context (English translation, 2006)},
+  volume = {19},
+  number = {4},
+  pages = {591--600},
+  year = {1913}
+}
+</pre>
+
+</div></li>
+<li><span id="Metropolis1953">Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller, A. H., &amp; Teller, E. (1953). Equation of State Calculations by Fast Computing Machines. <i>The Journal of Chemical Physics</i>, <i>21</i>(6), 1087–1092.</span>
+
+<div id="Metropolis1953-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Metropolis1953-bibtex" class="pre pre-scrollable collapse">@article{Metropolis1953,
+  author = {Metropolis, Nicholas and Rosenbluth, Arianna W. and Rosenbluth, Marshall N. and Teller, Augusta H. and Teller, Edward},
+  title = {Equation of State Calculations by Fast Computing Machines},
+  journal = {The Journal of Chemical Physics},
+  volume = {21},
+  number = {6},
+  pages = {1087--1092},
+  year = {1953}
+}
+</pre>
+
+</div></li>
+<li><span id="Page1999">Page, L., Brin, S., Motwani, R., &amp; Winograd, T. (1999). <i>The PageRank Citation Ranking: Bringing Order to the Web</i> (No.1999-66; Numbers 1999-66). Stanford InfoLab.</span>
+
+<div id="Page1999-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Page1999-bibtex" class="pre pre-scrollable collapse">@techreport{Page1999,
+  author = {Page, Lawrence and Brin, Sergey and Motwani, Rajeev and Winograd, Terry},
+  title = {The PageRank Citation Ranking: Bringing Order to the Web},
+  institution = {Stanford InfoLab},
+  number = {1999-66},
+  year = {1999}
+}
+</pre>
+
+</div></li>
+<li><span id="Rabiner1989">Rabiner, L. R. (1989). A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition. <i>Proceedings of the IEEE</i>, <i>77</i>(2), 257–286.</span>
+
+<div id="Rabiner1989-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Rabiner1989-bibtex" class="pre pre-scrollable collapse">@article{Rabiner1989,
+  author = {Rabiner, Lawrence R.},
+  title = {A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition},
+  journal = {Proceedings of the IEEE},
+  volume = {77},
+  number = {2},
+  pages = {257--286},
+  year = {1989}
+}
+</pre>
+
+</div></li>
+<li><span id="Viterbi1967">Viterbi, A. J. (1967). Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm. <i>IEEE Transactions on Information Theory</i>, <i>13</i>(2), 260–269.</span>
+
+<div id="Viterbi1967-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Viterbi1967-bibtex" class="pre pre-scrollable collapse">@article{Viterbi1967,
+  author = {Viterbi, Andrew J.},
+  title = {Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm},
+  journal = {IEEE Transactions on Information Theory},
+  volume = {13},
+  number = {2},
+  pages = {260--269},
+  year = {1967}
+}
+</pre>
+
+</div></li></ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Markov’s choice of <em>Eugene Onegin</em> was polemical. He was in a long argument with Pavel Nekrasov, who had claimed that the law of large numbers required independence and therefore that its appearance in social statistics was evidence of free will. Markov’s vowel-and-consonant counts were a deliberate counterexample : here is a sequence that is plainly <em>not</em> independent, and the law of large numbers holds anyway. The theory of stochastic processes began as a rebuttal in a philosophical dispute. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </article>
+	     </div>
+     </div>
+  </div>
+</div>
+
+    <footer>
+    <div class="container">
+        <div class="row biography">
+            <div class="col-sm-6">
+                <h2>who am i</h2>
+                <p>Hi! I am a Data Scientist by profession, an Emacs devotee and an untalented bassist. I intend to use this space for writing about things that I think I have understood well in the hope that they may be helpful to others, including my future self.</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>what is this</h2>
+                <p><b><i>OhMyKode</i></b> is an opportunity to share knowledge about mathematics, computer science, machine learning and algorithmic beauty, which allows us to improve our skills and learn in depth. It is a sharing place to learn the how and the why.</p>
+            </div>
+           
+        </div>
+        
+        <div class="row copyright">
+            <center>© MMXVIII - MMXXVI by Maâmra Youcef - معامره يوسف <br/>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br/>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and powered by <a href='http://jekyllrb.com/'>Jekyll</a> & <a href='https://github.com/hugoferreira/papyrus-theme'>Papyrus</a>.<br/><i><u>“We can't skip Math forever !”<u/></i><br/> <a class='fa fa-github' href='https://github.com/Cyuss' title='GitHub'></a> <a class='fa fa-linkedin' href='https://id.linkedin.com/in/youcefmaamra' title='LinkedIn'></a><br/></center>
+        </div>
+        
+    </div>
+</footer>
+
+  </body>
+</html>

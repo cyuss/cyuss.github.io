@@ -15,8 +15,8 @@
               
             The Fourier Transform, Why Sinusoids?
              15 May 2019 
-             9 minutes read
-          ..." />
+             64 minutes read
+         ..." />
 
   
   <meta name="keywords" content="" />
@@ -71,8 +71,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta property="og:title" content="The Fourier Transform, Why Sinusoids?" />
 <meta name="author" content="Maâmra Youcef" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The Fourier transform is a prism for signals. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of pure tones it is made of : how much of each frequency is present. This one idea underpins audio compression, image formats, quantum mechanics and, as we will see, the way Transformers encode the position of a word. But it raises a nagging question : of…" />
-<meta name="twitter:description" property="og:description" content="Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The Fourier transform is a prism for signals. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of pure tones it is made of : how much of each frequency is present. This one idea underpins audio compression, image formats, quantum mechanics and, as we will see, the way Transformers encode the position of a word. But it raises a nagging question : of…" />
+<meta name="description" content="Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The Fourier transform is a prism for signals. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of pure tones it is made of. This one idea underpins audio compression, medical imaging, quantum mechanics and the way Transformers encode the position of a word. But it raises a nagging question that most treatments skip : of all possible building blocks, why should sine waves…" />
+<meta name="twitter:description" property="og:description" content="Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The Fourier transform is a prism for signals. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of pure tones it is made of. This one idea underpins audio compression, medical imaging, quantum mechanics and the way Transformers encode the position of a word. But it raises a nagging question that most treatments skip : of all possible building blocks, why should sine waves…" />
 <link rel="canonical" href="www.ohmykode.com/blog/mathematics/fourier-transform" />
 <meta property="og:url" content="www.ohmykode.com/blog/mathematics/fourier-transform" />
 <meta property="og:site_name" content="Oh My Kode" />
@@ -82,7 +82,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="The Fourier Transform, Why Sinusoids?" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2019-05-15T12:00:00+02:00","datePublished":"2019-05-15T12:00:00+02:00","description":"Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The Fourier transform is a prism for signals. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of pure tones it is made of : how much of each frequency is present. This one idea underpins audio compression, image formats, quantum mechanics and, as we will see, the way Transformers encode the position of a word. But it raises a nagging question : of…","headline":"The Fourier Transform, Why Sinusoids?","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/fourier-transform"},"url":"www.ohmykode.com/blog/mathematics/fourier-transform"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maâmra Youcef"},"dateModified":"2019-05-15T12:00:00+02:00","datePublished":"2019-05-15T12:00:00+02:00","description":"Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The Fourier transform is a prism for signals. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of pure tones it is made of. This one idea underpins audio compression, medical imaging, quantum mechanics and the way Transformers encode the position of a word. But it raises a nagging question that most treatments skip : of all possible building blocks, why should sine waves…","headline":"The Fourier Transform, Why Sinusoids?","mainEntityOfPage":{"@type":"WebPage","@id":"www.ohmykode.com/blog/mathematics/fourier-transform"},"url":"www.ohmykode.com/blog/mathematics/fourier-transform"}</script>
 <!-- End Jekyll SEO tag -->
 
     <body>
@@ -93,11 +93,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
             <center>  <a class="fa fa-home home_button" href="/"></a></center>
             <center><span itemprop="name"><h1>The Fourier Transform, Why Sinusoids?</h1></span></center>
             <center><p> 15 May 2019 </p></center>
-            <center><p class="fa fa-clock-o"> 9 minutes read</p></center>
+            <center><p class="fa fa-clock-o"> 64 minutes read</p></center>
             <!--<center><p class="fa fa-clock-o"> 
                         
                           
-                            12 minutes read
+                            85 minutes read
                         </p></center>-->
         <center><span class="small-ornament"><svg viewBox="0 0 290 320">
           <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
@@ -110,8 +110,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         <article lang="en">
           
           <blockquote>
-  <p>Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The <strong>Fourier transform</strong> is a prism for <em>signals</em>. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of <strong>pure tones</strong> it is made of : how much of each frequency is present. This one idea underpins audio compression, image formats, quantum mechanics and, as we will see, the way <a href="/blog/machine-learning/transformers">Transformers</a> encode the position of a word. But it raises a nagging question : of all possible building blocks, why should <em>sine waves</em> be the right ones ? This post answers that, keeping the intuition simple and the mathematics honest.</p>
+  <p>Shine white light through a prism and it fans out into a rainbow : the prism reveals that “white” was secretly a mixture of every colour. The <strong>Fourier transform</strong> is a prism for <em>signals</em>. It takes a sound, an image, a stock price, any wiggly function of time, and reveals the hidden mixture of <strong>pure tones</strong> it is made of. This one idea underpins audio compression, medical imaging, quantum mechanics and the way <a href="/blog/machine-learning/transformers">Transformers</a> encode the position of a word. But it raises a nagging question that most treatments skip : of all possible building blocks, why should <em>sine waves</em> be the right ones ? This post answers that properly, then follows the consequences — the handful of properties that make the transform useful, the uncertainty principle that falls out of them for free, and the algorithm that made the whole thing practical.</p>
 </blockquote>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART I — WHY SINE WAVES</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">the question that justifies everything else</span>
+</div>
 
 <h2 id="1-the-big-idea--signals-are-recipes-of-sine-waves">1. The big idea : signals are recipes of sine waves</h2>
 <p>A <strong>sine wave</strong> $\sin(2\pi f t)$ is the purest oscillation there is : a single, unwavering frequency $f$. The claim at the heart of Fourier analysis is startling in its generality.</p>
@@ -123,25 +128,43 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <p><em>In plain words : just as a chord is several pure notes played together, any repeating waveform, however jagged, is really a stack of simple sine waves added up. Fourier analysis hands you the sheet music.</em></p>
 
 <h2 id="2-why-sinusoids-and-not-something-else-">2. Why sinusoids, and not something else ?</h2>
-<p>There are two deep reasons sine waves are the privileged ingredients.</p>
+<p>This is the question worth taking seriously, because the answer is not “tradition”. You could try to build signals out of square pulses, or polynomials, or wavelets — and people do. Sine waves earn their place for two reasons, and the second is the deep one.</p>
 
-<ul>
-  <li><strong>They are “orthogonal”.</strong> Over one period, the average product of two sine waves of <em>different</em> whole-number frequencies is exactly zero. They do not interfere. This means we can measure “how much of frequency $n$ is present” without the other frequencies contaminating the answer, each ingredient can be extracted cleanly.</li>
-  <li><strong>They are the natural modes of physics.</strong> Sinusoids are the shapes that pass through any stable, linear, time-invariant system (a vibrating string, an electrical circuit, an echoing room) unchanged except for a rescaling. Feed in a pure tone and you get out the same tone, louder or softer and shifted, never a <em>different</em> frequency. No other family of functions has this property.</li>
-</ul>
+<p><strong>First : they stay out of each other’s way.</strong> Over one period, the average product of two sine waves of <em>different</em> whole-number frequencies is exactly zero. Concretely, for integers $m \ne n$,</p>
 
-<p><em>In plain words : sine waves are chosen not by taste but by mathematics, they are the only building blocks that stay out of each other’s way and that nature itself prefers.</em></p>
+\[\begin{equation} \int_{0}^{2\pi} \sin(mt)\sin(nt)\,\mathrm{d}t = 0, \qquad \int_{0}^{2\pi} \sin(mt)\cos(nt)\,\mathrm{d}t = 0. \label{eq:orth} \end{equation}\]
 
-<h2 id="3-the-fourier-series">3. The Fourier series</h2>
+<p><em>The first one is a two-line computation : the product-to-sum identity turns $\sin(mt)\sin(nt)$ into $\tfrac{1}{2}[\cos((m-n)t) - \cos((m+n)t)]$, and a cosine of a non-zero whole-number frequency integrates to zero over a full period. Only when $m = n$ does the first term become $\cos 0 = 1$ and survive.</em></p>
+
+<p>This is <strong>orthogonality</strong>, and it is precisely the property that makes the recipe recoverable. It means you can ask “how much of frequency $n$ is in this signal ?” and get a clean answer, uncontaminated by all the other frequencies. Without it, the ingredients would leak into each other and the notion of a spectrum would be ill-defined.</p>
+
+<p><strong>Second : they are what linear physics leaves alone.</strong> This is the real reason, and it is worth stating precisely. Consider any system that is <em>linear</em> (doubling the input doubles the output) and <em>time-invariant</em> (its behaviour does not change from one moment to the next). A vibrating string, an electrical circuit, a room with echoes, a lens, a mechanical suspension — almost every physical system you meet, at least approximately.</p>
+
+<div class="theorem" text="complex exponentials are the eigenfunctions of LTI systems">
+	Let $L$ be a linear time-invariant system. If you feed it $e^{i\omega t}$, the output is
+	$$ L\big[e^{i\omega t}\big] = H(\omega)\, e^{i\omega t} $$
+	for some complex number $H(\omega)$ depending only on the frequency. The <b>same</b> frequency comes out, rescaled and phase-shifted, never a different one.
+	<br /><br />
+	<i>Proof sketch.&nbsp;&nbsp;</i> Write the output as $y(t) = L[e^{i\omega t}]$. Time invariance says that delaying the input by $\tau$ delays the output by $\tau$ : $L[e^{i\omega (t-\tau)}] = y(t-\tau)$. But $e^{i\omega(t-\tau)} = e^{-i\omega\tau}e^{i\omega t}$, and by linearity the constant $e^{-i\omega\tau}$ pulls straight out, so $e^{-i\omega\tau} y(t) = y(t-\tau)$. Setting $t = 0$ gives $y(-\tau) = e^{-i\omega\tau} y(0)$, that is, $y(t) = y(0)\,e^{i\omega t}$. So the output is the input times the constant $H(\omega) = y(0)$.
+	<p align="right">$\square$</p>
+</div>
+
+<p><em>In plain words : sine waves are the shapes that pass through the physical world unchanged in character. Play a pure tone into a room and you hear the same pure tone, louder or softer and slightly delayed — never a different note. No other family of functions has this property, and it means that once you know what a system does to each frequency, you know what it does to everything.</em></p>
+
+<p>That is why the frequency domain is not merely a convenient coordinate change. It is the coordinate system in which linear physical systems become <strong>diagonal</strong> : a hopelessly tangled operation in time becomes, one frequency at a time, a single multiplication.</p>
+
+<h2 id="3-the-fourier-series-and-how-to-read-off-a-coefficient">3. The Fourier series, and how to read off a coefficient</h2>
 <p>For a signal $f(t)$ that repeats with period $T$ (base frequency $\omega = 2\pi/T$), the recipe is written</p>
 
 \[\begin{equation} f(t) = a_0 + \sum_{n=1}^{\infty}\Big( a_n \cos(n\omega t) + b_n \sin(n\omega t) \Big). \label{eq:series} \end{equation}\]
 
-<p>The amplitudes are recovered by the orthogonality trick above : to find how much of frequency $n$ is present, <strong>multiply</strong> the signal by that pure wave and <strong>average</strong> over a period (the contamination from all other frequencies integrates to zero) :</p>
+<p>The amplitudes are recovered by the orthogonality trick above. To find how much of frequency $n$ is present, <strong>multiply</strong> the signal by that pure wave and <strong>average</strong> over a period :</p>
 
-\[\begin{equation} a_n = \frac{2}{T}\int_{0}^{T} f(t)\cos(n\omega t)\,dt, \qquad b_n = \frac{2}{T}\int_{0}^{T} f(t)\sin(n\omega t)\,dt. \label{eq:coeffs} \end{equation}\]
+\[\begin{equation} a_n = \frac{2}{T}\int_{0}^{T} f(t)\cos(n\omega t)\,\mathrm{d}t, \qquad b_n = \frac{2}{T}\int_{0}^{T} f(t)\sin(n\omega t)\,\mathrm{d}t. \label{eq:coeffs} \end{equation}\]
 
-<p><em>In plain words : each integral in $\eqref{eq:coeffs}$ asks “how much does the signal resemble this particular pure wave ?” , it is a similarity score, exactly the kind of projection a <a href="/blog/machine-learning/attention-mechanism">dot product</a> performs, but for functions.</em></p>
+<p>Why this works is worth spelling out, because it is the whole mechanism. Substitute the series $\eqref{eq:series}$ into the integral $\eqref{eq:coeffs}$. Every term $a_m\cos(m\omega t)$ with $m \ne n$ integrates against $\cos(n\omega t)$ to <strong>zero</strong>, by $\eqref{eq:orth}$. Every sine term does too. Exactly one term survives — the one you were asking about — and the factor $2/T$ normalises it.</p>
+
+<p><em>In plain words : each integral asks “how much does the signal resemble this particular pure wave ?” It is a similarity score, exactly the kind of projection a <a href="/blog/machine-learning/attention-mechanism">dot product</a> performs, but for functions instead of vectors. Orthogonality is what guarantees the other ingredients score zero and do not pollute the measurement.</em></p>
 
 <h2 id="4-watching-a-square-wave-being-built">4. Watching a square wave being built</h2>
 <p>Nothing makes $\eqref{eq:series}$ more convincing than watching it work. A <strong>square wave</strong>, all sharp corners and flat tops, seems the least “sine-like” shape imaginable <sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. Yet it is just</p>
@@ -168,20 +191,471 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <figcaption><b>Figure 1 -</b> A square wave reconstructed from its Fourier series. Each new odd harmonic sharpens the corners. Infinitely many are needed for a perfect square, the little overshoot at the jumps never quite disappears (the <i>Gibbs phenomenon</i>).</figcaption>
 </center></figure>
 
+<p>Look closely at the corners as the harmonics pile up. The overshoot does not shrink — it narrows, but its height converges to about 9 % of the jump and stays there forever. This is the <strong>Gibbs phenomenon</strong> <a class="citation" href="#Gibbs1899">(Gibbs, 1899)</a>, and it is not a numerical artefact : it is what happens when you insist on building a discontinuity out of continuous pieces. It is also the reason ringing appears around sharp edges in over-compressed JPEG images, which discard exactly the high harmonics that would have tamed it.</p>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART II — THE TRANSFORM AND ITS RULES</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">six properties, and one principle that follows from them</span>
+</div>
+
 <h2 id="5-from-series-to-transform">5. From series to transform</h2>
-<p>The Fourier <em>series</em> handles periodic signals. For a signal that does <strong>not</strong> repeat, we let the period $T \to \infty$, the discrete list of harmonics blurs into a continuous range of frequencies, and the sum becomes an integral. Using Euler’s identity $e^{i\theta} = \cos\theta + i\sin\theta$ to package sine and cosine together, we arrive at the <strong>Fourier transform</strong> :</p>
+<p>The Fourier <em>series</em> handles periodic signals. For a signal that does <strong>not</strong> repeat, take the period $T$ to infinity. The harmonics sit at frequencies $n/T$, spaced $1/T$ apart — so as $T$ grows, the spacing shrinks, the discrete comb of allowed frequencies fills in, and the sum over $n$ becomes an integral over a continuum. Using Euler’s identity $e^{i\theta} = \cos\theta + i\sin\theta$ to package sine and cosine into one object, we arrive at the <strong>Fourier transform</strong> :</p>
 
-\[\begin{equation} \hat{f}(\xi) = \int_{-\infty}^{\infty} f(t)\, e^{-2\pi i \xi t}\, dt. \label{eq:ft} \end{equation}\]
+<div class="definition">
+	$$ \hat{f}(\xi) = \int_{-\infty}^{\infty} f(t)\, e^{-2\pi i \xi t}\, \mathrm{d}t, \qquad f(t) = \int_{-\infty}^{\infty} \hat{f}(\xi)\, e^{+2\pi i \xi t}\, \mathrm{d}\xi. $$
+	The two formulas are inverses : $f$ and $\hat f$ are two complete descriptions of the same object, one in the <b>time domain</b>, one in the <b>frequency domain</b>. Nothing is lost going either way.
+</div>
 
-<p><em>In plain words : $\hat{f}(\xi)$ is still just “how much of frequency $\xi$ is in the signal”, the same similarity score as $\eqref{eq:coeffs}$, now measured for every frequency on a continuum.</em> The transform is invertible : $f$ and $\hat f$ are two views of the same object, one in the <strong>time domain</strong>, one in the <strong>frequency domain</strong>. A sharp spike in $\hat f$ means a strong pure tone ; a spread-out $\hat f$ means a rich mixture.</p>
+<p><em>In plain words : $\hat{f}(\xi)$ is still just “how much of frequency $\xi$ is in the signal”, the same similarity score as $\eqref{eq:coeffs}$, now measured for every frequency on a continuum instead of a discrete list.</em></p>
 
-<h2 id="6-why-it-matters">6. Why it matters</h2>
-<p>Once a signal is in the frequency domain, things that were hard become easy. Removing hiss from audio is just deleting high-frequency components ; JPEG and MP3 compression throw away the frequencies your eyes and ears barely notice ; solving certain differential equations turns into simple algebra. The workhorse that makes this practical is the <strong>Fast Fourier Transform</strong> (FFT) <a class="citation" href="#Cooley1965">(Cooley &amp; Tukey, 1965)</a>, which computes $\eqref{eq:ft}$ for $N$ samples in $N\log N$ operations instead of $N^2$, one of the most consequential algorithms ever written.</p>
+<figure><center>
+<svg viewBox="0 0 640 300" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .ax{ stroke:#d8d8d8; stroke-width:1.1; }
+    .sg{ fill:none; stroke:#4a6da7; stroke-width:1.9; }
+    .sp{ stroke:#b5651d; stroke-width:2.2; }
+    .spd{ fill:#b5651d; }
+    .ar{ fill:#e8c9a8; fill-opacity:.7; stroke:#b5651d; stroke-width:1.6; }
+    .tr{ stroke:#4a6da7; stroke-width:1.6; fill:none; }
+    .tl{ font-size:14px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .rl{ font-size:10.5px; fill:#7a7a7a; text-anchor:start; font-style:italic; }
+    .hd{ font-size:12px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+  </style>
+  <defs>
+    <marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="fo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="fg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#9aa8bf" /></marker>
+  </defs>
+  <line class="ax" x1="52" y1="78" x2="292" y2="78" />
+  <path class="sg" d="M56.0,78.0 L56.6,76.6 L57.2,75.2 L57.7,73.8 L58.3,72.4 L58.9,71.0 L59.5,69.6 L60.1,68.3 L60.6,67.0 L61.2,65.7 L61.8,64.4 L62.4,63.1 L63.0,61.9 L63.5,60.7 L64.1,59.6 L64.7,58.5 L65.3,57.5 L65.9,56.5 L66.4,55.5 L67.0,54.6 L67.6,53.7 L68.2,52.9 L68.8,52.2 L69.3,51.5 L69.9,50.9 L70.5,50.3 L71.1,49.8 L71.7,49.3 L72.2,48.9 L72.8,48.6 L73.4,48.4 L74.0,48.2 L74.6,48.1 L75.1,48.0 L75.7,48.0 L76.3,48.1 L76.9,48.2 L77.5,48.4 L78.0,48.7 L78.6,49.1 L79.2,49.5 L79.8,49.9 L80.4,50.5 L80.9,51.1 L81.5,51.7 L82.1,52.4 L82.7,53.2 L83.3,54.0 L83.8,54.9 L84.4,55.8 L85.0,56.8 L85.6,57.8 L86.2,58.9 L86.7,60.0 L87.3,61.1 L87.9,62.3 L88.5,63.5 L89.1,64.8 L89.6,66.1 L90.2,67.4 L90.8,68.7 L91.4,70.1 L92.0,71.5 L92.5,72.8 L93.1,74.2 L93.7,75.6 L94.3,77.1 L94.9,78.5 L95.4,79.9 L96.0,81.3 L96.6,82.7 L97.2,84.1 L97.8,85.5 L98.3,86.8 L98.9,88.2 L99.5,89.5 L100.1,90.8 L100.7,92.0 L101.2,93.3 L101.8,94.5 L102.4,95.6 L103.0,96.8 L103.6,97.8 L104.1,98.9 L104.7,99.9 L105.3,100.8 L105.9,101.7 L106.5,102.5 L107.0,103.3 L107.6,104.1 L108.2,104.7 L108.8,105.3 L109.4,105.9 L109.9,106.4 L110.5,106.8 L111.1,107.2 L111.7,107.5 L112.3,107.7 L112.8,107.9 L113.4,108.0 L114.0,108.0 L114.6,108.0 L115.2,107.9 L115.7,107.7 L116.3,107.5 L116.9,107.2 L117.5,106.8 L118.1,106.4 L118.6,105.9 L119.2,105.3 L119.8,104.7 L120.4,104.1 L121.0,103.3 L121.5,102.5 L122.1,101.7 L122.7,100.8 L123.3,99.9 L123.9,98.9 L124.4,97.8 L125.0,96.8 L125.6,95.6 L126.2,94.5 L126.8,93.3 L127.3,92.0 L127.9,90.8 L128.5,89.5 L129.1,88.2 L129.7,86.8 L130.2,85.5 L130.8,84.1 L131.4,82.7 L132.0,81.3 L132.6,79.9 L133.1,78.5 L133.7,77.1 L134.3,75.6 L134.9,74.2 L135.5,72.8 L136.0,71.5 L136.6,70.1 L137.2,68.7 L137.8,67.4 L138.4,66.1 L138.9,64.8 L139.5,63.5 L140.1,62.3 L140.7,61.1 L141.3,60.0 L141.8,58.9 L142.4,57.8 L143.0,56.8 L143.6,55.8 L144.2,54.9 L144.7,54.0 L145.3,53.2 L145.9,52.4 L146.5,51.7 L147.1,51.1 L147.6,50.5 L148.2,49.9 L148.8,49.5 L149.4,49.1 L150.0,48.7 L150.5,48.4 L151.1,48.2 L151.7,48.1 L152.3,48.0 L152.9,48.0 L153.4,48.1 L154.0,48.2 L154.6,48.4 L155.2,48.6 L155.8,48.9 L156.3,49.3 L156.9,49.8 L157.5,50.3 L158.1,50.9 L158.7,51.5 L159.2,52.2 L159.8,52.9 L160.4,53.7 L161.0,54.6 L161.6,55.5 L162.1,56.5 L162.7,57.5 L163.3,58.5 L163.9,59.6 L164.5,60.7 L165.0,61.9 L165.6,63.1 L166.2,64.4 L166.8,65.7 L167.4,67.0 L167.9,68.3 L168.5,69.6 L169.1,71.0 L169.7,72.4 L170.3,73.8 L170.8,75.2 L171.4,76.6 L172.0,78.0 L172.6,79.4 L173.2,80.8 L173.7,82.2 L174.3,83.6 L174.9,85.0 L175.5,86.4 L176.1,87.7 L176.6,89.0 L177.2,90.3 L177.8,91.6 L178.4,92.9 L179.0,94.1 L179.5,95.3 L180.1,96.4 L180.7,97.5 L181.3,98.5 L181.9,99.5 L182.4,100.5 L183.0,101.4 L183.6,102.3 L184.2,103.1 L184.8,103.8 L185.3,104.5 L185.9,105.1 L186.5,105.7 L187.1,106.2 L187.7,106.7 L188.2,107.1 L188.8,107.4 L189.4,107.6 L190.0,107.8 L190.6,107.9 L191.1,108.0 L191.7,108.0 L192.3,107.9 L192.9,107.8 L193.5,107.6 L194.0,107.3 L194.6,106.9 L195.2,106.5 L195.8,106.1 L196.4,105.5 L196.9,104.9 L197.5,104.3 L198.1,103.6 L198.7,102.8 L199.3,102.0 L199.8,101.1 L200.4,100.2 L201.0,99.2 L201.6,98.2 L202.2,97.1 L202.7,96.0 L203.3,94.9 L203.9,93.7 L204.5,92.5 L205.1,91.2 L205.6,89.9 L206.2,88.6 L206.8,87.3 L207.4,85.9 L208.0,84.5 L208.5,83.2 L209.1,81.8 L209.7,80.4 L210.3,78.9 L210.9,77.5 L211.4,76.1 L212.0,74.7 L212.6,73.3 L213.2,71.9 L213.8,70.5 L214.3,69.2 L214.9,67.8 L215.5,66.5 L216.1,65.2 L216.7,64.0 L217.2,62.7 L217.8,61.5 L218.4,60.4 L219.0,59.2 L219.6,58.2 L220.1,57.1 L220.7,56.1 L221.3,55.2 L221.9,54.3 L222.5,53.5 L223.0,52.7 L223.6,51.9 L224.2,51.3 L224.8,50.7 L225.4,50.1 L225.9,49.6 L226.5,49.2 L227.1,48.8 L227.7,48.5 L228.3,48.3 L228.8,48.1 L229.4,48.0 L230.0,48.0 L230.6,48.0 L231.2,48.1 L231.7,48.3 L232.3,48.5 L232.9,48.8 L233.5,49.2 L234.1,49.6 L234.6,50.1 L235.2,50.7 L235.8,51.3 L236.4,51.9 L237.0,52.7 L237.5,53.5 L238.1,54.3 L238.7,55.2 L239.3,56.1 L239.9,57.1 L240.4,58.2 L241.0,59.2 L241.6,60.4 L242.2,61.5 L242.8,62.7 L243.3,64.0 L243.9,65.2 L244.5,66.5 L245.1,67.8 L245.7,69.2 L246.2,70.5 L246.8,71.9 L247.4,73.3 L248.0,74.7 L248.6,76.1 L249.1,77.5 L249.7,78.9 L250.3,80.4 L250.9,81.8 L251.5,83.2 L252.0,84.5 L252.6,85.9 L253.2,87.3 L253.8,88.6 L254.4,89.9 L254.9,91.2 L255.5,92.5 L256.1,93.7 L256.7,94.9 L257.3,96.0 L257.8,97.1 L258.4,98.2 L259.0,99.2 L259.6,100.2 L260.2,101.1 L260.7,102.0 L261.3,102.8 L261.9,103.6 L262.5,104.3 L263.1,104.9 L263.6,105.5 L264.2,106.1 L264.8,106.5 L265.4,106.9 L266.0,107.3 L266.5,107.6 L267.1,107.8 L267.7,107.9 L268.3,108.0 L268.9,108.0 L269.4,107.9 L270.0,107.8 L270.6,107.6 L271.2,107.4 L271.8,107.1 L272.3,106.7 L272.9,106.2 L273.5,105.7 L274.1,105.1 L274.7,104.5 L275.2,103.8 L275.8,103.1 L276.4,102.3 L277.0,101.4 L277.6,100.5 L278.1,99.5 L278.7,98.5 L279.3,97.5 L279.9,96.4 L280.5,95.3 L281.0,94.1 L281.6,92.9 L282.2,91.6 L282.8,90.3 L283.4,89.0 L283.9,87.7 L284.5,86.4 L285.1,85.0 L285.7,83.6 L286.3,82.2 L286.8,80.8 L287.4,79.4 L288.0,78.0" />
+  <text class="rl" x="56" y="38">one pure tone</text>
+  <line class="ax" x1="368" y1="108" x2="604" y2="108" />
+  <line class="sp" x1="423.7" y1="108.0" x2="423.7" y2="50.0" />
+  <circle class="spd" cx="423.7" cy="50.0" r="3" />
+  <path class="tr" d="M304,78 L356,78" marker-end="url(#fa)" />
+  <text class="tl" x="330" y="70">ℱ</text>
+  <line class="ax" x1="52" y1="166" x2="292" y2="166" />
+  <path class="sg" d="M56.0,166.0 L56.6,164.0 L57.2,162.1 L57.7,160.2 L58.3,158.4 L58.9,156.6 L59.5,154.9 L60.1,153.4 L60.6,151.9 L61.2,150.6 L61.8,149.4 L62.4,148.4 L63.0,147.5 L63.5,146.8 L64.1,146.3 L64.7,145.9 L65.3,145.6 L65.9,145.5 L66.4,145.5 L67.0,145.7 L67.6,145.9 L68.2,146.3 L68.8,146.7 L69.3,147.2 L69.9,147.8 L70.5,148.4 L71.1,149.0 L71.7,149.7 L72.2,150.3 L72.8,151.0 L73.4,151.5 L74.0,152.1 L74.6,152.6 L75.1,153.1 L75.7,153.5 L76.3,153.8 L76.9,154.1 L77.5,154.3 L78.0,154.4 L78.6,154.5 L79.2,154.5 L79.8,154.5 L80.4,154.4 L80.9,154.3 L81.5,154.2 L82.1,154.1 L82.7,154.0 L83.3,153.9 L83.8,153.8 L84.4,153.7 L85.0,153.7 L85.6,153.8 L86.2,153.8 L86.7,154.0 L87.3,154.2 L87.9,154.5 L88.5,154.8 L89.1,155.2 L89.6,155.7 L90.2,156.2 L90.8,156.7 L91.4,157.3 L92.0,158.0 L92.5,158.6 L93.1,159.3 L93.7,159.9 L94.3,160.6 L94.9,161.2 L95.4,161.7 L96.0,162.2 L96.6,162.7 L97.2,163.1 L97.8,163.3 L98.3,163.5 L98.9,163.6 L99.5,163.6 L100.1,163.5 L100.7,163.3 L101.2,162.9 L101.8,162.5 L102.4,162.0 L103.0,161.3 L103.6,160.6 L104.1,159.8 L104.7,159.0 L105.3,158.1 L105.9,157.2 L106.5,156.3 L107.0,155.4 L107.6,154.6 L108.2,153.8 L108.8,153.0 L109.4,152.3 L109.9,151.7 L110.5,151.2 L111.1,150.9 L111.7,150.7 L112.3,150.6 L112.8,150.7 L113.4,150.9 L114.0,151.3 L114.6,151.9 L115.2,152.6 L115.7,153.5 L116.3,154.5 L116.9,155.7 L117.5,157.0 L118.1,158.4 L118.6,159.9 L119.2,161.5 L119.8,163.2 L120.4,164.9 L121.0,166.7 L121.5,168.5 L122.1,170.3 L122.7,172.0 L123.3,173.8 L123.9,175.4 L124.4,177.0 L125.0,178.5 L125.6,179.9 L126.2,181.2 L126.8,182.4 L127.3,183.5 L127.9,184.4 L128.5,185.3 L129.1,185.9 L129.7,186.5 L130.2,186.9 L130.8,187.2 L131.4,187.4 L132.0,187.6 L132.6,187.6 L133.1,187.5 L133.7,187.4 L134.3,187.2 L134.9,187.0 L135.5,186.7 L136.0,186.4 L136.6,186.1 L137.2,185.8 L137.8,185.6 L138.4,185.3 L138.9,185.1 L139.5,184.9 L140.1,184.7 L140.7,184.6 L141.3,184.5 L141.8,184.4 L142.4,184.3 L143.0,184.3 L143.6,184.3 L144.2,184.3 L144.7,184.3 L145.3,184.4 L145.9,184.3 L146.5,184.3 L147.1,184.2 L147.6,184.1 L148.2,183.9 L148.8,183.6 L149.4,183.3 L150.0,182.9 L150.5,182.3 L151.1,181.7 L151.7,181.1 L152.3,180.3 L152.9,179.4 L153.4,178.5 L154.0,177.4 L154.6,176.3 L155.2,175.1 L155.8,173.9 L156.3,172.6 L156.9,171.3 L157.5,170.0 L158.1,168.7 L158.7,167.5 L159.2,166.2 L159.8,165.0 L160.4,163.9 L161.0,162.9 L161.6,161.9 L162.1,161.1 L162.7,160.3 L163.3,159.7 L163.9,159.3 L164.5,159.0 L165.0,158.8 L165.6,158.8 L166.2,158.9 L166.8,159.1 L167.4,159.5 L167.9,160.0 L168.5,160.7 L169.1,161.4 L169.7,162.2 L170.3,163.1 L170.8,164.0 L171.4,165.0 L172.0,166.0 L172.6,167.0 L173.2,168.0 L173.7,168.9 L174.3,169.8 L174.9,170.6 L175.5,171.3 L176.1,172.0 L176.6,172.5 L177.2,172.9 L177.8,173.1 L178.4,173.2 L179.0,173.2 L179.5,173.0 L180.1,172.7 L180.7,172.3 L181.3,171.7 L181.9,170.9 L182.4,170.1 L183.0,169.1 L183.6,168.1 L184.2,167.0 L184.8,165.8 L185.3,164.5 L185.9,163.3 L186.5,162.0 L187.1,160.7 L187.7,159.4 L188.2,158.1 L188.8,156.9 L189.4,155.7 L190.0,154.6 L190.6,153.5 L191.1,152.6 L191.7,151.7 L192.3,150.9 L192.9,150.3 L193.5,149.7 L194.0,149.1 L194.6,148.7 L195.2,148.4 L195.8,148.1 L196.4,147.9 L196.9,147.8 L197.5,147.7 L198.1,147.7 L198.7,147.6 L199.3,147.7 L199.8,147.7 L200.4,147.7 L201.0,147.7 L201.6,147.7 L202.2,147.6 L202.7,147.5 L203.3,147.4 L203.9,147.3 L204.5,147.1 L205.1,146.9 L205.6,146.7 L206.2,146.4 L206.8,146.2 L207.4,145.9 L208.0,145.6 L208.5,145.3 L209.1,145.0 L209.7,144.8 L210.3,144.6 L210.9,144.5 L211.4,144.4 L212.0,144.4 L212.6,144.6 L213.2,144.8 L213.8,145.1 L214.3,145.5 L214.9,146.1 L215.5,146.7 L216.1,147.6 L216.7,148.5 L217.2,149.6 L217.8,150.8 L218.4,152.1 L219.0,153.5 L219.6,155.0 L220.1,156.6 L220.7,158.2 L221.3,160.0 L221.9,161.7 L222.5,163.5 L223.0,165.3 L223.6,167.1 L224.2,168.8 L224.8,170.5 L225.4,172.1 L225.9,173.6 L226.5,175.0 L227.1,176.3 L227.7,177.5 L228.3,178.5 L228.8,179.4 L229.4,180.1 L230.0,180.7 L230.6,181.1 L231.2,181.3 L231.7,181.4 L232.3,181.3 L232.9,181.1 L233.5,180.8 L234.1,180.3 L234.6,179.7 L235.2,179.0 L235.8,178.2 L236.4,177.4 L237.0,176.6 L237.5,175.7 L238.1,174.8 L238.7,173.9 L239.3,173.0 L239.9,172.2 L240.4,171.4 L241.0,170.7 L241.6,170.0 L242.2,169.5 L242.8,169.1 L243.3,168.7 L243.9,168.5 L244.5,168.4 L245.1,168.4 L245.7,168.5 L246.2,168.7 L246.8,168.9 L247.4,169.3 L248.0,169.8 L248.6,170.3 L249.1,170.8 L249.7,171.4 L250.3,172.1 L250.9,172.7 L251.5,173.4 L252.0,174.0 L252.6,174.7 L253.2,175.3 L253.8,175.8 L254.4,176.3 L254.9,176.8 L255.5,177.2 L256.1,177.5 L256.7,177.8 L257.3,178.0 L257.8,178.2 L258.4,178.2 L259.0,178.3 L259.6,178.3 L260.2,178.2 L260.7,178.1 L261.3,178.0 L261.9,177.9 L262.5,177.8 L263.1,177.7 L263.6,177.6 L264.2,177.5 L264.8,177.5 L265.4,177.5 L266.0,177.6 L266.5,177.7 L267.1,177.9 L267.7,178.2 L268.3,178.5 L268.9,178.9 L269.4,179.4 L270.0,179.9 L270.6,180.5 L271.2,181.0 L271.8,181.7 L272.3,182.3 L272.9,183.0 L273.5,183.6 L274.1,184.2 L274.7,184.8 L275.2,185.3 L275.8,185.7 L276.4,186.1 L277.0,186.3 L277.6,186.5 L278.1,186.5 L278.7,186.4 L279.3,186.1 L279.9,185.7 L280.5,185.2 L281.0,184.5 L281.6,183.6 L282.2,182.6 L282.8,181.4 L283.4,180.1 L283.9,178.6 L284.5,177.1 L285.1,175.4 L285.7,173.6 L286.3,171.8 L286.8,169.9 L287.4,168.0 L288.0,166.0" />
+  <text class="rl" x="56" y="126">three tones added</text>
+  <line class="ax" x1="368" y1="196" x2="604" y2="196" />
+  <line class="sp" x1="406.5" y1="196.0" x2="406.5" y2="138.0" />
+  <circle class="spd" cx="406.5" cy="138.0" r="3" />
+  <line class="sp" x1="458.2" y1="196.0" x2="458.2" y2="160.0" />
+  <circle class="spd" cx="458.2" cy="160.0" r="3" />
+  <line class="sp" x1="527.1" y1="196.0" x2="527.1" y2="176.3" />
+  <circle class="spd" cx="527.1" cy="176.3" r="3" />
+  <path class="tr" d="M304,166 L356,166" marker-end="url(#fa)" />
+  <text class="tl" x="330" y="158">ℱ</text>
+  <line class="ax" x1="52" y1="254" x2="292" y2="254" />
+  <path class="sg" d="M56.0,254.0 L56.6,254.0 L57.2,254.0 L57.7,254.0 L58.3,254.0 L58.9,254.0 L59.5,254.0 L60.1,254.0 L60.6,254.0 L61.2,254.0 L61.8,254.0 L62.4,254.0 L63.0,254.0 L63.5,254.0 L64.1,254.0 L64.7,254.0 L65.3,254.0 L65.9,254.0 L66.4,254.0 L67.0,254.0 L67.6,254.0 L68.2,254.0 L68.8,254.0 L69.3,254.0 L69.9,254.0 L70.5,254.0 L71.1,254.0 L71.7,254.0 L72.2,254.0 L72.8,254.0 L73.4,254.0 L74.0,254.0 L74.6,254.0 L75.1,254.0 L75.7,254.0 L76.3,254.0 L76.9,254.0 L77.5,254.0 L78.0,254.0 L78.6,254.0 L79.2,254.0 L79.8,254.0 L80.4,254.0 L80.9,254.0 L81.5,254.0 L82.1,254.0 L82.7,254.0 L83.3,254.0 L83.8,254.0 L84.4,254.0 L85.0,254.0 L85.6,254.0 L86.2,254.0 L86.7,254.0 L87.3,254.0 L87.9,254.0 L88.5,254.0 L89.1,254.0 L89.6,254.0 L90.2,254.0 L90.8,254.0 L91.4,254.0 L92.0,254.0 L92.5,254.0 L93.1,254.0 L93.7,254.0 L94.3,254.0 L94.9,254.0 L95.4,254.0 L96.0,254.0 L96.6,254.0 L97.2,254.0 L97.8,254.0 L98.3,254.0 L98.9,254.0 L99.5,254.0 L100.1,254.0 L100.7,254.0 L101.2,254.0 L101.8,254.0 L102.4,254.0 L103.0,254.0 L103.6,254.0 L104.1,254.0 L104.7,254.0 L105.3,254.0 L105.9,254.0 L106.5,254.0 L107.0,254.0 L107.6,254.0 L108.2,254.0 L108.8,254.0 L109.4,254.0 L109.9,254.0 L110.5,254.0 L111.1,254.0 L111.7,254.0 L112.3,254.0 L112.8,254.0 L113.4,254.0 L114.0,254.0 L114.6,254.0 L115.2,254.0 L115.7,254.0 L116.3,254.0 L116.9,254.0 L117.5,254.0 L118.1,254.0 L118.6,254.0 L119.2,254.0 L119.8,254.0 L120.4,254.0 L121.0,254.0 L121.5,254.0 L122.1,254.0 L122.7,254.0 L123.3,254.0 L123.9,254.0 L124.4,254.0 L125.0,254.0 L125.6,254.0 L126.2,254.0 L126.8,254.0 L127.3,254.0 L127.9,254.0 L128.5,254.0 L129.1,254.0 L129.7,254.0 L130.2,254.0 L130.8,254.0 L131.4,254.0 L132.0,254.0 L132.6,254.0 L133.1,254.0 L133.7,254.0 L134.3,254.0 L134.9,254.0 L135.5,254.0 L136.0,254.0 L136.6,254.0 L137.2,254.0 L137.8,254.0 L138.4,254.0 L138.9,254.0 L139.5,254.0 L140.1,254.0 L140.7,254.0 L141.3,254.0 L141.8,254.0 L142.4,254.0 L143.0,254.0 L143.6,254.0 L144.2,254.0 L144.7,254.0 L145.3,254.0 L145.9,254.0 L146.5,254.0 L147.1,254.0 L147.6,254.0 L148.2,254.0 L148.8,254.0 L149.4,254.0 L150.0,254.0 L150.5,254.0 L151.1,254.0 L151.7,253.9 L152.3,253.9 L152.9,253.9 L153.4,253.8 L154.0,253.8 L154.6,253.7 L155.2,253.6 L155.8,253.5 L156.3,253.3 L156.9,253.0 L157.5,252.8 L158.1,252.4 L158.7,252.0 L159.2,251.5 L159.8,250.8 L160.4,250.1 L161.0,249.2 L161.6,248.3 L162.1,247.1 L162.7,245.9 L163.3,244.5 L163.9,243.0 L164.5,241.3 L165.0,239.6 L165.6,237.8 L166.2,236.0 L166.8,234.2 L167.4,232.4 L167.9,230.6 L168.5,229.0 L169.1,227.6 L169.7,226.4 L170.3,225.3 L170.8,224.6 L171.4,224.2 L172.0,224.0 L172.6,224.2 L173.2,224.6 L173.7,225.3 L174.3,226.4 L174.9,227.6 L175.5,229.0 L176.1,230.6 L176.6,232.4 L177.2,234.2 L177.8,236.0 L178.4,237.8 L179.0,239.6 L179.5,241.3 L180.1,243.0 L180.7,244.5 L181.3,245.9 L181.9,247.1 L182.4,248.3 L183.0,249.2 L183.6,250.1 L184.2,250.8 L184.8,251.5 L185.3,252.0 L185.9,252.4 L186.5,252.8 L187.1,253.0 L187.7,253.3 L188.2,253.5 L188.8,253.6 L189.4,253.7 L190.0,253.8 L190.6,253.8 L191.1,253.9 L191.7,253.9 L192.3,253.9 L192.9,254.0 L193.5,254.0 L194.0,254.0 L194.6,254.0 L195.2,254.0 L195.8,254.0 L196.4,254.0 L196.9,254.0 L197.5,254.0 L198.1,254.0 L198.7,254.0 L199.3,254.0 L199.8,254.0 L200.4,254.0 L201.0,254.0 L201.6,254.0 L202.2,254.0 L202.7,254.0 L203.3,254.0 L203.9,254.0 L204.5,254.0 L205.1,254.0 L205.6,254.0 L206.2,254.0 L206.8,254.0 L207.4,254.0 L208.0,254.0 L208.5,254.0 L209.1,254.0 L209.7,254.0 L210.3,254.0 L210.9,254.0 L211.4,254.0 L212.0,254.0 L212.6,254.0 L213.2,254.0 L213.8,254.0 L214.3,254.0 L214.9,254.0 L215.5,254.0 L216.1,254.0 L216.7,254.0 L217.2,254.0 L217.8,254.0 L218.4,254.0 L219.0,254.0 L219.6,254.0 L220.1,254.0 L220.7,254.0 L221.3,254.0 L221.9,254.0 L222.5,254.0 L223.0,254.0 L223.6,254.0 L224.2,254.0 L224.8,254.0 L225.4,254.0 L225.9,254.0 L226.5,254.0 L227.1,254.0 L227.7,254.0 L228.3,254.0 L228.8,254.0 L229.4,254.0 L230.0,254.0 L230.6,254.0 L231.2,254.0 L231.7,254.0 L232.3,254.0 L232.9,254.0 L233.5,254.0 L234.1,254.0 L234.6,254.0 L235.2,254.0 L235.8,254.0 L236.4,254.0 L237.0,254.0 L237.5,254.0 L238.1,254.0 L238.7,254.0 L239.3,254.0 L239.9,254.0 L240.4,254.0 L241.0,254.0 L241.6,254.0 L242.2,254.0 L242.8,254.0 L243.3,254.0 L243.9,254.0 L244.5,254.0 L245.1,254.0 L245.7,254.0 L246.2,254.0 L246.8,254.0 L247.4,254.0 L248.0,254.0 L248.6,254.0 L249.1,254.0 L249.7,254.0 L250.3,254.0 L250.9,254.0 L251.5,254.0 L252.0,254.0 L252.6,254.0 L253.2,254.0 L253.8,254.0 L254.4,254.0 L254.9,254.0 L255.5,254.0 L256.1,254.0 L256.7,254.0 L257.3,254.0 L257.8,254.0 L258.4,254.0 L259.0,254.0 L259.6,254.0 L260.2,254.0 L260.7,254.0 L261.3,254.0 L261.9,254.0 L262.5,254.0 L263.1,254.0 L263.6,254.0 L264.2,254.0 L264.8,254.0 L265.4,254.0 L266.0,254.0 L266.5,254.0 L267.1,254.0 L267.7,254.0 L268.3,254.0 L268.9,254.0 L269.4,254.0 L270.0,254.0 L270.6,254.0 L271.2,254.0 L271.8,254.0 L272.3,254.0 L272.9,254.0 L273.5,254.0 L274.1,254.0 L274.7,254.0 L275.2,254.0 L275.8,254.0 L276.4,254.0 L277.0,254.0 L277.6,254.0 L278.1,254.0 L278.7,254.0 L279.3,254.0 L279.9,254.0 L280.5,254.0 L281.0,254.0 L281.6,254.0 L282.2,254.0 L282.8,254.0 L283.4,254.0 L283.9,254.0 L284.5,254.0 L285.1,254.0 L285.7,254.0 L286.3,254.0 L286.8,254.0 L287.4,254.0 L288.0,254.0" />
+  <text class="rl" x="56" y="214">a short click</text>
+  <line class="ax" x1="368" y1="284" x2="604" y2="284" />
+  <path class="ar" d="M372.0,226.0 L372.9,226.0 L373.7,226.0 L374.6,226.0 L375.4,226.0 L376.3,226.1 L377.2,226.1 L378.0,226.1 L378.9,226.1 L379.8,226.2 L380.6,226.2 L381.5,226.3 L382.3,226.3 L383.2,226.4 L384.1,226.4 L384.9,226.5 L385.8,226.5 L386.6,226.6 L387.5,226.7 L388.4,226.8 L389.2,226.9 L390.1,226.9 L391.0,227.0 L391.8,227.1 L392.7,227.2 L393.5,227.3 L394.4,227.4 L395.3,227.6 L396.1,227.7 L397.0,227.8 L397.8,227.9 L398.7,228.0 L399.6,228.2 L400.4,228.3 L401.3,228.4 L402.2,228.6 L403.0,228.7 L403.9,228.9 L404.7,229.0 L405.6,229.2 L406.5,229.3 L407.3,229.5 L408.2,229.7 L409.0,229.9 L409.9,230.0 L410.8,230.2 L411.6,230.4 L412.5,230.6 L413.4,230.8 L414.2,231.0 L415.1,231.1 L415.9,231.3 L416.8,231.5 L417.7,231.8 L418.5,232.0 L419.4,232.2 L420.2,232.4 L421.1,232.6 L422.0,232.8 L422.8,233.0 L423.7,233.3 L424.6,233.5 L425.4,233.7 L426.3,234.0 L427.1,234.2 L428.0,234.4 L428.9,234.7 L429.7,234.9 L430.6,235.2 L431.4,235.4 L432.3,235.7 L433.2,235.9 L434.0,236.2 L434.9,236.4 L435.8,236.7 L436.6,236.9 L437.5,237.2 L438.3,237.5 L439.2,237.7 L440.1,238.0 L440.9,238.3 L441.8,238.6 L442.6,238.8 L443.5,239.1 L444.4,239.4 L445.2,239.7 L446.1,239.9 L447.0,240.2 L447.8,240.5 L448.7,240.8 L449.5,241.1 L450.4,241.4 L451.3,241.7 L452.1,241.9 L453.0,242.2 L453.8,242.5 L454.7,242.8 L455.6,243.1 L456.4,243.4 L457.3,243.7 L458.2,244.0 L459.0,244.3 L459.9,244.6 L460.7,244.9 L461.6,245.2 L462.5,245.5 L463.3,245.8 L464.2,246.1 L465.0,246.4 L465.9,246.7 L466.8,247.0 L467.6,247.3 L468.5,247.6 L469.4,247.9 L470.2,248.2 L471.1,248.5 L471.9,248.8 L472.8,249.1 L473.7,249.4 L474.5,249.7 L475.4,250.0 L476.2,250.3 L477.1,250.7 L478.0,251.0 L478.8,251.3 L479.7,251.6 L480.6,251.9 L481.4,252.2 L482.3,252.5 L483.1,252.8 L484.0,253.1 L484.9,253.4 L485.7,253.7 L486.6,254.0 L487.4,254.2 L488.3,254.5 L489.2,254.8 L490.0,255.1 L490.9,255.4 L491.8,255.7 L492.6,256.0 L493.5,256.3 L494.3,256.6 L495.2,256.9 L496.1,257.2 L496.9,257.5 L497.8,257.7 L498.6,258.0 L499.5,258.3 L500.4,258.6 L501.2,258.9 L502.1,259.2 L503.0,259.4 L503.8,259.7 L504.7,260.0 L505.5,260.3 L506.4,260.5 L507.3,260.8 L508.1,261.1 L509.0,261.3 L509.8,261.6 L510.7,261.9 L511.6,262.1 L512.4,262.4 L513.3,262.7 L514.2,262.9 L515.0,263.2 L515.9,263.4 L516.7,263.7 L517.6,263.9 L518.5,264.2 L519.3,264.4 L520.2,264.7 L521.0,264.9 L521.9,265.2 L522.8,265.4 L523.6,265.7 L524.5,265.9 L525.4,266.1 L526.2,266.4 L527.1,266.6 L527.9,266.8 L528.8,267.1 L529.7,267.3 L530.5,267.5 L531.4,267.8 L532.2,268.0 L533.1,268.2 L534.0,268.4 L534.8,268.6 L535.7,268.8 L536.6,269.1 L537.4,269.3 L538.3,269.5 L539.1,269.7 L540.0,269.9 L540.9,270.1 L541.7,270.3 L542.6,270.5 L543.4,270.7 L544.3,270.9 L545.2,271.1 L546.0,271.3 L546.9,271.5 L547.8,271.7 L548.6,271.8 L549.5,272.0 L550.3,272.2 L551.2,272.4 L552.1,272.6 L552.9,272.7 L553.8,272.9 L554.6,273.1 L555.5,273.3 L556.4,273.4 L557.2,273.6 L558.1,273.8 L559.0,273.9 L559.8,274.1 L560.7,274.3 L561.5,274.4 L562.4,274.6 L563.3,274.7 L564.1,274.9 L565.0,275.0 L565.8,275.2 L566.7,275.3 L567.6,275.5 L568.4,275.6 L569.3,275.7 L570.2,275.9 L571.0,276.0 L571.9,276.2 L572.7,276.3 L573.6,276.4 L574.5,276.6 L575.3,276.7 L576.2,276.8 L577.0,276.9 L577.9,277.1 L578.8,277.2 L579.6,277.3 L580.5,277.4 L581.4,277.5 L582.2,277.7 L583.1,277.8 L583.9,277.9 L584.8,278.0 L585.7,278.1 L586.5,278.2 L587.4,278.3 L588.2,278.4 L589.1,278.5 L590.0,278.6 L590.8,278.7 L591.7,278.8 L592.6,278.9 L593.4,279.0 L594.3,279.1 L595.1,279.2 L596.0,279.3 L596.0,284.0 L372.0,284.0 Z" />
+  <path class="tr" d="M304,254 L356,254" marker-end="url(#fa)" />
+  <text class="tl" x="330" y="246">ℱ</text>
+  <text class="hd" x="172" y="26">the signal, in time</text>
+  <text class="hd" x="486" y="26">its spectrum, in frequency</text>
+</svg>
+<figcaption><b>Figure 2 -</b> Three signals and their spectra. A single pure tone is one spike. Three tones added together are three spikes, at the right heights — the transform separates them perfectly, which is the orthogonality of section 2 doing its job. And a very brief click is <i>every</i> frequency at once, which is the first hint of the uncertainty principle in section 8.</figcaption>
+</center></figure>
 
-<p>And there is a charming connection back to deep learning. The <a href="/blog/machine-learning/transformers">Transformer</a> tags each word position with a vector of sines and cosines <em>of many different frequencies</em>, exactly the ingredients of a Fourier series. Fast-oscillating components pin down fine position, slow ones the coarse position, so the whole vector is a Fourier-style “fingerprint” of where a word sits, the same principle that lets $\eqref{eq:coeffs}$ distinguish one frequency from another.</p>
+<h2 id="6-amplitude-and-phase--the-half-everyone-forgets">6. Amplitude and phase : the half everyone forgets</h2>
+<p>The transform returns <strong>complex</strong> numbers, and that is not a technicality. Each $\hat f(\xi)$ carries two pieces of information :</p>
 
-<h2 id="7-conclusion">7. Conclusion</h2>
-<p>The Fourier transform is a change of perspective : stop describing a signal by <em>what it does at each moment</em>, and start describing it by <em>which frequencies it is made of</em>. Sine waves earn their central role honestly, they are the only ingredients that stay out of each other’s way and that linear physics leaves intact, so the recipe they define is unique and meaningful. From a prism splitting light to a Transformer locating a word, the same idea keeps reappearing : complicated things are often simple mixtures of pure oscillations, if only you look at them through the right prism.</p>
+\[\hat f(\xi) = \underbrace{\lvert \hat f(\xi) \rvert}_{\text{amplitude}} \cdot\; e^{\,i\,\underbrace{\arg \hat f(\xi)}_{\text{phase}}}.\]
+
+<p>The <strong>amplitude</strong> says how loud that frequency is. The <strong>phase</strong> says where its peaks sit — how the ingredient is aligned in time. Almost every spectrum plot you will ever see shows only the amplitude, which quietly throws half the information away.</p>
+
+<p>How much does phase matter ? Take two photographs, compute the transform of each, then rebuild two new images : one using the amplitudes of image A with the phases of image B, and one the other way round. The result is not a blend. <strong>Each reconstruction looks like the picture whose phase was used.</strong> Structure — edges, positions, what the thing actually is — lives in the phase. The amplitude spectrum mostly records texture and contrast.</p>
+
+<p><em>In plain words : the amplitudes say which ingredients are in the cake ; the phases say in what order and alignment they were combined. It turns out the arrangement is what you recognise.</em></p>
+
+<h2 id="7-the-rules-that-make-it-useful">7. The rules that make it useful</h2>
+<p>Six properties do nearly all the work in practice. The first three are quick ; the fourth is the one that changed the world.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>operation in time</th>
+      <th>becomes, in frequency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$af(t) + bg(t)$</td>
+      <td>$a\hat f(\xi) + b\hat g(\xi)$</td>
+    </tr>
+    <tr>
+      <td>$f(t - t_0)$ — a delay</td>
+      <td>$e^{-2\pi i \xi t_0}\,\hat f(\xi)$ — a phase ramp, amplitude untouched</td>
+    </tr>
+    <tr>
+      <td>$f(at)$ — squeeze in time</td>
+      <td>$\tfrac{1}{\lvert a \rvert}\hat f(\xi/a)$ — stretch in frequency</td>
+    </tr>
+    <tr>
+      <td>$(f * g)(t)$ — convolution</td>
+      <td>$\hat f(\xi)\,\hat g(\xi)$ — plain multiplication</td>
+    </tr>
+    <tr>
+      <td>$f’(t)$</td>
+      <td>$2\pi i \xi\, \hat f(\xi)$</td>
+    </tr>
+    <tr>
+      <td>$\int \lvert f \rvert^2$ — total energy</td>
+      <td>$\int \lvert \hat f \rvert^2$ — the same total</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>The delay rule</strong> explains why a shifted signal has the same amplitude spectrum : moving a sound later in time does not change which notes it contains, only their alignment. All the shifting information is stored in the phase — which is another reason to stop discarding it.</p>
+
+<p><strong>The scaling rule</strong> is the seed of section 8 : you cannot compress a signal in time without spreading it out in frequency, and the trade is exactly reciprocal.</p>
+
+<p><strong>The derivative rule</strong> turns calculus into arithmetic. A differential equation, which couples a function to its own slopes, becomes an algebraic equation in $\xi$ that you solve by dividing. This is why the transform shows up wherever differential equations do — heat flow, which is the problem Fourier invented all this to solve <a class="citation" href="#Fourier1822">(Fourier, 1822)</a>, quantum mechanics, and every vibration problem in engineering.</p>
+
+<p><strong>The convolution theorem</strong> is the crown jewel, and it deserves a proof.</p>
+
+<div class="theorem" text="convolution theorem">
+	Define the convolution $(f * g)(t) = \int f(\tau)\,g(t-\tau)\,\mathrm{d}\tau$. Then
+	$$ \widehat{f * g}\,(\xi) = \hat f(\xi)\, \hat g(\xi). $$
+	<br />
+	<i>Proof.&nbsp;&nbsp;</i> Write out the transform of the convolution and swap the order of integration :
+	$$ \int\!\!\left[\int f(\tau)g(t-\tau)\,\mathrm{d}\tau\right] e^{-2\pi i\xi t}\,\mathrm{d}t = \int f(\tau)\left[\int g(t-\tau)\,e^{-2\pi i \xi t}\,\mathrm{d}t\right]\mathrm{d}\tau. $$
+	In the inner integral substitute $u = t - \tau$, so $e^{-2\pi i\xi t} = e^{-2\pi i \xi u}\,e^{-2\pi i \xi\tau}$ and the inner integral becomes $e^{-2\pi i\xi\tau}\hat g(\xi)$. The factor $\hat g(\xi)$ no longer depends on $\tau$, so it comes out :
+	$$ \hat g(\xi)\int f(\tau)\,e^{-2\pi i \xi \tau}\,\mathrm{d}\tau = \hat g(\xi)\,\hat f(\xi). $$
+	<p align="right">$\square$</p>
+</div>
+
+<figure><center>
+<svg viewBox="0 0 640 266" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .bx{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.6; }
+    .bt{ font-size:14px; fill:#2b2b2b; text-anchor:middle; }
+    .bs{ font-size:10px; fill:#7a7a7a; text-anchor:middle; font-style:italic; }
+    .ln{ stroke-width:1.8; fill:none; }
+    .slow{ stroke:#b5651d; } .fast{ stroke:#4a6da7; }
+    .el{ font-size:12px; text-anchor:middle; font-style:italic; stroke:none; }
+    text.slow{ fill:#b5651d; } text.fast{ fill:#4a6da7; }
+    .es{ font-size:10.5px; fill:#7a7a7a; text-anchor:middle; }
+    .vl{ font-size:11px; fill:#4a6da7; text-anchor:end; stroke:none; }
+    .vr{ text-anchor:start; }
+    .cap3{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="fo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="fg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#9aa8bf" /></marker>
+  </defs>
+  <rect class="bx" x="88" y="44" width="150" height="44" rx="6" />
+  <text class="bt" x="163" y="64">f  and  g</text>
+  <text class="bs" x="163" y="78">two signals</text>
+  <rect class="bx" x="402" y="44" width="150" height="44" rx="6" />
+  <text class="bt" x="477" y="64">f ✻ g</text>
+  <text class="bs" x="477" y="78">their convolution</text>
+  <rect class="bx" x="88" y="176" width="150" height="44" rx="6" />
+  <text class="bt" x="163" y="196">ℱf  and  ℱg</text>
+  <text class="bs" x="163" y="210">their spectra</text>
+  <rect class="bx" x="402" y="176" width="150" height="44" rx="6" />
+  <text class="bt" x="477" y="196">ℱf · ℱg</text>
+  <text class="bs" x="477" y="210">a pointwise product</text>
+  <path class="ln slow" d="M244,66 L396,66" marker-end="url(#fo)" />
+  <text class="el slow" x="320" y="56">the hard way</text>
+  <text class="es" x="320" y="86">O(N²) operations</text>
+  <path class="ln fast" d="M244,198 L396,198" marker-end="url(#fa)" />
+  <text class="el fast" x="320" y="188">just multiply</text>
+  <text class="es" x="320" y="218">O(N) operations</text>
+  <path class="ln fast" d="M163,94 L163,170" marker-end="url(#fa)" />
+  <text class="vl" x="155" y="136">FFT</text>
+  <path class="ln fast" d="M477,170 L477,94" marker-end="url(#fa)" />
+  <text class="vl vr" x="485" y="136">inverse FFT</text>
+  <text class="cap3" x="320" y="252">both routes end at the same place — and the lower one is faster even after paying for two transforms</text>
+</svg>
+<figcaption><b>Figure 3 -</b> The convolution theorem as a commuting square. Convolving two signals directly costs $\mathcal{O}(N^2)$ because every output depends on every input. Going the long way round — transform both, multiply them pointwise, transform back — costs $\mathcal{O}(N \log N)$, and lands on exactly the same answer. Nearly every fast filter, blur and large-integer multiplication takes the bottom route.</figcaption>
+</center></figure>
+
+<p><em>In plain words : convolution is the expensive, tangled operation — every output sample depends on every input sample, which costs $\mathcal{O}(N^2)$. Multiplication is the cheap one, costing $\mathcal{O}(N)$. The theorem says you can always take the second route : transform, multiply pointwise, transform back. Combined with the fast algorithm of section 10, this turns an $\mathcal{O}(N^2)$ problem into an $\mathcal{O}(N\log N)$ one, and it is why blurring an image, filtering audio and multiplying enormous integers are all fast.</em></p>
+
+<p>There is a second reason this theorem matters, far from signal processing. Adding two independent random variables convolves their probability densities — and by this theorem, that becomes an ordinary product in Fourier space. Repeating it $n$ times gives an $n$-th power, and taking the limit is what produces the bell curve. That argument is the proof of the central limit theorem, and it is why the <a href="/blog/mathematics/probability-distributions">normal distribution</a> is the shape that survives being added to itself.</p>
+
+<h2 id="8-the-uncertainty-principle-for-free">8. The uncertainty principle, for free</h2>
+<p>The scaling rule already hinted at it : squeeze in time, spread in frequency. Made precise, that hint becomes a theorem — and it is the same theorem physicists know by another name.</p>
+
+<div class="theorem" text="time-frequency uncertainty">
+	Let $\sigma_t$ and $\sigma_\xi$ be the spreads (standard deviations) of $\lvert f \rvert^2$ and $\lvert \hat f \rvert^2$. Then
+	$$ \sigma_t \, \sigma_\xi \;\ge\; \frac{1}{4\pi}, $$
+	with equality if and only if $f$ is a Gaussian.
+</div>
+
+<p><em>In plain words : a signal cannot be both brief and pure. A very short click contains every frequency at once — that is why a snare drum has no pitch. A very pure tone must ring on for a long time — that is why a tuning fork sustains. There is no trick, no cleverness, no better instrument that beats this ; it is a property of the transform itself</em> <a class="citation" href="#Gabor1946">(Gabor, 1946)</a>.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 316" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .pl{ fill:#dce3ef; stroke:#4a6da7; stroke-width:1.8; }
+    .sp4{ fill:#f2e0cd; stroke:#b5651d; stroke-width:1.8; }
+    .ax{ stroke:#d0d0d0; stroke-width:1.1; }
+    .wb{ stroke:#9aa8bf; stroke-width:1.4; fill:none; }
+    .cl4{ font-size:12.5px; fill:#4a6da7; text-anchor:middle; font-style:italic; }
+    .nm4{ font-size:11px; fill:#4a6da7; text-anchor:middle; }
+    .or{ fill:#b5651d; }
+    .sd4{ font-size:10.5px; fill:#7a7a7a; text-anchor:start; font-style:italic; }
+    .cap4{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="fo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="fg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#9aa8bf" /></marker>
+  </defs>
+  <path class="pl" d="M30.0,128.0 L30.5,128.0 L31.1,128.0 L31.7,128.0 L32.2,128.0 L32.8,128.0 L33.3,128.0 L33.8,128.0 L34.4,128.0 L35.0,128.0 L35.5,128.0 L36.0,128.0 L36.6,128.0 L37.2,128.0 L37.7,128.0 L38.2,128.0 L38.8,128.0 L39.3,128.0 L39.9,128.0 L40.5,128.0 L41.0,128.0 L41.5,128.0 L42.1,128.0 L42.7,128.0 L43.2,128.0 L43.8,128.0 L44.3,128.0 L44.8,128.0 L45.4,128.0 L46.0,128.0 L46.5,128.0 L47.0,128.0 L47.6,128.0 L48.2,128.0 L48.7,128.0 L49.2,128.0 L49.8,128.0 L50.3,128.0 L50.9,128.0 L51.5,128.0 L52.0,128.0 L52.5,128.0 L53.1,128.0 L53.7,128.0 L54.2,128.0 L54.8,128.0 L55.3,128.0 L55.8,128.0 L56.4,128.0 L57.0,128.0 L57.5,128.0 L58.0,128.0 L58.6,128.0 L59.2,128.0 L59.7,128.0 L60.2,128.0 L60.8,128.0 L61.3,128.0 L61.9,128.0 L62.5,128.0 L63.0,128.0 L63.5,128.0 L64.1,128.0 L64.7,128.0 L65.2,128.0 L65.8,128.0 L66.3,128.0 L66.8,128.0 L67.4,128.0 L68.0,128.0 L68.5,128.0 L69.0,128.0 L69.6,128.0 L70.2,128.0 L70.7,128.0 L71.2,128.0 L71.8,128.0 L72.3,128.0 L72.9,128.0 L73.5,128.0 L74.0,128.0 L74.5,128.0 L75.1,128.0 L75.7,128.0 L76.2,128.0 L76.8,128.0 L77.3,128.0 L77.8,128.0 L78.4,128.0 L79.0,128.0 L79.5,128.0 L80.0,128.0 L80.6,128.0 L81.2,128.0 L81.7,128.0 L82.2,128.0 L82.8,128.0 L83.3,128.0 L83.9,128.0 L84.5,128.0 L85.0,128.0 L85.5,128.0 L86.1,128.0 L86.7,128.0 L87.2,128.0 L87.8,128.0 L88.3,128.0 L88.8,128.0 L89.4,128.0 L90.0,128.0 L90.5,128.0 L91.0,128.0 L91.6,128.0 L92.2,128.0 L92.7,128.0 L93.2,128.0 L93.8,128.0 L94.3,128.0 L94.9,128.0 L95.5,128.0 L96.0,128.0 L96.5,128.0 L97.1,128.0 L97.7,128.0 L98.2,127.9 L98.8,127.9 L99.3,127.9 L99.8,127.8 L100.4,127.7 L101.0,127.6 L101.5,127.4 L102.0,127.2 L102.6,126.9 L103.2,126.6 L103.7,126.1 L104.2,125.5 L104.8,124.7 L105.3,123.8 L105.9,122.6 L106.5,121.2 L107.0,119.6 L107.5,117.6 L108.1,115.2 L108.7,112.6 L109.2,109.5 L109.8,106.2 L110.3,102.4 L110.8,98.4 L111.4,94.1 L112.0,89.6 L112.5,85.0 L113.0,80.3 L113.6,75.7 L114.2,71.3 L114.7,67.1 L115.2,63.4 L115.8,60.2 L116.3,57.5 L116.9,55.6 L117.5,54.4 L118.0,54.0 L118.6,54.4 L119.1,55.6 L119.7,57.5 L120.2,60.2 L120.8,63.4 L121.3,67.1 L121.8,71.3 L122.4,75.7 L122.9,80.3 L123.5,85.0 L124.1,89.6 L124.6,94.1 L125.2,98.4 L125.7,102.4 L126.2,106.2 L126.8,109.5 L127.3,112.6 L127.9,115.2 L128.4,117.6 L129.0,119.6 L129.6,121.2 L130.1,122.6 L130.7,123.8 L131.2,124.7 L131.8,125.5 L132.3,126.1 L132.8,126.6 L133.4,126.9 L133.9,127.2 L134.5,127.4 L135.1,127.6 L135.6,127.7 L136.2,127.8 L136.7,127.9 L137.2,127.9 L137.8,127.9 L138.3,128.0 L138.9,128.0 L139.4,128.0 L140.0,128.0 L140.6,128.0 L141.1,128.0 L141.7,128.0 L142.2,128.0 L142.8,128.0 L143.3,128.0 L143.8,128.0 L144.4,128.0 L144.9,128.0 L145.5,128.0 L146.1,128.0 L146.6,128.0 L147.2,128.0 L147.7,128.0 L148.2,128.0 L148.8,128.0 L149.3,128.0 L149.9,128.0 L150.4,128.0 L151.0,128.0 L151.6,128.0 L152.1,128.0 L152.7,128.0 L153.2,128.0 L153.8,128.0 L154.3,128.0 L154.8,128.0 L155.4,128.0 L155.9,128.0 L156.5,128.0 L157.1,128.0 L157.6,128.0 L158.2,128.0 L158.7,128.0 L159.2,128.0 L159.8,128.0 L160.3,128.0 L160.9,128.0 L161.4,128.0 L162.0,128.0 L162.6,128.0 L163.1,128.0 L163.7,128.0 L164.2,128.0 L164.8,128.0 L165.3,128.0 L165.8,128.0 L166.4,128.0 L166.9,128.0 L167.5,128.0 L168.1,128.0 L168.6,128.0 L169.2,128.0 L169.7,128.0 L170.2,128.0 L170.8,128.0 L171.3,128.0 L171.9,128.0 L172.4,128.0 L173.0,128.0 L173.6,128.0 L174.1,128.0 L174.7,128.0 L175.2,128.0 L175.8,128.0 L176.3,128.0 L176.8,128.0 L177.4,128.0 L177.9,128.0 L178.5,128.0 L179.1,128.0 L179.6,128.0 L180.2,128.0 L180.7,128.0 L181.2,128.0 L181.8,128.0 L182.3,128.0 L182.9,128.0 L183.4,128.0 L184.0,128.0 L184.6,128.0 L185.1,128.0 L185.7,128.0 L186.2,128.0 L186.8,128.0 L187.3,128.0 L187.8,128.0 L188.4,128.0 L188.9,128.0 L189.5,128.0 L190.1,128.0 L190.6,128.0 L191.2,128.0 L191.7,128.0 L192.2,128.0 L192.8,128.0 L193.3,128.0 L193.9,128.0 L194.4,128.0 L195.0,128.0 L195.6,128.0 L196.1,128.0 L196.7,128.0 L197.2,128.0 L197.8,128.0 L198.3,128.0 L198.8,128.0 L199.4,128.0 L199.9,128.0 L200.5,128.0 L201.1,128.0 L201.6,128.0 L202.2,128.0 L202.7,128.0 L203.2,128.0 L203.8,128.0 L204.3,128.0 L204.9,128.0 L205.4,128.0 L206.0,128.0 L206.0,128.0 L30.0,128.0 Z" />
+  <line class="ax" x1="30" y1="128" x2="206" y2="128" />
+  <path class="sp4" d="M30.0,252.3 L30.5,252.1 L31.1,251.9 L31.6,251.7 L32.2,251.5 L32.8,251.3 L33.3,251.1 L33.9,250.9 L34.4,250.6 L35.0,250.4 L35.5,250.2 L36.0,250.0 L36.6,249.7 L37.1,249.5 L37.7,249.2 L38.2,248.9 L38.8,248.7 L39.4,248.4 L39.9,248.1 L40.5,247.9 L41.0,247.6 L41.5,247.3 L42.1,247.0 L42.6,246.7 L43.2,246.3 L43.8,246.0 L44.3,245.7 L44.9,245.4 L45.4,245.0 L46.0,244.7 L46.5,244.3 L47.0,244.0 L47.6,243.6 L48.1,243.2 L48.7,242.9 L49.2,242.5 L49.8,242.1 L50.4,241.7 L50.9,241.3 L51.5,240.9 L52.0,240.4 L52.5,240.0 L53.1,239.6 L53.6,239.2 L54.2,238.7 L54.8,238.3 L55.3,237.8 L55.9,237.3 L56.4,236.9 L57.0,236.4 L57.5,235.9 L58.0,235.4 L58.6,234.9 L59.1,234.4 L59.7,233.9 L60.2,233.4 L60.8,232.9 L61.4,232.4 L61.9,231.8 L62.4,231.3 L63.0,230.8 L63.6,230.2 L64.1,229.7 L64.7,229.1 L65.2,228.5 L65.8,228.0 L66.3,227.4 L66.8,226.8 L67.4,226.2 L67.9,225.7 L68.5,225.1 L69.1,224.5 L69.6,223.9 L70.2,223.3 L70.7,222.7 L71.2,222.1 L71.8,221.4 L72.3,220.8 L72.9,220.2 L73.4,219.6 L74.0,219.0 L74.6,218.3 L75.1,217.7 L75.7,217.1 L76.2,216.5 L76.8,215.8 L77.3,215.2 L77.8,214.6 L78.4,213.9 L78.9,213.3 L79.5,212.7 L80.1,212.0 L80.6,211.4 L81.2,210.7 L81.7,210.1 L82.2,209.5 L82.8,208.9 L83.3,208.2 L83.9,207.6 L84.4,207.0 L85.0,206.4 L85.6,205.7 L86.1,205.1 L86.7,204.5 L87.2,203.9 L87.8,203.3 L88.3,202.7 L88.8,202.1 L89.4,201.5 L90.0,200.9 L90.5,200.4 L91.0,199.8 L91.6,199.2 L92.2,198.7 L92.7,198.1 L93.2,197.6 L93.8,197.0 L94.4,196.5 L94.9,196.0 L95.5,195.4 L96.0,194.9 L96.5,194.4 L97.1,193.9 L97.6,193.5 L98.2,193.0 L98.8,192.5 L99.3,192.1 L99.9,191.6 L100.4,191.2 L101.0,190.8 L101.5,190.4 L102.0,190.0 L102.6,189.6 L103.1,189.2 L103.7,188.8 L104.2,188.5 L104.8,188.1 L105.4,187.8 L105.9,187.5 L106.5,187.2 L107.0,186.9 L107.5,186.6 L108.1,186.4 L108.6,186.1 L109.2,185.9 L109.8,185.6 L110.3,185.4 L110.9,185.2 L111.4,185.1 L112.0,184.9 L112.5,184.7 L113.0,184.6 L113.6,184.5 L114.1,184.4 L114.7,184.3 L115.2,184.2 L115.8,184.1 L116.4,184.1 L116.9,184.0 L117.5,184.0 L118.0,184.0 L118.5,184.0 L119.1,184.0 L119.6,184.1 L120.2,184.1 L120.8,184.2 L121.3,184.3 L121.9,184.4 L122.4,184.5 L123.0,184.6 L123.5,184.7 L124.0,184.9 L124.6,185.1 L125.1,185.2 L125.7,185.4 L126.2,185.6 L126.8,185.9 L127.4,186.1 L127.9,186.4 L128.4,186.6 L129.0,186.9 L129.6,187.2 L130.1,187.5 L130.6,187.8 L131.2,188.1 L131.8,188.5 L132.3,188.8 L132.9,189.2 L133.4,189.6 L133.9,190.0 L134.5,190.4 L135.1,190.8 L135.6,191.2 L136.1,191.6 L136.7,192.1 L137.2,192.5 L137.8,193.0 L138.4,193.5 L138.9,193.9 L139.4,194.4 L140.0,194.9 L140.6,195.4 L141.1,196.0 L141.6,196.5 L142.2,197.0 L142.8,197.6 L143.3,198.1 L143.9,198.7 L144.4,199.2 L144.9,199.8 L145.5,200.4 L146.1,200.9 L146.6,201.5 L147.1,202.1 L147.7,202.7 L148.2,203.3 L148.8,203.9 L149.3,204.5 L149.9,205.1 L150.4,205.7 L151.0,206.4 L151.6,207.0 L152.1,207.6 L152.7,208.2 L153.2,208.9 L153.8,209.5 L154.3,210.1 L154.8,210.7 L155.4,211.4 L155.9,212.0 L156.5,212.7 L157.1,213.3 L157.6,213.9 L158.2,214.6 L158.7,215.2 L159.2,215.8 L159.8,216.5 L160.3,217.1 L160.9,217.7 L161.5,218.3 L162.0,219.0 L162.5,219.6 L163.1,220.2 L163.7,220.8 L164.2,221.4 L164.8,222.1 L165.3,222.7 L165.8,223.3 L166.4,223.9 L167.0,224.5 L167.5,225.1 L168.0,225.7 L168.6,226.2 L169.2,226.8 L169.7,227.4 L170.2,228.0 L170.8,228.5 L171.3,229.1 L171.9,229.7 L172.5,230.2 L173.0,230.8 L173.5,231.3 L174.1,231.8 L174.7,232.4 L175.2,232.9 L175.8,233.4 L176.3,233.9 L176.8,234.4 L177.4,234.9 L178.0,235.4 L178.5,235.9 L179.0,236.4 L179.6,236.9 L180.2,237.3 L180.7,237.8 L181.2,238.3 L181.8,238.7 L182.3,239.2 L182.9,239.6 L183.5,240.0 L184.0,240.4 L184.5,240.9 L185.1,241.3 L185.7,241.7 L186.2,242.1 L186.8,242.5 L187.3,242.9 L187.8,243.2 L188.4,243.6 L189.0,244.0 L189.5,244.3 L190.0,244.7 L190.6,245.0 L191.2,245.4 L191.7,245.7 L192.2,246.0 L192.8,246.3 L193.3,246.7 L193.9,247.0 L194.5,247.3 L195.0,247.6 L195.5,247.9 L196.1,248.1 L196.7,248.4 L197.2,248.7 L197.8,248.9 L198.3,249.2 L198.8,249.5 L199.4,249.7 L200.0,250.0 L200.5,250.2 L201.0,250.4 L201.6,250.6 L202.2,250.9 L202.7,251.1 L203.2,251.3 L203.8,251.5 L204.3,251.7 L204.9,251.9 L205.5,252.1 L206.0,252.3 L206.0,258.0 L30.0,258.0 Z" />
+  <line class="ax" x1="30" y1="258" x2="206" y2="258" />
+  <path class="wb" d="M112.7,140 L123.3,140" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <path class="wb" d="M79.1,270 L156.9,270" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <text class="cl4" x="118.0" y="40">brief pulse</text>
+  <text class="nm4" x="118.0" y="158">σ = 0.030</text>
+  <text class="nm4 or" x="118.0" y="288">σ = 5.31</text>
+  <path class="pl" d="M234.0,128.0 L234.6,128.0 L235.1,128.0 L235.7,128.0 L236.2,128.0 L236.8,128.0 L237.3,128.0 L237.8,128.0 L238.4,128.0 L238.9,128.0 L239.5,128.0 L240.1,128.0 L240.6,128.0 L241.2,128.0 L241.7,128.0 L242.2,128.0 L242.8,128.0 L243.3,128.0 L243.9,128.0 L244.4,128.0 L245.0,128.0 L245.6,128.0 L246.1,128.0 L246.7,128.0 L247.2,128.0 L247.8,128.0 L248.3,128.0 L248.8,128.0 L249.4,128.0 L249.9,128.0 L250.5,128.0 L251.1,128.0 L251.6,128.0 L252.2,128.0 L252.7,128.0 L253.2,128.0 L253.8,128.0 L254.3,128.0 L254.9,128.0 L255.4,128.0 L256.0,128.0 L256.6,128.0 L257.1,128.0 L257.6,128.0 L258.2,128.0 L258.8,128.0 L259.3,128.0 L259.9,128.0 L260.4,128.0 L260.9,128.0 L261.5,128.0 L262.1,128.0 L262.6,128.0 L263.1,128.0 L263.7,128.0 L264.2,128.0 L264.8,128.0 L265.4,128.0 L265.9,128.0 L266.4,128.0 L267.0,128.0 L267.6,128.0 L268.1,128.0 L268.6,128.0 L269.2,128.0 L269.8,128.0 L270.3,128.0 L270.9,128.0 L271.4,128.0 L271.9,128.0 L272.5,128.0 L273.1,128.0 L273.6,128.0 L274.1,128.0 L274.7,128.0 L275.2,127.9 L275.8,127.9 L276.4,127.9 L276.9,127.9 L277.4,127.9 L278.0,127.9 L278.6,127.9 L279.1,127.8 L279.6,127.8 L280.2,127.8 L280.8,127.7 L281.3,127.7 L281.9,127.6 L282.4,127.6 L282.9,127.5 L283.5,127.4 L284.1,127.4 L284.6,127.3 L285.1,127.2 L285.7,127.0 L286.2,126.9 L286.8,126.8 L287.4,126.6 L287.9,126.4 L288.4,126.2 L289.0,126.0 L289.6,125.7 L290.1,125.4 L290.6,125.1 L291.2,124.7 L291.8,124.4 L292.3,124.0 L292.9,123.5 L293.4,123.0 L293.9,122.5 L294.5,121.9 L295.1,121.2 L295.6,120.6 L296.1,119.8 L296.7,119.0 L297.2,118.2 L297.8,117.3 L298.4,116.3 L298.9,115.2 L299.4,114.1 L300.0,113.0 L300.6,111.7 L301.1,110.4 L301.6,109.1 L302.2,107.7 L302.8,106.2 L303.3,104.6 L303.9,103.0 L304.4,101.3 L304.9,99.6 L305.5,97.8 L306.1,96.0 L306.6,94.1 L307.1,92.2 L307.7,90.3 L308.2,88.3 L308.8,86.3 L309.4,84.3 L309.9,82.3 L310.4,80.3 L311.0,78.3 L311.6,76.4 L312.1,74.4 L312.6,72.5 L313.2,70.7 L313.8,68.9 L314.3,67.1 L314.9,65.5 L315.4,63.9 L315.9,62.4 L316.5,61.0 L317.1,59.7 L317.6,58.6 L318.1,57.5 L318.7,56.6 L319.2,55.8 L319.8,55.2 L320.4,54.7 L320.9,54.3 L321.4,54.1 L322.0,54.0 L322.6,54.1 L323.1,54.3 L323.6,54.7 L324.2,55.2 L324.8,55.8 L325.3,56.6 L325.9,57.5 L326.4,58.6 L326.9,59.7 L327.5,61.0 L328.1,62.4 L328.6,63.9 L329.1,65.5 L329.7,67.1 L330.2,68.9 L330.8,70.7 L331.4,72.5 L331.9,74.4 L332.4,76.4 L333.0,78.3 L333.6,80.3 L334.1,82.3 L334.6,84.3 L335.2,86.3 L335.8,88.3 L336.3,90.3 L336.9,92.2 L337.4,94.1 L337.9,96.0 L338.5,97.8 L339.1,99.6 L339.6,101.3 L340.1,103.0 L340.7,104.6 L341.2,106.2 L341.8,107.7 L342.4,109.1 L342.9,110.4 L343.4,111.7 L344.0,113.0 L344.6,114.1 L345.1,115.2 L345.6,116.3 L346.2,117.3 L346.8,118.2 L347.3,119.0 L347.9,119.8 L348.4,120.6 L348.9,121.2 L349.5,121.9 L350.1,122.5 L350.6,123.0 L351.1,123.5 L351.7,124.0 L352.2,124.4 L352.8,124.7 L353.4,125.1 L353.9,125.4 L354.4,125.7 L355.0,126.0 L355.6,126.2 L356.1,126.4 L356.6,126.6 L357.2,126.8 L357.8,126.9 L358.3,127.0 L358.9,127.2 L359.4,127.3 L359.9,127.4 L360.5,127.4 L361.1,127.5 L361.6,127.6 L362.1,127.6 L362.7,127.7 L363.2,127.7 L363.8,127.8 L364.4,127.8 L364.9,127.8 L365.4,127.9 L366.0,127.9 L366.6,127.9 L367.1,127.9 L367.6,127.9 L368.2,127.9 L368.8,127.9 L369.3,128.0 L369.9,128.0 L370.4,128.0 L370.9,128.0 L371.5,128.0 L372.1,128.0 L372.6,128.0 L373.1,128.0 L373.7,128.0 L374.2,128.0 L374.8,128.0 L375.4,128.0 L375.9,128.0 L376.4,128.0 L377.0,128.0 L377.6,128.0 L378.1,128.0 L378.6,128.0 L379.2,128.0 L379.8,128.0 L380.3,128.0 L380.9,128.0 L381.4,128.0 L381.9,128.0 L382.5,128.0 L383.1,128.0 L383.6,128.0 L384.1,128.0 L384.7,128.0 L385.2,128.0 L385.8,128.0 L386.4,128.0 L386.9,128.0 L387.4,128.0 L388.0,128.0 L388.6,128.0 L389.1,128.0 L389.6,128.0 L390.2,128.0 L390.8,128.0 L391.3,128.0 L391.9,128.0 L392.4,128.0 L392.9,128.0 L393.5,128.0 L394.1,128.0 L394.6,128.0 L395.1,128.0 L395.7,128.0 L396.2,128.0 L396.8,128.0 L397.4,128.0 L397.9,128.0 L398.4,128.0 L399.0,128.0 L399.6,128.0 L400.1,128.0 L400.6,128.0 L401.2,128.0 L401.8,128.0 L402.3,128.0 L402.9,128.0 L403.4,128.0 L403.9,128.0 L404.5,128.0 L405.1,128.0 L405.6,128.0 L406.1,128.0 L406.7,128.0 L407.2,128.0 L407.8,128.0 L408.4,128.0 L408.9,128.0 L409.4,128.0 L410.0,128.0 L410.0,128.0 L234.0,128.0 Z" />
+  <line class="ax" x1="234" y1="128" x2="410" y2="128" />
+  <path class="sp4" d="M234.0,258.0 L234.5,258.0 L235.1,258.0 L235.7,258.0 L236.2,258.0 L236.8,258.0 L237.3,258.0 L237.8,258.0 L238.4,258.0 L239.0,258.0 L239.5,258.0 L240.0,258.0 L240.6,258.0 L241.2,258.0 L241.7,258.0 L242.2,258.0 L242.8,258.0 L243.3,258.0 L243.9,258.0 L244.5,258.0 L245.0,258.0 L245.5,258.0 L246.1,258.0 L246.7,258.0 L247.2,258.0 L247.8,258.0 L248.3,258.0 L248.8,258.0 L249.4,258.0 L250.0,258.0 L250.5,258.0 L251.0,258.0 L251.6,258.0 L252.2,258.0 L252.7,258.0 L253.2,258.0 L253.8,258.0 L254.3,258.0 L254.9,258.0 L255.5,258.0 L256.0,258.0 L256.6,258.0 L257.1,258.0 L257.6,258.0 L258.2,258.0 L258.8,257.9 L259.3,257.9 L259.9,257.9 L260.4,257.9 L260.9,257.9 L261.5,257.9 L262.1,257.9 L262.6,257.9 L263.1,257.9 L263.7,257.8 L264.2,257.8 L264.8,257.8 L265.4,257.8 L265.9,257.7 L266.4,257.7 L267.0,257.7 L267.6,257.6 L268.1,257.6 L268.6,257.6 L269.2,257.5 L269.8,257.5 L270.3,257.4 L270.9,257.3 L271.4,257.3 L271.9,257.2 L272.5,257.1 L273.1,257.0 L273.6,256.9 L274.1,256.8 L274.7,256.7 L275.2,256.5 L275.8,256.4 L276.4,256.3 L276.9,256.1 L277.4,255.9 L278.0,255.7 L278.6,255.5 L279.1,255.3 L279.6,255.1 L280.2,254.8 L280.8,254.5 L281.3,254.2 L281.9,253.9 L282.4,253.6 L282.9,253.2 L283.5,252.9 L284.1,252.5 L284.6,252.0 L285.1,251.6 L285.7,251.1 L286.2,250.6 L286.8,250.0 L287.4,249.5 L287.9,248.9 L288.4,248.2 L289.0,247.6 L289.6,246.9 L290.1,246.1 L290.6,245.4 L291.2,244.6 L291.8,243.7 L292.3,242.9 L292.9,241.9 L293.4,241.0 L293.9,240.0 L294.5,239.0 L295.1,238.0 L295.6,236.9 L296.1,235.8 L296.7,234.6 L297.2,233.4 L297.8,232.2 L298.4,230.9 L298.9,229.7 L299.4,228.3 L300.0,227.0 L300.6,225.7 L301.1,224.3 L301.6,222.9 L302.2,221.4 L302.8,220.0 L303.3,218.5 L303.9,217.1 L304.4,215.6 L304.9,214.1 L305.5,212.7 L306.1,211.2 L306.6,209.7 L307.1,208.2 L307.7,206.8 L308.2,205.3 L308.8,203.9 L309.4,202.5 L309.9,201.1 L310.4,199.8 L311.0,198.5 L311.6,197.2 L312.1,196.0 L312.6,194.8 L313.2,193.6 L313.8,192.5 L314.3,191.5 L314.9,190.5 L315.4,189.6 L315.9,188.7 L316.5,187.9 L317.1,187.2 L317.6,186.5 L318.1,185.9 L318.7,185.4 L319.2,185.0 L319.8,184.6 L320.4,184.4 L320.9,184.2 L321.4,184.0 L322.0,184.0 L322.6,184.0 L323.1,184.2 L323.6,184.4 L324.2,184.6 L324.8,185.0 L325.3,185.4 L325.9,185.9 L326.4,186.5 L326.9,187.2 L327.5,187.9 L328.1,188.7 L328.6,189.6 L329.1,190.5 L329.7,191.5 L330.2,192.5 L330.8,193.6 L331.4,194.8 L331.9,196.0 L332.4,197.2 L333.0,198.5 L333.6,199.8 L334.1,201.1 L334.6,202.5 L335.2,203.9 L335.8,205.3 L336.3,206.8 L336.9,208.2 L337.4,209.7 L337.9,211.2 L338.5,212.7 L339.1,214.1 L339.6,215.6 L340.1,217.1 L340.7,218.5 L341.2,220.0 L341.8,221.4 L342.4,222.9 L342.9,224.3 L343.4,225.7 L344.0,227.0 L344.6,228.3 L345.1,229.7 L345.6,230.9 L346.2,232.2 L346.8,233.4 L347.3,234.6 L347.9,235.8 L348.4,236.9 L348.9,238.0 L349.5,239.0 L350.1,240.0 L350.6,241.0 L351.1,241.9 L351.7,242.9 L352.2,243.7 L352.8,244.6 L353.3,245.4 L353.9,246.1 L354.4,246.9 L355.0,247.6 L355.6,248.2 L356.1,248.9 L356.7,249.5 L357.2,250.0 L357.8,250.6 L358.3,251.1 L358.8,251.6 L359.4,252.0 L359.9,252.5 L360.5,252.9 L361.1,253.2 L361.6,253.6 L362.1,253.9 L362.7,254.2 L363.2,254.5 L363.8,254.8 L364.4,255.1 L364.9,255.3 L365.5,255.5 L366.0,255.7 L366.5,255.9 L367.1,256.1 L367.6,256.3 L368.2,256.4 L368.8,256.5 L369.3,256.7 L369.9,256.8 L370.4,256.9 L371.0,257.0 L371.5,257.1 L372.0,257.2 L372.6,257.3 L373.1,257.3 L373.7,257.4 L374.2,257.5 L374.8,257.5 L375.4,257.6 L375.9,257.6 L376.5,257.6 L377.0,257.7 L377.5,257.7 L378.1,257.7 L378.6,257.8 L379.2,257.8 L379.8,257.8 L380.3,257.8 L380.9,257.9 L381.4,257.9 L382.0,257.9 L382.5,257.9 L383.0,257.9 L383.6,257.9 L384.1,257.9 L384.7,257.9 L385.2,257.9 L385.8,258.0 L386.4,258.0 L386.9,258.0 L387.5,258.0 L388.0,258.0 L388.5,258.0 L389.1,258.0 L389.6,258.0 L390.2,258.0 L390.8,258.0 L391.3,258.0 L391.9,258.0 L392.4,258.0 L393.0,258.0 L393.5,258.0 L394.0,258.0 L394.6,258.0 L395.1,258.0 L395.7,258.0 L396.2,258.0 L396.8,258.0 L397.4,258.0 L397.9,258.0 L398.5,258.0 L399.0,258.0 L399.5,258.0 L400.1,258.0 L400.6,258.0 L401.2,258.0 L401.8,258.0 L402.3,258.0 L402.9,258.0 L403.4,258.0 L404.0,258.0 L404.5,258.0 L405.0,258.0 L405.6,258.0 L406.1,258.0 L406.7,258.0 L407.2,258.0 L407.8,258.0 L408.4,258.0 L408.9,258.0 L409.5,258.0 L410.0,258.0 L410.0,258.0 L234.0,258.0 Z" />
+  <line class="ax" x1="234" y1="258" x2="410" y2="258" />
+  <path class="wb" d="M309.7,140 L334.3,140" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <path class="wb" d="M305.3,270 L338.7,270" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <text class="cl4" x="322.0" y="40">medium pulse</text>
+  <text class="nm4" x="322.0" y="158">σ = 0.070</text>
+  <text class="nm4 or" x="322.0" y="288">σ = 2.27</text>
+  <path class="pl" d="M438.0,127.2 L438.6,127.2 L439.1,127.2 L439.6,127.1 L440.2,127.1 L440.8,127.0 L441.3,126.9 L441.9,126.9 L442.4,126.8 L442.9,126.8 L443.5,126.7 L444.1,126.6 L444.6,126.5 L445.1,126.5 L445.7,126.4 L446.2,126.3 L446.8,126.2 L447.4,126.1 L447.9,126.0 L448.4,125.9 L449.0,125.8 L449.6,125.7 L450.1,125.6 L450.6,125.4 L451.2,125.3 L451.8,125.2 L452.3,125.0 L452.9,124.9 L453.4,124.7 L453.9,124.6 L454.5,124.4 L455.1,124.3 L455.6,124.1 L456.1,123.9 L456.7,123.7 L457.2,123.5 L457.8,123.3 L458.4,123.1 L458.9,122.9 L459.4,122.6 L460.0,122.4 L460.6,122.2 L461.1,121.9 L461.6,121.6 L462.2,121.4 L462.8,121.1 L463.3,120.8 L463.9,120.5 L464.4,120.2 L464.9,119.9 L465.5,119.6 L466.1,119.2 L466.6,118.9 L467.1,118.5 L467.7,118.1 L468.2,117.8 L468.8,117.4 L469.4,117.0 L469.9,116.5 L470.4,116.1 L471.0,115.7 L471.6,115.2 L472.1,114.8 L472.6,114.3 L473.2,113.8 L473.8,113.3 L474.3,112.8 L474.9,112.3 L475.4,111.8 L475.9,111.2 L476.5,110.7 L477.1,110.1 L477.6,109.5 L478.1,109.0 L478.7,108.4 L479.2,107.7 L479.8,107.1 L480.4,106.5 L480.9,105.8 L481.4,105.2 L482.0,104.5 L482.6,103.8 L483.1,103.1 L483.6,102.4 L484.2,101.7 L484.8,101.0 L485.3,100.3 L485.9,99.5 L486.4,98.8 L486.9,98.0 L487.5,97.3 L488.1,96.5 L488.6,95.7 L489.1,94.9 L489.7,94.1 L490.2,93.3 L490.8,92.5 L491.4,91.7 L491.9,90.9 L492.4,90.0 L493.0,89.2 L493.6,88.4 L494.1,87.5 L494.6,86.7 L495.2,85.8 L495.8,85.0 L496.3,84.1 L496.9,83.3 L497.4,82.4 L497.9,81.6 L498.5,80.7 L499.1,79.9 L499.6,79.0 L500.1,78.2 L500.7,77.4 L501.2,76.5 L501.8,75.7 L502.4,74.9 L502.9,74.1 L503.4,73.3 L504.0,72.5 L504.6,71.7 L505.1,70.9 L505.6,70.1 L506.2,69.3 L506.8,68.6 L507.3,67.9 L507.9,67.1 L508.4,66.4 L508.9,65.7 L509.5,65.0 L510.1,64.4 L510.6,63.7 L511.1,63.1 L511.7,62.4 L512.2,61.8 L512.8,61.3 L513.4,60.7 L513.9,60.2 L514.5,59.6 L515.0,59.1 L515.5,58.6 L516.1,58.2 L516.6,57.7 L517.2,57.3 L517.8,56.9 L518.3,56.6 L518.9,56.2 L519.4,55.9 L520.0,55.6 L520.5,55.3 L521.0,55.1 L521.6,54.8 L522.1,54.6 L522.7,54.5 L523.2,54.3 L523.8,54.2 L524.4,54.1 L524.9,54.1 L525.5,54.0 L526.0,54.0 L526.5,54.0 L527.1,54.1 L527.6,54.1 L528.2,54.2 L528.8,54.3 L529.3,54.5 L529.9,54.6 L530.4,54.8 L531.0,55.1 L531.5,55.3 L532.0,55.6 L532.6,55.9 L533.1,56.2 L533.7,56.6 L534.2,56.9 L534.8,57.3 L535.4,57.7 L535.9,58.2 L536.5,58.6 L537.0,59.1 L537.5,59.6 L538.1,60.2 L538.6,60.7 L539.2,61.3 L539.8,61.8 L540.3,62.4 L540.9,63.1 L541.4,63.7 L542.0,64.4 L542.5,65.0 L543.0,65.7 L543.6,66.4 L544.1,67.1 L544.7,67.9 L545.2,68.6 L545.8,69.3 L546.4,70.1 L546.9,70.9 L547.5,71.7 L548.0,72.5 L548.5,73.3 L549.1,74.1 L549.6,74.9 L550.2,75.7 L550.8,76.5 L551.3,77.4 L551.9,78.2 L552.4,79.0 L553.0,79.9 L553.5,80.7 L554.0,81.6 L554.6,82.4 L555.1,83.3 L555.7,84.1 L556.2,85.0 L556.8,85.8 L557.4,86.7 L557.9,87.5 L558.5,88.4 L559.0,89.2 L559.5,90.0 L560.1,90.9 L560.6,91.7 L561.2,92.5 L561.8,93.3 L562.3,94.1 L562.9,94.9 L563.4,95.7 L564.0,96.5 L564.5,97.3 L565.0,98.0 L565.6,98.8 L566.1,99.5 L566.7,100.3 L567.2,101.0 L567.8,101.7 L568.4,102.4 L568.9,103.1 L569.5,103.8 L570.0,104.5 L570.5,105.2 L571.1,105.8 L571.6,106.5 L572.2,107.1 L572.8,107.7 L573.3,108.4 L573.9,109.0 L574.4,109.5 L575.0,110.1 L575.5,110.7 L576.0,111.2 L576.6,111.8 L577.1,112.3 L577.7,112.8 L578.2,113.3 L578.8,113.8 L579.4,114.3 L579.9,114.8 L580.5,115.2 L581.0,115.7 L581.5,116.1 L582.1,116.5 L582.6,117.0 L583.2,117.4 L583.8,117.8 L584.3,118.1 L584.9,118.5 L585.4,118.9 L586.0,119.2 L586.5,119.6 L587.0,119.9 L587.6,120.2 L588.1,120.5 L588.7,120.8 L589.2,121.1 L589.8,121.4 L590.4,121.6 L590.9,121.9 L591.5,122.2 L592.0,122.4 L592.5,122.6 L593.1,122.9 L593.6,123.1 L594.2,123.3 L594.8,123.5 L595.3,123.7 L595.9,123.9 L596.4,124.1 L597.0,124.3 L597.5,124.4 L598.0,124.6 L598.6,124.7 L599.1,124.9 L599.7,125.0 L600.2,125.2 L600.8,125.3 L601.4,125.4 L601.9,125.6 L602.5,125.7 L603.0,125.8 L603.5,125.9 L604.1,126.0 L604.6,126.1 L605.2,126.2 L605.8,126.3 L606.3,126.4 L606.9,126.5 L607.4,126.5 L608.0,126.6 L608.5,126.7 L609.0,126.8 L609.6,126.8 L610.1,126.9 L610.7,126.9 L611.2,127.0 L611.8,127.1 L612.4,127.1 L612.9,127.2 L613.5,127.2 L614.0,127.2 L614.0,128.0 L438.0,128.0 Z" />
+  <line class="ax" x1="438" y1="128" x2="614" y2="128" />
+  <path class="sp4" d="M438.0,258.0 L438.6,258.0 L439.1,258.0 L439.6,258.0 L440.2,258.0 L440.8,258.0 L441.3,258.0 L441.9,258.0 L442.4,258.0 L442.9,258.0 L443.5,258.0 L444.1,258.0 L444.6,258.0 L445.1,258.0 L445.7,258.0 L446.2,258.0 L446.8,258.0 L447.4,258.0 L447.9,258.0 L448.4,258.0 L449.0,258.0 L449.6,258.0 L450.1,258.0 L450.6,258.0 L451.2,258.0 L451.8,258.0 L452.3,258.0 L452.9,258.0 L453.4,258.0 L453.9,258.0 L454.5,258.0 L455.1,258.0 L455.6,258.0 L456.1,258.0 L456.7,258.0 L457.2,258.0 L457.8,258.0 L458.4,258.0 L458.9,258.0 L459.4,258.0 L460.0,258.0 L460.6,258.0 L461.1,258.0 L461.6,258.0 L462.2,258.0 L462.8,258.0 L463.3,258.0 L463.9,258.0 L464.4,258.0 L464.9,258.0 L465.5,258.0 L466.1,258.0 L466.6,258.0 L467.1,258.0 L467.7,258.0 L468.2,258.0 L468.8,258.0 L469.4,258.0 L469.9,258.0 L470.4,258.0 L471.0,258.0 L471.6,258.0 L472.1,258.0 L472.6,258.0 L473.2,258.0 L473.8,258.0 L474.3,258.0 L474.9,258.0 L475.4,258.0 L475.9,258.0 L476.5,258.0 L477.1,258.0 L477.6,258.0 L478.1,258.0 L478.7,258.0 L479.2,258.0 L479.8,258.0 L480.4,258.0 L480.9,258.0 L481.4,258.0 L482.0,258.0 L482.6,258.0 L483.1,258.0 L483.6,258.0 L484.2,258.0 L484.8,258.0 L485.3,258.0 L485.9,258.0 L486.4,258.0 L486.9,258.0 L487.5,258.0 L488.1,258.0 L488.6,258.0 L489.1,258.0 L489.7,258.0 L490.2,258.0 L490.8,258.0 L491.4,258.0 L491.9,258.0 L492.4,258.0 L493.0,258.0 L493.6,258.0 L494.1,258.0 L494.6,258.0 L495.2,258.0 L495.8,258.0 L496.3,258.0 L496.9,258.0 L497.4,258.0 L497.9,258.0 L498.5,258.0 L499.1,257.9 L499.6,257.9 L500.1,257.9 L500.7,257.9 L501.2,257.8 L501.8,257.8 L502.4,257.7 L502.9,257.6 L503.4,257.5 L504.0,257.4 L504.6,257.3 L505.1,257.1 L505.6,256.8 L506.2,256.5 L506.8,256.2 L507.3,255.8 L507.9,255.2 L508.4,254.7 L508.9,253.9 L509.5,253.1 L510.1,252.2 L510.6,251.1 L511.1,249.8 L511.7,248.4 L512.2,246.8 L512.8,245.0 L513.4,243.0 L513.9,240.9 L514.5,238.5 L515.0,235.9 L515.5,233.2 L516.1,230.2 L516.6,227.1 L517.2,223.9 L517.8,220.5 L518.3,217.1 L518.9,213.6 L519.4,210.1 L520.0,206.7 L520.5,203.3 L521.0,200.1 L521.6,197.0 L522.1,194.2 L522.7,191.6 L523.2,189.4 L523.8,187.5 L524.4,186.0 L524.9,184.9 L525.5,184.2 L526.0,184.0 L526.5,184.2 L527.1,184.9 L527.6,186.0 L528.2,187.5 L528.8,189.4 L529.3,191.6 L529.9,194.2 L530.4,197.0 L531.0,200.1 L531.5,203.3 L532.0,206.7 L532.6,210.1 L533.1,213.6 L533.7,217.1 L534.2,220.5 L534.8,223.9 L535.4,227.1 L535.9,230.2 L536.5,233.2 L537.0,235.9 L537.5,238.5 L538.1,240.9 L538.6,243.0 L539.2,245.0 L539.8,246.8 L540.3,248.4 L540.9,249.8 L541.4,251.1 L542.0,252.2 L542.5,253.1 L543.0,253.9 L543.6,254.7 L544.1,255.2 L544.7,255.8 L545.2,256.2 L545.8,256.5 L546.4,256.8 L546.9,257.1 L547.5,257.3 L548.0,257.4 L548.5,257.5 L549.1,257.6 L549.6,257.7 L550.2,257.8 L550.8,257.8 L551.3,257.9 L551.9,257.9 L552.4,257.9 L553.0,257.9 L553.5,258.0 L554.0,258.0 L554.6,258.0 L555.1,258.0 L555.7,258.0 L556.2,258.0 L556.8,258.0 L557.4,258.0 L557.9,258.0 L558.5,258.0 L559.0,258.0 L559.5,258.0 L560.1,258.0 L560.6,258.0 L561.2,258.0 L561.8,258.0 L562.3,258.0 L562.9,258.0 L563.4,258.0 L564.0,258.0 L564.5,258.0 L565.0,258.0 L565.6,258.0 L566.1,258.0 L566.7,258.0 L567.2,258.0 L567.8,258.0 L568.4,258.0 L568.9,258.0 L569.5,258.0 L570.0,258.0 L570.5,258.0 L571.1,258.0 L571.6,258.0 L572.2,258.0 L572.8,258.0 L573.3,258.0 L573.9,258.0 L574.4,258.0 L575.0,258.0 L575.5,258.0 L576.0,258.0 L576.6,258.0 L577.1,258.0 L577.7,258.0 L578.2,258.0 L578.8,258.0 L579.4,258.0 L579.9,258.0 L580.5,258.0 L581.0,258.0 L581.5,258.0 L582.1,258.0 L582.6,258.0 L583.2,258.0 L583.8,258.0 L584.3,258.0 L584.9,258.0 L585.4,258.0 L586.0,258.0 L586.5,258.0 L587.0,258.0 L587.6,258.0 L588.1,258.0 L588.7,258.0 L589.2,258.0 L589.8,258.0 L590.4,258.0 L590.9,258.0 L591.5,258.0 L592.0,258.0 L592.5,258.0 L593.1,258.0 L593.6,258.0 L594.2,258.0 L594.8,258.0 L595.3,258.0 L595.9,258.0 L596.4,258.0 L597.0,258.0 L597.5,258.0 L598.0,258.0 L598.6,258.0 L599.1,258.0 L599.7,258.0 L600.2,258.0 L600.8,258.0 L601.4,258.0 L601.9,258.0 L602.5,258.0 L603.0,258.0 L603.5,258.0 L604.1,258.0 L604.6,258.0 L605.2,258.0 L605.8,258.0 L606.3,258.0 L606.9,258.0 L607.4,258.0 L608.0,258.0 L608.5,258.0 L609.0,258.0 L609.6,258.0 L610.1,258.0 L610.7,258.0 L611.2,258.0 L611.8,258.0 L612.4,258.0 L612.9,258.0 L613.5,258.0 L614.0,258.0 L614.0,258.0 L438.0,258.0 Z" />
+  <line class="ax" x1="438" y1="258" x2="614" y2="258" />
+  <path class="wb" d="M497.0,140 L555.0,140" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <path class="wb" d="M518.9,270 L533.1,270" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <text class="cl4" x="526.0" y="40">long pulse</text>
+  <text class="nm4" x="526.0" y="158">σ = 0.165</text>
+  <text class="nm4 or" x="526.0" y="288">σ = 0.96</text>
+  <text class="sd4" x="24" y="46">in time</text>
+  <text class="sd4 or" x="24" y="176">in frequency</text>
+  <text class="cap4" x="320" y="304">narrow in time forces wide in frequency, and the product of the two spreads never drops below 1/4π</text>
+</svg>
+<figcaption><b>Figure 4 -</b> The trade, made concrete. Each column is a Gaussian pulse (blue) above its own spectrum (orange), with a grey bar marking the spread of each. Squeeze the pulse and the spectrum fans out by exactly the reciprocal factor : the brief pulse on the left contains almost every frequency, the long one on the right is nearly a pure tone. This is why a click has no pitch and a tuning fork must ring.</figcaption>
+</center></figure>
+
+<p>Two consequences worth carrying :</p>
+
+<ul>
+  <li><strong>In practice.</strong> To measure a frequency precisely you must listen for a long time. A spectrum analyser with 1 Hz resolution needs at least a full second of signal, no matter how good it is. This is why a music transcription system faces a genuine trade-off between telling you <em>what note</em> and telling you <em>exactly when</em>.</li>
+  <li><strong>In physics.</strong> A quantum particle’s position and momentum are related by exactly this transform pair. Heisenberg’s uncertainty principle is not an extra postulate about measurement disturbing things — it is this mathematical fact, applied to wavefunctions.</li>
+</ul>
+
+<div style="text-align:center; margin:2.4em 0 1.2em; color:#b5651d; letter-spacing:.06em;">
+  <b>PART III — MAKING IT REAL</b><br />
+  <span style="font-size:.85em; color:#7a7a7a; font-style:italic; letter-spacing:0;">sampling, the fast algorithm, and the traps</span>
+</div>
+
+<h2 id="9-sampling--how-often-is-often-enough-">9. Sampling : how often is often enough ?</h2>
+<p>A computer never sees a continuous signal. It sees samples, taken every $\Delta t$ seconds, at rate $f_s = 1/\Delta t$. What gets lost ?</p>
+
+<div class="theorem" text="Nyquist–Shannon sampling theorem">
+	If a signal contains no frequencies above $B$, it is <b>completely determined</b> by samples taken at any rate $f_s &gt; 2B$ — the original continuous signal can be reconstructed exactly <a class="citation" href="#Nyquist1928">(Nyquist, 1928)</a> <a class="citation" href="#Shannon1949">(Shannon, 1949)</a>.
+</div>
+
+<p>Sample more slowly than that and something worse than blurring happens : frequencies above $f_s/2$ do not vanish, they <strong>fold back</strong> and masquerade as lower frequencies that were never there. This is <strong>aliasing</strong>, and once it has happened no amount of processing can undo it, because the impostor is indistinguishable from a genuine low-frequency component.</p>
+
+<figure><center>
+<svg viewBox="0 0 640 244" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .ax5{ stroke:#d0d0d0; stroke-width:1.1; }
+    .true{ fill:none; stroke:#b9c6da; stroke-width:1.8; }
+    .alias{ fill:none; stroke:#b5651d; stroke-width:2.4; }
+    .stem{ stroke:#4a6da7; stroke-width:1; stroke-dasharray:2 3; }
+    .dot{ fill:#4a6da7; }
+    .lg{ font-size:11.5px; stroke:none; }
+    text.true{ fill:#8fa5c8; } text.alias{ fill:#b5651d; }
+    .dotl{ fill:#4a6da7; }
+  </style>
+  <line class="ax5" x1="56" y1="120" x2="608" y2="120" />
+  <path class="true" d="M64.0,120.0 L64.8,116.5 L65.5,113.0 L66.3,109.5 L67.1,106.1 L67.8,102.7 L68.6,99.4 L69.4,96.2 L70.1,93.0 L70.9,90.0 L71.7,87.1 L72.4,84.3 L73.2,81.7 L74.0,79.2 L74.7,76.9 L75.5,74.7 L76.3,72.7 L77.0,70.9 L77.8,69.3 L78.5,67.9 L79.3,66.7 L80.1,65.8 L80.8,65.0 L81.6,64.4 L82.4,64.1 L83.1,64.0 L83.9,64.1 L84.7,64.4 L85.4,65.0 L86.2,65.8 L87.0,66.7 L87.7,67.9 L88.5,69.3 L89.3,70.9 L90.0,72.7 L90.8,74.7 L91.6,76.9 L92.3,79.2 L93.1,81.7 L93.9,84.3 L94.6,87.1 L95.4,90.0 L96.2,93.0 L96.9,96.2 L97.7,99.4 L98.5,102.7 L99.2,106.1 L100.0,109.5 L100.8,113.0 L101.5,116.5 L102.3,120.0 L103.1,123.5 L103.8,127.0 L104.6,130.5 L105.3,133.9 L106.1,137.3 L106.9,140.6 L107.6,143.8 L108.4,147.0 L109.2,150.0 L109.9,152.9 L110.7,155.7 L111.5,158.3 L112.2,160.8 L113.0,163.1 L113.8,165.3 L114.5,167.3 L115.3,169.1 L116.1,170.7 L116.8,172.1 L117.6,173.3 L118.4,174.2 L119.1,175.0 L119.9,175.6 L120.7,175.9 L121.4,176.0 L122.2,175.9 L123.0,175.6 L123.7,175.0 L124.5,174.2 L125.3,173.3 L126.0,172.1 L126.8,170.7 L127.6,169.1 L128.3,167.3 L129.1,165.3 L129.9,163.1 L130.6,160.8 L131.4,158.3 L132.1,155.7 L132.9,152.9 L133.7,150.0 L134.4,147.0 L135.2,143.8 L136.0,140.6 L136.7,137.3 L137.5,133.9 L138.3,130.5 L139.0,127.0 L139.8,123.5 L140.6,120.0 L141.3,116.5 L142.1,113.0 L142.9,109.5 L143.6,106.1 L144.4,102.7 L145.2,99.4 L145.9,96.2 L146.7,93.0 L147.5,90.0 L148.2,87.1 L149.0,84.3 L149.8,81.7 L150.5,79.2 L151.3,76.9 L152.1,74.7 L152.8,72.7 L153.6,70.9 L154.4,69.3 L155.1,67.9 L155.9,66.7 L156.7,65.8 L157.4,65.0 L158.2,64.4 L158.9,64.1 L159.7,64.0 L160.5,64.1 L161.2,64.4 L162.0,65.0 L162.8,65.8 L163.5,66.7 L164.3,67.9 L165.1,69.3 L165.8,70.9 L166.6,72.7 L167.4,74.7 L168.1,76.9 L168.9,79.2 L169.7,81.7 L170.4,84.3 L171.2,87.1 L172.0,90.0 L172.7,93.0 L173.5,96.2 L174.3,99.4 L175.0,102.7 L175.8,106.1 L176.6,109.5 L177.3,113.0 L178.1,116.5 L178.9,120.0 L179.6,123.5 L180.4,127.0 L181.2,130.5 L181.9,133.9 L182.7,137.3 L183.5,140.6 L184.2,143.8 L185.0,147.0 L185.7,150.0 L186.5,152.9 L187.3,155.7 L188.0,158.3 L188.8,160.8 L189.6,163.1 L190.3,165.3 L191.1,167.3 L191.9,169.1 L192.6,170.7 L193.4,172.1 L194.2,173.3 L194.9,174.2 L195.7,175.0 L196.5,175.6 L197.2,175.9 L198.0,176.0 L198.8,175.9 L199.5,175.6 L200.3,175.0 L201.1,174.2 L201.8,173.3 L202.6,172.1 L203.4,170.7 L204.1,169.1 L204.9,167.3 L205.7,165.3 L206.4,163.1 L207.2,160.8 L208.0,158.3 L208.7,155.7 L209.5,152.9 L210.3,150.0 L211.0,147.0 L211.8,143.8 L212.5,140.6 L213.3,137.3 L214.1,133.9 L214.8,130.5 L215.6,127.0 L216.4,123.5 L217.1,120.0 L217.9,116.5 L218.7,113.0 L219.4,109.5 L220.2,106.1 L221.0,102.7 L221.7,99.4 L222.5,96.2 L223.3,93.0 L224.0,90.0 L224.8,87.1 L225.6,84.3 L226.3,81.7 L227.1,79.2 L227.9,76.9 L228.6,74.7 L229.4,72.7 L230.2,70.9 L230.9,69.3 L231.7,67.9 L232.5,66.7 L233.2,65.8 L234.0,65.0 L234.8,64.4 L235.5,64.1 L236.3,64.0 L237.1,64.1 L237.8,64.4 L238.6,65.0 L239.3,65.8 L240.1,66.7 L240.9,67.9 L241.6,69.3 L242.4,70.9 L243.2,72.7 L243.9,74.7 L244.7,76.9 L245.5,79.2 L246.2,81.7 L247.0,84.3 L247.8,87.1 L248.5,90.0 L249.3,93.0 L250.1,96.2 L250.8,99.4 L251.6,102.7 L252.4,106.1 L253.1,109.5 L253.9,113.0 L254.7,116.5 L255.4,120.0 L256.2,123.5 L257.0,127.0 L257.7,130.5 L258.5,133.9 L259.3,137.3 L260.0,140.6 L260.8,143.8 L261.6,147.0 L262.3,150.0 L263.1,152.9 L263.9,155.7 L264.6,158.3 L265.4,160.8 L266.1,163.1 L266.9,165.3 L267.7,167.3 L268.4,169.1 L269.2,170.7 L270.0,172.1 L270.7,173.3 L271.5,174.2 L272.3,175.0 L273.0,175.6 L273.8,175.9 L274.6,176.0 L275.3,175.9 L276.1,175.6 L276.9,175.0 L277.6,174.2 L278.4,173.3 L279.2,172.1 L279.9,170.7 L280.7,169.1 L281.5,167.3 L282.2,165.3 L283.0,163.1 L283.8,160.8 L284.5,158.3 L285.3,155.7 L286.1,152.9 L286.8,150.0 L287.6,147.0 L288.4,143.8 L289.1,140.6 L289.9,137.3 L290.7,133.9 L291.4,130.5 L292.2,127.0 L292.9,123.5 L293.7,120.0 L294.5,116.5 L295.2,113.0 L296.0,109.5 L296.8,106.1 L297.5,102.7 L298.3,99.4 L299.1,96.2 L299.8,93.0 L300.6,90.0 L301.4,87.1 L302.1,84.3 L302.9,81.7 L303.7,79.2 L304.4,76.9 L305.2,74.7 L306.0,72.7 L306.7,70.9 L307.5,69.3 L308.3,67.9 L309.0,66.7 L309.8,65.8 L310.6,65.0 L311.3,64.4 L312.1,64.1 L312.9,64.0 L313.6,64.1 L314.4,64.4 L315.2,65.0 L315.9,65.8 L316.7,66.7 L317.5,67.9 L318.2,69.3 L319.0,70.9 L319.7,72.7 L320.5,74.7 L321.3,76.9 L322.0,79.2 L322.8,81.7 L323.6,84.3 L324.3,87.1 L325.1,90.0 L325.9,93.0 L326.6,96.2 L327.4,99.4 L328.2,102.7 L328.9,106.1 L329.7,109.5 L330.5,113.0 L331.2,116.5 L332.0,120.0 L332.8,123.5 L333.5,127.0 L334.3,130.5 L335.1,133.9 L335.8,137.3 L336.6,140.6 L337.4,143.8 L338.1,147.0 L338.9,150.0 L339.7,152.9 L340.4,155.7 L341.2,158.3 L342.0,160.8 L342.7,163.1 L343.5,165.3 L344.3,167.3 L345.0,169.1 L345.8,170.7 L346.5,172.1 L347.3,173.3 L348.1,174.2 L348.8,175.0 L349.6,175.6 L350.4,175.9 L351.1,176.0 L351.9,175.9 L352.7,175.6 L353.4,175.0 L354.2,174.2 L355.0,173.3 L355.7,172.1 L356.5,170.7 L357.3,169.1 L358.0,167.3 L358.8,165.3 L359.6,163.1 L360.3,160.8 L361.1,158.3 L361.9,155.7 L362.6,152.9 L363.4,150.0 L364.2,147.0 L364.9,143.8 L365.7,140.6 L366.5,137.3 L367.2,133.9 L368.0,130.5 L368.8,127.0 L369.5,123.5 L370.3,120.0 L371.1,116.5 L371.8,113.0 L372.6,109.5 L373.3,106.1 L374.1,102.7 L374.9,99.4 L375.6,96.2 L376.4,93.0 L377.2,90.0 L377.9,87.1 L378.7,84.3 L379.5,81.7 L380.2,79.2 L381.0,76.9 L381.8,74.7 L382.5,72.7 L383.3,70.9 L384.1,69.3 L384.8,67.9 L385.6,66.7 L386.4,65.8 L387.1,65.0 L387.9,64.4 L388.7,64.1 L389.4,64.0 L390.2,64.1 L391.0,64.4 L391.7,65.0 L392.5,65.8 L393.3,66.7 L394.0,67.9 L394.8,69.3 L395.6,70.9 L396.3,72.7 L397.1,74.7 L397.9,76.9 L398.6,79.2 L399.4,81.7 L400.1,84.3 L400.9,87.1 L401.7,90.0 L402.4,93.0 L403.2,96.2 L404.0,99.4 L404.7,102.7 L405.5,106.1 L406.3,109.5 L407.0,113.0 L407.8,116.5 L408.6,120.0 L409.3,123.5 L410.1,127.0 L410.9,130.5 L411.6,133.9 L412.4,137.3 L413.2,140.6 L413.9,143.8 L414.7,147.0 L415.5,150.0 L416.2,152.9 L417.0,155.7 L417.8,158.3 L418.5,160.8 L419.3,163.1 L420.1,165.3 L420.8,167.3 L421.6,169.1 L422.4,170.7 L423.1,172.1 L423.9,173.3 L424.7,174.2 L425.4,175.0 L426.2,175.6 L426.9,175.9 L427.7,176.0 L428.5,175.9 L429.2,175.6 L430.0,175.0 L430.8,174.2 L431.5,173.3 L432.3,172.1 L433.1,170.7 L433.8,169.1 L434.6,167.3 L435.4,165.3 L436.1,163.1 L436.9,160.8 L437.7,158.3 L438.4,155.7 L439.2,152.9 L440.0,150.0 L440.7,147.0 L441.5,143.8 L442.3,140.6 L443.0,137.3 L443.8,133.9 L444.6,130.5 L445.3,127.0 L446.1,123.5 L446.9,120.0 L447.6,116.5 L448.4,113.0 L449.2,109.5 L449.9,106.1 L450.7,102.7 L451.5,99.4 L452.2,96.2 L453.0,93.0 L453.7,90.0 L454.5,87.1 L455.3,84.3 L456.0,81.7 L456.8,79.2 L457.6,76.9 L458.3,74.7 L459.1,72.7 L459.9,70.9 L460.6,69.3 L461.4,67.9 L462.2,66.7 L462.9,65.8 L463.7,65.0 L464.5,64.4 L465.2,64.1 L466.0,64.0 L466.8,64.1 L467.5,64.4 L468.3,65.0 L469.1,65.8 L469.8,66.7 L470.6,67.9 L471.4,69.3 L472.1,70.9 L472.9,72.7 L473.7,74.7 L474.4,76.9 L475.2,79.2 L476.0,81.7 L476.7,84.3 L477.5,87.1 L478.3,90.0 L479.0,93.0 L479.8,96.2 L480.5,99.4 L481.3,102.7 L482.1,106.1 L482.8,109.5 L483.6,113.0 L484.4,116.5 L485.1,120.0 L485.9,123.5 L486.7,127.0 L487.4,130.5 L488.2,133.9 L489.0,137.3 L489.7,140.6 L490.5,143.8 L491.3,147.0 L492.0,150.0 L492.8,152.9 L493.6,155.7 L494.3,158.3 L495.1,160.8 L495.9,163.1 L496.6,165.3 L497.4,167.3 L498.2,169.1 L498.9,170.7 L499.7,172.1 L500.5,173.3 L501.2,174.2 L502.0,175.0 L502.8,175.6 L503.5,175.9 L504.3,176.0 L505.1,175.9 L505.8,175.6 L506.6,175.0 L507.3,174.2 L508.1,173.3 L508.9,172.1 L509.6,170.7 L510.4,169.1 L511.2,167.3 L511.9,165.3 L512.7,163.1 L513.5,160.8 L514.2,158.3 L515.0,155.7 L515.8,152.9 L516.5,150.0 L517.3,147.0 L518.1,143.8 L518.8,140.6 L519.6,137.3 L520.4,133.9 L521.1,130.5 L521.9,127.0 L522.7,123.5 L523.4,120.0 L524.2,116.5 L525.0,113.0 L525.7,109.5 L526.5,106.1 L527.3,102.7 L528.0,99.4 L528.8,96.2 L529.6,93.0 L530.3,90.0 L531.1,87.1 L531.9,84.3 L532.6,81.7 L533.4,79.2 L534.1,76.9 L534.9,74.7 L535.7,72.7 L536.4,70.9 L537.2,69.3 L538.0,67.9 L538.7,66.7 L539.5,65.8 L540.3,65.0 L541.0,64.4 L541.8,64.1 L542.6,64.0 L543.3,64.1 L544.1,64.4 L544.9,65.0 L545.6,65.8 L546.4,66.7 L547.2,67.9 L547.9,69.3 L548.7,70.9 L549.5,72.7 L550.2,74.7 L551.0,76.9 L551.8,79.2 L552.5,81.7 L553.3,84.3 L554.1,87.1 L554.8,90.0 L555.6,93.0 L556.4,96.2 L557.1,99.4 L557.9,102.7 L558.7,106.1 L559.4,109.5 L560.2,113.0 L560.9,116.5 L561.7,120.0 L562.5,123.5 L563.2,127.0 L564.0,130.5 L564.8,133.9 L565.5,137.3 L566.3,140.6 L567.1,143.8 L567.8,147.0 L568.6,150.0 L569.4,152.9 L570.1,155.7 L570.9,158.3 L571.7,160.8 L572.4,163.1 L573.2,165.3 L574.0,167.3 L574.7,169.1 L575.5,170.7 L576.3,172.1 L577.0,173.3 L577.8,174.2 L578.6,175.0 L579.3,175.6 L580.1,175.9 L580.9,176.0 L581.6,175.9 L582.4,175.6 L583.2,175.0 L583.9,174.2 L584.7,173.3 L585.5,172.1 L586.2,170.7 L587.0,169.1 L587.7,167.3 L588.5,165.3 L589.3,163.1 L590.0,160.8 L590.8,158.3 L591.6,155.7 L592.3,152.9 L593.1,150.0 L593.9,147.0 L594.6,143.8 L595.4,140.6 L596.2,137.3 L596.9,133.9 L597.7,130.5 L598.5,127.0 L599.2,123.5 L600.0,120.0" />
+  <path class="alias" d="M64.0,120.0 L64.8,119.0 L65.5,118.0 L66.3,117.0 L67.1,116.0 L67.8,115.0 L68.6,114.0 L69.4,113.0 L70.1,112.0 L70.9,111.0 L71.7,110.0 L72.4,109.0 L73.2,108.0 L74.0,107.0 L74.7,106.1 L75.5,105.1 L76.3,104.1 L77.0,103.2 L77.8,102.2 L78.5,101.3 L79.3,100.3 L80.1,99.4 L80.8,98.5 L81.6,97.5 L82.4,96.6 L83.1,95.7 L83.9,94.8 L84.7,93.9 L85.4,93.0 L86.2,92.1 L87.0,91.3 L87.7,90.4 L88.5,89.6 L89.3,88.7 L90.0,87.9 L90.8,87.1 L91.6,86.3 L92.3,85.5 L93.1,84.7 L93.9,83.9 L94.6,83.2 L95.4,82.4 L96.2,81.7 L96.9,80.9 L97.7,80.2 L98.5,79.5 L99.2,78.8 L100.0,78.2 L100.8,77.5 L101.5,76.9 L102.3,76.2 L103.1,75.6 L103.8,75.0 L104.6,74.4 L105.3,73.8 L106.1,73.3 L106.9,72.7 L107.6,72.2 L108.4,71.7 L109.2,71.2 L109.9,70.7 L110.7,70.2 L111.5,69.8 L112.2,69.3 L113.0,68.9 L113.8,68.5 L114.5,68.1 L115.3,67.7 L116.1,67.4 L116.8,67.1 L117.6,66.7 L118.4,66.4 L119.1,66.2 L119.9,65.9 L120.7,65.6 L121.4,65.4 L122.2,65.2 L123.0,65.0 L123.7,64.8 L124.5,64.7 L125.3,64.5 L126.0,64.4 L126.8,64.3 L127.6,64.2 L128.3,64.1 L129.1,64.1 L129.9,64.0 L130.6,64.0 L131.4,64.0 L132.1,64.0 L132.9,64.1 L133.7,64.1 L134.4,64.2 L135.2,64.3 L136.0,64.4 L136.7,64.5 L137.5,64.7 L138.3,64.8 L139.0,65.0 L139.8,65.2 L140.6,65.4 L141.3,65.6 L142.1,65.9 L142.9,66.2 L143.6,66.4 L144.4,66.7 L145.2,67.1 L145.9,67.4 L146.7,67.7 L147.5,68.1 L148.2,68.5 L149.0,68.9 L149.8,69.3 L150.5,69.8 L151.3,70.2 L152.1,70.7 L152.8,71.2 L153.6,71.7 L154.4,72.2 L155.1,72.7 L155.9,73.3 L156.7,73.8 L157.4,74.4 L158.2,75.0 L158.9,75.6 L159.7,76.2 L160.5,76.9 L161.2,77.5 L162.0,78.2 L162.8,78.8 L163.5,79.5 L164.3,80.2 L165.1,80.9 L165.8,81.7 L166.6,82.4 L167.4,83.2 L168.1,83.9 L168.9,84.7 L169.7,85.5 L170.4,86.3 L171.2,87.1 L172.0,87.9 L172.7,88.7 L173.5,89.6 L174.3,90.4 L175.0,91.3 L175.8,92.1 L176.6,93.0 L177.3,93.9 L178.1,94.8 L178.9,95.7 L179.6,96.6 L180.4,97.5 L181.2,98.5 L181.9,99.4 L182.7,100.3 L183.5,101.3 L184.2,102.2 L185.0,103.2 L185.7,104.1 L186.5,105.1 L187.3,106.1 L188.0,107.0 L188.8,108.0 L189.6,109.0 L190.3,110.0 L191.1,111.0 L191.9,112.0 L192.6,113.0 L193.4,114.0 L194.2,115.0 L194.9,116.0 L195.7,117.0 L196.5,118.0 L197.2,119.0 L198.0,120.0 L198.8,121.0 L199.5,122.0 L200.3,123.0 L201.1,124.0 L201.8,125.0 L202.6,126.0 L203.4,127.0 L204.1,128.0 L204.9,129.0 L205.7,130.0 L206.4,131.0 L207.2,132.0 L208.0,133.0 L208.7,133.9 L209.5,134.9 L210.3,135.9 L211.0,136.8 L211.8,137.8 L212.5,138.7 L213.3,139.7 L214.1,140.6 L214.8,141.5 L215.6,142.5 L216.4,143.4 L217.1,144.3 L217.9,145.2 L218.7,146.1 L219.4,147.0 L220.2,147.9 L221.0,148.7 L221.7,149.6 L222.5,150.4 L223.3,151.3 L224.0,152.1 L224.8,152.9 L225.6,153.7 L226.3,154.5 L227.1,155.3 L227.9,156.1 L228.6,156.8 L229.4,157.6 L230.2,158.3 L230.9,159.1 L231.7,159.8 L232.5,160.5 L233.2,161.2 L234.0,161.8 L234.8,162.5 L235.5,163.1 L236.3,163.8 L237.1,164.4 L237.8,165.0 L238.6,165.6 L239.3,166.2 L240.1,166.7 L240.9,167.3 L241.6,167.8 L242.4,168.3 L243.2,168.8 L243.9,169.3 L244.7,169.8 L245.5,170.2 L246.2,170.7 L247.0,171.1 L247.8,171.5 L248.5,171.9 L249.3,172.3 L250.1,172.6 L250.8,172.9 L251.6,173.3 L252.4,173.6 L253.1,173.8 L253.9,174.1 L254.7,174.4 L255.4,174.6 L256.2,174.8 L257.0,175.0 L257.7,175.2 L258.5,175.3 L259.3,175.5 L260.0,175.6 L260.8,175.7 L261.6,175.8 L262.3,175.9 L263.1,175.9 L263.9,176.0 L264.6,176.0 L265.4,176.0 L266.1,176.0 L266.9,175.9 L267.7,175.9 L268.4,175.8 L269.2,175.7 L270.0,175.6 L270.7,175.5 L271.5,175.3 L272.3,175.2 L273.0,175.0 L273.8,174.8 L274.6,174.6 L275.3,174.4 L276.1,174.1 L276.9,173.8 L277.6,173.6 L278.4,173.3 L279.2,172.9 L279.9,172.6 L280.7,172.3 L281.5,171.9 L282.2,171.5 L283.0,171.1 L283.8,170.7 L284.5,170.2 L285.3,169.8 L286.1,169.3 L286.8,168.8 L287.6,168.3 L288.4,167.8 L289.1,167.3 L289.9,166.7 L290.7,166.2 L291.4,165.6 L292.2,165.0 L292.9,164.4 L293.7,163.8 L294.5,163.1 L295.2,162.5 L296.0,161.8 L296.8,161.2 L297.5,160.5 L298.3,159.8 L299.1,159.1 L299.8,158.3 L300.6,157.6 L301.4,156.8 L302.1,156.1 L302.9,155.3 L303.7,154.5 L304.4,153.7 L305.2,152.9 L306.0,152.1 L306.7,151.3 L307.5,150.4 L308.3,149.6 L309.0,148.7 L309.8,147.9 L310.6,147.0 L311.3,146.1 L312.1,145.2 L312.9,144.3 L313.6,143.4 L314.4,142.5 L315.2,141.5 L315.9,140.6 L316.7,139.7 L317.5,138.7 L318.2,137.8 L319.0,136.8 L319.7,135.9 L320.5,134.9 L321.3,133.9 L322.0,133.0 L322.8,132.0 L323.6,131.0 L324.3,130.0 L325.1,129.0 L325.9,128.0 L326.6,127.0 L327.4,126.0 L328.2,125.0 L328.9,124.0 L329.7,123.0 L330.5,122.0 L331.2,121.0 L332.0,120.0 L332.8,119.0 L333.5,118.0 L334.3,117.0 L335.1,116.0 L335.8,115.0 L336.6,114.0 L337.4,113.0 L338.1,112.0 L338.9,111.0 L339.7,110.0 L340.4,109.0 L341.2,108.0 L342.0,107.0 L342.7,106.1 L343.5,105.1 L344.3,104.1 L345.0,103.2 L345.8,102.2 L346.5,101.3 L347.3,100.3 L348.1,99.4 L348.8,98.5 L349.6,97.5 L350.4,96.6 L351.1,95.7 L351.9,94.8 L352.7,93.9 L353.4,93.0 L354.2,92.1 L355.0,91.3 L355.7,90.4 L356.5,89.6 L357.3,88.7 L358.0,87.9 L358.8,87.1 L359.6,86.3 L360.3,85.5 L361.1,84.7 L361.9,83.9 L362.6,83.2 L363.4,82.4 L364.2,81.7 L364.9,80.9 L365.7,80.2 L366.5,79.5 L367.2,78.8 L368.0,78.2 L368.8,77.5 L369.5,76.9 L370.3,76.2 L371.1,75.6 L371.8,75.0 L372.6,74.4 L373.3,73.8 L374.1,73.3 L374.9,72.7 L375.6,72.2 L376.4,71.7 L377.2,71.2 L377.9,70.7 L378.7,70.2 L379.5,69.8 L380.2,69.3 L381.0,68.9 L381.8,68.5 L382.5,68.1 L383.3,67.7 L384.1,67.4 L384.8,67.1 L385.6,66.7 L386.4,66.4 L387.1,66.2 L387.9,65.9 L388.7,65.6 L389.4,65.4 L390.2,65.2 L391.0,65.0 L391.7,64.8 L392.5,64.7 L393.3,64.5 L394.0,64.4 L394.8,64.3 L395.6,64.2 L396.3,64.1 L397.1,64.1 L397.9,64.0 L398.6,64.0 L399.4,64.0 L400.1,64.0 L400.9,64.1 L401.7,64.1 L402.4,64.2 L403.2,64.3 L404.0,64.4 L404.7,64.5 L405.5,64.7 L406.3,64.8 L407.0,65.0 L407.8,65.2 L408.6,65.4 L409.3,65.6 L410.1,65.9 L410.9,66.2 L411.6,66.4 L412.4,66.7 L413.2,67.1 L413.9,67.4 L414.7,67.7 L415.5,68.1 L416.2,68.5 L417.0,68.9 L417.8,69.3 L418.5,69.8 L419.3,70.2 L420.1,70.7 L420.8,71.2 L421.6,71.7 L422.4,72.2 L423.1,72.7 L423.9,73.3 L424.7,73.8 L425.4,74.4 L426.2,75.0 L426.9,75.6 L427.7,76.2 L428.5,76.9 L429.2,77.5 L430.0,78.2 L430.8,78.8 L431.5,79.5 L432.3,80.2 L433.1,80.9 L433.8,81.7 L434.6,82.4 L435.4,83.2 L436.1,83.9 L436.9,84.7 L437.7,85.5 L438.4,86.3 L439.2,87.1 L440.0,87.9 L440.7,88.7 L441.5,89.6 L442.3,90.4 L443.0,91.3 L443.8,92.1 L444.6,93.0 L445.3,93.9 L446.1,94.8 L446.9,95.7 L447.6,96.6 L448.4,97.5 L449.2,98.5 L449.9,99.4 L450.7,100.3 L451.5,101.3 L452.2,102.2 L453.0,103.2 L453.7,104.1 L454.5,105.1 L455.3,106.1 L456.0,107.0 L456.8,108.0 L457.6,109.0 L458.3,110.0 L459.1,111.0 L459.9,112.0 L460.6,113.0 L461.4,114.0 L462.2,115.0 L462.9,116.0 L463.7,117.0 L464.5,118.0 L465.2,119.0 L466.0,120.0 L466.8,121.0 L467.5,122.0 L468.3,123.0 L469.1,124.0 L469.8,125.0 L470.6,126.0 L471.4,127.0 L472.1,128.0 L472.9,129.0 L473.7,130.0 L474.4,131.0 L475.2,132.0 L476.0,133.0 L476.7,133.9 L477.5,134.9 L478.3,135.9 L479.0,136.8 L479.8,137.8 L480.5,138.7 L481.3,139.7 L482.1,140.6 L482.8,141.5 L483.6,142.5 L484.4,143.4 L485.1,144.3 L485.9,145.2 L486.7,146.1 L487.4,147.0 L488.2,147.9 L489.0,148.7 L489.7,149.6 L490.5,150.4 L491.3,151.3 L492.0,152.1 L492.8,152.9 L493.6,153.7 L494.3,154.5 L495.1,155.3 L495.9,156.1 L496.6,156.8 L497.4,157.6 L498.2,158.3 L498.9,159.1 L499.7,159.8 L500.5,160.5 L501.2,161.2 L502.0,161.8 L502.8,162.5 L503.5,163.1 L504.3,163.8 L505.1,164.4 L505.8,165.0 L506.6,165.6 L507.3,166.2 L508.1,166.7 L508.9,167.3 L509.6,167.8 L510.4,168.3 L511.2,168.8 L511.9,169.3 L512.7,169.8 L513.5,170.2 L514.2,170.7 L515.0,171.1 L515.8,171.5 L516.5,171.9 L517.3,172.3 L518.1,172.6 L518.8,172.9 L519.6,173.3 L520.4,173.6 L521.1,173.8 L521.9,174.1 L522.7,174.4 L523.4,174.6 L524.2,174.8 L525.0,175.0 L525.7,175.2 L526.5,175.3 L527.3,175.5 L528.0,175.6 L528.8,175.7 L529.6,175.8 L530.3,175.9 L531.1,175.9 L531.9,176.0 L532.6,176.0 L533.4,176.0 L534.1,176.0 L534.9,175.9 L535.7,175.9 L536.4,175.8 L537.2,175.7 L538.0,175.6 L538.7,175.5 L539.5,175.3 L540.3,175.2 L541.0,175.0 L541.8,174.8 L542.6,174.6 L543.3,174.4 L544.1,174.1 L544.9,173.8 L545.6,173.6 L546.4,173.3 L547.2,172.9 L547.9,172.6 L548.7,172.3 L549.5,171.9 L550.2,171.5 L551.0,171.1 L551.8,170.7 L552.5,170.2 L553.3,169.8 L554.1,169.3 L554.8,168.8 L555.6,168.3 L556.4,167.8 L557.1,167.3 L557.9,166.7 L558.7,166.2 L559.4,165.6 L560.2,165.0 L560.9,164.4 L561.7,163.8 L562.5,163.1 L563.2,162.5 L564.0,161.8 L564.8,161.2 L565.5,160.5 L566.3,159.8 L567.1,159.1 L567.8,158.3 L568.6,157.6 L569.4,156.8 L570.1,156.1 L570.9,155.3 L571.7,154.5 L572.4,153.7 L573.2,152.9 L574.0,152.1 L574.7,151.3 L575.5,150.4 L576.3,149.6 L577.0,148.7 L577.8,147.9 L578.6,147.0 L579.3,146.1 L580.1,145.2 L580.9,144.3 L581.6,143.4 L582.4,142.5 L583.2,141.5 L583.9,140.6 L584.7,139.7 L585.5,138.7 L586.2,137.8 L587.0,136.8 L587.7,135.9 L588.5,134.9 L589.3,133.9 L590.0,133.0 L590.8,132.0 L591.6,131.0 L592.3,130.0 L593.1,129.0 L593.9,128.0 L594.6,127.0 L595.4,126.0 L596.2,125.0 L596.9,124.0 L597.7,123.0 L598.5,122.0 L599.2,121.0 L600.0,120.0" />
+  <line class="stem" x1="64.0" y1="120" x2="64.0" y2="120.0" />
+  <circle class="dot" cx="64.0" cy="120.0" r="4.2" />
+  <line class="stem" x1="123.6" y1="120" x2="123.6" y2="175.1" />
+  <circle class="dot" cx="123.6" cy="175.1" r="4.2" />
+  <line class="stem" x1="183.1" y1="120" x2="183.1" y2="139.2" />
+  <circle class="dot" cx="183.1" cy="139.2" r="4.2" />
+  <line class="stem" x1="242.7" y1="120" x2="242.7" y2="71.5" />
+  <circle class="dot" cx="242.7" cy="71.5" r="4.2" />
+  <line class="stem" x1="302.2" y1="120" x2="302.2" y2="84.0" />
+  <circle class="dot" cx="302.2" cy="84.0" r="4.2" />
+  <line class="stem" x1="361.8" y1="120" x2="361.8" y2="156.0" />
+  <circle class="dot" cx="361.8" cy="156.0" r="4.2" />
+  <line class="stem" x1="421.3" y1="120" x2="421.3" y2="168.5" />
+  <circle class="dot" cx="421.3" cy="168.5" r="4.2" />
+  <line class="stem" x1="480.9" y1="120" x2="480.9" y2="100.8" />
+  <circle class="dot" cx="480.9" cy="100.8" r="4.2" />
+  <line class="stem" x1="540.4" y1="120" x2="540.4" y2="64.9" />
+  <circle class="dot" cx="540.4" cy="64.9" r="4.2" />
+  <line class="stem" x1="600.0" y1="120" x2="600.0" y2="120.0" />
+  <circle class="dot" cx="600.0" cy="120.0" r="4.2" />
+  <text class="lg true" x="64" y="30">the real signal — 7 cycles per second</text>
+  <text class="lg alias" x="64" y="212">what the samples suggest — 2 cycles per second</text>
+  <text class="lg dotl" x="64" y="232">the samples, taken 9 times per second — too slow, so the two are indistinguishable</text>
+</svg>
+<figcaption><b>Figure 5 -</b> Aliasing. The pale curve is a 7 Hz signal ; the blue dots are samples taken only 9 times a second, below the 14 Hz the sampling theorem demands. Every one of those samples lies exactly on the bold 2 Hz curve as well — so from the samples alone the two signals are the same, and the high frequency has come back disguised as a low one. No later processing can undo it, which is why the anti-aliasing filter has to come <i>before</i> the sampler.</figcaption>
+</center></figure>
+
+<p><em>In plain words : you have seen this. A wagon wheel in a film appearing to spin backwards is aliasing — 24 frames per second is too slow for the spokes. Moiré patterns on a striped shirt on television are aliasing in space. The fix is always the same and always happens</em> before <em>sampling : a low-pass filter that removes the frequencies you cannot afford to capture. That is why audio is sampled at 44.1 kHz — comfortably above twice the ~20 kHz limit of human hearing.</em></p>
+
+<h2 id="10-the-dft-and-the-algorithm-that-made-it-practical">10. The DFT, and the algorithm that made it practical</h2>
+<p>For $N$ samples $x_0, \dots, x_{N-1}$, the <strong>discrete Fourier transform</strong> is the finite version of the same idea :</p>
+
+\[\begin{equation} X_k = \sum_{n=0}^{N-1} x_n\, e^{-2\pi i kn/N}, \qquad k = 0, \dots, N-1. \label{eq:dft} \end{equation}\]
+
+<p>This is a matrix–vector product : $N$ outputs, each a sum of $N$ terms, so $\mathcal{O}(N^{2})$ operations. For an hour of CD audio, $N \approx 1.6 \times 10^{8}$ and $N^2$ is about $2.5 \times 10^{16}$ — decades of computation. The Fourier transform was mathematically beautiful and practically unusable.</p>
+
+<p>The <strong>Fast Fourier Transform</strong> <a class="citation" href="#Cooley1965">(Cooley &amp; Tukey, 1965)</a> fixes this with one observation. Split the sum into even-indexed and odd-indexed samples :</p>
+
+\[\begin{equation} X_k = \underbrace{\sum_{m=0}^{N/2-1} x_{2m}\,e^{-2\pi i k m/(N/2)}}_{E_k,\;\text{a DFT of half the size}} \;+\; e^{-2\pi i k/N} \underbrace{\sum_{m=0}^{N/2-1} x_{2m+1}\,e^{-2\pi i k m/(N/2)}}_{O_k,\;\text{another one}}. \label{eq:fft} \end{equation}\]
+
+<p>Both halves are themselves DFTs of length $N/2$. And because $E_k$ and $O_k$ are periodic with period $N/2$, the <em>same</em> two half-transforms give you the second half of the output almost free :</p>
+
+\[X_k = E_k + e^{-2\pi i k/N} O_k, \qquad X_{k + N/2} = E_k - e^{-2\pi i k/N} O_k.\]
+
+<figure><center>
+<svg viewBox="0 0 640 304" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
+  <style>
+    .nb{ fill:#f6f7fb; stroke:#4a6da7; stroke-width:1.4; }
+    .nt{ font-size:11.5px; fill:#2b2b2b; text-anchor:middle; }
+    .ed6{ stroke:#c2ccdc; stroke-width:1.4; fill:none; }
+    .lv{ font-size:10px; fill:#7a7a7a; text-anchor:end; font-style:italic; }
+    .br{ stroke:#9aa8bf; stroke-width:1.3; fill:none; }
+    .bl{ font-size:10.5px; fill:#7a7a7a; text-anchor:middle; }
+    .cap6{ font-size:11px; fill:#7a7a7a; text-anchor:middle; }
+    .eq{ font-size:12.5px; fill:#b5651d; }
+  </style>
+  <defs>
+    <marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4a6da7" /></marker>
+    <marker id="fo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#b5651d" /></marker>
+    <marker id="fg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#9aa8bf" /></marker>
+  </defs>
+  <rect class="nb" x="268.0" y="42" width="64" height="26" rx="4" />
+  <text class="nt" x="300.0" y="59.0">N = 8</text>
+  <text class="lv" x="632" y="59.0">1 subproblem</text>
+  <path class="ed6" d="M300.0,68 L170.0,100" />
+  <path class="ed6" d="M300.0,68 L430.0,100" />
+  <rect class="nb" x="141.0" y="100" width="58" height="26" rx="4" />
+  <text class="nt" x="170.0" y="117.0">4</text>
+  <rect class="nb" x="401.0" y="100" width="58" height="26" rx="4" />
+  <text class="nt" x="430.0" y="117.0">4</text>
+  <text class="lv" x="632" y="117.0">2 subproblems</text>
+  <path class="ed6" d="M170.0,126 L105.0,158" />
+  <path class="ed6" d="M170.0,126 L235.0,158" />
+  <path class="ed6" d="M430.0,126 L365.0,158" />
+  <path class="ed6" d="M430.0,126 L495.0,158" />
+  <rect class="nb" x="80.0" y="158" width="50" height="24" rx="4" />
+  <text class="nt" x="105.0" y="174.0">2</text>
+  <rect class="nb" x="210.0" y="158" width="50" height="24" rx="4" />
+  <text class="nt" x="235.0" y="174.0">2</text>
+  <rect class="nb" x="340.0" y="158" width="50" height="24" rx="4" />
+  <text class="nt" x="365.0" y="174.0">2</text>
+  <rect class="nb" x="470.0" y="158" width="50" height="24" rx="4" />
+  <text class="nt" x="495.0" y="174.0">2</text>
+  <text class="lv" x="632" y="174.0">4 subproblems</text>
+  <path class="ed6" d="M105.0,182 L72.5,216" />
+  <path class="ed6" d="M105.0,182 L137.5,216" />
+  <path class="ed6" d="M235.0,182 L202.5,216" />
+  <path class="ed6" d="M235.0,182 L267.5,216" />
+  <path class="ed6" d="M365.0,182 L332.5,216" />
+  <path class="ed6" d="M365.0,182 L397.5,216" />
+  <path class="ed6" d="M495.0,182 L462.5,216" />
+  <path class="ed6" d="M495.0,182 L527.5,216" />
+  <rect class="nb" x="52.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="72.5" y="232.0">1</text>
+  <rect class="nb" x="117.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="137.5" y="232.0">1</text>
+  <rect class="nb" x="182.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="202.5" y="232.0">1</text>
+  <rect class="nb" x="247.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="267.5" y="232.0">1</text>
+  <rect class="nb" x="312.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="332.5" y="232.0">1</text>
+  <rect class="nb" x="377.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="397.5" y="232.0">1</text>
+  <rect class="nb" x="442.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="462.5" y="232.0">1</text>
+  <rect class="nb" x="507.5" y="216" width="40" height="24" rx="4" />
+  <text class="nt" x="527.5" y="232.0">1</text>
+  <text class="lv" x="632" y="232.0">8 subproblems</text>
+  <path class="br" d="M22,42 L22,240" marker-start="url(#fg)" marker-end="url(#fg)" />
+  <text class="bl" x="14" y="141" transform="rotate(-90 14,141)">log₂ N levels</text>
+  <text class="cap6" x="320" y="272">every level costs O(N) to recombine, and there are log₂N of them</text>
+  <text class="cap6 eq" x="320" y="292">T(N) = 2 T(N/2) + O(N)   →   O(N log N)</text>
+</svg>
+<figcaption><b>Figure 6 -</b> Why the FFT is fast. A transform of length 8 is two of length 4, each of which is two of length 2, and so on — and because the even and odd halves are <i>disjoint</i>, nothing is ever computed twice. Recombining a level costs $\mathcal{O}(N)$, and there are only $\log_2 N$ levels, so the whole thing lands at $\mathcal{O}(N\log N)$ instead of $\mathcal{O}(N^2)$.</figcaption>
+</center></figure>
+
+<p><em>In plain words : one problem of size $N$ becomes two of size $N/2$, and combining them costs only $\mathcal{O}(N)$. Recurse, and the cost obeys $T(N) = 2T(N/2) + \mathcal{O}(N)$, which solves to $\mathcal{O}(N\log N)$.</em> For that hour of audio, $N \log_2 N \approx 4.4 \times 10^{9}$ — a few seconds instead of decades. It is hard to overstate how much modern technology rests on that single factorisation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cmath</span>
+
+<span class="k">def</span> <span class="nf">fft</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="s">"""Radix-2 Cooley-Tukey. len(x) must be a power of two."""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">even</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">odd</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">cmath</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2j</span> <span class="o">*</span> <span class="n">cmath</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">odd</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">even</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">even</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span>
+    <span class="k">return</span> <span class="n">out</span>
+</code></pre></div></div>
+
+<div class="note">
+	This is <b>divide and conquer</b>, not <a href="/blog/algorithmic/dynamic-programming">dynamic programming</a>, and the distinction is exactly the one that post draws. The two halves of the array are disjoint : no subproblem is ever solved twice, so a cache would never get a single hit. The FFT is fast because the work <i>splits</i> cleanly, not because results are <i>reused</i>.
+</div>
+
+<h2 id="11-spectral-leakage-and-why-your-fft-looks-smeared">11. Spectral leakage, and why your FFT looks smeared</h2>
+<p>Here is the trap that catches everyone the first time. Feed a perfect sine wave into an FFT and you expect a single clean spike. You usually get a spike surrounded by a skirt of spurious neighbours.</p>
+
+<p>The reason is that the DFT does not see your $N$ samples as a finite chunk. It assumes they repeat forever, end joined to start. If your window does not contain a whole number of periods, that wrap-around creates a <strong>discontinuity</strong> — and by section 4, a discontinuity needs high harmonics. Those harmonics are entirely an artefact of where you cut, and they are called <strong>spectral leakage</strong>.</p>
+
+<p>The fix is <strong>windowing</strong> : before transforming, multiply the samples by a function that tapers smoothly to zero at both ends, so the wrap-around is seamless. The Hann window $w_n = \tfrac{1}{2}\big(1 - \cos(2\pi n/N)\big)$ is the usual default. You pay for it — tapering widens the main peak slightly — and choosing a window is exactly a trade between how narrow the peak is and how fast the skirt decays <a class="citation" href="#Harris1978">(Harris, 1978)</a>.</p>
+
+<p><em>In plain words : the DFT thinks your recording is a loop. If the loop clicks, the spectrum shows the click.</em></p>
+
+<h2 id="12-where-it-shows-up">12. Where it shows up</h2>
+<p>Once a signal is in the frequency domain, things that were hard become easy.</p>
+
+<ul>
+  <li><strong>Compression.</strong> JPEG splits an image into blocks and keeps only the low-frequency coefficients, because the eye barely notices the rest. MP3 does the same for hearing, with a model of which frequencies get masked by louder neighbours. Both are throwing away parts of a spectrum.</li>
+  <li><strong>Filtering.</strong> Removing hiss, isolating a bass line, or cleaning mains hum from an ECG is deleting or attenuating a band of frequencies — one multiplication in the frequency domain, thanks to the convolution theorem.</li>
+  <li><strong>Medical imaging.</strong> An MRI scanner does not measure an image. It measures the <em>Fourier transform</em> of the body slice directly, one frequency at a time, and the picture you see is produced by an inverse transform.</li>
+  <li><strong>Diffraction.</strong> The pattern X-rays make when they scatter off a crystal is the Fourier transform of the crystal’s electron density. Working out the structure of DNA meant inverting one of these by hand.</li>
+  <li><strong>Probability.</strong> The characteristic function is the Fourier transform of a density, and it is the standard machinery for proving results about <a href="/blog/mathematics/probability-distributions">sums of random variables</a>.</li>
+  <li><strong>Deep learning.</strong> The <a href="/blog/machine-learning/transformers">Transformer</a> tags each word position with a vector of sines and cosines <em>of many different frequencies</em>, exactly the ingredients of a Fourier series. Fast-oscillating components pin down fine position, slow ones the coarse position, so the whole vector is a Fourier-style fingerprint of where a word sits.</li>
+</ul>
+
+<h2 id="13-conclusion">13. Conclusion</h2>
+<p>The Fourier transform is a change of perspective : stop describing a signal by <em>what it does at each moment</em>, and start describing it by <em>which frequencies it is made of</em>.</p>
+
+<p>Sine waves earn their central role honestly. They are orthogonal, so the recipe can be read off cleanly, one ingredient at a time. And they are the eigenfunctions of every linear time-invariant system, which means the frequency domain is the coordinate system where physics becomes diagonal — where a tangled operation over all of time collapses into one multiplication per frequency. Everything else follows from those two facts : the convolution theorem, and with it fast filtering and the central limit theorem ; the uncertainty principle, and with it Heisenberg ; the sampling theorem, and with it every digital recording ever made.</p>
+
+<p>From a prism splitting light to a Transformer locating a word, the same idea keeps reappearing. Complicated things are often simple mixtures of pure oscillations — if only you look at them through the right prism.</p>
 
 <h2 id="references">References</h2>
 <ol class="bibliography"><li><span id="Cooley1965">Cooley, J. W., &amp; Tukey, J. W. (1965). An Algorithm for the Machine Calculation of Complex Fourier Series. <i>Mathematics of Computation</i>, <i>19</i>(90), 297–301.</span>
@@ -206,12 +680,147 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 }
 </pre>
 
+</div></li>
+<li><span id="Fourier1822">Fourier, J. (1822). <i>Théorie Analytique de la Chaleur</i>. Firmin Didot.</span>
+
+<div id="Fourier1822-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Fourier1822-bibtex" class="pre pre-scrollable collapse">@book{Fourier1822,
+  author = {Fourier, Joseph},
+  title = {Th{\'e}orie Analytique de la Chaleur},
+  publisher = {Firmin Didot},
+  year = {1822}
+}
+</pre>
+
+</div></li>
+<li><span id="Gabor1946">Gabor, D. (1946). Theory of Communication. <i>Journal of the Institution of Electrical Engineers</i>, <i>93</i>(26), 429–457.</span>
+
+<div id="Gabor1946-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Gabor1946-bibtex" class="pre pre-scrollable collapse">@article{Gabor1946,
+  author = {Gabor, Dennis},
+  title = {Theory of Communication},
+  journal = {Journal of the Institution of Electrical Engineers},
+  volume = {93},
+  number = {26},
+  pages = {429--457},
+  year = {1946}
+}
+</pre>
+
+</div></li>
+<li><span id="Gibbs1899">Gibbs, J. W. (1899). Fourier’s Series. <i>Nature</i>, <i>59</i>(1539), 606.</span>
+
+<div id="Gibbs1899-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Gibbs1899-bibtex" class="pre pre-scrollable collapse">@article{Gibbs1899,
+  author = {Gibbs, J. Willard},
+  title = {Fourier's Series},
+  journal = {Nature},
+  volume = {59},
+  number = {1539},
+  pages = {606},
+  year = {1899}
+}
+</pre>
+
+</div></li>
+<li><span id="Harris1978">Harris, F. J. (1978). On the Use of Windows for Harmonic Analysis with the Discrete Fourier Transform. <i>Proceedings of the IEEE</i>, <i>66</i>(1), 51–83.</span>
+
+<div id="Harris1978-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Harris1978-bibtex" class="pre pre-scrollable collapse">@article{Harris1978,
+  author = {Harris, Fredric J.},
+  title = {On the Use of Windows for Harmonic Analysis with the Discrete Fourier Transform},
+  journal = {Proceedings of the IEEE},
+  volume = {66},
+  number = {1},
+  pages = {51--83},
+  year = {1978}
+}
+</pre>
+
+</div></li>
+<li><span id="Nyquist1928">Nyquist, H. (1928). Certain Topics in Telegraph Transmission Theory. <i>Transactions of the American Institute of Electrical Engineers</i>, <i>47</i>(2), 617–644.</span>
+
+<div id="Nyquist1928-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Nyquist1928-bibtex" class="pre pre-scrollable collapse">@article{Nyquist1928,
+  author = {Nyquist, Harry},
+  title = {Certain Topics in Telegraph Transmission Theory},
+  journal = {Transactions of the American Institute of Electrical Engineers},
+  volume = {47},
+  number = {2},
+  pages = {617--644},
+  year = {1928}
+}
+</pre>
+
+</div></li>
+<li><span id="Shannon1949">Shannon, C. E. (1949). Communication in the Presence of Noise. <i>Proceedings of the IRE</i>, <i>37</i>(1), 10–21.</span>
+
+<div id="Shannon1949-materials">
+  <ul class="nav nav-pills">
+    
+
+    
+  </ul>
+
+  
+
+  <pre id="Shannon1949-bibtex" class="pre pre-scrollable collapse">@article{Shannon1949,
+  author = {Shannon, Claude E.},
+  title = {Communication in the Presence of Noise},
+  journal = {Proceedings of the IRE},
+  volume = {37},
+  number = {1},
+  pages = {10--21},
+  year = {1949}
+}
+</pre>
+
 </div></li></ol>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
     <li id="fn:1">
-      <p>Joseph Fourier introduced these series in 1822 while studying heat flow, to considerable scepticism, his contemporaries doubted that sums of smooth sines could represent functions with sharp corners. The Gibbs overshoot in Figure 1 is a trace of exactly that tension. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p>Joseph Fourier introduced these series in 1822 while studying heat flow <a class="citation" href="#Fourier1822">(Fourier, 1822)</a>, to considerable scepticism : his contemporaries, Lagrange among them, doubted that sums of smooth sines could represent functions with sharp corners. They were not being obtuse — the claim is genuinely delicate, and pinning down exactly which functions it holds for occupied analysts for the next century and produced a good deal of modern mathematics along the way. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
