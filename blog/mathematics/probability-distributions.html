@@ -15,7 +15,7 @@
               
             Where Distributions Come From
              20 May 2026 
-             102 minutes read
+             108 minutes read
             
    ..." />
 
@@ -94,11 +94,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
             <center>  <a class="fa fa-home home_button" href="/"></a></center>
             <center><span itemprop="name"><h1>Where Distributions Come From</h1></span></center>
             <center><p> 20 May 2026 </p></center>
-            <center><p class="fa fa-clock-o"> 102 minutes read</p></center>
+            <center><p class="fa fa-clock-o"> 108 minutes read</p></center>
             <!--<center><p class="fa fa-clock-o"> 
                         
                           
-                            137 minutes read
+                            144 minutes read
                         </p></center>-->
         <center><span class="small-ornament"><svg viewBox="0 0 290 320">
           <path d="M280.2656 245.3906 Q280.2656 263.25 261.8438 271.9688 Q247.9219 278.7188 227.8125 278.7188 Q235.2656 269.8594 235.2656 256.5 Q235.2656 231.8906 214.4531 217.125 Q196.0312 204.0469 170.2969 204.0469 Q143.5781 204.0469 108.8438 221.0625 L118.9688 231.4688 Q154.4062 267.8906 168.3281 267.8906 Q181.125 267.8906 181.125 255.9375 Q181.125 248.3438 173.5312 243.5625 Q167.0625 239.3438 159.0469 239.3438 Q154.6875 239.3438 148.6406 241.4531 Q158.625 220.0781 173.9531 220.0781 Q184.5 220.0781 191.8828 228.0938 Q199.2656 236.1094 199.2656 246.6562 Q199.2656 265.5 184.3594 277.875 Q170.2969 289.4062 151.0312 289.4062 Q118.6875 289.4062 81.4219 251.0156 L72.1406 241.4531 Q53.5781 249.4688 39.375 249.4688 Q26.4375 249.4688 17.1562 240.9609 Q7.875 232.4531 7.875 219.5156 Q7.875 203.9062 19.125 193.9219 Q29.9531 184.5 45.8438 184.5 Q70.0312 184.5 98.2969 211.6406 Q111.5156 202.2188 127.5469 185.4844 L134.5781 178.1719 Q174.5156 136.6875 204.8906 136.6875 Q231.4688 136.6875 231.4688 155.25 Q231.4688 173.5312 204.3281 177.3281 Q206.4375 172.8281 206.4375 170.1562 Q206.4375 159.3281 193.3594 159.3281 Q175.2188 159.3281 144.2812 189 L137.1094 195.8906 Q165.2344 185.7656 191.25 185.7656 Q221.7656 185.7656 248.3438 200.1094 Q280.2656 217.2656 280.2656 245.3906 ZM61.1719 230.4844 Q44.5781 215.2969 37.2656 215.2969 Q27.9844 215.2969 27.9844 223.4531 Q27.9844 234.4219 42.75 234.4219 Q51.1875 234.4219 61.1719 230.4844z"/>
@@ -415,6 +415,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 
 <p>If you want the wait until the <strong>$k$-th</strong> event rather than the first, you are summing $k$ independent exponentials, and the result is the <strong>Gamma</strong> distribution with shape $k$ and rate $\lambda$. Same process, third question.</p>
 
+<p><strong>Where it shows up.</strong> The time until a given radioactive atom decays. The gap between customers arriving at a till, between requests hitting a server, between packets on a network link — the standard model for any queue. The interval between earthquakes above a chosen magnitude. The lifetime of an electronic component during its long middle age, after infant mortality and before wear-out, which is exactly the stretch where the hazard rate is flat. The time until the next goal in a football match. And the wait for a bus that is not running to a timetable — which is why, infuriatingly, the expected remaining wait is the same however long you have already stood there.</p>
+
+<p><strong>And the Gamma, one question further along.</strong> The time until the tenth customer arrives rather than the first. The total rainfall accumulated over a season, as a sum of many small independent contributions that cannot go negative. The size of insurance claims. The duration of a job made of several sequential stages, each of them exponential — which is why service times in queueing models are so often Gamma rather than exponential.</p>
+
 <figure><center>
 <svg viewBox="0 0 640 322" width="100%" style="max-width:625px" xmlns="http://www.w3.org/2000/svg" font-family="'PT Serif', Georgia, serif">
   <style>
@@ -679,6 +683,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <h2 id="9-the-uniform-and-the-trick-that-makes-all-the-others">9. The uniform, and the trick that makes all the others</h2>
 <p>The <strong>uniform</strong> distribution on $[0, 1]$ spreads the budget perfectly evenly : $f(x) = 1$ on the interval and $0$ outside. It is what you use when every value in a range is equally plausible and you know nothing more.</p>
 
+<p><strong>Where it shows up.</strong> Less often in nature than people assume, and constantly in machinery. The output of a random number generator, by construction. The rounding error left over when you truncate a measurement — the discarded fractional part is uniform, which is why rounding errors accumulate the way they do. The angle at which a spun pointer comes to rest. Hash values spread across buckets, which is the design goal that makes <a href="/blog/algorithmic/bloom-filters">Bloom filters</a> and <a href="/blog/algorithmic/hyperloglog">HyperLogLog</a> work. And one genuinely surprising case : in a Poisson process, once you know how many events fell in a window, their individual arrival times are uniformly scattered across it.</p>
+
 <p>It is also the raw material for everything else, through a result that is short, exact, and quietly powerful.</p>
 
 <div class="theorem" text="inverse transform sampling">
@@ -816,6 +822,75 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
   <li><strong>Is it a proportion, living strictly between 0 and 1 ?</strong> Beta, which is flexible enough to be a U, a bell or a ramp on $[0,1]$ and is the natural partner of the binomial.</li>
   <li><strong>Do you genuinely know nothing except the range ?</strong> Uniform.</li>
 </ul>
+
+<p>And the same list read the other way round — starting from something you might actually be holding. Every entry below is a case where the mechanism of Part II genuinely applies, not merely a shape that happens to fit.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>distribution</th>
+      <th>where you actually meet it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Binomial</strong></td>
+      <td>conversions among 1000 visitors ; defective units in a batch ; heads in 20 tosses ; how many of $n$ offspring inherit an allele ; packets lost out of $n$ sent ; “yes” answers in a poll of fixed size</td>
+    </tr>
+    <tr>
+      <td><strong>Poisson</strong></td>
+      <td>radioactive decays per second ; photons landing on a camera pixel in one exposure, which is what photographic <em>shot noise</em> is ; calls per minute at a switchboard ; mutations per genome per generation ; typos per page ; flaws per metre of optical fibre ; goals in a match ; cars past a point on a quiet road</td>
+    </tr>
+    <tr>
+      <td><strong>Geometric</strong></td>
+      <td>tosses until the first head ; sales calls until the first sale ; retransmissions until a packet gets through ; and the count of leading zeros in a hash, which is the entire basis of <a href="/blog/algorithmic/hyperloglog">HyperLogLog</a></td>
+    </tr>
+    <tr>
+      <td><strong>Exponential</strong></td>
+      <td>time until an atom decays ; gaps between arrivals at a queue, a server or a network link ; intervals between earthquakes above a magnitude ; component lifetimes during their flat-hazard middle age ; the wait for a bus with no timetable</td>
+    </tr>
+    <tr>
+      <td><strong>Gamma</strong></td>
+      <td>the wait until the tenth arrival, not the first ; seasonal rainfall totals ; insurance claim sizes ; service times for jobs made of several sequential stages</td>
+    </tr>
+    <tr>
+      <td><strong>Normal</strong></td>
+      <td>adult height within one sex ; instrument and measurement error ; machined dimensions within tolerance ; birth weight ; blood pressure ; thermal (Johnson) noise in a circuit ; the displacement of a pollen grain in Brownian motion ; and above all <strong>any average of enough observations</strong>, whatever the raw data looks like</td>
+    </tr>
+    <tr>
+      <td><strong>Log-normal</strong></td>
+      <td>income and wealth through the body of the range ; share prices, whose returns compound ; particle sizes after repeated grinding or fragmentation ; concentrations of substances in blood or soil ; file sizes ; length of hospital stays ; how long software tasks actually take ; the incubation period of an infectious disease</td>
+    </tr>
+    <tr>
+      <td><strong>Power law</strong></td>
+      <td>city populations and word frequencies ; wealth in the far tail ; earthquake energies ; links pointing at a web page and degrees in a social network ; citations per paper ; sizes of forest fires, blackouts and wars ; sales per book or song, the “long tail”</td>
+    </tr>
+    <tr>
+      <td><strong>Weibull</strong></td>
+      <td>time to failure of bearings, turbine blades and other things that wear out ; the breaking strength of brittle materials, which is what Weibull invented it for ; and wind speed at a site, which is the industry standard for sizing a wind farm</td>
+    </tr>
+    <tr>
+      <td><strong>Beta</strong></td>
+      <td>any uncertain proportion : a conversion rate, a click-through rate, an allele frequency ; the natural Bayesian companion to the binomial ; and the fraction of a project believed complete</td>
+    </tr>
+    <tr>
+      <td><strong>Chi-square</strong></td>
+      <td>the distribution of a sample variance ; goodness-of-fit and contingency-table test statistics — it is a sum of squared normals, so it turns up wherever squared errors are added</td>
+    </tr>
+    <tr>
+      <td><strong>Student’s $t$</strong></td>
+      <td>the test statistic for a small-sample mean, as in the <a href="/blog/mathematics/statistical-inference">statistical inference</a> post ; and, empirically, daily financial returns, which have tails far too heavy for a normal</td>
+    </tr>
+    <tr>
+      <td><strong>Cauchy</strong></td>
+      <td>the ratio of two independent normals ; the spot where a beam from a randomly-aimed rotating searchlight strikes a wall ; resonance line shapes in spectroscopy, where physicists call it a Lorentzian</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note">
+	Two entries above deserve a second look, because they are the ones people get wrong. <b>Income</b> is log-normal through the bulk and a power law only in the far tail — which is why the "average salary" is a poor summary but not a meaningless one, while the "average wealth of the richest thousand people" is genuinely meaningless. And <b>wind speed</b> is Weibull rather than normal, which matters commercially : a wind turbine's output goes as the cube of the speed, so the rare windy hours dominate the annual yield and a symmetric model would badly misprice a site.
+</div>
 
 <h2 id="11-they-are-all-related">11. They are all related</h2>
 <p>The distributions above are not a list of unrelated formulas. They are one connected family, and knowing the connections saves a great deal of memorising.</p>
