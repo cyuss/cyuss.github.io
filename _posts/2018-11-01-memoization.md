@@ -4,9 +4,9 @@ title: Memoization - Remember what we already found
 date: 2018-11-01 12:00
 comments: true
 external-url:
-categories: Python
-tags: [python, memoization, algorithmic]
-permalink: /blog/:categories/memoization
+categories: Algorithmic
+tags: [algorithmic, memoization, python]
+permalink: /blog/algorithmic/memoization
 ---
 
 > Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining a base case. Sometimes, using recursion can be a bit complicated, like if the base case is not reached or not defined, which can be very slow.
