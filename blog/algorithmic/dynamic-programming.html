@@ -110,11 +110,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         <article lang="en">
           
           <blockquote>
-  <p>The <a href="/blog/python/memoization">memoization</a> post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called <strong>dynamic programming</strong>. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential disaster, proves <em>why</em> it is allowed to work, fills two tables by hand, and shows exactly where it stops working.</p>
+  <p>The <a href="/blog/algorithmic/memoization">memoization</a> post ended on a promise : that caching a recursive function opens the door to a whole algorithmic technique called <strong>dynamic programming</strong>. Time to walk through that door. The name is intimidating and, as we will see, deliberately meaningless, but the idea behind it is one you already use when you climb stairs : to know how many ways there are to reach step $n$, you do not re-explore the whole staircase, you look at the two steps you just came from. Dynamic programming is that instinct made rigorous — and this post builds it from an exponential disaster, proves <em>why</em> it is allowed to work, fills two tables by hand, and shows exactly where it stops working.</p>
 </blockquote>
 
 <h2 id="1-the-disaster-we-are-trying-to-fix">1. The disaster we are trying to fix</h2>
-<p>Let us go back to the naive recursive Fibonacci of the <a href="/blog/python/memoization">memoization</a> post and count precisely how bad it is. Let $T(n)$ be the number of calls made by <code class="language-plaintext highlighter-rouge">fibo_recursive(n)</code>. The function returns immediately for $n&lt;2$, and otherwise makes one call for $n-1$ and one for $n-2$ :</p>
+<p>Let us go back to the naive recursive Fibonacci of the <a href="/blog/algorithmic/memoization">memoization</a> post and count precisely how bad it is. Let $T(n)$ be the number of calls made by <code class="language-plaintext highlighter-rouge">fibo_recursive(n)</code>. The function returns immediately for $n&lt;2$, and otherwise makes one call for $n-1$ and one for $n-2$ :</p>
 
 \[\begin{equation} T(0) = T(1) = 1, \qquad T(n) = 1 + T(n-1) + T(n-2). \label{eq:calls} \end{equation}\]
 
@@ -468,7 +468,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     <span class="k">return</span> <span class="n">K</span><span class="p">[</span><span class="n">W</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>Memory drops from $\mathcal{O}(mW)$ to $\mathcal{O}(W)$, a change that routinely decides whether a dynamic program fits in RAM. The price is that we can no longer backtrack through the table to recover <em>which</em> items were chosen — the same <a href="/blog/python/memoization">memoization</a> trade-off between speed, memory and information, one level up.</p>
+<p>Memory drops from $\mathcal{O}(mW)$ to $\mathcal{O}(W)$, a change that routinely decides whether a dynamic program fits in RAM. The price is that we can no longer backtrack through the table to recover <em>which</em> items were chosen — the same <a href="/blog/algorithmic/memoization">memoization</a> trade-off between speed, memory and information, one level up.</p>
 
 <h2 id="7-the-recipe">7. The recipe</h2>
 <p>Every dynamic program you will ever write is these five steps, in this order.</p>
@@ -502,7 +502,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 <p>And one you have already met : <a href="/blog/machine-learning/backpropagation">backpropagation</a>. The computational graph of a neural network <em>is</em> the DAG, the upstream gradient at each node <em>is</em> the memoized subproblem value, and the backward pass <em>is</em> the topological sweep. It computes every partial derivative in a single pass for the same reason our table did — because it refuses to answer the same question twice.</p>
 
 <h2 id="10-conclusion">10. Conclusion</h2>
-<p>Dynamic programming is not a family of tricks to memorise, it is one observation applied with discipline : <strong>a recursion whose calls overlap is secretly a DAG, and a DAG should be evaluated once, in order.</strong> <a href="/blog/python/memoization">Memoization</a> is that observation applied lazily from the top ; tabulation is the same observation applied deliberately from the bottom. The exponential blow-up of Figure 1 and the polynomial table of Figure 2 describe the <em>same computation</em> — the only difference is whether the algorithm bothers to remember.</p>
+<p>Dynamic programming is not a family of tricks to memorise, it is one observation applied with discipline : <strong>a recursion whose calls overlap is secretly a DAG, and a DAG should be evaluated once, in order.</strong> <a href="/blog/algorithmic/memoization">Memoization</a> is that observation applied lazily from the top ; tabulation is the same observation applied deliberately from the bottom. The exponential blow-up of Figure 1 and the polynomial table of Figure 2 describe the <em>same computation</em> — the only difference is whether the algorithm bothers to remember.</p>
 
 <p>What makes it an engineering discipline rather than a reflex is the middle step, the one this post insisted on : proving that the pieces of an optimal solution are themselves optimal. When that cut-and-paste argument goes through, you get an algorithm and a proof at the same time. When it does not — longest simple path — no table in the world will rescue you, and that failure is itself worth knowing.</p>
 

@@ -234,12 +234,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
     #f-ml:checked   ~ .cards .card:not(.cat-machine-learning),
     #f-math:checked ~ .cards .card:not(.cat-mathematics),
     #f-algo:checked ~ .cards .card:not(.cat-algorithmic),
-    #f-py:checked   ~ .cards .card:not(.cat-python),
     #f-phys:checked ~ .cards .card:not(.cat-physics),
     #f-ml:checked   ~ .orig-list .olist-sec:not(.cat-machine-learning),
     #f-math:checked ~ .orig-list .olist-sec:not(.cat-mathematics),
     #f-algo:checked ~ .orig-list .olist-sec:not(.cat-algorithmic),
-    #f-py:checked   ~ .orig-list .olist-sec:not(.cat-python),
     #f-phys:checked ~ .orig-list .olist-sec:not(.cat-physics) { display:none; }
 
     /* ---- animated wordmark : calligraphy ----
@@ -299,7 +297,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
       <input class="st" type="radio" name="catfilter" id="f-ml">
       <input class="st" type="radio" name="catfilter" id="f-math">
       <input class="st" type="radio" name="catfilter" id="f-algo">
-      <input class="st" type="radio" name="catfilter" id="f-py">
       <input class="st" type="radio" name="catfilter" id="f-phys">
       <input class="st" type="radio" name="viewmode" id="v-grid">
       <input class="st" type="radio" name="viewmode" id="v-list" checked>
@@ -310,7 +307,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
           <label for="f-ml">Machine Learning</label>
           <label for="f-math">Mathematics</label>
           <label for="f-algo">Algorithmic</label>
-          <label for="f-py">Python</label>
           <label for="f-phys">Physics</label>
         </div>
         <div class="view-switch">
@@ -481,8 +477,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         </a>
         
         
-        <a class="card cat-python" href="/blog/python/memoization">
-          <span class="badge">Python</span>
+        <a class="card cat-algorithmic" href="/blog/algorithmic/memoization">
+          <span class="badge">Algorithmic</span>
           <h3 class="c-title">Memoization - Remember what we already found</h3>
           <p class="c-exc">Certain problems can be solved quite easily using recursion. It is the process in which a function calls itself directly or indirectly by defining...</p>
           <span class="c-date">November 2018</span>
@@ -504,7 +500,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         
         <section class="olist-sec cat-algorithmic">
           <h3>On Algorithmic</h3>
-          <p><span class="olist-num">1.</span> <a href="/blog/algorithmic/hyperloglog">HyperLogLog, Counting Millions with Kilobytes</a>&nbsp;&nbsp;<span class="olist-num">2.</span> <a href="/blog/algorithmic/bloom-filters">Introduction to Bloom Filters</a>&nbsp;&nbsp;<span class="olist-num">3.</span> <a href="/blog/algorithmic/mapreduce">The MapReduce Paradigm</a>&nbsp;&nbsp;<span class="olist-num">4.</span> <a href="/blog/algorithmic/dynamic-programming">Dynamic Programming, Solve It Once</a></p>
+          <p><span class="olist-num">1.</span> <a href="/blog/algorithmic/hyperloglog">HyperLogLog, Counting Millions with Kilobytes</a>&nbsp;&nbsp;<span class="olist-num">2.</span> <a href="/blog/algorithmic/bloom-filters">Introduction to Bloom Filters</a>&nbsp;&nbsp;<span class="olist-num">3.</span> <a href="/blog/algorithmic/mapreduce">The MapReduce Paradigm</a>&nbsp;&nbsp;<span class="olist-num">4.</span> <a href="/blog/algorithmic/dynamic-programming">Dynamic Programming, Solve It Once</a>&nbsp;&nbsp;<span class="olist-num">5.</span> <a href="/blog/algorithmic/memoization">Memoization - Remember what we already found</a></p>
         </section>
         
         <section class="olist-sec cat-machine-learning">
@@ -520,11 +516,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
         <section class="olist-sec cat-physics">
           <h3>On Physics</h3>
           <p><span class="olist-num">1.</span> <a href="/blog/physics/mri">How an MRI Scanner Works</a></p>
-        </section>
-        
-        <section class="olist-sec cat-python">
-          <h3>On Python</h3>
-          <p><span class="olist-num">1.</span> <a href="/blog/python/memoization">Memoization - Remember what we already found</a></p>
         </section>
         
       </div>
