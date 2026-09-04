@@ -160,10 +160,12 @@ layout: default
     #f-math:checked ~ .cards .card:not(.cat-mathematics),
     #f-algo:checked ~ .cards .card:not(.cat-algorithmic),
     #f-py:checked   ~ .cards .card:not(.cat-python),
+    #f-phys:checked ~ .cards .card:not(.cat-physics),
     #f-ml:checked   ~ .orig-list .olist-sec:not(.cat-machine-learning),
     #f-math:checked ~ .orig-list .olist-sec:not(.cat-mathematics),
     #f-algo:checked ~ .orig-list .olist-sec:not(.cat-algorithmic),
-    #f-py:checked   ~ .orig-list .olist-sec:not(.cat-python) { display:none; }
+    #f-py:checked   ~ .orig-list .olist-sec:not(.cat-python),
+    #f-phys:checked ~ .orig-list .olist-sec:not(.cat-physics) { display:none; }
 
     /* ---- animated wordmark : calligraphy ----
        1. the letterforms draw themselves as strokes (SVG mask wipe)
@@ -223,6 +225,7 @@ layout: default
       <input class="st" type="radio" name="catfilter" id="f-math">
       <input class="st" type="radio" name="catfilter" id="f-algo">
       <input class="st" type="radio" name="catfilter" id="f-py">
+      <input class="st" type="radio" name="catfilter" id="f-phys">
       <input class="st" type="radio" name="viewmode" id="v-grid">
       <input class="st" type="radio" name="viewmode" id="v-list" checked>
 
@@ -233,6 +236,7 @@ layout: default
           <label for="f-math">Mathematics</label>
           <label for="f-algo">Algorithmic</label>
           <label for="f-py">Python</label>
+          <label for="f-phys">Physics</label>
         </div>
         <div class="view-switch">
           <label for="v-grid" title="Card view">
